@@ -1,3 +1,7 @@
+/* for smart-phone (disable bad auto adjust) */
+body {
+-webkit-text-size-adjust: 100%;
+}
 
 .MstyItemOdd {
 	padding: 4px 8px;
