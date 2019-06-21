@@ -152,7 +152,7 @@ body {
 
 .MstyNowSelectedLink {
 	color: #000;
-	border: 1px solid #3D8080;
+#	border: 1px solid #3D8080;
 	padding: 3px 8px;
 	display: inline-block;
 	background: #A0A0FF none repeat scroll 0% 0%;
