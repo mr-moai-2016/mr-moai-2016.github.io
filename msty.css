@@ -214,7 +214,7 @@ body {
 .MstyElemLink {
 	color: #000;
 #	font-size: 16px;
-	border: 1px solid #3D803D;
+#	border: 1px solid #3D803D;
 	padding: 4px 8px;
 	display: inline-block;
 	background: #E0E0B0 none repeat scroll 0% 0%;
@@ -227,7 +227,7 @@ body {
 .MstyElemLink:hover {
 	color: #000;
 #	font-size: 16px;
-	border: 1px solid #3D803D;
+#	border: 1px solid #3D803D;
 	padding: 4px 8px;
 	display: inline-block;
 	background: #B0B0E0 none repeat scroll 0% 0%;
@@ -239,7 +239,7 @@ body {
 }
 .MstyElemLinkTop {
 	color: #000;
-	border: 1px solid #3D803D;
+#	border: 1px solid #3D803D;
 	padding: 4px 8px;
 	display: inline-block;
 	background: #E0E0B0 none repeat scroll 0% 0%;
