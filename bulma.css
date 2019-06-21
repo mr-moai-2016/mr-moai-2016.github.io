@@ -1577,6 +1577,8 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   color: #4a4a4a;
   display: block;
   padding: 1.25rem;
+  border: 1px solid #a0a0a0\0; /* forIE8gt */
+  padding: 0.75em\0; /* forIE8gt */
 }
 
 a.box:hover, a.box:focus {
@@ -4040,6 +4042,7 @@ a.tag:hover {
 .title {
   color: #363636;
   font-size: 2rem;
+  font-size: 1.5em\0; /* forIE8gt */
   font-weight: 600;
   line-height: 1.125;
 }
@@ -5544,6 +5547,8 @@ fieldset[disabled] .select select:hover {
   color: #4a4a4a;
   max-width: 100%;
   position: relative;
+  border: 1px solid #a0a0a0\0; /* forIE8gt */
+  padding: 0.75em\0; /* forIE8gt */
 }
 
 .card-header {
@@ -10581,6 +10586,8 @@ label.panel-block:hover {
 
 .section {
   padding: 3rem 1.5rem;
+  margin-left:  10%\0; /* forIE8gt */
+  margin-right: 10%\0; /* forIE8gt */
 }
 
 @media screen and (min-width: 1024px) {
