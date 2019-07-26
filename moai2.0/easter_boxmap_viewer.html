@@ -1,27 +1,30 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html><html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta http-equiv="Content-Script-Type" content="text/javascript">
 	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="/msty.css" rel="stylesheet" type="text/css">
+	<link href="/bulma.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="section">
+<div class="container">
+<div class="content">
 <a name=TopBar></a>
 <p><b><img src="/imgs/here_landmark.png"> Moai+Easter ユーザーマニュアル</b></p>
 
 <a class=MstyElemLink href="/">トップページ</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/index.html">ユーザーマニュアル</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/index_expert.html">エキスパートマニュアル</a> &nbsp;
+<a class=MstyNowSelectedLink href="/moai2.0/index.html">初級マニュアル</a> &nbsp;
+<a class=MstyElemLink href="/moai2.0/index_expert.html">上級マニュアル</a> &nbsp;
 <a class=MstyElemLink href="/announcement.html">アナウンスメント</a> &nbsp;
 <a class=MstyElemLink href="/FAQ.html">FAQ</a> &nbsp;
 <br> <br>
 <a class=MstyElemLink href="/moai2.0/index.html">ご案内</a> &nbsp;
 <a class=MstyElemLink href="/moai2.0/install.html">インストールガイド</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/moai_feature.html">Moaiの特徴</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/easter_reference.html">Easter</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/virtual_users.html">VirtualUSERS</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/upgrade.html">Moaiのアップグレード方法</a> &nbsp;
+<a class=MstyNowSelectedLink href="/moai2.0/easter_reference.html">Easterの使い方</a> &nbsp;
+<a class=MstyElemLink href="/moai2.0/virtual_users.html">VirtualUSERSの使い方</a> &nbsp;
+<a class=MstyElemLink href="/moai2.0/upgrade.html">Moaiを最新バージョンにする</a> &nbsp;
 <br> <br>
 <a class=MstyElemLink href="/moai2.0/easter_reference.html">仮想ブラウジング</a> &nbsp;
 <a class=MstyElemLink href="/moai2.0/easter_collection.html">コレクション</a> &nbsp;
@@ -29,33 +32,19 @@
 <a class=MstyNowSelectedLink href="/moai2.0/easter_boxmap_viewer.html">BoxMapビューア</a> &nbsp;
 <br> <br>
 
-<div class=MstyComment>
-<u><b>記事担当者</b></u> : 全角<br>
-<br>
-<u><b>最終更新日</b></u> : 2018/04/02<br>
-<br>
-</div>
-<br>
-
-
 <a name=AtFirst></a>
-<u><b>
-はじめに
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">はじめに</h1>
+<p>
 	この記事ではEasterのコア機能の一つであるBoxと呼ばれる機構について説明します.<br>
 	またそれを閲覧、操作するためのBoxMapビューアについても解説します.<br>
 	尚、この記事の内容はエキスパート向けのものです.<br>
 	Easterコレクションについての知識も前提となるため、まずはそちらを一読しておくことをお勧めします.<br>
-</div><br>
+</p>
 <br>
 
 
 <a name=Index></a>
-<u><b>
-目次
-</b></u><br>
+<h1 class="title">目次</h1>
 <br>
 <ul>
 	<li><b><a class=MstyElemLink href=#Abstract>概要</a></b></li>
@@ -66,11 +55,8 @@
 
 
 <a name=Abstract></a>
-<u><b>
-概要
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">概要</h1>
+<p>
 	Easterではコレクションやキャッシュが格納された特殊ディレクトリを特に<b>Box</b>と呼びます.<br>
 	またBoxMapビューアではBoxの中身をファイルシステム上の実ディレクトリレベルで直接閲覧したり管理を行うことができます.<br>
 	<br>
@@ -151,18 +137,15 @@
 		(環境変数による変更を反映させるにはmoai本体を一度終了させ、再び起動させる必要があります)<br>
 		</li>
 	</ul>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=BoxMapViewer_UserBox></a>
-<u><b>
-BoxMapビューアから既存のフォルダの内容を閲覧する
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">BoxMapビューアから既存のフォルダの内容を閲覧する</h1>
+<p>
 	ここではユーザボックスの典型的な使い方の例を挙げましょう.<br>
 	また以下ではWindows環境で説明しますが、Linuxなどの環境でも同様な処理が可能です.<br>
 	既に述べましたが、ユーザボックスの実体はデフォルトではmoai_profile/userboxディレクトリとなります.<br>
@@ -235,18 +218,15 @@ BoxMapビューアから既存のフォルダの内容を閲覧する
 		</div>
 		</li>
 	</ul>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=BoxMapViewer_UserBox_Assort></a>
-<u><b>
-BoxMapビューアからEasterコレクションへ分類する
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">BoxMapビューアからEasterコレクションへ分類する</h1>
+<p>
 	このセクションは前セクションの続きです.<br>
 	「未分類」フォルダ内に存在するファイルをEasterコレクションへ分類する方法について詳しく述べます.<br>
 	フォルダ一覧やファイル一覧のそれぞれの要素には、よく見るとすべてチェックボタンがついています.<br>
@@ -368,18 +348,15 @@ BoxMapビューアからEasterコレクションへ分類する
 		これらを再閲覧する方法については<a class=MstyElemLink href=/moai2.0/easter_collection.html#TopicViewer target=_blank>こちら</a>を参照してください.<br>
 		</li>
 	</ul>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=BoxMapViewer_CacheBox></a>
-<u><b>
-BoxMapビューアでキャッシュの内容を直接閲覧する
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">BoxMapビューアでキャッシュの内容を直接閲覧する</h1>
+<p>
 	通常必要ないことではありますが、EasterのキャッシュファイルはBoxMapビューアで直接閲覧することもできます.<br>
 	ここではその方法について極簡単にヒントを示しておきましょう.<br>
 	画像掲示板ふたばちゃんねるを例とします.<br>
@@ -405,17 +382,17 @@ BoxMapビューアでキャッシュの内容を直接閲覧する
 		また「src」には、Easter Image Viewerで今まで開いたことのある画像(画像本体でサムネイルではない)がキャッシュとして保存されています.<br>
 		</li>
 	</ol>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
+
+
 
 
 <a name=Link></a>
-<u><b>
-リンク
-</b></u><br>
-<br>
+<h1 class="title"></h1>
+<hr>
 <ul>
 	<li><a class=MstyElemLink href=#TopBar>一番上へ</a></li>
 	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moaiドキュメント(オンライン)</a></li>
@@ -423,5 +400,8 @@ BoxMapビューアでキャッシュの内容を直接閲覧する
 </ul><br>
 
 
+</div>>
+</div>
+</div>
 </body>
 </html>

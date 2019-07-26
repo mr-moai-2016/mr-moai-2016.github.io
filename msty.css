@@ -158,7 +158,8 @@ body {
 	background: #A0A0FF none repeat scroll 0% 0%;
 	text-align: center;
 	border-radius: 10px;
-	margin-bottom: 5px;
+	margin-top:    5px;
+#	margin-bottom: 5px;
 	text-decoration: none;
 }
 
@@ -220,7 +221,8 @@ body {
 	background: #E0E0B0 none repeat scroll 0% 0%;
 	text-align: center;
 	border-radius: 10px;
-	margin-bottom: 5px;
+	margin-top:    5px;
+#	margin-bottom: 5px;
 	text-decoration: none;
     word-break: normal;
 }
@@ -233,7 +235,8 @@ body {
 	background: #B0B0E0 none repeat scroll 0% 0%;
 	text-align: center;
 	border-radius: 10px;
-	margin-bottom: 5px;
+	margin-top:    5px;
+#	margin-bottom: 5px;
 	text-decoration: none;
     word-break: normal;
 }
@@ -262,7 +265,8 @@ body {
 	background: #E0E0B0 none repeat scroll 0% 0%;
 	text-align: center;
 	border-radius: 10px;
-	margin-bottom: 5px;
+	margin-top:    5px;
+#	margin-bottom: 5px;
 	text-decoration: none;
     word-break: normal;
 }
@@ -274,7 +278,8 @@ body {
 	background: #B0B0E0 none repeat scroll 0% 0%;
 	text-align: center;
 	border-radius: 10px;
-	margin-bottom: 5px;
+	margin-top:    5px;
+#	margin-bottom: 5px;
 	text-decoration: none;
     word-break: normal;
 }
@@ -313,8 +318,10 @@ body {
 	text-align: center;
 	border-radius: 10px;
 	margin-bottom: 0px;
+	margin-left:   10px;
 	text-decoration: none;
     word-break: break-all;
+	max-width: 200px;
 }
 .MstyFInfElemLink:hover {
 	color: #000;
@@ -325,8 +332,10 @@ body {
 	text-align: center;
 	border-radius: 10px;
 	margin-bottom: 0px;
+	margin-left:   10px;
 	text-decoration: none;
     word-break: break-all;
+	max-width: 200px;
 }
 
 .MstyMsgConsole {
@@ -407,10 +416,10 @@ body {
 
 .MstyAutoLinkTarget {
 	color: #000;
-	border: 1px solid #3D803D;
+#	border: 1px solid #3D803D;
 	padding: 3px 8px;
 	display: inline-block;
-#	background: #E0E0B0 none repeat scroll 0% 0%;
+	background: #E0E0B0 none repeat scroll 0% 0%;
 	text-align: center;
 	border-radius: 10px;
 	margin-bottom: 5px;
@@ -517,3 +526,41 @@ body {
 	text-align: center
 }
 
+.MstyFutabaBGColor {
+	color: "#F0E0D6";
+}
+.MstyOnlyIE8 {
+	display:none;
+	display:block\0; /* forIE8gt */
+}
+.MstyThumbnail {
+#	width: 200px;
+#	height: auto;
+	max-width:  200px;
+	max-height: 200px;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+.MstyNoun {
+	max-width:  230px;
+	min-width:  230px;
+	max-height: 200px;
+	padding-right: 15px;
+	padding-left: 15px;
+	display: inline-block;
+	font-size: 14px;
+    word-break: break-all;
+}
+.MstyRightPreview {
+	margin-left: 10px;
+}
+.MstyImgBox {
+	width: 100%;
+	overflow: auto;
+}
+.MstyImgBox img {
+	width:  auto;
+	height: auto;
+	max-width:  none;
+	max-height: none;
+}

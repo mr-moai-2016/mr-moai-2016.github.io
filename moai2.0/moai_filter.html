@@ -1,18 +1,22 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html><html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta http-equiv="Content-Script-Type" content="text/javascript">
 	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="/msty.css" rel="stylesheet" type="text/css">
+	<link href="/bulma.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="section">
+<div class="container">
+<div class="content">
 <a name=TopBar></a>
 <p><b><img src="/imgs/here_landmark.png"> Moai+Easter エキスパートマニュアル</b></p>
 
 <a class=MstyElemLink href="/">トップページ</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/index.html">ユーザーマニュアル</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">エキスパートマニュアル</a> &nbsp;
+<a class=MstyElemLink href="/moai2.0/index.html">初級マニュアル</a> &nbsp;
+<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">上級マニュアル</a> &nbsp;
 <a class=MstyElemLink href="/announcement.html">アナウンスメント</a> &nbsp;
 <a class=MstyElemLink href="/FAQ.html">FAQ</a> &nbsp;
 <br> <br>
@@ -28,31 +32,17 @@
 <a class=MstyElemLink href="/moai2.0/hacking.html">プラグイン開発のためのヒント</a> &nbsp;
 <br> <br>
 
-<div class=MstyComment>
-<u><b>記事担当者</b></u> : Mr.Moai ＆ 高速ヤキソバ変換<br>
-<br>
-<u><b>最終更新日</b></u> : 2018/07/17<br>
-<br>
-</div>
-<br>
-
-
 <a name=AtFirst></a>
-<u><b>
-はじめに
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">はじめに</h1>
+<p>
 この記事ではMoaiエンジン本体のフィルター機能についての詳細に解説します.<br>
 また高速ヤキソバ変換氏による例題や実践的な適用例も紹介します.<br>
-</div><br>
+</p>
 <br>
 
 
 <a name=Index></a>
-<u><b>
-目次
-</b></u><br>
+<h1 class="title">目次</h1>
 <br>
 <ul>
 	<li><b><a class=MstyElemLink href=#filter_recv_section1>受信フィルタ : 受信したHTML、Javascript、CSSの修正</a></b></li>
@@ -68,11 +58,8 @@
 
 
 <a name=filter_recv_section1></a>
-<u><b>
-受信フィルタ : 受信したHTML、Javascript、CSSの修正
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">受信フィルタ : 受信したHTML、Javascript、CSSの修正</h1>
+<p>
 	<b>TARGET_NAME</b>_recv.myf ファイル内の html_filter、js_filter、css_filterという部分で<br>
 	それぞれHTML、Javascript、CSSにおける文字列の置換を行うことができる.<br>
 	この部分にはfiltersコマンドと呼ばれる命令列を記述する.<br>
@@ -98,34 +85,28 @@
 	</div>
 	<br>
 	と書いておく( -[ と ]- の間には必ずスペースを入れること ).<br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=filter_recv_section2></a>
-<u><b>
-受信フィルタ : 独自のCSSを付け加える
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">受信フィルタ : 独自のCSSを付け加える</h1>
+<p>
 	<b>TARGET_NAME</b>_recv.myf ファイル内の css_additional という部分で、<br>
 	複数行に渡るユーザ独自のcssの記述を追加することができる.<br>
 	CSSの知識がある方は、サイトによって指定しているスタイルをこの部分により上書きするなどすることで<br>
 	独自のページデザインにカスタマイズするなどといったことが可能だ.<br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=filter_recv_exam></a>
-<u><b>
-受信フィルタ : 例題その1
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">受信フィルタ : 例題その1</h1>
+<p>
 	例えば掲示板「５ちゃんねる」を対象として、その受信HTMLとCSSを加工したいとしよう.<br>
 	target.myf内で例えば5chという名前のtargetを定義し、filters/5ch_recv.myfというファイルを作成する.<br>
 	このファイル内で以下のフィルタコマンドを指定する.<br>
@@ -146,18 +127,15 @@
 	またCSSの内容が加工されて、背景色と文字色も変更されているはずである. <br>
 	もしも正しく設定したにもかかわらず表示が変わらないなら、ブラウザのキャッシュに古い情報が残っている可能性がある.<br>
 	キャッシュをクリアしてからもう一度目的のサイトへアクセスしよう.<br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=filter_send_header_vars></a>
-<u><b>
-送信フィルタ : HTTPヘッダの値の修正
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">送信フィルタ : HTTPヘッダの値の修正</h1>
+<p>
 	一般にHTTPにおいてサイトへアクセスする場合、送信や受信されるデータ本体の直前に<br>
 	HTTPヘッダと呼ばれるものが付加されて通信される.<br>
 	例えば単純にブラウザから http://may.2chan.net/b/res/77777777.htm へURL指定したり、<br>
@@ -240,18 +218,15 @@
 	尚、User-Agent以外のその他のヘッダー変数の値も同様に変更することができるが<br>
 	通常その必要はない上、不用意に変えると通信そのものが不可能になる恐れがあるので、<br>
 	深い知識のある方以外はそれらを変更しない方がよい.<br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=filter_send_post_vars></a>
-<u><b>
-送信フィルタ : POST変数の値の修正
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">送信フィルタ : POST変数の値の修正</h1>
+<p>
 	投稿が可能な掲示板のHTMLのソースなどを開いてもらうと、<br>
 	まず以下のように formタグで囲まれた領域がある.<br>
 	<br>
@@ -281,18 +256,15 @@
 	<span class=MstyComment>post_varsによる強制変更</span> ⇒
 	<span class=MstyComment>目的のサイトへ送信</span><br>
 	<br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=filter_send_post_vars_exam></a>
-<u><b>
-送信フィルタ : 例題その1
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">送信フィルタ : 例題その1</h1>
+<p>
 	例えば、ある架空の匿名掲示板のHTMLのソースに以下のような部分が含まれていたとしよう.<br>
 	<br>
 	<div class=MstyComment>
@@ -395,18 +367,15 @@
 	以上である.<br>
 	これで以降のMoaiを介した通信では、このターゲットのサイトのPOST変数himitu_no_dataに関しては、<br>
 	常に上記の偽の値に置換される.<br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=filter_send_cookie></a>
-<u><b>
-送信フィルタ : Cookieの値の修正
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">送信フィルタ : Cookieの値の修正</h1>
+<p>
 	Cookieについては知っている方も多いであろう.<br>
 	ブラウザの設定画面からも簡単に確認できるし、その内容を消去するのも同様に簡単である.<br>
 	一般にこの値はサイト毎に別に記録される.<br>
@@ -461,18 +430,15 @@
 	<span class=MstyComment>cookie_varsによる変更</span> ⇒
 	<span class=MstyComment>cookie_forceによる強制変更</span> ⇒
 	<span class=MstyComment>目的のサイトへ送信</span><br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=filter_send_cookie_exam></a>
-<u><b>
-送信フィルタ : 例題その2
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">送信フィルタ : 例題その2</h1>
+<p>
 	例えば、掲示板moai-chanという架空の掲示板を考えよう.<br>
 	この掲示板には mei.moai-chan.net と imoge.moai-chan.netという二つのサーバが存在し、<br>
 	これらのHTMLのソースはいずれも以下のような部分が含まれているものとする.<br>
@@ -614,18 +580,15 @@
 	以上である.<br>
 	これで以降のMoaiを介した通信では、このターゲットのサイトのPOST変数secret_of_fingとentry_timeに関しては、<br>
 	常に上記の偽の値に置換される.<br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=filter_send_pragmatic_exam></a>
-<u><b>
-送信フィルタ : 実践例題
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">送信フィルタ : 実践例題</h1>
+<p>
 	最後に実際の適用例も出しておこう.<br>
 	ちなみに、この例も我々Moai開発チームの１人である高速ヤキソバ変換氏が作成したものだ.<br>
 	(pluginは用いない方法なので一部面倒だが)<br>
@@ -698,17 +661,17 @@
 		またnamecというのは、最後のレスにおいて使用したお名前欄の内容であり、<br>
 		ここではこれを強制的に空値へとリセット(Cookie変数を削除)している.<br>
 	</div>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
+
+
 
 
 <a name=Link></a>
-<u><b>
-リンク
-</b></u><br>
-<br>
+<h1 class="title"></h1>
+<hr>
 <ul>
 	<li><a class=MstyElemLink href=#TopBar>一番上へ</a></li>
 	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moaiドキュメント(オンライン)</a></li>
@@ -716,5 +679,8 @@
 </ul><br>
 
 
+</div>>
+</div>
+</div>
 </body>
 </html>

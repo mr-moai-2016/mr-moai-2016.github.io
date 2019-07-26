@@ -1,18 +1,22 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html><html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta http-equiv="Content-Script-Type" content="text/javascript">
 	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="/msty.css" rel="stylesheet" type="text/css">
+	<link href="/bulma.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="section">
+<div class="container">
+<div class="content">
 <a name=TopBar></a>
 <p><b><img src="/imgs/here_landmark.png"> Moai+Easter エキスパートマニュアル</b></p>
 
 <a class=MstyElemLink href="/">トップページ</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/index.html">ユーザーマニュアル</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">エキスパートマニュアル</a> &nbsp;
+<a class=MstyElemLink href="/moai2.0/index.html">初級マニュアル</a> &nbsp;
+<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">上級マニュアル</a> &nbsp;
 <a class=MstyElemLink href="/announcement.html">アナウンスメント</a> &nbsp;
 <a class=MstyElemLink href="/FAQ.html">FAQ</a> &nbsp;
 <br> <br>
@@ -30,33 +34,19 @@
 <a class=MstyNowSelectedLink href="/moai2.0/futaba_note.html">Futaba Note</a> &nbsp;
 <br> <br>
 
-<div class=MstyComment>
-<u><b>記事担当者</b></u> : 高速ヤキソバ変換<br>
-<br>
-<u><b>最終更新日</b></u> : 2018/08/01<br>
-<br>
-</div>
-<br>
-
-
 <a name=AtFirst></a>
-<u><b>
-はじめに
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">はじめに</h1>
+<p>
 	この記事はMoaiの旧バージョン Moai Ver1.1.8 にあったものです.<br>
 	高速ヤキソバ変換氏によるとてもわかりやすいふたばちゃんねる入門講座です.<br>
 	意外と好評のため、この記事はVer2.0においても残しておくことにします.<br>
 	(この度、Ver2.1のリリースに伴って、この記事の内容について彼女に若干のリニューアルをお願いしました).<br>
-</div><br>
+</p>
 <br>
 
 
 <a name=Index></a>
-<u><b>
-目次
-</b></u><br>
+<h1 class="title">目次</h1>
 <br>
 <ul>
 	<li><b><a class=MstyElemLink href=#chap1>Chapter1 : Moai+Easter、そしてVirtualUSERS、歴史と展望</a></b></li>
@@ -66,11 +56,8 @@
 
 
 <a name=chap1></a>
-<u><b>
-Chapter1 : Moai+Easter、そしてVirtualUSERS、歴史と展望
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">Chapter1 : Moai+Easter、そしてVirtualUSERS、歴史と展望</h1>
+<p>
 	はじめに少し歴史を説明致しましょう.<br>
 	Moaiシステムが生まれた経緯など….<br>
 	あと、ふたばちゃんねるという匿名掲示板についてもお話します.<br>
@@ -123,18 +110,15 @@ Chapter1 : Moai+Easter、そしてVirtualUSERS、歴史と展望
 	システム全体として、当初と比べ随分と使いやすくなったものだと感じています.<br>
 	Moaiと匿名掲示板、一体どこまで進化するのでしょうか？<br>
 	USERSの生みの親としては、これからもこれらの更なる進化が楽しみでなりません.<br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=chap2></a>
-<u><b>
-Chapter2 : VirtualUSERSが仮想化する情報とは？
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">Chapter2 : VirtualUSERSが仮想化する情報とは？</h1>
+<p>
 	このチャプターではVirtualUSERSが仮想化する情報について詳しく述べましょう.<br>
 	その情報とは具体的に一体どういうものなのか？<br>
 	それらはどのようにして掲示板へと送信されるのか？<br>
@@ -245,7 +229,7 @@ Chapter2 : VirtualUSERSが仮想化する情報とは？
 		それどころかブラウザ標準の機能としてUser-Agentを偽装できるものすらあります.<br>
 		よって、単にUser-Agentの文字列では、ユーザが本当はどのブラウザのどのバージョンを使っているのかを特定する情報としては、いささか信憑性に欠けるというわけです.<br>
 <br>
-		そこでブラウザ識別のために掲示板がとる戦略としては、ユーザが投稿する際にこのまずSnippetを実行させ、次にそのテスト結果も掲示板へと一緒に送信されるようにしておきます.<br>
+		そこでブラウザ識別のために掲示板がとる戦略としては、ユーザが投稿する際にまずこのSnippetを実行させ、次にそのテスト結果も掲示板へと一緒に送信されるようにしておきます.<br>
 		掲示板側からは送信されたこの値を分析することで、ユーザが本当はどのブラウザのどのバージョンにおいて実行されたのかを(ある程度)特定するわけです.<br>
 <br>
 		Fingerprintとの違いは可逆性にあります.<br>
@@ -267,7 +251,7 @@ Chapter2 : VirtualUSERSが仮想化する情報とは？
 	長くなりましたが、要するに上記の情報のいずれも(IPアドレスを除けば)最終的にはHTTPヘッダ、POST変数、そしてCookieの値のいずれかにパックされて送信されるということです.<br>
 	言い換えれば、途中これら３つの要素で仲介されるということです.<br>
 <br>
-	そしてこの送信の流れを逆にして掲示板サイドの視点に立って頂くと、ある一つの重要なことがわかります.<br>
+	そしてこの送信の流れを逆にして掲示板サイドの視点に立つと、重要なことが見えてきます.<br>
 	それは、<b>掲示板サイドからはHTTPヘッダ、POST変数、Cookieの値、この３つの手段をもってしかあなたを認識できない</b>ということです(IPを除いてですが).<br>
 	これは仮想環境を実現する上では非常に重要な要件です.<br>
 	もしあなたがこれら３つを直接修正する術を持つなら、仮想ブラウザ環境をソフトウェア的に自由に実現可能であることを意味します.<br>
@@ -276,18 +260,15 @@ Chapter2 : VirtualUSERSが仮想化する情報とは？
 	では具体的にどうやってその３つを修正すればよいのでしょうか？<br>
 	それをやってくれるツールがMoaiのVirtualUSERSなわけで、通常は「Moaiを使ってください」で話は終わるところですが、次のチャプターでは敢えてそれを使わず手動でこれを実現する方法を示しましょう.<br>
 	このような処理を自分でプログラミングして実現したいという方にも、この知識は役に立つことでしょう.<br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=chap3></a>
-<u><b>
-Chapter3 : 手動で仮想ブラウザ環境を実現する方法
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">Chapter3 : 手動で仮想ブラウザ環境を実現する方法</h1>
+<p>
 	このチャプターでは、MoaiのVirtualUSERSを使わず、掲示板側に送られる情報を仮想化する方法について述べます.<br>
 	例によってふたばちゃんねるを例に挙げますが、ここで紹介するテクニックは他の掲示板でも使えるかと思います.<br>
 	<ol><br>
@@ -397,17 +378,17 @@ Chapter3 : 手動で仮想ブラウザ環境を実現する方法
 		後は修正したHTMLをダブルクリックして、表示される投稿フォームから投稿すれば上において偽装された値が送信されることでしょう.<br>
 		</li>
 	</ol><br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
+
+
 
 
 <a name=Link></a>
-<u><b>
-リンク
-</b></u><br>
-<br>
+<h1 class="title"></h1>
+<hr>
 <ul>
 	<li><a class=MstyElemLink href=#TopBar>一番上へ</a></li>
 	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moaiドキュメント(オンライン)</a></li>
@@ -415,5 +396,8 @@ Chapter3 : 手動で仮想ブラウザ環境を実現する方法
 </ul><br>
 
 
+</div>>
+</div>
+</div>
 </body>
 </html>

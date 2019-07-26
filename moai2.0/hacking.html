@@ -1,18 +1,22 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html><html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta http-equiv="Content-Script-Type" content="text/javascript">
 	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="/msty.css" rel="stylesheet" type="text/css">
+	<link href="/bulma.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="section">
+<div class="container">
+<div class="content">
 <a name=TopBar></a>
 <p><b><img src="/imgs/here_landmark.png"> Moai+Easter エキスパートマニュアル</b></p>
 
 <a class=MstyElemLink href="/">トップページ</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/index.html">ユーザーマニュアル</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">エキスパートマニュアル</a> &nbsp;
+<a class=MstyElemLink href="/moai2.0/index.html">初級マニュアル</a> &nbsp;
+<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">上級マニュアル</a> &nbsp;
 <a class=MstyElemLink href="/announcement.html">アナウンスメント</a> &nbsp;
 <a class=MstyElemLink href="/FAQ.html">FAQ</a> &nbsp;
 <br> <br>
@@ -28,30 +32,16 @@
 <a class=MstyNowSelectedLink href="/moai2.0/hacking.html">プラグイン開発のためのヒント</a> &nbsp;
 <br> <br>
 
-<div class=MstyComment>
-<u><b>記事担当者</b></u> : 全角 ＆ Mr.Moai<br>
-<br>
-<u><b>最終更新日</b></u> : 2018/07/31<br>
-<br>
-</div>
-<br>
-
-
 <a name=AtFirst></a>
-<u><b>
-はじめに
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">はじめに</h1>
+<p>
 	この記事ではMoaiのplugin開発について、そのヒントを説明します.<br><br>
-</div><br>
+</p>
 <br>
 
 
 <a name=Index></a>
-<u><b>
-目次
-</b></u><br>
+<h1 class="title">目次</h1>
 <br>
 <ul>
 	<li><b><a class=MstyElemLink href=#lang>開発言語について</a></b></li>
@@ -65,11 +55,8 @@
 
 
 <a name=lang></a>
-<u><b>
-開発言語について
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">開発言語について</h1>
+<p>
 	Moaiでは開発言語としてCを使ってある.<br>
 	そして基本的に実行効率より確実性を最優先にしてある.<br>
 	<br>
@@ -103,35 +90,29 @@
 	突然エラーになるなどよくある話ではある. <br>
 	また万一その言語に未知のバグがあったりドキュメントされていないある種の癖に由来した挙動が発生した場合、<br>
 	スクリプト環境に付属した膨大なコードから原因を分析するなどやってられないので今回は不採用とした.<br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=message></a>
-<u><b>
-改造に挑戦される方へ
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">改造に挑戦される方へ</h1>
+<p>
 	あなたが開発したプラグインは公開してもらっても勿論構わない.<br>
 	我々がPolipoを参考に新しくMoaiを開発したように、<br>
 	今度はあなたがMoaiのpluginを作られてみるのもまた一興ではないだろうか？<br>
 	技術のある方は是非挑戦してもらいたい.<br>
 	Moaiのライセンスは<a class=MstyElemLink href=http://www.kmonos.net/nysl target=_blank>NYSL</a>であり、某ライセンスのようなソースコード開示の義務はない.<br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=dependency></a>
-<u><b>
-ライブラリの依存関係について
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">ライブラリの依存関係について</h1>
+<p>
 	まずMoaiシステム全体において、各ツールおよびライブラリの依存関係を以下に簡単に示しておく.<br>
 	<ul>
 		<li><b>libZnk</b><br>
@@ -176,18 +157,15 @@
 		libZnk<br>
 		</li>
 	</ul>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=moai_src></a>
-<u><b>
-moai本体のソースコードの構成について
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">moai本体のソースコードの構成について</h1>
+<p>
 	このセクションではMoaiエンジンのソースを分析したい方のために、そのソースを構成するファイルの概要を示す.<br>
 	<ul>
 		<li><b>Moai_connection</b><br>
@@ -269,18 +247,15 @@ moai本体のソースコードの構成について
 		mainが存在するエントリー部である.<br>
 		</li>
 	</ul>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=libZnk></a>
-<u><b>
-libZnkについて
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">libZnkについて</h1>
+<p>
 	基本ライブラリ libZnk はこのプロジェクトに存在する全てのツールの開発において使われている.<br>
 	よってこれの解説を抜きにするわけにはいかないのであるが、このライブラリの仕様を詳しく解説していたら<br>
 	それこそ紙面と時間がいくらあっても足らないので、とりあえず<a class=MstyElemLink href=https://github.com/mr-moai-2016/znk_project/blob/master/src/libZnk/README.md target=_blank>こちら</a>に
@@ -288,18 +263,15 @@ libZnkについて
 	<br>
 	あとはlibZnkのソースコードやコメントなどを適宜参照して戴きたい.<br>
 	時間があればそのうち詳細なドキュメントも用意したいところであるが、いつになるかは未定である.<br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=plugin></a>
-<u><b>
-プラグインインターフェース
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">プラグインインターフェース</h1>
+<p>
 	Moaiプラグインでは以下のダイナミックロード可能なグローバル関数をC言語により実装する.<br>
 	このバージョンにおいてサポートされる関数は以下である.<br>
 	<br>
@@ -413,18 +385,15 @@ libZnkについて
 			あなたのpluginはこの関数内でこの値の参照は可能だが変更することはできない.<br>
 		</div>
 	</div>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=Znk_in_plugin></a>
-<u><b>
-プラグインインターフェースで登場するlibZnk
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">プラグインインターフェースで登場するlibZnk</h1>
+<p>
 	plugin開発において出現するlibZnk特有の型に関して、以下に極一部を紹介しておこう.<br>
 	<ul>
 		<li><b>ZnkMyf</b><br>
@@ -515,17 +484,17 @@ libZnkについて
 		(実装にあたってはZnkObjAry(Znk_obj_ary.h)というさらに基本的なポインタ型汎用配列を利用している)<br>
 		</li>
 	</ul>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
+
+
 
 
 <a name=Link></a>
-<u><b>
-リンク
-</b></u><br>
-<br>
+<h1 class="title"></h1>
+<hr>
 <ul>
 	<li><a class=MstyElemLink href=#TopBar>一番上へ</a></li>
 	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moaiドキュメント(オンライン)</a></li>
@@ -533,5 +502,8 @@ libZnkについて
 </ul><br>
 
 
+</div>>
+</div>
+</div>
 </body>
 </html>

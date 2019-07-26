@@ -1,18 +1,22 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html><html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta http-equiv="Content-Script-Type" content="text/javascript">
 	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="/msty.css" rel="stylesheet" type="text/css">
+	<link href="/bulma.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="section">
+<div class="container">
+<div class="content">
 <a name=TopBar></a>
 <p><b><img src="/imgs/here_landmark.png"> Moai+Easter エキスパートマニュアル</b></p>
 
 <a class=MstyElemLink href="/">トップページ</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/index.html">ユーザーマニュアル</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">エキスパートマニュアル</a> &nbsp;
+<a class=MstyElemLink href="/moai2.0/index.html">初級マニュアル</a> &nbsp;
+<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">上級マニュアル</a> &nbsp;
 <a class=MstyElemLink href="/announcement.html">アナウンスメント</a> &nbsp;
 <a class=MstyElemLink href="/FAQ.html">FAQ</a> &nbsp;
 <br> <br>
@@ -28,32 +32,18 @@
 <a class=MstyElemLink href="/moai2.0/hacking.html">プラグイン開発のためのヒント</a> &nbsp;
 <br> <br>
 
-<div class=MstyComment>
-<u><b>記事担当者</b></u> : Mr.Moai<br>
-<br>
-<u><b>最終更新日</b></u> : 2018/07/17<br>
-<br>
-</div>
-<br>
-
-
 <a name=AtFirst></a>
-<u><b>
-はじめに
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">はじめに</h1>
+<p>
 	この記事ではMoaiをローカルプロキシとして使用する方法について詳しく説明します.<br>
 	( Ver2.0以降ではEasterによる仮想化が簡単に行えるため、<br>
 	もはやローカルプロキシによる仮想化の意味はあまりありません ).<br>
-</div><br>
+</p>
 <br>
 
 
 <a name=Index></a>
-<u><b>
-目次
-</b></u><br>
+<h1 class="title">目次</h1>
 <br>
 <ul>
 	<li><b><a class=MstyElemLink href=#WhatIsProxy>プロキシとは？</a></b></li>
@@ -66,11 +56,8 @@
 
 
 <a name=WhatIsProxy></a>
-<u><b>
-プロキシとは？
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">プロキシとは？</h1>
+<p>
 	一般に「プロキシを使う」と言った場合、あなたと最終接続先となるホストとの通信において、<br>
 	第三者のサーバ、即ちプロキシサーバでその通信を仲介することを意味します.<br>
 	概念的には以下のようになります.<br>
@@ -81,18 +68,15 @@
 	<br>
 	これにより最終接続先サイトからはあなたのマシンのIPアドレスが直接はわからなくなります.<br>
 	つまりIP情報を隠蔽することができます.<br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=WhatIsLocalProxy></a>
-<u><b>
-ローカルプロキシとは？
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">ローカルプロキシとは？</h1>
+<p>
 	ローカルプロキシとは第三者となる外部サーバで通信を仲介するのではなく、<br>
 	この仕事を文字通り今あなたの使っているコンピュータ上で行うというものです.<br>
 	概念的には以下のようになります.<br>
@@ -127,18 +111,15 @@
 	また一方、受信においてサイトからの応答時のデータ(HTML, Javascriptのjsファイル, cssファイルなど)を<br>
 	加工修正することもできます.<br>
 	これにより、サイトのページのレイアウトを好みの形に修正したり、広告を除去したりすることもできます. <br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=FirstLocalProxy></a>
-<u><b>
-初めてのローカルプロキシ
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">初めてのローカルプロキシ</h1>
+<p>
 	Moaiをローカルプロキシとして使う場合は、以下の手順で設定します.<br>
 	<ul>
 		<li>1. moaiを起動する.<br>
@@ -172,18 +153,15 @@
 	<div class=MstyComment>
 		Moaiをローカルプロキシとして使う場合でも、仮想ブラウザ環境の新規構築/刷新には <a class=MstyElemLink href=/moai2.0/virtual_users.html>VirtualUSERS</a> を使います.<br>
 	</div>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=WhatIsProxySettingDialog></a>
-<u><b>
-プロキシ設定ダイアログとは？
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">プロキシ設定ダイアログとは？</h1>
+<p>
 	プロキシを使ったことがある方なら、この項目を読む必要はありません.<br>
 	使ったことがない方でも、プロキシの設定方法に関してはGoogleなどで検索すれば<br>
 	解説サイトは出てくるのでそちらをご覧頂いても勿論かまいませんが、<br>
@@ -231,18 +209,15 @@
 		どうしてもうまく表示されないなど不具合が発生する場合は、諦めてブラウザのプロキシ設定を元に戻した上で閲覧しましょう.<br>
 		Ver2.0以降ならEasterを使う方がほとんどの場合望ましいです.<br>
 	</div>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=DifferenceOfOthers></a>
-<u><b>
-同種の競合ツールと比べた場合の特徴は？
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">同種の競合ツールと比べた場合の特徴は？</h1>
+<p>
 	Moaiの提供するローカルプロキシ機能は同種のツールであるProxomitronやPolipoなどと比べ、<br>
 	機能はずっと限定されるため、普段これらを使いこなしている方にとってはローカルプロキシとしてのMoaiは不要と思われます. <br>
 	 <br>
@@ -262,18 +237,15 @@
 		ブロックされ待たされてしまいますが、非ブロッキング接続によってこの問題を回避できます.<br>
 		</li>
 	</ul>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
 
 
 <a name=warning></a>
-<u><b>
-ご注意
-</b></u><br>
-<br>
-<div class=MstyIndent>
+<h1 class="title">ご注意</h1>
+<p>
 	特に重要な内容を伴う情報の通信を確実に行う必要がある場合においては、<br>
 	まず問題ないとは思いますが、念のためローカルプロキシの設定を一時解除するなどしておいた方がよいかもしれません. <br>
 	<br>
@@ -295,17 +267,17 @@
 	WANからの接続を可能としたような<b>チャレンジャーな</b>使い方をされる予定なら、<br>
 	Moai側での防御として<b>access_allow_ips</b> や<b>access_deny_ips</b> などで不要なIPからの接続要求を弾くなどし、<br>
 	セキュリティ面にも十分配慮して下さい.<br>
+</p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-</div><br>
 <br>
+
+
 
 
 <a name=Link></a>
-<u><b>
-リンク
-</b></u><br>
-<br>
+<h1 class="title"></h1>
+<hr>
 <ul>
 	<li><a class=MstyElemLink href=#TopBar>一番上へ</a></li>
 	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moaiドキュメント(オンライン)</a></li>
@@ -313,5 +285,8 @@
 </ul><br>
 
 
+</div>>
+</div>
+</div>
 </body>
 </html>
