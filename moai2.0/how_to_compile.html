@@ -55,7 +55,7 @@
 	<li><b><a class=MstyElemLink href=#compile_on_msys>MSYSを使ってコンパイルする</a></b></li>
 	<li><b><a class=MstyElemLink href=#compile_on_others_windows>WindowsでBCC5.5(Borland C++ Compiler 5.5)またはDMC(Digital Mars C/C++)を使ってコンパイルする</a></b></li>
 	<li><b><a class=MstyElemLink href=#compile_for_android_term>Android版をコンパイルする(ターミナルエミュレータ上で動作するバイナリ)</a></b></li>
-	<li><b><a class=MstyElemLink href=#compile_for_apk>Android版をコンパイルする(単独でインストールと動作可能なapkファイル)</a></b></li>
+	<li><b><a class=MstyElemLink href=#compile_for_apk>Android版をコンパイルする(単独でインストールと動作可能なapkファイル) (執筆中)</a></b></li>
 	<li><b><a class=MstyElemLink href=#about_libressl>付属ライブラリlibresslについて</a></b></li>
 	<li><b><a class=MstyElemLink href=#about_macos>MacOSについて</a></b></li>
 </ul><br>
@@ -1213,8 +1213,10 @@
 
 
 <a name=compile_for_apk></a>
-<h1 class="title">Android版をコンパイルする(単独でインストールと動作可能なapkファイル)</h1>
+<h1 class="title">Android版をコンパイルする(単独でインストールと動作可能なapkファイル) (執筆中)</h1>
 <p>
+	<font color=red>この記事は現在執筆中で未完成です. Ver2.2リリースのタイミングで完成予定ですのでしばらくお待ちください.</font><br>
+<br>
 	一つ前のセクションでは、ターミナルエミュレータ上で動作するandroid版実行バイナリのコンパイル方法について述べました.<br>
 	これは何と言うかAndroidを非常に(その正体であり核である)Linux的に見たやり方であり、それゆえに複雑な手順が必要となったわけです.<br>
 <br>
@@ -1223,56 +1225,66 @@
 	apkファイルは、多くの場合 Google Play と呼ばれるサイトから提供されるわけですが、別にこれは必須ではありません.<br>
 	Google Play 以外のサイトからでも apk ファイルをダウンロードしてアプリをインストールすることができます.<br>
 <br>
-	<div class=MstyComment>
+	<div class=box>
 		Google Play を経由して apk を配布したい場合、Googleが決めた特別な取り決めなどを色々と満たす必要があります.<br>
 		Google Play には商業的な側面もあり、そのような目的のためには考慮しなければならないことも多いのでしょう.<br>
-		しかし我々は今、Androidのアプリでお金もうけしたいわけではありませんので<br>
-		ここでは特に Google Play は考慮しませんし、それについてこれ以上触れることもしません.<br>
+		しかし我々は今、Androidのアプリでお金もうけしたいわけではありませんのでここでは特に Google Play は考慮しませんし、それについてこれ以上触れることもしません.<br>
 	</div>
 <br>
 	ここでは apk ファイルの作成方法と、このファイルによるandroid実機へのインストール方法について技術的な解説をします.<br>
 	ここではAndroid Studioは使用せず、最小限の構成で開発を進めます.<br>
 	必要なのはjre、gradle、android-sdk、android-ndkとなります.<br>
+<br>
 	以下の手順で述べます.<br>
-<br>
-	1.  jreのインストール<br>
-	    いわゆるJavaランタイムである.<br>
+	<ol>
+		<li>jreのインストール<br>
+		いわゆるJavaランタイムである.<br>
 	    以下に述べるgradleを動作するのに必要となる.<br>
+		</li>
 <br>
-	2.  gradle-2.14.1のインストール<br>
+		<li>gradle-2.14.1のインストール<br>
 	    androidアプリにおける java のコンパイルはgradleと呼ばれるツールによって行われる.<br>
+		</li>
 <br>
-	3.  sdk-toolsによるandroid-sdkのインストール<br>
-	    Android SDK はandroid アプリを生成するための主にjavaに関連したツール、API群からなる.<br>
+		<li>sdk-toolsによるandroid-sdkのインストール<br>
+		Android SDK はandroid アプリを生成するための主にjavaに関連したツール、API群からなる.<br>
+		</li>
 <br>
-	4.  android-ndkのインストール<br>
-	    Android NDK はandroid版実行バイナリを生成するためのcコンパイラやツール、ライブラリ群からなる.<br>
+		<li>android-ndkのインストール<br>
+		Android NDK はandroid版実行バイナリを生成するためのcコンパイラやツール、ライブラリ群からなる.<br>
+		</li>
 <br>
-	5.  apk作成のためのgradleおよびjni環境のフォルダ構成.<br>
-	    apk作成のためのソースプロジェクトとでも言うべき骨格であり、<br>
-	    apk作成のための全作業はこのフォルダ内で行われる.<br>
+		<li>apk作成のためのgradleおよびjni環境のフォルダ構成.<br>
+		apk作成のためのソースプロジェクトとでも言うべき骨格であり、apk作成のための全作業はこのフォルダ内で行われる.<br>
+		</li>
 <br>
-	6.  build.gradle、AndroidManifest.xml等の記述.<br>
-	    gradleはbuild.gradleと呼ばれるファイルの記述にしたがって実行される.<br>
-	    ちょうどmakeがMakefileを参照しながら動作するのに似ている.<br>
+		<li>build.gradle、AndroidManifest.xml等の記述.<br>
+		gradleはbuild.gradleと呼ばれるファイルの記述にしたがって実行される.<br>
+		ちょうどmakeがMakefileを参照しながら動作するのに似ている.<br>
+		</li>
 <br>
-	7.  javaソースによるActivityクラスの記述.<br>
-	    Activityクラスとはアプリのエントリポイントとなるjavaのクラスである.<br>
+		<li>javaソースによるActivityクラスの記述.<br>
+		Activityクラスとはアプリのエントリポイントとなるjavaのクラスである.<br>
+		</li>
 <br>
-	8.  cソースによるJNIインターフェースの記述.<br>
-	    Activityクラス内から呼び出されるCのコードである.<br>
-	    ここで記述したcファイルはndk内のCコンパイラによってコンパイルされ、<br>
-	    同じくndk内のリンカによって最終的にシェアードライブラリ(libmain.soファイル)となる.<br>
+		<li>cソースによるJNIインターフェースの記述.<br>
+		Activityクラス内から呼び出されるCのコードである.<br>
+		ここで記述したcファイルはndk内のCコンパイラによってコンパイルされ、同じくndk内のリンカによって最終的にシェアードライブラリ(libmain.soファイル)となる.<br>
+		</li>
 <br>
-	9.  ネイティブライブラリのリンクとAndroid.mkでの記述.<br>
-	    libZnkなどcで記述されたその他のライブラリをリンクする方法である.<br>
+		<li>ネイティブライブラリのリンクとAndroid.mkでの記述.<br>
+		libZnkなどcで記述されたその他のライブラリをリンクする方法である.<br>
+		</li>
 <br>
-	10. gradle実行によるjavaソースのコンパイルとapkファイルの生成.<br>
-	    7で記述したjavaソースをコンパイルし、8で生成したlibmain.so、9で指定したその他のライブラリ(libZnk.so)、<br>
-	    その他リソースファイルやassetsファイルなどを統合し、最終的にapkファイルとしてまとめる.<br>
-	    この作業をgradleが行う.<br>
+		<li>gradle実行によるjavaソースのコンパイルとapkファイルの生成.<br>
+		7で記述したjavaソースをコンパイルし、8で生成したlibmain.so、9で指定したその他のライブラリ(libZnk.so)、<br>
+		その他リソースファイルやassetsファイルなどを統合し、最終的にapkファイルとしてまとめる.<br>
+		この作業をgradleが行う.<br>
+		</li>
 <br>
-	11. 生成したapkファイルを実機へとインストールする各種方法<br>
+		<li>生成したapkファイルを実機へとインストールする各種方法<br>
+		</li>
+	</ol>
 </p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
