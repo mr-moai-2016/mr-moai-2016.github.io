@@ -93,20 +93,6 @@ body {
 	border-radius: 0.5em;
 	box-shadow: 5px 5px 5px #AAA;
 }
-.MstyAppLink {
-	color: #000;
-	font-size: 16px;
-	font-weight: bold;
-	border: 1px solid #3D803D;
-	padding: 4px 8px;
-	display: inline-block;
-	background: #E0E0B0 none repeat scroll 0% 0%;
-	text-align: center;
-	border-radius: 10px;
-	margin-bottom: 0px;
-	text-decoration: none;
-    word-break: normal;
-}
 .MstyAppLinkRed {
 	color: #000;
 	font-size: 16px;
@@ -126,20 +112,6 @@ body {
 	font-size: 16px;
 	font-weight: bold;
 	border: 1px solid #FF0000;
-	padding: 4px 8px;
-	display: inline-block;
-	background: #B0B0E0 none repeat scroll 0% 0%;
-	text-align: center;
-	border-radius: 10px;
-	margin-bottom: 0px;
-	text-decoration: none;
-    word-break: normal;
-}
-.MstyAppLink:hover {
-	color: #000;
-	font-size: 16px;
-	font-weight: bold;
-	border: 1px solid #3D803D;
 	padding: 4px 8px;
 	display: inline-block;
 	background: #B0B0E0 none repeat scroll 0% 0%;
@@ -214,32 +186,54 @@ body {
 
 .MstyElemLink {
 	color: #000;
-#	font-size: 16px;
-#	border: 1px solid #3D803D;
 	padding: 4px 8px;
 	display: inline-block;
 	background: #E0E0B0 none repeat scroll 0% 0%;
 	text-align: center;
 	border-radius: 10px;
 	margin-top:    5px;
-#	margin-bottom: 5px;
 	text-decoration: none;
-    word-break: normal;
+#   word-break: normal;
+#	overflow-wrap: break-word;
 }
 .MstyElemLink:hover {
 	color: #000;
-#	font-size: 16px;
-#	border: 1px solid #3D803D;
 	padding: 4px 8px;
 	display: inline-block;
 	background: #B0B0E0 none repeat scroll 0% 0%;
 	text-align: center;
 	border-radius: 10px;
 	margin-top:    5px;
-#	margin-bottom: 5px;
+	text-decoration: none;
+#   word-break: normal;
+#	overflow-wrap: break-word;
+}
+
+.MstyWrapLink {
+	color: #000;
+	padding: 4px 8px;
+	display: inline;
+	background: #E0E0B0 none repeat scroll 0% 0%;
+	text-align: center;
+	border-radius: 10px;
+	margin-top:    5px;
 	text-decoration: none;
     word-break: normal;
+	overflow-wrap: break-word;
 }
+.MstyWrapLink:hover {
+	color: #000;
+	padding: 4px 8px;
+	display: inline;
+	background: #B0B0E0 none repeat scroll 0% 0%;
+	text-align: center;
+	border-radius: 10px;
+	margin-top:    5px;
+	text-decoration: none;
+    word-break: normal;
+	overflow-wrap: break-word;
+}
+
 .MstyElemLinkTop {
 	color: #000;
 #	border: 1px solid #3D803D;
@@ -505,8 +499,21 @@ body {
 .MstyFloatLeft {
 	float: left;
 }
+.MstyBlock {
+	display: block;
+    word-break: normal;
+	overflow-wrap: break-word;
+}
 .MstyCode {
 	font-family:Monaco,Consolas,Courier New,Courier,monospace,sans-serif;
+	display: block;
+    word-break: normal;
+	overflow-wrap: break-word;
+}
+.MstyCodeIn {
+	font-family:Monaco,Consolas,Courier New,Courier,monospace,sans-serif;
+    word-break: normal;
+	overflow-wrap: break-word;
 }
 .MstyCodeSynConst {
 	color: #660000;

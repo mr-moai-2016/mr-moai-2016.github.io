@@ -12,7 +12,7 @@
 <div class="container">
 <div class="content">
 <a name=TopBar></a>
-<p><b><img src="/imgs/here_landmark.png"> Moai+Easter エキスパートマニュアル</b></p>
+<p><b><img src="/imgs/here_landmark.png"> Moai+Easter 上級マニュアル</b></p>
 
 <a class=MstyElemLink href="/">トップページ</a> &nbsp;
 <a class=MstyElemLink href="/moai2.0/index.html">初級マニュアル</a> &nbsp;
@@ -91,9 +91,9 @@
 	この値はカタログのフォーマットを指定するために存在する.<br>
 	これが示す内容の意味はカタログの「設定」画面から行える指定そのものである.<br>
 	<br>
-	<div class=MstyComment>
+	<div class=box><div class=MstyCode>
 		横のスレ個数 x 縦のスレ個数 x 各スレでの文字数 x 文字位置(0:下,1:右) x 画像サイズ(0から6までで0が最小で旧来の表示)<br>
-	</div>
+	</div></div>
 	<br>
 	というフォーマットを持つ記述子となる.<br>
 	<br>
@@ -143,14 +143,13 @@
 	<br>
 	この値は筆者の知る限り、現在では「時限式の規制」において使われているようである.<br>
 	(かつては別の用途で使用されていたこともあったと記憶している).<br>
-	時限式の規制とは、「何日の何時何分何秒よりレスが出来るようになります」といった旨のメッセージが表示される規制であり、<br>
-	基本的にはISPやIPベースで行われる広域規制の一種のようである.<br>
+	時限式の規制とは、「何日の何時何分何秒よりレスが出来るようになります」といった旨のメッセージが表示される規制であり、基本的にはISPやIPベースで行われる広域規制の一種のようである.<br>
 	<br>
 	このverifycは、ユーザがそのIPにおいて初めてレスする際に発行され、<br>
 	おそらくその値の内容はそのときの時刻とIPアドレスの情報が暗号化されて格納されたものである.<br>
 	そしてその表示の通り、その時刻からプラス何時間か経過した後にレスが可能になるといったものである.<br>
 	<br>
-	また、この値をユーザが不用意に改変したりそもそもverifyc自体を消去すると、futaba.phpはそのような改変を検出するruleを持っており、<br>
+	また、この値をユーザが不用意に改変したりそもそもverifyc自体を消去すると、futaba.phpはそのような改変を検出するruleを持っており、
 	改変された値は破棄され、再びそのIPにおける「初めてのレス」とみなされて時刻の情報も初期化される.<br>
 	<br>
 	例えば、「３時間後にレスが可能になる」といった表示がされて２時間が経過した場合を考えよう.<br>
@@ -162,8 +161,7 @@
 	<br>
 	これは割と凝った規制であり、規制コレクター+マニアの筆者としては<b>面白い部類の仕組み</b>かと思うのだがいかがであろうか？<br>
 	<br>
-	ちなみにこの実験において元のverifycをbackupしておき、一旦初期化された後に再び元の値を復元すると、<br>
-	残り１時間後にレスが可能になる状態に復元できるケースもあるようである.<br>
+	ちなみにこの実験において元のverifycをbackupしておき、一旦初期化された後に再び元の値を復元すると、残り１時間後にレスが可能になる状態に復元できるケースもあるようである.<br>
 </p>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
@@ -184,7 +182,7 @@
 	<br>
 	ユーザ情報を初期化したい場合は、この種のCookie変数の値をどう扱うべきであろうか？<br>
 	大抵の場合、とりあえず一旦空にしておくと間違いはなかろう. <br>
-	なぜなら誰でも一番初めは何もない状態なのだし、そうでなくとも少しでもセキュリティーに意識があるユーザなら、<br>
+	なぜなら誰でも一番初めは何もない状態なのだし、そうでなくとも少しでもセキュリティーに意識があるユーザなら、
 	<b>Browserを閉じる際に全Cookieを削除する</b>設定にしておくなどは、極めて自然で妥当なことであろう.<br>
 <br>
 	<br>
@@ -198,6 +196,25 @@
 <br>
 
 
+<div class="card">
+	<u><b>This article was written by:</b></u><br>
+	<div class="card-content">
+		<div class="media">
+			<div class="media-left">
+				<figure class="image is-48x48">
+				<img src="/imgs/yakisoba.png" alt="none image">
+				</figure>
+			</div>
+			<div class="media-content">
+				<p class="title is-4">K.Yakisoba.H</p>
+				<p class="subtitle is-6">@znk project</p>
+			</div>
+		</div>
+		<div class="content">
+		  <time datetime="2016-1-1">2019/07/29</time>
+		</div>
+	</div>
+</div>
 
 
 <a name=Link></a>

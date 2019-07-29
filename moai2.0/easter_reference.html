@@ -256,9 +256,9 @@ EasterはVirtualUSERS等によって構築された仮想ブラウザ環境を�
 <p>
 	以下の例でEaster URLの構造を簡単に説明しましょう.<br>
 	<br>
-	<div class=box>
+	<div class=box><div class=MstyCode>
 		http://192.168.0.1:8125/easter?est_view=may.2chan.net/b/futaba.php?mode=cat&amp;sort=1<br>
-	</div>
+	</div></div>
 <br>
 	<ul>
 		<li><b>192.168.0.1:8125</b><br>
@@ -467,7 +467,6 @@ EasterはVirtualUSERS等によって構築された仮想ブラウザ環境を�
 			これはいわばEasterコレクションとEaster HyperPostの両方の機能をフルに活用した奥義的な使い方です.<br>
 			あなたが画像BBSから収集した画像コレクションと、それを再び画像BBSに投稿するという一連の流れをブラウザ内のみで完結させることができます.<br>
 		</div>
-		</li>
 	</div>
 </article><br>
 <br>
@@ -506,7 +505,7 @@ EasterはVirtualUSERS等によって構築された仮想ブラウザ環境を�
 		<ol>
 			<li><b>ImageMagicをダウンロードします.</b><br>
 			ImageMagicの公式サイトは、https://imagemagick.org となります.<br>
-			特にWindows版のImageMagicについては、<a class=MstyElemLink href=https://imagemagick.org/script/download.php#windows target=_blank>https://imagemagick.org/script/download.php#windows</a>より入手できます.<br>
+			特にWindows版のImageMagicについては、<a class=MstyWrapLink href=https://imagemagick.org/script/download.php#windows target=_blank>https://imagemagick.org/script/download.php#windows</a>より入手できます.<br>
 			リンク先を見て頂くとわかりますが、Windows版だけでも割と沢山ファイルがあり少しわかりにくいですが、ImageMagick-7.0.8-*-portable-Q16-x86.zip というのを選んでいただくのが確実でしょう.<br>
 			</li>
 <br>
@@ -525,7 +524,7 @@ EasterはVirtualUSERS等によって構築された仮想ブラウザ環境を�
 <br>
 		これで準備は完了です.<br>
 <br>
-		<div class=box>
+		<div class=box><div class=MstyBlock>
 			<b><u>なぜImageMagickのconvertが別途必要なのか？</u></b><br>
 <br>
 			この機能が行っている内部処理を少し説明致しましょう.<br>
@@ -547,8 +546,7 @@ EasterはVirtualUSERS等によって構築された仮想ブラウザ環境を�
 			しかしMoaiシステム全体の合計サイズですら現在(zip展開された初期状態で)およそ15MBですので、たかがオプション的な機能の変換にちょろっと使用するだけのこのコマンド一個で<br>
 			システム全体のサイズがイキナリ倍になるのは<s>あまりにダサい</s>考え物です.<br>
 			まあそんなワケで、今回は「お試し頂きたい方は別途ダウンロードして下さい」という形にしました.<br>
-		</div>
-		</li>
+		</div></div>
 	</div>
 </article><br>
 		<br>
@@ -603,9 +601,9 @@ EasterはVirtualUSERS等によって構築された仮想ブラウザ環境を�
 		赤福の設定で「外部の板」パネルを開き、「外部の板でも動作させる」にチェックを入れます.<br>
 		「パターン」に以下をコピペし、「追加」ボタンを押します.<br>
 		<br>
-		<div class=box>
+		<div class=box><div class=MstyCode>
 			^http://.+:8125/easter\?est_.*=(.*)\.2chan\.net/([^/]+)/([^#]*)<br>
-		</div>
+		</div></div>
 <br>
 		「monaca.php」と「前方一致」のチェックは<b>Off</b>にしておきます.<br>
 <br>
