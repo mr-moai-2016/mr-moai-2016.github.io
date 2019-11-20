@@ -41,8 +41,9 @@
 <ul>
 	<li><b><a class=MstyElemLink href=#ForWindows>Windows版の入手およびインストール方法</a></b></li>
 	<li><b><a class=MstyElemLink href=#ForLinux>Linux版の入手およびインストール方法</a></b></li>
-	<li><b><a class=MstyElemLink href=#ForCygwin>Cygwin版の入手およびインストール方法</a></b></li>
 	<li><b><a class=MstyElemLink href=#ForAndroid>Android版の入手およびインストール方法</a></b></li>
+	<li><b><a class=MstyElemLink href=#ForAndroidTerm>Android Terminal Emulator版の入手およびインストール方法</a></b></li>
+	<li><b><a class=MstyElemLink href=#ForCygwin>Cygwin版の入手およびインストール方法</a></b></li>
 	<li><b><a class=MstyElemLink href=#AboutMoaiProfile>moai_profile</a></b></li>
 	<li><b><a class=MstyElemLink href=#AboutDiskSize_ofMoaiEaster>Moai+Easter本体が使うディスク容量について</a></b></li>
 </ul><br>
@@ -240,78 +241,75 @@
 <br>
 
 
-<a name=ForCygwin></a>
-<h1 class="title">Cygwin版の入手およびインストール方法</h1>
+<a name=ForAndroid></a>
+<h1 class="title">Android版の入手およびインストール方法</h1>
 <p>
 <article class="message is-dark"><br>
 	<div class="message-header">
-		インストール手順<br>
+		apk版について<br>
+	</div>
+	<div class="message-body">
+		Androidでのアプリといえば、Google Play を経由してインストールするというイメージをお持ちの方も多いでしょう.<br>
+		しかし、必ずしも Google Play を経由しなければならないということはなく、apk ファイルさえあればアプリをインストールすることができます.<br>
+		apk ファイルは Google Play 以外を経由して入手(ダウンロード)したものとなりますので、いわゆる「野良アプリ」と呼ばれるものになります.<br>
+		Moai Ver2.2以降では、この apk ファイルによるインストールをサポートします.<br>
+	</div>
+</article><br>
+<br>
+<article class="message is-dark"><br>
+	<div class="message-header">
+		apk版でのインストール手順<br>
 	</div>
 	<div class="message-body">
 		<ol>
-			<li>最新版はzipファイルとなっており、以下より入手できます.<br>
-			<br>
-			<a class=MstyWrapLink target=_blank href=https://github.com/mr-moai-2016/znk_project/releases/v2.1>https://github.com/mr-moai-2016/znk_project/releases/v2.1</a><br>
-			<br>
-			Assetsにある moai-v2.1-cygwin32.zip がCygwin版となります.<br>
-			64bit Windows の方もこれをお使いください.<br>
-		<br>
-			<div class=box>
-				Cygwinの64bit版専用実行バイナリは提供しておりません.<br>
-				(Cygwin環境本体がWOWで動作する32bitというケースもあり得るため、このあたりの組み合わせは割と煩雑です).<br>
-				<br>
-				そもそもWindows版がある中、わざわざCygwin版を選ぶといった方はソースコードから自分でビルドして使いたいという方がほとんどだと思います.<br>
-				従って、わざわざ実行バイナリを提供する意味自体あまり感じないのですが、その場合でもビルド後の構成がどうなっているのかは確認できますので、<br>
-				32bit版実行バイナリのみ提供しております.<br>
-			</div>
-			</li>
-			<br>
-			<li>ダウンロードしたzipファイルを展開します.<br>
-	<br>
-			<div class=box>
-				展開直後の時点での全体のサイズ合計はせいぜい15MB程度なのですが、将来に備えてディスク容量にさらに150MB程度の余裕がある方が望ましいです.<br>
-				詳細は<a class=MstyElemLink href=#AboutDiskSize_ofMoaiEaster>こちら</a>を参照してください.<br>
-			</div>
-			</li>
-			<br>
-			<li>展開したディレクトリへ移動します.<br>
-			以下のように入力しEnterを押します.<br>
-	<br>
-			<div class=box><div class=MstyCode>
-		    	cd moai-v2.1-cygwin32<br>
-			</div></div>
+			<li>以下より最新の apk ファイルをダウンロードします.<br>
+			<span class=MstyWrapLink target=_blank href=https://mr-moai-2016.github.io/download/moai-v2.2-android.apk>https://mr-moai-2016.github.io/download/moai-v2.2-android.apk</span><br>
 			</li>
 <br>
-			<li>moaiを一旦起動させます.<br>
-			以下のように入力しEnterを押します.<br>
-	<br>
-			<div class=box><div class=MstyCode>
-				sh moai_for_cygwin.sh<br>
-			</div></div>
-	<br>
-			尚、２度目以降の起動は、もちろん上記のように入力してもかまいませんが、 単に以下のように入力しても起動できると思います.<br>
-	<br>
-			<div class=box><div class=MstyCode>
-				./moai<br>
-			</div></div>
+			<li>ダウンロードした apk ファイルは /sdcard/Download 直下にあると思われますので、Androidのファイルマネージャでこのフォルダを開きましょう.<br>
 			</li>
-			<br>
-			<li>展開ディレクトリと同列の場所に moai_profile ディレクトリが作成されたことを念のため確認してください<br>
+<br>
+			<li>この apk ファイルをタップして実行しさえすれば Moai をインストールできるのですが、<br>
+			お使いのAndroidのデフォルトの設定では、apk ファイルによるインストール自体が不許可となっている可能性が高いです.<br>
+			<div class=box>
+				例えば「インストールはブロックされました」や「セキュリティ上の理由から、お使いのスマートフォンではこの提供元からの不明なアプリをインストールすることはできません」などのメッセージが表示されると思います.<br>
+				つまり Google Play 以外を経由して入手した「野良アプリ」をインストールさせないという設定となっているわけですが<br>
+				明確な意思を持って、(むしろGoogle Playよりも)手間の掛かる apk ファイルによるインストールを試みているところに<br>
+				こんな設定は邪魔でしかないと思いますので、解除してしまいましょう.<br>
+			</div>
+			この設定を解除する方法について解説したサイトは非常にたくさんありますのでググってもらう方が確実そうですが、一応ここでも解説しておきます.<br>
+			</li>
+<br>
+			<li>Android のバージョンによっても微妙に異なりますが、このインストール制限は概してセキュリティの設定によるものです.<br>
+			例えば、「設定」→「詳細設定」→「セキュリティ」と開いていき、「提供元不明のアプリ」の項目で「許可する」をONにします.<br>
+			</li>
+<br>
+			<li>改めて apk ファイルを実行してみます.<br>
+			無事「インストールされました」と表示されたら、アプリ一覧に「Moai for Android」という項目が登録されていると思います.<br>
+			それを選択すれば Moai が起動します.<br>
+			Moai for Android 起動を意味するシンプルな画面が表示されますので、一旦それをクリアして閉じます.<br>
+			(閉じてもMoaiのサーバスレッドはしばらくは生きています)<br>
+			</li>
+<br>
+			<li>お使いのAndroidシステムにあるWebブラウザ(なんでもよいですが)を起動します.<br>
+			http://127.0.0.1:8124にアクセスします.<br>
+			Moaiのトップページが表示されれば成功です.<br>
+			</li>
+<br>
+			<li>長時間何もせずに放置すると、そのうちMoaiのサーバスレッドがAndroidシステムによって終了させられると思います.<br>
+			そのときは再度Moai for Androidを起動してください.<br>
 			</li>
 		</ol>
-		インストールについては以上です.<br>
-		<br>
-		Moaiを明示的に終了させる必要性は通常ありませんが、終了させたい場合はCtrl+Cでプロセスをkillして構いません.<br>
 	</div>
 </article><br>
-	<br>
+<br>
 <article class="message is-dark"><br>
 	<div class="message-header">
-		アンインストールについて<br>
+		apk 版でのアンインストールについて<br>
 	</div>
 	<div class="message-body">
-		Moaiをアンインストールするには展開ディレクトリをそのまま削除すればよいです.<br>
-		ただし基本的に<b><font color=red>moai_profileディレクトリだけは削除せず残しておく方がよいでしょう.</font></b><br>
+		通常のAndroid アプリのアンインストールと同じ要領でMoaiをアンインストールできます.<br>
+		ただしこのアンインストールを行っても<b><font color=red>moai_profileディレクトリだけは削除されずに残る</font></b>ようになっています.<br>
 		これについては、<a class=MstyElemLink href=#AboutMoaiProfile>moai_profile</a>を参照してください.<br>
 	</div>
 </article><br>
@@ -321,16 +319,16 @@
 <br>
 
 
-<a name=ForAndroid></a>
-<h1 class="title">Android版の入手およびインストール方法</h1>
+<a name=ForAndroidTerm></a>
+<h1 class="title">Android Terminal Emulator版の入手およびインストール方法</h1>
 <p>
 <article class="message is-dark"><br>
 	<div class="message-header">
-		Terminal Emulator版とapk版<br>
+		Terminal Emulator版について<br>
 	</div>
 	<div class="message-body">
-		Android版のインストールは、Terminal Emulator 版と apk 版の二通りの方式があります.<br>
-		Ver2.1(現在の最新バージョン)では、前者のみをサポートします.<br>
+		Android版には、Terminal Emulator 版というのもあります.<br>
+		Ver2.1まではでは、このTerminal Emulator版のみをサポートしていました.<br>
 		これはいわゆる一般的なAndroidアプリとは異なり、Terminal Emulatorと呼ばれるソフトウェアの上でMoaiを動作させるという方式です.<br>
 		Android上で動作する代表的な Terminal Emulator として Android Terminal Emulator (Jack Palevich著) と Termux (Fredrik Fornwall著) があります.<br>
 		どちらの上でも Moai が動作することを確認しておりますが、ここでは Android Terminal Emulator を使った方法を解説します.<br>
@@ -474,51 +472,84 @@
 		これについては、<a class=MstyElemLink href=#AboutMoaiProfile>moai_profile</a>を参照してください.<br>
 	</div>
 </article><br>
+</p>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br>
+
+
+<a name=ForCygwin></a>
+<h1 class="title">Cygwin版の入手およびインストール方法</h1>
+<p>
 <article class="message is-dark"><br>
 	<div class="message-header">
-		apk版でのインストール手順(予定)<br>
+		インストール手順<br>
 	</div>
 	<div class="message-body">
 		<ol>
-			<li>このバージョンは現在開発中です. リリースされ次第、以下より入手可能とする予定です.<br>
-			<span class=MstyWrapLink target=_blank href=https://mr-moai-2016.github.io/download/moai-v2.2-android.apk>https://mr-moai-2016.github.io/download/moai-v2.2-android.apk</span><br>
+			<li>最新版はzipファイルとなっており、以下より入手できます.<br>
+			<br>
+			<a class=MstyWrapLink target=_blank href=https://github.com/mr-moai-2016/znk_project/releases/v2.1>https://github.com/mr-moai-2016/znk_project/releases/v2.1</a><br>
+			<br>
+			Assetsにある moai-v2.1-cygwin32.zip がCygwin版となります.<br>
+			64bit Windows の方もこれをお使いください.<br>
+		<br>
+			<div class=box>
+				Cygwinの64bit版専用実行バイナリは提供しておりません.<br>
+				(Cygwin環境本体がWOWで動作する32bitというケースもあり得るため、このあたりの組み合わせは割と煩雑です).<br>
+				<br>
+				そもそもWindows版がある中、わざわざCygwin版を選ぶといった方はソースコードから自分でビルドして使いたいという方がほとんどだと思います.<br>
+				従って、わざわざ実行バイナリを提供する意味自体あまり感じないのですが、その場合でもビルド後の構成がどうなっているのかは確認できますので、<br>
+				32bit版実行バイナリのみ提供しております.<br>
+			</div>
+			</li>
+			<br>
+			<li>ダウンロードしたzipファイルを展開します.<br>
+	<br>
+			<div class=box>
+				展開直後の時点での全体のサイズ合計はせいぜい15MB程度なのですが、将来に備えてディスク容量にさらに150MB程度の余裕がある方が望ましいです.<br>
+				詳細は<a class=MstyElemLink href=#AboutDiskSize_ofMoaiEaster>こちら</a>を参照してください.<br>
+			</div>
+			</li>
+			<br>
+			<li>展開したディレクトリへ移動します.<br>
+			以下のように入力しEnterを押します.<br>
+	<br>
+			<div class=box><div class=MstyCode>
+		    	cd moai-v2.1-cygwin32<br>
+			</div></div>
 			</li>
 <br>
-			<li>この apk ファイルは Google Play 以外を経由して直接ダウンロードしたものですので、いわゆる「野良アプリ」と呼ばれるものになります.<br>
-			ダウンロードしたファイルは /sdcard/Download直下にあると思われますので、ファイルマネージャでこのフォルダを開きましょう.<br>
-			あとはこの apk ファイルを実行すれば原理的にはインストールできるのですが、お使いのAndroidのデフォルトの設定ではapkファイルがインストールできないように制限がかかっている可能性が高いです.<br>
-			この制限がかかっている状態で apk ファイルを実行すると、例えば「インストールはブロックされました」や「セキュリティ上の理由から、お使いのスマートフォンではこの提供元からの不明なアプリをインストールすることはできません」<br>
-			などのメッセージが表示されるようです.<br>
-			これを回避する方法について解説したサイトは非常にたくさんありますのでググってもらう方が確実そうですが、一応ここでも解説しておきます.<br>
+			<li>moaiを一旦起動させます.<br>
+			以下のように入力しEnterを押します.<br>
+	<br>
+			<div class=box><div class=MstyCode>
+				sh moai_for_cygwin.sh<br>
+			</div></div>
+	<br>
+			尚、２度目以降の起動は、もちろん上記のように入力してもかまいませんが、 単に以下のように入力しても起動できると思います.<br>
+	<br>
+			<div class=box><div class=MstyCode>
+				./moai<br>
+			</div></div>
 			</li>
-<br>
-			<li>Androidのバージョンによっても微妙に異なりますが、このインストール制限は概してセキュリティの設定によるものです.<br>
-			例えば、「設定」→「詳細設定」→「セキュリティ」と開いていき、「提供元不明のアプリ」の項目で「許可する」をONにします.<br>
-			</li>
-<br>
-			<li>改めて apk ファイルを実行してみます.<br>
-			無事「インストールされました」と表示されたら、アプリ一覧に「Moai for Android」という項目が登録されていると思います.<br>
-			それを選択すれば Moai が起動します.<br>
-			Moai for Android 起動を意味するシンプルな画面が表示されますので、一旦それを閉じます.<br>
-			(閉じてもMoaiのサーバスレッドはしばらくは生きています)<br>
-			</li>
-<br>
-			<li>お使いのAndroidシステムにあるWebブラウザ(なんでもよいですが)を起動します.<br>
-			http://127.0.0.1:8124にアクセスします.<br>
-			Moaiのトップページが表示されれば成功です.<br>
+			<br>
+			<li>展開ディレクトリと同列の場所に moai_profile ディレクトリが作成されたことを念のため確認してください<br>
 			</li>
 		</ol>
+		インストールについては以上です.<br>
+		<br>
+		Moaiを明示的に終了させる必要性は通常ありませんが、終了させたい場合はCtrl+Cでプロセスをkillして構いません.<br>
 	</div>
 </article><br>
-<br>
+	<br>
 <article class="message is-dark"><br>
 	<div class="message-header">
-		apk 版でのアンインストールについて<br>
+		アンインストールについて<br>
 	</div>
 	<div class="message-body">
-		通常のAndroid アプリのアンインストールと同じ要領でMoaiをアンインストールできます.<br>
-		ただしこのアンインストールを行っても<b><font color=red>moai_profileディレクトリだけは削除されずに残る</font></b>ようになっています.<br>
+		Moaiをアンインストールするには展開ディレクトリをそのまま削除すればよいです.<br>
+		ただし基本的に<b><font color=red>moai_profileディレクトリだけは削除せず残しておく方がよいでしょう.</font></b><br>
 		これについては、<a class=MstyElemLink href=#AboutMoaiProfile>moai_profile</a>を参照してください.<br>
 	</div>
 </article><br>
