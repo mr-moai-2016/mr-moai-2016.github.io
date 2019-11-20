@@ -253,6 +253,9 @@
 		しかし、必ずしも Google Play を経由しなければならないということはなく、apk ファイルさえあればアプリをインストールすることができます.<br>
 		apk ファイルは Google Play 以外を経由して入手(ダウンロード)したものとなりますので、いわゆる「野良アプリ」と呼ばれるものになります.<br>
 		Moai Ver2.2以降では、この apk ファイルによるインストールをサポートします.<br>
+<br>
+		<b>Android 4.0.3 ( Ice Cream Sandwich ) 以前の古いシステムでは、この apk 版を使用することはできません.<br>
+		Terminal Emulator 版の方であれば使用可能です.</b><br>
 	</div>
 </article><br>
 <br>
@@ -330,11 +333,45 @@
 		Android版には、Terminal Emulator 版というのもあります.<br>
 		Ver2.1まではでは、このTerminal Emulator版のみをサポートしていました.<br>
 		これはいわゆる一般的なAndroidアプリとは異なり、Terminal Emulatorと呼ばれるソフトウェアの上でMoaiを動作させるという方式です.<br>
+<br>
+		<b>Android 5.0 (Lollipop) 以降をご使用の方は、このTerminal Emulator版を使用することはできません.<br>
+		apk 版の方をインストールして頂きますようお願いします</b>.<br>
+<br>
 		Android上で動作する代表的な Terminal Emulator として Android Terminal Emulator (Jack Palevich著) と Termux (Fredrik Fornwall著) があります.<br>
 		どちらの上でも Moai が動作することを確認しておりますが、ここでは Android Terminal Emulator を使った方法を解説します.<br>
 		この方法ではアルファベットを多く入力するため、Hacker's Keyboard (Klaus Weidner著) というアプリをインストールした方が作業がしやすいかもしれません.<br>
+<br>
+		<div class=box>
+			この Terminal Emulator 版は 非PIEと呼ばれるネイティブ実行形式で作成してあります.<br>
+			一方、apk 版は PIEと呼ばれるネイティブ実行形式で作成してあります.<br>
+			この違いにより、それぞれの版で使用できるAndroidのバージョンが異なります.<br>
+<br>
+			<b><u>Android 5.0 (Lollipop) 以降</u></b><br>
+<br>
+			ネイティブ実行形式に関する仕様が変更となり、<br>
+			PIE( Position Independent Executable ) 形式のみをサポートするようになりました.<br>
+			そのため、この環境では Terminal Emulator版(非PIE)は、以下のエラーメッセージを出力して起動することができません.<br>
+<br>
+			<div class=box><div class=MstyCode>
+				error: only position independent executables (PIE) are supported.<br>
+			</div></div>
+<br>
+			<b><u>Android 4.1 ( Jelly Bean ) 以降 Android 4.4 ( KitKat ) 以前まで</u></b><br>
+<br>
+			この範囲のバージョンのAndroidでは、PIE 形式と非PIE形式の両方がサポートされています.<br>
+			よってこのバージョンのAndroidをご使用であれば、apk版とTerminal Emulator版のどちらでも使用可能です.<br>
+<br>
+			<b><u>Android 4.0.3 (Ice Cream Sandwich) 以前</u></b><br>
+<br>
+			これ以前の古いシステムでは、今度は逆に PIE 形式がサポートされず非PIE形式のみのサポートとなります.<br>
+			そのため、この環境では apk 版(PIE)は、起動することができません.<br>
+			(PIE形式を起動するとエラーもなくクラッシュします).<br>
+<br>
+			ここまでの説明でおわかりと思いますが、結局PIEと非PIEのいずれもすべてのAndroidバージョンをカバーできません.<br>
+			ここにジレンマがありますが、Moaiでは apk 版 Moai では、新しいAndroidを重視して PIE形式とし、<br>
+			Terminal Emulator版 Moai では、(古いAndroid環境への救済措置という位置づけで)従来どおり非PIE形式とする形としました.<br>
+		</div>
 		<br>
-		尚、Ver2.2(現在開発中)では、後者の apk 版をサポートする予定です.<br>
 	</div>
 </article><br>
 <br>
@@ -350,31 +387,6 @@
 			<br>
 			Assetsにある moai-v2.1-android-armeabi.zip がAndroid版となります.<br>
 			これをダウンロードしてください.<br>
-<br>
-			Android 4.4 (KitKat) までのARMベースCPUであれば動作すると思われます.<br>
-			しかし、申し訳ありませんが Android 5.0 (Lollipop) 以降で Moai を起動した場合、<br>
-			現状では以下のエラーメッセージを出力して起動に失敗する不具合があります.<br>
-<br>
-			<div class=box><div class=MstyCode>
-				error: only position independent executables (PIE) are supported.<br>
-			</div></div>
-<br>
-			これはMoai次期バージョンVer2.2で修正予定です.<br>
-<br>
-			<div class=box>
-				現状の Moai Ver2.1 では、PIE形式としてビルドしていません.<br>
-				Android 4.4 以前の古い環境ならばそっちの方がよいのですが、Android 5.0 以降ではネイティブ実行形式に関する仕様が変更となり、<br>
-				PIE( Position Independent Executable ) 形式のみをサポートするようになりました.<br>
-				上記のエラーはそれが原因で発生しています.<br>
-<br>
-				ではPIE形式にしてビルドすれば万事解決かというと、実はそうでもないのです.<br>
-				Android 4.0.3 ( Ice Cream ) 以前の古いシステムでは、今度は逆に PIE 形式をサポートしていないのです.<br>
-				そのため、この環境では PIE形式の方が不具合を起こします.<br>
-				ここにジレンマがありますが、今はもう2019年ですからね・・・<br>
-				Ver2.2で導入する apk 版 Moai では、新しいAndroidを重視して PIE形式とする予定です.<br>
-				一方、Terminal Emulator版 Moai では、従来どおり非PIE形式としようと思います.<br>
-				これならば Android 4.0.3 ( Ice Cream ) 以前の古いシステムでも動作しますので・・・.<br>
-			</div>
 	<br>
 			<div class=box>
 				moai-v2.1-android-x86.zip は、PC(x86)上のAndroidエミュレータなどで動作させるためのバイナリとなります.<br>
@@ -602,8 +614,8 @@
 		これが指定されている場合は Moaiエンジンの設定よりもこれが優先されます.<br>
 <br>
 		初期設定では、この位置はWindowsやLinuxの場合は Moai 本体のディレクトリより一つ上になっています.<br>
-		Androidの場合、Ver2.1(現在の最新バージョン)では、Moai 本体ディレクトリより一つ上です.<br>
-		Ver2.2(現在開発中)以降では Android apk版の場合、データフォルダのファイルマネージャ直下(/sdcard/moai_profile) となります.<br>
+		Androidの場合、Ver2.1では、Moai 本体ディレクトリより一つ上です.<br>
+		Ver2.2以降では Android apk版の場合、データフォルダのファイルマネージャ直下(/sdcard/moai_profile) となります.<br>
 		(Androidではシステムに様々な取り決めがあるため、moai_profileのデフォルトの位置を変えることはあまりお勧めできません)<br>
 		moai_profile がまだ存在しない場合、Moai はこの位置へ moai_profile を自動的に生成します.<br>
 	</div>
