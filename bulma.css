@@ -4392,6 +4392,7 @@ fieldset[disabled] .select select:-ms-input-placeholder,
 
 .textarea[rows] {
   height: initial;
+  height: auto\0; /* forIE8gt */
 }
 
 .textarea.has-fixed-size {
