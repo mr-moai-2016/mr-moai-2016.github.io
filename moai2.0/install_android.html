@@ -357,8 +357,10 @@
 		Moaiが不要になった場合、このmoai_profileも削除してよいのか？<br>
 	</div>
 	<div class="message-body">
+		Moai for Android をアンインストールしても、moai_profileディレクトリだけは残るようになっています.<br>
+		(より正確にはアンインストールしても残るような位置にmoai_profileが作成されています)<br>
+<br>
 		Moai 本体が不要になっても、普通は集めた画像や動画は残しておきたいでしょう.<br>
-		よって Moai 本体のディレクトリを削除しても moai_profile だけは残しておくべきです.<br>
 		(必要に応じて中身をサルベージするなどもできるでしょう).<br>
 		しかし、それらの画像や動画さえも不要というなら、moai_profile もまるごと削除してもかまいません.<br>
 	</div>
@@ -369,18 +371,32 @@
 		moai_profile の位置は？<br>
 	</div>
 	<div class="message-body">
-		Android apk版の場合、データフォルダのファイルマネージャ直下(/sdcard/moai_profile) となります.<br>
+		Android apk版の場合、Moai for Androidを一度起動すると、ファイルマネージャーの直下にmoai_profileが作られると思います.<br>
+		(UNIXのパスで言えば /sdcard/moai_profile となります).<br>
 <br>
 		Android Terminal Emulator版の場合、Moai本体より一つ上のディレクトリです.<br>
 		moai_profile がまだ存在しない場合、Moai はこの位置へ moai_profile を自動的に生成します.<br>
 <br>
-		moai_profile の位置は Moaiエンジンの設定画面で変えることができます.<br>
-		例えば現在のディスク容量に余裕がなく、moai_profile のみを他のディスクに移動させたい場合などに柔軟に対応できます.<br>
-		この位置は、環境変数 MOAI_PROFILE_DIR の値としてそのフルパスを設定することで強制的に指定することもでき、<br>
-		これが指定されている場合は Moaiエンジンの設定よりもこれが優先されます.<br>
+		<div class=box>
+			<b><u>moai_profile の位置の確認と変更</u></b><br>
 <br>
-		ただしAndroidではシステムに様々な取り決めがあるため、特にapk版に関しては<br>
-		moai_profileのデフォルトの位置を変えることはあまりお勧めできません.<br>
+			moai_profile の現在の位置は Moaiエンジン設定の画面(Moai Engine Configボタンで開く画面)で確認することができます.<br>
+			設定画面内に profile_dir という項目がありますが、そこの「現在の値」が moai_profile の現在の位置です.<br>
+			ただし、この値はUNIXのパスとなっています.<br>
+<br>
+			moai_profileのデフォルトの位置を変えることはあまりお勧めできません.<br>
+			特に問題等がない場合はデフォルトの位置のままでお使いください.<br>
+<br>
+			万一、現在の moai_profile の位置では書き込み不可などの問題が生じる場合、<br>
+			Moaiエンジン設定の下の方にある「スキャン」ボタンを試してみると問題が解消することがあります.<br>
+			「スキャン」ボタンを押すと、Moaiエンジンは、書き込み不可などの問題の発生しない新しい位置を自動的に探索し、<br>
+			その位置をユーザに提案します(filters_dir欄およびprofile_dir欄に一時的に値が代入されます).<br>
+			このとき、すぐ横に赤文字で「成功」または「失敗」を示すメッセージも表示されます.<br>
+			幸いにしてこのメッセージが「成功」であったなら、「設定を確定」ボタンを押し、その提案値で確定させましょう.<br>
+		</div>
+<br>
+		Terminal Emulator版の場合、この位置は、環境変数 MOAI_PROFILE_DIR の値としてそのフルパスを設定することで強制的に指定することもでき、<br>
+		これが指定されている場合は Moaiエンジン設定の値よりも優先されます.<br>
 	</div>
 </article><br>
 	<br>
