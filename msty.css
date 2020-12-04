@@ -580,3 +580,28 @@ body {
 	font-size:small;
 	padding:2px 8px;
 }
+
+
+.MstyThumb250 {
+	max-width:  250px;
+	max-height: 250px;
+	object-fit: contain;
+	max-width:  none\0;
+	max-height: none\0;
+	margin-right: 1rem;
+}
+.MstyMinWidth256 {
+	min-width: 256px;
+}
+.MstyWidthAuto {
+	width: auto;
+}
+.MstyNarrow {
+	width: 1%;
+}
+.MstyUnvisible {
+	display: none !important;
+}
+.MstyVisible {
+	display: inline-block;
+}
