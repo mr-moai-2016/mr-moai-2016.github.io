@@ -6,6 +6,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="/msty.css" rel="stylesheet" type="text/css">
 	<link href="/bulma.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript">
+		function MstyUI_detailBtn( tgt_id, btn_id, open_lbl, close_lbl ){
+			var tgt=document.getElementById( tgt_id );
+			var btn=document.getElementById( btn_id );
+			if( tgt.className=='MstyUnvisible' ){
+				tgt.className = 'MstyVisible';
+				btn.innerHTML = close_lbl;
+			} else{
+				tgt.className = 'MstyUnvisible';
+				btn.innerHTML = open_lbl;
+			}
+		}
+	</script>
 </head>
 <body>
 <div class="section">
@@ -33,38 +46,41 @@
 <h1 class="title">目次</h1>
 <br>
 <ul>
-	<li><b><a class=MstyElemLink href=#FAQ_00>Moaiって何ですか？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_02>このツールで掲示板の規制が回避できるの？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_20>その規制の回避ってどういう仕組みでやってるの？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_26>とりあえずこのツールで規制回避する方法を三行で頼むわ</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_03>そのVirtualUSERSとEasterを実行するには？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_21>そのVirtualUSERSとEasterのリンク先が「ファイルがみつかりません」となるのだが？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_24>マニュアルが分かりにくいのだが？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_27>マニュアルがオンラインとオフラインの二つがあるが、何が違うのか？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_15>MoaiはIPを偽装することができるのか？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_25>Moaiの利用は外部プロキシ(いわゆる串)を経由することが必須なのか？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_05>User-Agentを偽装せずとも単純にブラウザいっぱいインスコしておけばよいのでは？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_06>User-Agentを偽装するなら外部プロキシを使えばよいのでは？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_16>Androidで使うには？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_09>Moaiは広告をブロックする機能もあるのか？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_01>試すのが怖いんだけど、このMoaiの安全性をどう確認すればよいのか？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_28>Chromeでダウンロードしたとき「危害を及ぼす可能性」というメッセージが出るのだが？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_22>Moaiをソースコードからコンパイルしてみたいのだが？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_07>Moaiに頼らずとも、UA偽装とルータリセット、クッキー削除で大抵の場合、規制解除できるよね？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_04>Moaiに頼らずとも、Proxomitron のフィルターでも代用できね？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_10>Moaiを他サイトで紹介してもいい？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_08>過疎らせたい定時があるんだが…このツールを使えばオレの勝ちよな？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_11>(ふたばちゃんねるにおいて)Moaiはdel連打ツールという噂を聞きました</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_12>画像投稿時、filenameがフルパスのままで送信されるようなことはないのか？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_23>研究所の名前変えたん？</a></b></li>
-	<li><b><a class=MstyElemLink href=#FAQ_14>全日本ネットワーク研究所(ZNK)とかホントはなくて全部同一人物なんでしょ？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_00>【導入】Moaiって何ですか？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_29>【導入】Moaiってどのブラウザ上で動作するの？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_30>【導入】Moaiのお勧めの機能をごく簡単に教えて！</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_16>【導入】Androidで使うには？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_03>【導入】VirtualUSERSとEasterを実行するには？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_21>【導入】VirtualUSERSとEasterのリンク先が「ファイルがみつかりません」となるのだが？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_01>【導入】試すのが怖いんだけど、このMoaiの安全性をどう確認すればよいのか？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_28>【導入】Chromeでダウンロードしたとき「危害を及ぼす可能性」というメッセージが出るのだが？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_02>【仮想環境】このツールで掲示板の規制が回避できるの？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_26>【仮想環境】とりあえずこのツールで規制回避する方法を三行で頼むわ</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_20>【仮想環境】その規制の回避ってどういう仕組みでやってるの？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_05>【仮想環境】それなら単純にブラウザいっぱいインスコしておけばよいのでは？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_15>【仮想環境】MoaiはIPを偽装することができるのか？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_25>【仮想環境】Moaiの利用は外部プロキシ(いわゆる串)を経由することが必須なのか？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_06>【仮想環境】外部プロキシを使えばIPは勿論、User-Agentも偽装できるのでは？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_07>【仮想環境】Moaiに頼らずとも、UA偽装とルータリセット、クッキー削除で大抵の場合、規制解除できるよね？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_04>【仮想環境】Moaiに頼らずとも、Proxomitron のフィルターでも代用できね？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_08>【仮想環境】過疎らせたい定時があるんだが…このツールを使えばオレの勝ちよな？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_12>【仮想環境】画像投稿時、filenameがフルパスのままで送信されるようなことはないのか？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_11>【仮想環境】ふたばちゃんねるにおいてMoaiはdel連打ツールという噂を聞きました</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_09>【仮想環境】Moaiは広告をブロックする機能もあるのか？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_24>【その他】マニュアルが分かりにくいのだが？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_27>【その他】マニュアルがオンラインとオフラインの二つがあるが、何が違うのか？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_10>【その他】Moaiを他サイトで紹介してもいい？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_22>【その他】Moaiをソースコードからコンパイルしてみたいのだが？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_23>【その他】研究所の名前変えたん？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_14>【その他】全日本ネットワーク研究所(ZNK)とかホントはなくて全部同一人物なんでしょ？</a></b></li>
 </ul><br>
 
 
 <a name=FAQ_00></a>
-<h1 class="title">Moaiって何ですか？</h1>
-	太平洋上の孤島に立つ謎の石ｚェ…<br>
-	…ではなく我々が開発したセキュリティーのためのツールの名前です.<br>
+<h1 class="title">【導入】Moaiって何ですか？</h1>
+	太平洋上の孤島に立つ謎の石ｚェ…ではなく、我々が開発したセキュリティーのためのツールの名前です.<br>
+	Moaiで匿名掲示板(ふたばちゃんねるや5ちゃんねる)を閲覧しますと、様々な拡張機能が提供されます.<br>
+<br>
 	元々はローカルプロキシと呼ばれるツールとして開発されました(Ver1.1.8以前).<br>
 	現在のバージョンのMoaiではこれはポータブルウェブサーバエンジンとなっています.<br>
 	<br>
@@ -72,8 +88,135 @@
 <br>
 
 
+<a name=FAQ_29></a>
+<h1 class="title">【導入】Moaiってどのブラウザ上で動作するの？</h1>
+	どのブラウザでも動作します.<br>
+	ただしWindowsやLinux、Androidでのみ動作します. 残念ながらMacやIPhoneでは実行できません.<br>
+<br>
+	正確に言えば、Moaiはブラウザ上で動作するのではなく、ブラウザと並行して動作する単独のプログラムです.<br>
+	あなたのPCまたはスマホ上で、ブラウザとは別に単独でMoaiを実行させます.<br>
+	ブラウザとMoaiは互いに通信し合う関係に過ぎないので、Moaiはブラウザ上で動作する必要がありません.<br>
+<br>
+	喩えるなら、Moaiはあなたが使っているブラウザと匿名掲示板との間に入る仲介役です.<br>
+	あなたが使っているブラウザは匿名掲示板と直接通信するのではなく、Moaiと通信します.<br>
+	一方、Moaiは匿名掲示板と直接通信します.<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_30></a>
+<h1 class="title">【導入】Moaiのお勧めの機能をごく簡単に教えて！</h1>
+	お勧めはVirtualUSERSとEasterの機能です.<br>
+	( これらは正確にはMoai上で動作する拡張機能です ).<br>
+<br>
+	これらは、あなたが使っている真のブラウザやOSや機種の<b>情報が、匿名掲示板へ漏洩されるのを防ぎます</b>.<br>
+	言い換えれば、仮想的に全く別のブラウザ環境であるかのように振舞えます.<br>
+	また、<b>掲示板閲覧の快適性の向上、保存した画像の整理分類</b>などで便利な機能を提供しています.<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_16></a>
+<h1 class="title">【導入】Androidで使うには？</h1>
+	Moaiは基本的にPC向けのツールですが、Androidでも使うことができ、apk ファイルを提供しております.<br>
+	ただしこの apk ファイルは Google Play からの配布は行っておりません.<br>
+	よっていわゆる「野良アプリ」と呼ばれるものになりますが、Moai公式のgithubのサイトから直接これをダウンロードできます.<br>
+	Android版Moaiの入手とインストール、起動については、<a class=MstyElemLink href=/moai2.0/install_android.html#ForApk>インストール方法(Android版)</a>を参照してください.<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_03></a>
+<h1 class="title">【導入】VirtualUSERSとEasterを実行するには？</h1>
+	まずはMoaiを起動させます.<br>
+<br>
+	次にVirtualUSERSにより、仮想ブラウザ環境をランダムに構築します.<br>
+	あなたのお好きなブラウザ上から <a class=MstyElemLink href=http://127.0.0.1:8124/cgis/custom_boy/custom_boy.cgi?cb_target=futaba&amp;cb_type=automatic>VirtualUSERS</a> にアクセスしてください.<br>
+	その画面にある「VirtualUSERS」ボタンを押します.<br>
+	<br>
+	最後にEasterで匿名掲示板を閲覧します.<br>
+	同様にブラウザ上から <a class=MstyElemLink href=http://127.0.0.1:8124/easter>Easter</a> にアクセスしてください.<br>
+<br>
+	さらなる詳細については<a class=MstyElemLink href=/moai2.0/index.html>初級マニュアル</a>を参照してください.<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_21></a>
+<h1 class="title">【導入】VirtualUSERSとEasterのリンク先が「ファイルがみつかりません」となるのだが？</h1>
+	リンク先が「ファイルがみつかりません」などと表示される場合は、まだMoai本体が起動していないと考えられます.<br>
+	インストールがまだなら<a class=MstyElemLink href=/moai2.0/install.html>インストール方法(PC版)</a>をご一読の上、Moaiを起動してみてください.<br>
+	万一Moaiが起動しているのにも関わらずそうなる場合は、ファイアウォール機能等でhttp://127.0.0.1:8124 へのアクセスがブロックされている可能性も考えられますのでご確認ください.<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_01></a>
+<h1 class="title">【導入】試すのが怖いんだけど、このMoaiの安全性をどう確認すればよいのか？</h1>
+	その感想はもっともだと思います.<br>
+<br>
+	いかに全ソースコードが公開されブラックボックスな部分が全くないとはいえ、実際問題プログラマでもない方にとってソースコードを検証するのは酷というものですね.<br>
+	(ましてやMoaiは当初よりも随分と大きなシステムにもなってきました…)<br>
+	この種の問題は我々開発側にとっても頭の痛い、もっとも配慮すべき事項の一つでもあります.<br>
+	<br>
+	一応このことに関しては、<a class=MstyElemLink href=/moai2.0/how_to_compile.html#WhyWeCompile>こちら</a>に我々の考えを述べてあります.<br>
+	ここにある記述で納得していただけるかどうかはわかりませんが、それなりの納得が得られたなら幸いです.<br>
+	<br>
+	<div class=box>
+		Moaiは現在、おかげさまで作者が当初思っていたより多くの方に使われているようです.<br>
+		この種の質問もあまりされることなくはなりましたが、このFAQの項目は重要だと我々は考えます.<br>
+		処理の透明性を掲げるのはMoaiの一大ポリシーでもあります.<br>
+		よって今後もこのまま残しておきます.<br>
+	</div>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_28></a>
+<h1 class="title">【導入】Chromeでダウンロードしたとき「危害を及ぼす可能性」というメッセージが出るのだが？</h1>
+	これですね。<br>
+<br>
+	<div class=MstyComment>
+		<img src=/imgs/chrome_download_warning.png><br>
+	</div>
+<br>
+	最初は「破棄」ボタンしか表示されておりません.<br>
+	<s>つまりMoaiが「一般的にダウンロードされているファイル」になるまで気長に待てというGoogle様からの有難いお言ｂ…</s>.<br>
+	一番右にある「ｖ」ボタンから表示されるプルダウンより「継続」を選んでもらうとダウンロードを完了させることができます.<br>
+<br>
+	<a class=MstyElemLink id=FAQ_28_detail_btn onClick="MstyUI_detailBtn( 'FAQ_28_detail_tgt', 'FAQ_28_detail_btn', '結局これは何なのか？', '閉じる' );">結局これは何なのか？</a><br>
+	<div id=FAQ_28_detail_tgt class=MstyUnvisible><div class=box>
+		<u><b>結局これは何なのか？</b></u><br>
+<br>
+		「Chrome」「一般的にダウンロードされているファイルではなく」などのフレーズで検索してみますと、他のフリーウェアや商用のソフトウェアのダウンロード時においても同様の現象が多く報告されていることがわかります.<br>
+<br>
+		Chrome では、ファイルのダウンロード時にウィルススキャンだとかそういったものを内部で行っているわけではなく、ただ単純に一般的にダウンロードされている回数がまだ少ないファイルについて、手当たり次第このメッセージを表示するという冗談のような仕様となっています.<br>
+		（ただしカウント対象となるファイルは、ある程度のサイズ以上の実行ファイルを含むだとかいくつかのアバウトな条件はあるようです）<br>
+		おそらくファイルがダウンロードされたという情報は、Chromeの公式サーバ(つまりGoogleですが)に自動的に送信され、そしてその公式サーバにおいて、世界中のファイルのダウンロードされた回数の情報をデータベースとして持っているということなのでしょう.<br>
+		（それはそれで凄くもあり、また同時に怖い話ですが…）<br>
+<br>
+		これまでにダウンロードされた回数などいった基準は、ファイルの安全性を検証する上ではほぼ何の確証にもなり得ないことは明らかです.<br>
+		（多いからといってただちに安全と言い切れるものでもありませんし、逆もまた然りで少ないからといってただちに危険とも言えません）<br>
+		そもそもリリース直後のソフトウェアならどんなものであれ、最初はダウンロード回数が少ないのは当然ですから、その観点から考慮してもおかしな指標と言えるでしょう.<br>
+		そしてそんなものを根拠に、いきなり「危害」だの「破棄」だのといった警告メッセージを表示したところで、我々Chromeユーザ側からすれば混乱の元となるだけではないでしょうか？<br>
+<br>
+		本気でファイルの安全性を検証するのであれば、こんなものよりもっと他にマシな手段はいくらでもあります.<br>
+		例えば、ダウンロードした後にまずはウィルススキャンソフトでそれをきちんとスキャンするなどの習慣をつけるべきでしょう.<br>
+		（ちなみに私はClamWinというウィルススキャンソフトを普段使っています）<br>
+	</div></div>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
 <a name=FAQ_02></a>
-<h1 class="title">このツールで掲示板の規制が回避できるの？</h1>
+<h1 class="title">【仮想環境】このツールで掲示板の規制が回避できるの？</h1>
 	このMoaiを使うことで、あなたの見ている掲示板の規制を確実に回避できるとは限りません.<br>
 	しかし、<b>ブラウザ環境</b>( User-AgentやCookieの情報、Fingerprintなどといったあなた個人を識別する情報 ) がその掲示板へ漏洩するのをソフトウェア的に可能な限り防止することができます.<br>
 <br>
@@ -85,18 +228,8 @@
 <br>
 
 
-<a name=FAQ_20></a>
-<h1 class="title">その規制の回避ってどういう仕組みでやってるの？</h1>
-	これは<b>ダミーの仮想ブラウザ環境</b>を構築し、それによって掲示板からあなたの真のブラウザ環境を覆い隠すことで実現しています.<br>
-	Moaiに付属する VirtualUSERS というツールは、世にある数千にも渡るブラウザに相当する環境から一つをランダムにチョイスし、一瞬にしてその仮想環境を構築します.<br>
-	その後、同じくMoaiに付属する Easter というツールによって掲示板を閲覧しますと、掲示板のサーバサイトからは、あたかもそのダミーの仮想ブラウザ環境でアクセスしているように見えるというものになります.<br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
-
-
 <a name=FAQ_26></a>
-<h1 class="title">とりあえずこのツールで規制回避する方法を三行で頼むわ</h1>
+<h1 class="title">【仮想環境】とりあえずこのツールで規制回避する方法を三行で頼むわ</h1>
 	まずブラウザと平行してMoaiを起動しておき、ふたばは常時Easterを介して閲覧します.<br>
 	規制喰らったらルータリセットでIP変えてVirtualUSERSを一発実行してリフレッシュ！<br>
 <br>
@@ -106,54 +239,269 @@
 <br>
 
 
-<a name=FAQ_03></a>
-<h1 class="title">そのVirtualUSERSとEasterを実行するには？</h1>
-	まずはMoaiを起動させる必要があります.<br>
-	その上であなたのお好きなブラウザ上から <a class=MstyElemLink href=http://127.0.0.1:8124/cgis/custom_boy/custom_boy.cgi?cb_target=futaba&amp;cb_type=automatic>VirtualUSERS</a> にアクセスしてください.<br>
-	Moaiの起動が問題なければ「VirtualUSERS」と書かれた画面が表示されるかと思います.<br>
-	その画面にある「VirtualUSERS」ボタンを押すことにより、仮想ブラウザ環境の情報をランダムに刷新できます.<br>
-	Easterを使う場合も同様にブラウザ上から <a class=MstyElemLink href=http://127.0.0.1:8124/easter>Easter</a> にアクセスしてください.<br>
-	これらのさらなる詳細については<a class=MstyElemLink href=/moai2.0/index.html>初級マニュアル</a>を参照してください.<br>
+<a name=FAQ_20></a>
+<h1 class="title">【仮想環境】その規制の回避ってどういう仕組みでやってるの？</h1>
+	これは<b>ダミーの仮想ブラウザ環境</b>を構築し、それによって掲示板からあなたの真のブラウザ環境を覆い隠すことで実現しています.<br>
+	Moaiに付属する VirtualUSERS というツールは、世にある数千にも渡るブラウザに相当する環境から一つをランダムにチョイスし、一瞬にしてその仮想環境を構築します.<br>
+	その後、同じくMoaiに付属する Easter というツールによって掲示板を閲覧しますと、掲示板のサーバサイトからは、あたかもそのダミーの仮想ブラウザ環境でアクセスしているように見えるというものになります.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br>
 
 
-<a name=FAQ_21></a>
-<h1 class="title">そのVirtualUSERSとEasterのリンク先が「ファイルがみつかりません」となるのだが？</h1>
-	リンク先が「ファイルがみつかりません」などと表示される場合は、まだMoai本体が起動していないと考えられます.<br>
-	インストールがまだなら<a class=MstyElemLink href=/moai2.0/install.html>インストール方法(PC版)</a>をご一読の上、Moaiを起動してみてください.<br>
-	万一Moaiが起動しているのにも関わらずそうなる場合は、ファイアウォール機能等でhttp://127.0.0.1:8124 へのアクセスがブロックされている可能性も考えられますのでご確認ください.<br>
+<a name=FAQ_05></a>
+<h1 class="title">【仮想環境】それなら単純にブラウザいっぱいインスコしておけばよいのでは？</h1>
+	勿論ブラウザをいっぱいインスコしておいてもよいでしょうが、限度がありましょう.<br>
+	<b>Moaiがあれば、あなたのマシンに実際にインスコするブラウザは一つでよいです.</b><br>
+	それでいて事実上無限にブラウザをいっぱいインスコしたような状況を実現できます. <br>
+	しかも単にVirtualUSERSボタンを押すだけで瞬時にランダムに切り替えできます.<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_15></a>
+<h1 class="title">【仮想環境】MoaiはIPを偽装することができるのか？</h1>
+	IPアドレスを偽装することはMoaiでもできません.<br>
+	(というよりローカルな端末だけでは原理的に不可能です).<br>
+<br>
+	一般に <b>IPアドレスはPCの場合であればルータリセット、スマホの場合であれば機内モードで簡単に変更可能</b>です.<br>
+	その上で、MoaiはIPアドレス以外のソフトウェア的に実現可能な環境の仮想化の全てをお手軽に実現するツールであるといえます.<br>
+	<br>
+	<a class=MstyElemLink id=FAQ_05_1_detail_btn onClick="MstyUI_detailBtn( 'FAQ_05_1_detail_tgt', 'FAQ_05_1_detail_btn', 'コラム：規制におけるマシンやブラウザ情報の重要性', '閉じる' );">コラム：規制におけるマシンやブラウザ情報の重要性</a><br>
+	<div id=FAQ_05_1_detail_tgt class=MstyUnvisible><div class=box>
+		<b>コラム：規制におけるマシンやブラウザ固有の情報の重要性</b><br>
+<br>
+		旧来は、IPアドレスやプロバイダのドメインだけで規制を行うのが多くの掲示板の主流でした.<br>
+		この方式では（特にプロバイダのドメインでの規制は）巻き添えが頻繁に発生しがちでした.<br>
+		そこで、最近の多くの掲示板では<b>IP以外のマシンやブラウザ固有の情報を重視する</b>流れが主流となりつつあるようです.<br>
+		(よく話題に挙がるUser-Agentもこの種の情報の一つです).<br>
+		<br>
+		つまり掲示板は、たとえアクセスして来た対象のIPが変わっていても、その対象のマシンやブラウザ固有の情報が変化していないならば、
+		規制対象として継続するか要警戒対象とみなす方式をとるわけです.<br>
+		このような状況に対して、Moaiは効力を発揮します.<br>
+	</div></div>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_25></a>
+<h1 class="title">【仮想環境】Moaiの利用は外部プロキシ(いわゆる串)を経由することが必須なのか？</h1>
+	いいえ.<br>
+<br>
+	Moaiにおいて外部プロキシサーバの経由は必須ではありませんし、むしろこれを使用しないことを推奨します.<br>
+	つまりMoaiでは、PCの場合であればルータリセット、スマホの場合であれば機内モードなどの使用でIPを変更することを推奨します.<br>
+<br>
+	<a class=MstyElemLink id=FAQ_25_detail_btn onClick="MstyUI_detailBtn( 'FAQ_25_detail_tgt', 'FAQ_25_detail_btn', 'コラム：Moaiで外部プロキシやVPNは使えるか？', '閉じる' );">コラム：Moaiで外部プロキシやVPNは使えるか？</a><br>
+	<div id=FAQ_25_detail_tgt class=MstyUnvisible><div class=box>
+		<b>コラム：Moaiで外部プロキシやVPNは使えるか？</b><br>
+<br>
+		一応Moaiでも外部プロキシ、VPNなどを経由させる手段が提供されています.<br>
+		しかしこれらのIPは現在、掲示板からブラックリスト化されている場合も多く、これらの使用はあまりお勧めできません.<br>
+<br>
+		それでも外部プロキシを使いたければMoaiでもそれは不可能ではありません.<br>
+		極簡単に説明すると、まず外部プロキシの候補をparent_proxy.txtに列挙しておきます.<br>
+		「Moaiエンジン設定」の画面からそれらの候補をparent_proxyメニューから選択します.<br>
+		これにより経由する外部プロキシを瞬時に切り替えることもできます.<br>
+		(デフォルトではこのメニューは「NONE」が選ばれており外部プロキシの利用自体が無効となっています).<br>
+	<br>
+		尚、Moai付属のツールProxyFinderを使えば、定番のプロキシ情報サイトに接続し、このリストを自動的に取得することもできます.<br>
+	</div></div>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_06></a>
+<h1 class="title">【仮想環境】外部プロキシを使えばIPは勿論、User-Agentも偽装できるのでは？</h1>
+	一般に外部プロキシを介したからといってUser-Agentが変化するとは限りません.<br>
+	そのようなUser-Agentを加工修正するプロキシも一部存在するかもしれませんが、User-Agentに関して一切手を加えないプロキシも数多く存在します.<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_07></a>
+<h1 class="title">【仮想環境】Moaiに頼らずとも、UA偽装とルータリセット、クッキー削除で大抵の場合、規制解除できるよね？</h1>
+	多くの場合は軽い規制でしょうから、それでいけるのでしょう.<br>
+<br>
+	さらにそれでもダメならMoaiを試してみるのもいいでしょう.<br>
+	中程度の規制の場合、さらにScreenSize(モニタ解像度の情報)やFingerprintの値などといった、Cookieやキャッシュ削除では対応できない種類の情報で規制されている可能性もありますが、Moaiならばこれに楽々に対応できます.<br>
+<br>
+	プロバイダごと問答無用で広域規制されるような最も重い規制の場合、おそらくMoaiでも対応できないでしょう.<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_04></a>
+<h1 class="title">【仮想環境】Moaiに頼らずとも、Proxomitron のフィルターでも代用できね？</h1>
+	現バージョンのMoaiでもローカルプロキシとしての機能が残されています.<br>
+<br>
+	<div class=box>
+		Moai Ver2.0以降では、ローカルプロキシよりもお手軽なEasterを使えばよく、もはやローカルプロキシとしてMoaiを使用する必要性はほとんどありません.<br>
+	</div>
+	<br>
+	ローカルプロキシといえば、Proxomitron(Windowsで動作する有名なツールです)を思い浮かべられる方もおられると思います.<br>
+	そしてMoaiでもProxomitron同様に、HTTP通信を仲介しつつ送信/受信データをフィルタリングして加工することができます.<br>
+	しかしながらMoaiはローカルプロキシの機能としてはProxomitronの足元にもおよびません.<br>
+	既にProxomitronをバリバリ使いこなしている方にとってローカルプロキシとしてのMoaiは不要といえるでしょう. <br>
+	<br>
+	ただ、それでもMoaiのローカルプロキシとしての利点を挙げるとすれば、全ソースが公開されており、必要であれば修正や改造、さらにはそれをあなたの名前で再配布するなども自由に行えるということがあります.<br>
+	<br>
+	またProxomitron に比べPOST変数のフィルターが容易に行えるという点などが挙げられます.<br>
+	具体的には filtersフォルダ内のfutaba_send.myfファイルのpost_varsという部分において、中継時に修正したいPOST変数を記述する形になります.<br>
+	<br>
+	他ツールと比べた場合におけるMoaiの特徴/機能に関しては<a class=MstyElemLink href=/moai2.0/moai_feature.html>こちら</a>を参照してください.<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_08></a>
+<h1 class="title">【仮想環境】過疎らせたい定時があるんだが…このツールを使えばオレの勝ちよな？</h1>
+	軍曹…<br>
+<br>
+	残念ながら(?)Moaiはそういう攻撃用のツールではなく、完全に防御向けのツールだ.<br>
+	つまり、それに関してMoaiがサポートできることと言えば、キミとその定時とやらの戦いにおいてキミのHPを限りなく∞にすることくらいだ…<br>
+	まあ事情はさっぱりわからんが健闘を祈る！<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_12></a>
+<h1 class="title">【仮想環境】画像投稿時、filenameがフルパスのままで送信されるようなことはないのか？</h1>
+	これは一部の非常に古いブラウザ(IE7以前)に存在する問題です.<br>
+	Moaiでは、ユーザがそのような安全上問題のあるブラウザを使用している場合でも画像投稿時のfilenameがフルパスのまま送信されることがないように配慮されています.<br>
+	すなわち万一filenameにフルパスが含まれていた場合はそれを確実に除去してから送信します.<br>
+<br>
+	<div class=box>
+		ただし現在のMoai(特にEaster)ではIE7以前ではUIが正常に表示されない可能性があります.<br>
+		最低でもIE8以降か、できればIE以外のもっと現代的なブラウザ(FirefoxやChromeなど色々とありますが)を使用することを強くお勧めします.<br>
+	</div>
+	<br>
+	<a class=MstyElemLink id=FAQ_12_detail_btn onClick="MstyUI_detailBtn( 'FAQ_12_detail_tgt', 'FAQ_12_detail_btn', '参考', '閉じる' );">参考</a><br>
+	<div id=FAQ_12_detail_tgt class=MstyUnvisible><div class=box>
+		<u><b>参考</b></u> <br>
+<br>
+		昔のIEはファイルアップロード時にサーバにそのフルパスを送りつけるという奇妙な仕様を持っていました.<br>
+		さらに厳密に言えば、フルパスが送られるのは以下の場合に限られます.<br>
+		<br>
+		<ul>
+			<li>IE6以前から画像投稿した場合.</li>
+<br>
+			<li>IE7で「サーバーにファイルをアップロードするときにローカルディレクトリのパスを含める」<br>
+			というブラウザのセキュリティ設定を有効としてしまっている場合.<br>
+			IE7ではこれがデフォルトで有効となっている.<br>
+			尚IE8以降よりこの設定はデフォルトで無効になっている.<br>
+			無論、セキュリティ上これは本来無効であるべきで、妥当なデフォルトと言える.</li>
+		</ul>
+		<br>
+		IE以外のブラウザの場合、フルパスを送るという仕様を持つブラウザは現在のところ確認されていません.<br>
+		例えばFirefox, Opera, Chromeなどではいずれも送られるのはファイル名の部分のみでありMoaiが中継段階で加工するまでもなく最初からフルパスは除去されています.<br>
+	</div></div>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_11></a>
+<h1 class="title">【仮想環境】ふたばちゃんねるにおいてMoaiはdel連打ツールという噂を聞きました</h1>
+	まずご存知ない方向けに説明すると、ふたばちゃんねるにおける「del」とは、HTTPの観点から言えば x-www-form-urlencoded 方式でPOSTする荒らし報告のための投票システムです.<br>
+	そして結論から言えば、(確証はありませんが)おそらくMoaiではそれはできません.<br>
+	(というか出来てしまうようでは掲示板として問題だとは思います).<br>
+	<br>
+	Moaiが出来ることといえば、User-AgentやScreen-Size、Fingerprintなどソフトウェア的に仮想化可能な情報のランダマイズ、そしてIPアドレスに関しては複数の登録プロキシの中からメニューで選択し、使用プロキシを簡易に切り替えを行う程度のことです.<br>
+	<br>
+	これらの切り替えを駆使すれば、同じくふたばちゃんねるにおける投票システム「そうだね」の値は際限なくカウントされることは私の方でも随分昔に確認しました(今現在も可能かどうかはわかりませんが…).<br>
+<br>
+	delについては効果があるのかどうかはわかりません.<br>
+	(まずそこまで詳しくは試していませんし、そもそもすぐに効果が確認できる類のものでもありませんので…).<br>
+	プロキシサーバ等を経由しプロバイダ環境さえも異なるIPに変更した上で、VirtualUSERSによりブラウザ環境までをも刷新するという徹底ぶりでdelすればもしかすれば可能かもしれませんが、ふたば側から見ればそれがプロキシサーバを経由したdelであるか否かはある程度検出できるはずですので、そのようなdelを無効としてカウントしていない可能性もありますね.<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_09></a>
+<h1 class="title">【仮想環境】Moaiは広告をブロックする機能もあるのか？</h1>
+	はい.<br>
+<br>
+	Moaiは基本的にセキュリティーのためのツールですので、当然これに対応すべく広告ブロック機能をサポートします.<br>
+	また広告をブロックすることで閲覧が圧倒的に高速化され、快適になるというメリットもあります.<br>
+	(uBlock Originなど世の中優れた広告ブロックツールはいくらでもありますけれども…<br>
+	ブラウザの種類やバージョンに制限されず使えるというのがMoaiの強みではあります)<br>
+<br>
+	<a class=MstyElemLink id=FAQ_09_detail_btn onClick="MstyUI_detailBtn( 'FAQ_09_detail_tgt', 'FAQ_09_detail_btn', '詳細', '閉じる' );">詳細</a><br>
+	<div id=FAQ_09_detail_tgt class=MstyUnvisible><div class=box>
+		Moaiでは以下の二つの戦略により広告のブロックを実現しています.<br>
+		<div class=content><ul>
+			<li><b>受信するHTMLをフィルタで文字列置換する</b><br>
+	<br>
+			これは filters/{target}_recv.myf の指定によって行います.<br>
+			( {target}の部分にはBBSの識別名などが入ります. )<br>
+			このファイルを開いてもらうと<br>
+	<br>
+			<div class=box>
+				<div class=MstyCode>
+					replace ['A'] ['B']<br>
+				</div>
+			</div>
+	<br>
+			というような行がいくつかあります.<br>
+			これは「AというパターンをBで置換(replace)せよ」という命令になります.<br>
+			というわけで、例えば広告の部分のパターンを A として指定し、B には空文字列を指定すれば、広告の部分だけが綺麗に消えるというわけです.<br>
+			また、これ以外にもEaster本体やMoaiのプラグインがいくつかの広告除去アルゴリズムを内蔵しています.<br>
+			</li>
+	<br>
+			<li><b>ブラックリストにあるサイトのTCP/IP通信自体をブロックする</b><br>
+	<br>
+			いわゆる通信ごと「根こそぎ」というやつです<br>
+			これは hosts.myf の ignore_hostsセクションの指定によって行います.<br>
+			この部分に指定されたパターンに一致するサイトへはMoaiは問答無用で接続を行いません.<br>
+			広告サイトへの接続そのものが発生しないため、やはりこの場合も広告の部分だけが消えるというわけです.<br>
+			</li>
+		</ul></div>
+	</div></div>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br>
 
 
 <a name=FAQ_24></a>
-<h1 class="title">マニュアルが分かりにくいのだが？</h1>
-	Ver2.1では、以下のようにこの二つを分離したマニュアル構成にしました.<br>
-	<div class=content><ul>
-		<li><b>初級マニュアル</b><br>
+<h1 class="title">【その他】マニュアルが分かりにくいのだが？</h1>
+	Ver2.1より、初級マニュアルと上級マニュアルの二つに分離しました.<br>
+<br>
+	<a class=MstyElemLink id=FAQ_24_1_detail_btn onClick="MstyUI_detailBtn( 'FAQ_24_1_detail_tgt', 'FAQ_24_1_detail_btn', '初級マニュアル', '閉じる' );">初級マニュアル</a><br>
+	<div id=FAQ_24_1_detail_tgt class=MstyUnvisible><div class=box>
+		<b>初級マニュアル</b><br>
+<br>
 		ほとんどのユーザーが使うことになる基本的な機能を平易に説明したものです.<br>
 		主にインストール方法、Easter、VirtualUSERSの使い方になります.<br>
 		(ただしEasterに関しては、コレクションに関する若干ディープな内容もこちらに分類しました).<br>
 		ほとんどのユーザーは、何か疑問が生じた段階で必要に応じてこれをご一読される程度で十分かと思います.<br>
-		</li>
+	</div></div>
 <br>
-		<li><b>上級マニュアル</b><br>
+	<a class=MstyElemLink id=FAQ_24_2_detail_btn onClick="MstyUI_detailBtn( 'FAQ_24_2_detail_tgt', 'FAQ_24_2_detail_btn', '上級マニュアル', '閉じる' );">上級マニュアル</a><br>
+	<div id=FAQ_24_2_detail_tgt class=MstyUnvisible><div class=box>
+		<b>上級マニュアル</b><br>
+<br>
 		Moaiの機能の深部まで使い倒したいといったエキスパートなユーザーのためのマニュアルです.<br>
 		Moaiエンジン、CustomBoyエンジンの詳細などリファレンス的な内容を解説してあります.<br>
 		開発者向けの内容もあります.<br>
 		ほとんどのユーザーはこちらを読む必要はないかと思います.<br>
-		</li>
-	</ul></div>
+	</div></div>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br>
 
 
 <a name=FAQ_27></a>
-<h1 class="title">マニュアルがオンラインとオフラインの二つがあるが、何が違うのか？</h1>
+<h1 class="title">【その他】マニュアルがオンラインとオフラインの二つがあるが、何が違うのか？</h1>
 	あなたがMoaiの最新バージョンをインストールしてお使いなら、両者の内容は基本的には同じです.<br>
 	一般のアプリケーションではあまり見られない試みとなっていますので、奇異に感じられる方もおられるかもしれません.<br>
 	これら二つについて何が違うのか、またなぜこのような二重の構成としてあるのかも説明しましょう.<br>
@@ -187,181 +535,21 @@
 <br>
 
 
-<a name=FAQ_15></a>
-<h1 class="title">MoaiはIPを偽装することができるのか？</h1>
-	IPアドレスを偽装することはMoaiでもできません.<br>
-	(というよりローカルな端末だけでは原理的に不可能です).<br>
+<a name=FAQ_10></a>
+<h1 class="title">【その他】Moaiを他サイトで紹介してもいい？</h1>
+	ありがとうございます. 是非ともどうぞ.<br>
 <br>
-	一般に <b>IPアドレスはPCの場合であればルータリセット、スマホの場合であれば機内モードで簡単に変更可能</b>です.<br>
-	一応Moaiでも外部プロキシ、VPNなどを経由させることでIPを偽装することもできますが、掲示板によってはそれらは既にブラックリスト化されている場合もあります.<br>
-	<br>
-	旧来は、IPアドレスやプロバイダのドメインだけで規制を行うのが多くの掲示板の主流でした.<br>
-	この方式では（特にプロバイダのドメインでの規制は）巻き添えが頻繁に発生しがちでした.<br>
-	そこで、最近の多くの掲示板ではIP以外のマシン固有の情報を重視する流れが主流となりつつあるようです.<br>
-	(よく話題に挙がるUser-Agentもこの種の情報の一つです).<br>
-	<br>
-	つまり、掲示板のサーバ側から見れば、アクセスして来た対象のIPとそのUser-Agentの双方を見て(実際にはUser-Agentだけでなく他のマシン固有情報も総合的に考慮することでしょう)、
-	もしIPが変わっているにも関わらず、それ以外の情報が全く変化していないならば、規制対象として継続するか要警戒対象とみなすという方式です.<br>
-	<br>
-	基本的にMoaiはIPアドレス以外のソフトウェア的に実現可能な環境の仮想化の全てをお手軽に実現するツールであると考えて頂いてもかまいません.<br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+	どこで宣伝してもらってもかまいませんし、別の場で再配布することも可能です.<br>
+	プラグインを作ったりMoai本体を改造などして、全く別のツールとしてあなたの名前で公開することすらできます.<br>
 <br>
-
-
-<a name=FAQ_25></a>
-<h1 class="title">Moaiの利用は外部プロキシ(いわゆる串)を経由することが必須なのか？</h1>
-	いいえ.<br>
-<br>
-	Moaiにおいて外部プロキシサーバの経由は必須ではありませんし、むしろこれを使用しないことを推奨します.<br>
-	つまりMoaiでは、PCの場合であればルータリセット、スマホの場合であれば機内モードなどの使用でIPを変更することを推奨します.<br>
-<br>
-	しかし、それでも外部プロキシを使いたければMoaiでもそれは不可能ではなく、外部プロキシの候補をparent_proxy.txtに列挙しておき、
-	「Moaiエンジン設定」の画面からそれらの候補をparent_proxyメニューから選択して経由する外部プロキシを瞬時に切り替えることもできます.<br>
-	(デフォルトではこのメニューは「NONE」が選ばれており外部プロキシの利用自体が無効となっています).<br>
-<br>
-	尚、Moai付属のツールProxyFinderを使えば、定番のプロキシ情報サイトに接続し、このリストを自動的に取得することもできます.<br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
-
-
-<a name=FAQ_05></a>
-<h1 class="title">User-Agentを偽装せずとも単純にブラウザいっぱいインスコしておけばよいのでは？</h1>
-	勿論ブラウザをいっぱいインスコしておいてもよいでしょうが、限度がありましょう.<br>
-	Moaiの付属ツールである VirtualUSERS を使えば、あなたのマシンに実際にインスコするブラウザは一つでよく、
-	それでいて事実上無限かつ瞬時にブラウザをいっぱいインスコしたような状況を実現できます. <br>
-	ユーザがすることは単にVirtualUSERSの画面からVirtualUSERSボタンを押すだけです.<br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
-
-
-<a name=FAQ_06></a>
-<h1 class="title">User-Agentを偽装するなら外部プロキシを使えばよいのでは？</h1>
-	一般に外部プロキシを介したからといってUser-Agentが変化するとは限りません.<br>
-	そのようなUser-Agentを加工修正するプロキシも一部存在するかもしれませんが、User-Agentに関して一切手を加えないプロキシも数多く存在します.<br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
-
-
-<a name=FAQ_16></a>
-<h1 class="title">Androidで使うには？</h1>
-	Moaiは基本的にPC向けのツールですが、Androidでも使うことができ、apk ファイルを提供しております.<br>
-	ただしこの apk ファイルは Google Play からの配布は行っておりません(作者がああいうの嫌いなので…というのもあります).<br>
-	よっていわゆる「野良アプリ」と呼ばれるものになりますが、Moai公式のgithubのサイトから直接これをダウンロードできます.<br>
-	Android版Moaiの入手とインストール、起動については、<a class=MstyElemLink href=/moai2.0/install_android.html#ForApk>インストール方法(Android版)</a>を参照してください.<br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
-
-
-<a name=FAQ_09></a>
-<h1 class="title">Moaiは広告をブロックする機能もあるのか？</h1>
-	はい.<br>
-<br>
-	昨今のネットでは広告こそがセキュリティーホールの温床の最たるものとなっています.<br>
-	そして残念ながら大抵のネット掲示板ではこの種の問題の抜本的対策がなされておらず、我々は常にセキュリティー上問題のある広告がブラウザに表示される危険性に晒されています.<br>
-	これに対しては我々ユーザが自衛するしか手はありません.<br>
-<br>
-	Moaiは基本的にセキュリティーのためのツールですので、当然これに対応すべく広告ブロック機能をサポートします.<br>
-	(uBlock Originなど世の中優れた広告ブロックツールはいくらでもありますけれども…<br>
-	ブラウザの種類やバージョンに制限されず使えるというのがMoaiのメリットではあります)<br>
-<br>
-	Moaiでは以下の二つの戦略により広告のブロックを実現しています.<br>
-	<div class=content><ul>
-		<li><b>受信するHTMLをフィルタで文字列置換する</b><br>
-<br>
-		これは filters/{target}_recv.myf の指定によって行います.<br>
-		( {target}の部分にはBBSの識別名などが入ります. )<br>
-		このファイルを開いてもらうと<br>
-<br>
-		<div class=box>
-			<div class=MstyCode>
-				replace ['A'] ['B']<br>
-			</div>
-		</div>
-<br>
-		というような行がいくつかあります.<br>
-		これは「AというパターンをBで置換(replace)せよ」という命令になります.<br>
-		というわけで、例えば広告の部分のパターンを A として指定し、B には空文字列を指定すれば、広告の部分だけが綺麗に消えるというわけです.<br>
-		また、これ以外にもEaster本体やMoaiのプラグインがいくつかの広告除去アルゴリズムを内蔵しています.<br>
-		</li>
-<br>
-		<li><b>ブラックリストにあるサイトのTCP/IP通信自体をブロックする</b><br>
-<br>
-		いわゆる通信ごと「根こそぎ」というやつです<br>
-		これは hosts.myf の ignore_hostsセクションの指定によって行います.<br>
-		この部分に指定されたパターンに一致するサイトへはMoaiは問答無用で接続を行いません.<br>
-		広告サイトへの接続そのものが発生しないため、やはりこの場合も広告の部分だけが消えるというわけです.<br>
-		</li>
-	</ul></div>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
-
-
-<a name=FAQ_01></a>
-<h1 class="title">試すのが怖いんだけど、このMoaiの安全性をどう確認すればよいのか？</h1>
-	その感想はもっともだと思います.<br>
-<br>
-	いかに全ソースコードが公開されブラックボックスな部分が全くないとはいえ、実際問題プログラマでもない方にとってソースコードを検証するのは酷というものですね.<br>
-	(ましてやMoaiは当初よりも随分と大きなシステムにもなってきました…)<br>
-	この種の問題は我々開発側にとっても頭の痛い、もっとも配慮すべき事項の一つでもあります.<br>
-	<br>
-	一応このことに関しては、<a class=MstyElemLink href=/moai2.0/how_to_compile.html#WhyWeCompile>こちら</a>に我々の考えを述べてあります.<br>
-	ここにある記述で納得していただけるかどうかはわかりませんが、それなりの納得が得られたなら幸いです.<br>
-	<br>
-	<div class=box>
-		Moaiは現在、おかげさまで作者が当初思っていたより多くの方に使われているようです.<br>
-		この種の質問もあまりされることなくはなりましたが、このFAQの項目は重要だと我々は考えます.<br>
-		処理の透明性を掲げるのはMoaiの一大ポリシーでもあります.<br>
-		よって今後もこのまま残しておきます.<br>
-	</div>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
-
-
-<a name=FAQ_28></a>
-<h1 class="title">Chromeでダウンロードしたとき「危害を及ぼす可能性」というメッセージが出るのだが？</h1>
-	これですね。<br>
-<br>
-	<div class=MstyComment>
-		<img src=/imgs/chrome_download_warning.png><br>
-	</div>
-<br>
-	最初は「破棄」ボタンしか表示されておりません.<br>
-	<s>つまりMoaiが「一般的にダウンロードされているファイル」になるまで気長に待てというGoogle様からの有難いお言ｂ…</s>.<br>
-	一番右にある「ｖ」ボタンから表示されるプルダウンより「継続」を選んでもらうとダウンロードを完了させることができます.<br>
-<br>
-	<div class=box>
-		<u><b>これは何なのか？</b></u><br>
-<br>
-		「Chrome」「一般的にダウンロードされているファイルではなく」などのフレーズで検索してみますと、他のフリーウェアや商用のソフトウェアのダウンロード時においても同様の現象が多く報告されていることがわかります.<br>
-<br>
-		Chrome では、ファイルのダウンロード時にウィルススキャンだとかそういったものを内部で行っているわけではなく、ただ単純に一般的にダウンロードされている回数がまだ少ないファイルについて、手当たり次第このメッセージを表示するという冗談のような仕様となっています.<br>
-		（ただしカウント対象となるファイルは、ある程度のサイズ以上の実行ファイルを含むだとかいくつかのアバウトな条件はあるようです）<br>
-		おそらくファイルがダウンロードされたという情報は、Chromeの公式サーバ(つまりGoogleですが)に自動的に送信され、そしてその公式サーバにおいて、世界中のファイルのダウンロードされた回数の情報をデータベースとして持っているということなのでしょう.<br>
-		（それはそれで凄くもあり、また同時に怖い話ですが…）<br>
-<br>
-		これまでにダウンロードされた回数などいった基準は、ファイルの安全性を検証する上ではほぼ何の確証にもなり得ないことは明らかです.<br>
-		（多いからといってただちに安全と言い切れるものでもありませんし、逆もまた然りで少ないからといってただちに危険とも言えません）<br>
-		そもそもリリース直後のソフトウェアならどんなものであれ、最初はダウンロード回数が少ないのは当然ですから、その観点から考慮してもおかしな指標と言えるでしょう.<br>
-		そしてそんなものを根拠に、いきなり「危害」だの「破棄」だのといった警告メッセージを表示したところで、我々Chromeユーザ側からすれば混乱の元となるだけではないでしょうか？<br>
-<br>
-		本気でファイルの安全性を検証するのであれば、こんなものよりもっと他にマシな手段はいくらでもあります.<br>
-		例えば、ダウンロードした後にまずはウィルススキャンソフトでそれをきちんとスキャンするなどの習慣をつけるべきでしょう.<br>
-		（ちなみに私はClamWinというウィルススキャンソフトを普段使っています）<br>
-	</div>
+	その場合、我々Moai開発者チームに許可をとる必要はありませんし、「Moaiを参考にして作りました」とか書く必要もありません(笑)<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br>
 
 
 <a name=FAQ_22></a>
-<h1 class="title">Moaiをソースコードからコンパイルしてみたいのだが？</h1>
+<h1 class="title">【その他】Moaiをソースコードからコンパイルしてみたいのだが？</h1>
 	<a class=MstyElemLink href=/moai2.0/how_to_compile.html#ForAndroid>HowTo コンパイル</a>を参照しつつ、じっくりとお試しください(なかなか大変かと思いますので…）.<br>
 	Moai本体およびそれに付随するシステムやライブラリなど、これらをすべてを一括コンパイルするためのスクリプトも用意してあります.<br>
 	Windows版やAndroid版ならばmake_world.bat、Linux版やCygwin版ならば make_world.sh という名前になります.<br>
@@ -377,124 +565,8 @@
 <br>
 
 
-<a name=FAQ_07></a>
-<h1 class="title">Moaiに頼らずとも、UA偽装とルータリセット、クッキー削除で大抵の場合、規制解除できるよね？</h1>
-	多くの場合は軽い規制でしょうから、それでいけるのでしょう.<br>
-<br>
-	さらにそれでもダメならMoaiを試してみるのもいいでしょう.<br>
-	中程度の規制の場合、さらにScreenSize(モニタ解像度の情報)やFingerprintの値などといった、Cookieやキャッシュ削除では対応できない種類の情報で規制されている可能性もありますが、Moaiならばこれに楽々に対応できます.<br>
-<br>
-	プロバイダごと問答無用で広域規制されるような最も重い規制の場合、おそらくMoaiでも対応できないでしょう.<br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
-
-
-<a name=FAQ_04></a>
-<h1 class="title">Moaiに頼らずとも、Proxomitron のフィルターでも代用できね？</h1>
-	現バージョンのMoaiでもローカルプロキシとしての機能が残されています.<br>
-<br>
-	<div class=box>
-		Moai Ver2.0以降では、ローカルプロキシよりもお手軽なEasterを使えばよく、もはやローカルプロキシとしてMoaiを使用する必要性はほとんどありません.<br>
-	</div>
-	<br>
-	ローカルプロキシといえば、Proxomitron(Windowsで動作する有名なツールです)を思い浮かべられる方もおられると思います.<br>
-	そしてMoaiでもProxomitron同様に、HTTP通信を仲介しつつ送信/受信データをフィルタリングして加工することができます.<br>
-	しかしながらMoaiはローカルプロキシの機能としてはProxomitronの足元にもおよびません.<br>
-	既にProxomitronをバリバリ使いこなしている方にとってローカルプロキシとしてのMoaiは不要といえるでしょう. <br>
-	<br>
-	ただ、それでもMoaiのローカルプロキシとしての利点を挙げるとすれば、全ソースが公開されており、必要であれば修正や改造、さらにはそれをあなたの名前で再配布するなども自由に行えるということがあります.<br>
-	<br>
-	またProxomitron に比べPOST変数のフィルターが容易に行えるという点などが挙げられます.<br>
-	具体的には filtersフォルダ内のfutaba_send.myfファイルのpost_varsという部分において、中継時に修正したいPOST変数を記述する形になります.<br>
-	<br>
-	他ツールと比べた場合におけるMoaiの特徴/機能に関しては<a class=MstyElemLink href=/moai2.0/moai_feature.html>こちら</a>を参照してください.<br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
-
-
-<a name=FAQ_10></a>
-<h1 class="title">Moaiを他サイトで紹介してもいい？</h1>
-	ありがとうございます. 是非ともどうぞ.<br>
-<br>
-	どこで宣伝してもらってもかまいませんし、別の場で再配布することも可能です.<br>
-	プラグインを作ったりMoai本体を改造などして、全く別のツールとしてあなたの名前で公開することすらできます.<br>
-<br>
-	その場合、我々Moai開発者チームに許可をとる必要はありませんし、「Moaiを参考にして作りました」とか書く必要もありません(笑)<br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
-
-
-<a name=FAQ_08></a>
-<h1 class="title">過疎らせたい定時があるんだが…このツールを使えばオレの勝ちよな？</h1>
-	軍曹…<br>
-<br>
-	残念ながら(?)Moaiはそういう攻撃用のツールではなく、完全に防御向けのツールだ.<br>
-	つまり、それに関してMoaiがサポートできることと言えば、キミとその定時とやらの戦いにおいてキミのHPを限りなく∞にすることくらいだ…<br>
-	まあ事情はさっぱりわからんが健闘を祈る！<br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
-
-
-<a name=FAQ_11></a>
-<h1 class="title">(ふたばちゃんねるにおいて)Moaiはdel連打ツールという噂を聞きました</h1>
-	まずご存知ない方向けに説明すると、ふたばちゃんねるにおける「del」とは、HTTPの観点から言えば x-www-form-urlencoded 方式でPOSTする荒らし報告のための投票システムです.<br>
-	そして結論から言えば、(確証はありませんが)おそらくMoaiではそれはできません.<br>
-	(というか出来てしまうようでは掲示板として問題だとは思います).<br>
-	<br>
-	Moaiが出来ることといえば、User-AgentやScreen-Size、Fingerprintなどソフトウェア的に仮想化可能な情報のランダマイズ、そしてIPアドレスに関しては複数の登録プロキシの中からメニューで選択し、使用プロキシを簡易に切り替えを行う程度のことです.<br>
-	<br>
-	これらの切り替えを駆使すれば、同じくふたばちゃんねるにおける投票システム「そうだね」の値は際限なくカウントされることは私の方でも随分昔に確認しました(今現在も可能かどうかはわかりませんが…).<br>
-<br>
-	delについては効果があるのかどうかはわかりません.<br>
-	(まずそこまで詳しくは試していませんし、そもそもすぐに効果が確認できる類のものでもありませんので…).<br>
-	プロキシサーバ等を経由しプロバイダ環境さえも異なるIPに変更した上で、VirtualUSERSによりブラウザ環境までをも刷新するという徹底ぶりでdelすればもしかすれば可能かもしれませんが、
-	ふたば側から見ればそれがプロキシサーバを経由したdelであるか否かはある程度検出できるはずですので、そのようなdelを無効としてカウントしていない可能性もありますね.<br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
-
-
-<a name=FAQ_12></a>
-<h1 class="title">画像投稿時、filenameがフルパスのままで送信されるようなことはないのか？</h1>
-	これは一部の非常に古いブラウザ(IE7以前)に存在する問題です.<br>
-	Moaiでは、ユーザがそのような安全上問題のあるブラウザを使用している場合でも画像投稿時のfilenameがフルパスのまま送信されることがないように配慮されています.<br>
-	すなわち万一filenameにフルパスが含まれていた場合はそれを確実に除去してから送信します.<br>
-<br>
-	<div class=box>
-		ただし現在のMoai(特にEaster)ではIE7以前ではUIが正常に表示されない可能性があります.<br>
-		最低でもIE8以降か、できればIE以外のもっと現代的なブラウザ(FirefoxやChromeなど色々とありますが)を使用することを強くお勧めします.<br>
-	</div>
-	<br>
-	<div class=box>
-		<u><b>参考</b></u> <br>
-<br>
-		昔のIEはファイルアップロード時にサーバにそのフルパスを送りつけるという奇妙な仕様を持っていました.<br>
-		さらに厳密に言えば、フルパスが送られるのは以下の場合に限られます.<br>
-		<br>
-		<ul>
-			<li>IE6以前から画像投稿した場合.</li>
-<br>
-			<li>IE7で「サーバーにファイルをアップロードするときにローカルディレクトリのパスを含める」<br>
-			というブラウザのセキュリティ設定を有効としてしまっている場合.<br>
-			IE7ではこれがデフォルトで有効となっている.<br>
-			尚IE8以降よりこの設定はデフォルトで無効になっている.<br>
-			無論、セキュリティ上これは本来無効であるべきで、妥当なデフォルトと言える.</li>
-		</ul>
-		<br>
-		IE以外のブラウザの場合、フルパスを送るという仕様を持つブラウザは現在のところ確認されていません.<br>
-		例えばFirefox, Opera, Chromeなどではいずれも送られるのはファイル名の部分のみでありMoaiが中継段階で加工するまでもなく最初からフルパスは除去されています.<br>
-	</div>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
-
-
 <a name=FAQ_23></a>
-<h1 class="title">研究所の名前変えたん？</h1>
+<h1 class="title">【その他】研究所の名前変えたん？</h1>
 	はい.<br>
 <br>
 	このたび「日本HTTP研究所(NHK)」改め、「全日本ネットワーク研究所(ZNK)」に改名いたしました.<br>
@@ -505,7 +577,7 @@
 
 
 <a name=FAQ_14></a>
-<h1 class="title">全日本ネットワーク研究所(ZNK)とかホントはなくて全部同一人物なんでしょ？</h1>
+<h1 class="title">【その他】全日本ネットワーク研究所(ZNK)とかホントはなくて全部同一人物なんでしょ？</h1>
 	ハドラー…その質問に対する我々の答えは常にひとつだ…<b>大魔王様のおｋ</b><br>
 	すなわち<b>NYSK(煮るなり焼くなり好きに解釈しろ)</b>というものだ….<br>
 	<br>
@@ -544,7 +616,7 @@
 			</div>
 		</div>
 		<div class="content">
-		  <time datetime="2016-1-1">2019/06/21</time>
+		  <time datetime="2016-1-1">2020/12/05</time>
 		</div>
 	</div>
 </div>
