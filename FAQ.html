@@ -6,19 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="/msty.css" rel="stylesheet" type="text/css">
 	<link href="/bulma.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript">
-		function MstyUI_detailBtn( tgt_id, btn_id, open_lbl, close_lbl ){
-			var tgt=document.getElementById( tgt_id );
-			var btn=document.getElementById( btn_id );
-			if( tgt.className=='MstyUnvisible' ){
-				tgt.className = 'MstyVisible';
-				btn.innerHTML = close_lbl;
-			} else{
-				tgt.className = 'MstyUnvisible';
-				btn.innerHTML = open_lbl;
-			}
-		}
-	</script>
+	<script type="text/javascript" src="/js/msty_ui.js"></script>
 </head>
 <body>
 <div class="section">
@@ -67,6 +55,7 @@
 	<li><b><a class=MstyElemLink href=#FAQ_12>【仮想環境】画像投稿時、filenameがフルパスのままで送信されるようなことはないのか？</a></b></li>
 	<li><b><a class=MstyElemLink href=#FAQ_11>【仮想環境】ふたばちゃんねるにおいてMoaiはdel連打ツールという噂を聞きました</a></b></li>
 	<li><b><a class=MstyElemLink href=#FAQ_09>【仮想環境】Moaiは広告をブロックする機能もあるのか？</a></b></li>
+	<li><b><a class=MstyElemLink href=#FAQ_31>【その他】このFAQなんでこんな内容なんすか？</a></b></li>
 	<li><b><a class=MstyElemLink href=#FAQ_24>【その他】マニュアルが分かりにくいのだが？</a></b></li>
 	<li><b><a class=MstyElemLink href=#FAQ_27>【その他】マニュアルがオンラインとオフラインの二つがあるが、何が違うのか？</a></b></li>
 	<li><b><a class=MstyElemLink href=#FAQ_10>【その他】Moaiを他サイトで紹介してもいい？</a></b></li>
@@ -182,7 +171,7 @@
 <h1 class="title">【導入】Chromeでダウンロードしたとき「危害を及ぼす可能性」というメッセージが出るのだが？</h1>
 	これですね。<br>
 <br>
-	<div class=MstyComment>
+	<div class=MstyImgBox>
 		<img src=/imgs/chrome_download_warning.png><br>
 	</div>
 <br>
@@ -190,10 +179,7 @@
 	<s>つまりMoaiが「一般的にダウンロードされているファイル」になるまで気長に待てというGoogle様からの有難いお言ｂ…</s>.<br>
 	一番右にある「ｖ」ボタンから表示されるプルダウンより「継続」を選んでもらうとダウンロードを完了させることができます.<br>
 <br>
-	<a class=MstyElemLink id=FAQ_28_detail_btn onClick="MstyUI_detailBtn( 'FAQ_28_detail_tgt', 'FAQ_28_detail_btn', '結局これは何なのか？', '閉じる' );">結局これは何なのか？</a><br>
-	<div id=FAQ_28_detail_tgt class=MstyUnvisible><div class=box>
-		<u><b>結局これは何なのか？</b></u><br>
-<br>
+	<a class=MstyElemLink id=FAQ_28_detail_btn onClick="MstyUI_detailBtn('FAQ_28_detail_tgt', 'FAQ_28_detail_btn', '結局これは何なの？', '閉じる');">結局これは何なの？</a><br><div id=FAQ_28_detail_tgt class=MstyUnvisible><div class=box><u><b>結局これは何なの？</b></u><br><br>
 		「Chrome」「一般的にダウンロードされているファイルではなく」などのフレーズで検索してみますと、他のフリーウェアや商用のソフトウェアのダウンロード時においても同様の現象が多く報告されていることがわかります.<br>
 <br>
 		Chrome では、ファイルのダウンロード時にウィルススキャンだとかそういったものを内部で行っているわけではなく、ただ単純に一般的にダウンロードされている回数がまだ少ないファイルについて、手当たり次第このメッセージを表示するという冗談のような仕様となっています.<br>
@@ -209,7 +195,7 @@
 		本気でファイルの安全性を検証するのであれば、こんなものよりもっと他にマシな手段はいくらでもあります.<br>
 		例えば、ダウンロードした後にまずはウィルススキャンソフトでそれをきちんとスキャンするなどの習慣をつけるべきでしょう.<br>
 		（ちなみに私はClamWinというウィルススキャンソフトを普段使っています）<br>
-	</div></div>
+	</div><br></div>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br>
@@ -268,10 +254,7 @@
 	一般に <b>IPアドレスはPCの場合であればルータリセット、スマホの場合であれば機内モードで簡単に変更可能</b>です.<br>
 	その上で、MoaiはIPアドレス以外のソフトウェア的に実現可能な環境の仮想化の全てをお手軽に実現するツールであるといえます.<br>
 	<br>
-	<a class=MstyElemLink id=FAQ_05_1_detail_btn onClick="MstyUI_detailBtn( 'FAQ_05_1_detail_tgt', 'FAQ_05_1_detail_btn', 'コラム：規制におけるマシンやブラウザ情報の重要性', '閉じる' );">コラム：規制におけるマシンやブラウザ情報の重要性</a><br>
-	<div id=FAQ_05_1_detail_tgt class=MstyUnvisible><div class=box>
-		<b>コラム：規制におけるマシンやブラウザ固有の情報の重要性</b><br>
-<br>
+	<a class=MstyElemLink id=FAQ_15_detail_btn onClick="MstyUI_detailBtn('FAQ_15_detail_tgt', 'FAQ_15_detail_btn', 'コラム：規制におけるマシンやブラウザ情報の重要性', '閉じる');">コラム：規制におけるマシンやブラウザ情報の重要性</a><br><div id=FAQ_15_detail_tgt class=MstyUnvisible><div class=box><u><b>コラム：規制におけるマシンやブラウザ情報の重要性</b></u><br><br>
 		旧来は、IPアドレスやプロバイダのドメインだけで規制を行うのが多くの掲示板の主流でした.<br>
 		この方式では（特にプロバイダのドメインでの規制は）巻き添えが頻繁に発生しがちでした.<br>
 		そこで、最近の多くの掲示板では<b>IP以外のマシンやブラウザ固有の情報を重視する</b>流れが主流となりつつあるようです.<br>
@@ -280,8 +263,7 @@
 		つまり掲示板は、たとえアクセスして来た対象のIPが変わっていても、その対象のマシンやブラウザ固有の情報が変化していないならば、
 		規制対象として継続するか要警戒対象とみなす方式をとるわけです.<br>
 		このような状況に対して、Moaiは効力を発揮します.<br>
-	</div></div>
-<br>
+	</div><br></div>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br>
@@ -294,10 +276,7 @@
 	Moaiにおいて外部プロキシサーバの経由は必須ではありませんし、むしろこれを使用しないことを推奨します.<br>
 	つまりMoaiでは、PCの場合であればルータリセット、スマホの場合であれば機内モードなどの使用でIPを変更することを推奨します.<br>
 <br>
-	<a class=MstyElemLink id=FAQ_25_detail_btn onClick="MstyUI_detailBtn( 'FAQ_25_detail_tgt', 'FAQ_25_detail_btn', 'コラム：Moaiで外部プロキシやVPNは使えるか？', '閉じる' );">コラム：Moaiで外部プロキシやVPNは使えるか？</a><br>
-	<div id=FAQ_25_detail_tgt class=MstyUnvisible><div class=box>
-		<b>コラム：Moaiで外部プロキシやVPNは使えるか？</b><br>
-<br>
+	<a class=MstyElemLink id=FAQ_25_detail_btn onClick="MstyUI_detailBtn('FAQ_25_detail_tgt', 'FAQ_25_detail_btn', 'コラム：Moaiで外部プロキシやVPNは使える？', '閉じる');">コラム：Moaiで外部プロキシやVPNは使える？</a><br><div id=FAQ_25_detail_tgt class=MstyUnvisible><div class=box><u><b>コラム：Moaiで外部プロキシやVPNは使える？</b></u><br><br>
 		一応Moaiでも外部プロキシ、VPNなどを経由させる手段が提供されています.<br>
 		しかしこれらのIPは現在、掲示板からブラックリスト化されている場合も多く、これらの使用はあまりお勧めできません.<br>
 <br>
@@ -308,8 +287,7 @@
 		(デフォルトではこのメニューは「NONE」が選ばれており外部プロキシの利用自体が無効となっています).<br>
 	<br>
 		尚、Moai付属のツールProxyFinderを使えば、定番のプロキシ情報サイトに接続し、このリストを自動的に取得することもできます.<br>
-	</div></div>
-<br>
+	</div><br></div>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br>
@@ -384,10 +362,7 @@
 		最低でもIE8以降か、できればIE以外のもっと現代的なブラウザ(FirefoxやChromeなど色々とありますが)を使用することを強くお勧めします.<br>
 	</div>
 	<br>
-	<a class=MstyElemLink id=FAQ_12_detail_btn onClick="MstyUI_detailBtn( 'FAQ_12_detail_tgt', 'FAQ_12_detail_btn', '参考', '閉じる' );">参考</a><br>
-	<div id=FAQ_12_detail_tgt class=MstyUnvisible><div class=box>
-		<u><b>参考</b></u> <br>
-<br>
+	<a class=MstyElemLink id=FAQ_12_detail_btn onClick="MstyUI_detailBtn('FAQ_12_detail_tgt', 'FAQ_12_detail_btn', 'コラム：昔のIE', '閉じる');">コラム：昔のIE</a><br><div id=FAQ_12_detail_tgt class=MstyUnvisible><div class=box><u><b>コラム：昔のIE</b></u><br><br>
 		昔のIEはファイルアップロード時にサーバにそのフルパスを送りつけるという奇妙な仕様を持っていました.<br>
 		さらに厳密に言えば、フルパスが送られるのは以下の場合に限られます.<br>
 		<br>
@@ -403,7 +378,7 @@
 		<br>
 		IE以外のブラウザの場合、フルパスを送るという仕様を持つブラウザは現在のところ確認されていません.<br>
 		例えばFirefox, Opera, Chromeなどではいずれも送られるのはファイル名の部分のみでありMoaiが中継段階で加工するまでもなく最初からフルパスは除去されています.<br>
-	</div></div>
+	</div><br></div>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br>
@@ -436,8 +411,7 @@
 	(uBlock Originなど世の中優れた広告ブロックツールはいくらでもありますけれども…<br>
 	ブラウザの種類やバージョンに制限されず使えるというのがMoaiの強みではあります)<br>
 <br>
-	<a class=MstyElemLink id=FAQ_09_detail_btn onClick="MstyUI_detailBtn( 'FAQ_09_detail_tgt', 'FAQ_09_detail_btn', '詳細', '閉じる' );">詳細</a><br>
-	<div id=FAQ_09_detail_tgt class=MstyUnvisible><div class=box>
+	<a class=MstyElemLink id=FAQ_09_detail_btn onClick="MstyUI_detailBtn('FAQ_09_detail_tgt', 'FAQ_09_detail_btn', 'コラム：広告ブロックの仕組み', '閉じる');">コラム：広告ブロックの仕組み</a><br><div id=FAQ_09_detail_tgt class=MstyUnvisible><div class=box><u><b>コラム：広告ブロックの仕組み</b></u><br><br>
 		Moaiでは以下の二つの戦略により広告のブロックを実現しています.<br>
 		<div class=content><ul>
 			<li><b>受信するHTMLをフィルタで文字列置換する</b><br>
@@ -466,7 +440,16 @@
 			広告サイトへの接続そのものが発生しないため、やはりこの場合も広告の部分だけが消えるというわけです.<br>
 			</li>
 		</ul></div>
-	</div></div>
+	</div><br></div>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br>
+
+
+<a name=FAQ_31></a>
+<h1 class="title">【その他】このFAQなんでこんな内容なんすか？</h1>
+	いやだって、よく来るのこんな質問ばかりなんですもん^^.<br>
+	尚、このサイトの他のドキュメントは割と真面目な内容です.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br>
@@ -476,25 +459,19 @@
 <h1 class="title">【その他】マニュアルが分かりにくいのだが？</h1>
 	Ver2.1より、初級マニュアルと上級マニュアルの二つに分離しました.<br>
 <br>
-	<a class=MstyElemLink id=FAQ_24_1_detail_btn onClick="MstyUI_detailBtn( 'FAQ_24_1_detail_tgt', 'FAQ_24_1_detail_btn', '初級マニュアル', '閉じる' );">初級マニュアル</a><br>
-	<div id=FAQ_24_1_detail_tgt class=MstyUnvisible><div class=box>
-		<b>初級マニュアル</b><br>
-<br>
+	<a class=MstyElemLink id=FAQ_24_1_detail_btn onClick="MstyUI_detailBtn('FAQ_24_1_detail_tgt', 'FAQ_24_1_detail_btn', '初級マニュアル', '閉じる');">初級マニュアル</a><br><div id=FAQ_24_1_detail_tgt class=MstyUnvisible><div class=box><u><b>初級マニュアル</b></u><br><br>
 		ほとんどのユーザーが使うことになる基本的な機能を平易に説明したものです.<br>
 		主にインストール方法、Easter、VirtualUSERSの使い方になります.<br>
 		(ただしEasterに関しては、コレクションに関する若干ディープな内容もこちらに分類しました).<br>
 		ほとんどのユーザーは、何か疑問が生じた段階で必要に応じてこれをご一読される程度で十分かと思います.<br>
-	</div></div>
+	</div><br></div>
 <br>
-	<a class=MstyElemLink id=FAQ_24_2_detail_btn onClick="MstyUI_detailBtn( 'FAQ_24_2_detail_tgt', 'FAQ_24_2_detail_btn', '上級マニュアル', '閉じる' );">上級マニュアル</a><br>
-	<div id=FAQ_24_2_detail_tgt class=MstyUnvisible><div class=box>
-		<b>上級マニュアル</b><br>
-<br>
+	<a class=MstyElemLink id=FAQ_24_2_detail_btn onClick="MstyUI_detailBtn('FAQ_24_2_detail_tgt', 'FAQ_24_2_detail_btn', '上級マニュアル', '閉じる');">上級マニュアル</a><br><div id=FAQ_24_2_detail_tgt class=MstyUnvisible><div class=box><u><b>上級マニュアル</b></u><br><br>
 		Moaiの機能の深部まで使い倒したいといったエキスパートなユーザーのためのマニュアルです.<br>
 		Moaiエンジン、CustomBoyエンジンの詳細などリファレンス的な内容を解説してあります.<br>
 		開発者向けの内容もあります.<br>
 		ほとんどのユーザーはこちらを読む必要はないかと思います.<br>
-	</div></div>
+	</div><br></div>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br>
@@ -503,8 +480,7 @@
 <a name=FAQ_27></a>
 <h1 class="title">【その他】マニュアルがオンラインとオフラインの二つがあるが、何が違うのか？</h1>
 	あなたがMoaiの最新バージョンをインストールしてお使いなら、両者の内容は基本的には同じです.<br>
-	一般のアプリケーションではあまり見られない試みとなっていますので、奇異に感じられる方もおられるかもしれません.<br>
-	これら二つについて何が違うのか、またなぜこのような二重の構成としてあるのかも説明しましょう.<br>
+	最新のバージョンでなければこれら二つに違いがあります.<br>
 <br>
 	<div class=content><ul>
 		<li><b>オンラインマニュアル</b><br>
@@ -523,13 +499,18 @@
 	前者は最新のバージョン、後者は今あなたが使用しているバージョンですから、一般には前者の方が新しいと言えます.<br>
 	よって、マニュアルの内容も前者の方が新しいわけです.<br>
 <br>
-	ならばオンラインマニュアルだけでよいのではないかと思われるかもしれませんが、<br>
-	例えば、最新バージョンでMoaiの仕様が大きく刷新されるなどし、かつあなたはまだ古いバージョンのMoaiを使っている状況を考えます.<br>
+	<a class=MstyElemLink id=FAQ_27_detail_btn onClick="MstyUI_detailBtn('FAQ_27_detail_tgt', 'FAQ_27_detail_btn', '２部構成の理由', '閉じる');">２部構成の理由</a><br><div id=FAQ_27_detail_tgt class=MstyUnvisible><div class=box><u><b>２部構成の理由</b></u><br><br>
+		オンラインマニュアルだけでよいのではないかと思われるかもしれませんが、
+		例えば、最新バージョンでMoaiの仕様が大きく刷新されるなどし、かつあなたはまだ古いバージョンのMoaiを使っている状況を考えます.<br>
+	<br>
+		すると、オンラインマニュアルしかない場合ですと、古いバージョンに関する内容と大きく食い違いが発生するわけです.<br>
+		あるいは、古いマニュアルへのリンクそのものが無効となっているかもしれません. これは避けなければなりません.<br>
+		そのために(古いバージョンへの救済措置として)オフラインマニュアルも用意されているわけです.<br>
+		オフラインマニュアルなら、その内容はあなたの使用中のMoaiをアップグレードしない限りは変わることはありません.<br>
 <br>
-	すると、オンラインマニュアルしかない場合ですと、古いバージョンに関する内容と食い違いが発生するわけです.<br>
-	あるいは、古いマニュアルへのリンクそのものが無効となっているかもしれません. これは避けなければなりません.<br>
-	そのために(古いバージョンへの救済措置として)オフラインマニュアルも用意されているわけです.<br>
-	オフラインマニュアルなら、その内容はあなたの使用中のMoaiをアップグレードしない限りは変わることはありません.<br>
+		一方、将来のバージョンに渡りもはや内容が大きく変わる可能性のないドキュメントや、
+		最新情報を届けるための一部のドキュメントは、オンラインのみ提供としてあるものもあります.<br>
+	</div><br></div>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br>
@@ -584,9 +565,10 @@
 	こんな研究所やチームが存在するかもしれないし、ひとりで自演しているかもしれない.<br>
 	あるいは、もっと大人数で不特定多数の人間が同じ名前を使いまわしているかもしれないし、実は誰もいない（！？）AIのようなものかもしれない！？<br>
 <br>
-	<div class=box>
+	<a class=MstyElemLink id=FAQ_14_detail_btn onClick="MstyUI_detailBtn( 'FAQ_14_detail_tgt', 'FAQ_14_detail_btn', 'ぶっちゃげ何人いんの？', '閉じる' );">ぶっちゃげ何人いんの？</a><br>
+	<div id=FAQ_14_detail_tgt class=MstyUnvisible><div class=box>
 		まあ３人はいるかもね.<br>
-	</div>
+	</div><br></div>
 	<br>
 	あなたがもっとも楽しめる解釈をすればそれが一番よいのではないでしょうか？<br>
 	最近の匿名掲示板の流れを見るに、そのような楽しみ方こそが新しい時代の潮流のようにさえ思います.<br>
