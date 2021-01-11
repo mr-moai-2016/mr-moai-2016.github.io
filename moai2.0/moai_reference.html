@@ -1,36 +1,38 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html><!-- master template moai -->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta http-equiv="Content-Script-Type" content="text/javascript">
-	<meta http-equiv="Content-Style-Type" content="text/css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="/msty.css" rel="stylesheet" type="text/css">
-	<link href="/bulma.css" rel="stylesheet" type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type"  content="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="/msty.css"  rel="stylesheet" type="text/css" />
+	<link href="/bulma.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
 </head>
 <body>
 <div class="section">
 <div class="container">
 <div class="content">
+
 <a name=TopBar></a>
 <p><b><img src="/imgs/here_landmark.png"> Moai+Easter 上級マニュアル</b></p>
-
-<a class=MstyElemLink href="/">トップページ</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/index.html">初級マニュアル</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">上級マニュアル</a> &nbsp;
-<a class=MstyElemLink href="/announcement.html">アナウンスメント</a> &nbsp;
-<a class=MstyElemLink href="/FAQ.html">FAQ</a> &nbsp;
-<br> <br>
-<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> &nbsp;
-<br> <br>
-<a class=MstyNowSelectedLink href="/moai2.0/moai_reference.html">エンジンの詳細</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/moai_filter.html">フィルターの詳細</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/moai_local_proxy.html">ローカルプロキシとしての使い方</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/hacking.html">プラグイン開発のためのヒント</a> &nbsp;
-<br> <br>
+<a class=MstyElemLink href="/">Moai</a> 
+<a class=MstyElemLink href="/moai2.0/index.html">Manual</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
+<a class=MstyElemLink href="/announcement.html">Annoucement</a> 
+<a class=MstyElemLink href="/FAQ.html">FAQ</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> 
+<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> 
+<br>
+<a class=MstyNowSelectedLink href="/moai2.0/moai_reference.html">エンジンの詳細</a> 
+<a class=MstyElemLink href="/moai2.0/moai_filter.html">フィルターの詳細</a> 
+<a class=MstyElemLink href="/moai2.0/moai_local_proxy.html">ローカルプロキシとしての使い方</a> 
+<a class=MstyElemLink href="/moai2.0/hacking.html">プラグイン開発のためのヒント</a> 
 
 <a name=AtFirst></a>
 <h1 class="title">はじめに</h1>
@@ -47,6 +49,7 @@
 	尚、この記事はエキスパートな方向けであり、通常のユーザーは読む必要はありません.<br>
 </p>
 <br>
+
 
 
 <a name=Index></a>
@@ -73,6 +76,7 @@
 </ul><br>
 
 
+
 <a name=RunMoai></a>
 <h1 class="title">Moaiの起動</h1>
 Moaiはサーバプログラムの一種ですから、これを機能させるためにはMoaiを起動しておかなければなりません.<br>
@@ -86,7 +90,7 @@ moai(Windowsならmoai.exe)を実行しましょう.<br>
 </div>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section RunMoai end -->
 
 
 <a name=AsWebSeaver></a>
@@ -114,7 +118,7 @@ Moaiはいわばローカルウェブサーバとしての使い方をメイン�
 </ol><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section AsWebSeaver end -->
 
 
 <a name=AsLocalProxy></a>
@@ -133,7 +137,7 @@ Moai Ver2.0以降、Moai は<b>ポータブルウェブサーバシステム</b>
 ローカルプロキシとして使う方法の詳細については<a class=MstyElemLink href=/moai2.0/moai_local_proxy.html target=_blank>ローカルプロキシ</a>を参照してください.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section AsLocalProxy end -->
 
 
 <a name=Config></a>
@@ -251,7 +255,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section Config end -->
 
 
 <a name=target></a>
@@ -295,7 +299,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 	これの仕様について知りたい方は<a class=MstyElemLink href=/common/myf_spec.html target=_blank>myf_spec</a>を参照してください.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section target end -->
 
 
 <a name=filter_recv></a>
@@ -307,7 +311,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 	<b>TARGET_NAME</b>_recv.myfの詳細については<a class=MstyElemLink href=/moai2.0/moai_filter.html>フィルターの詳細</a>を参照してください.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section filter_recv end -->
 
 
 <a name=filter_send></a>
@@ -336,7 +340,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 	<b>TARGET_NAME</b>_send.myfの詳細については<a class=MstyElemLink href=/moai2.0/moai_filter.html>フィルターの詳細</a>を参照してください.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section filter_send end -->
 
 
 <a name=MoaiAuthentication></a>
@@ -372,7 +376,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 	後述するXhrDMZ側でブラウザにて実行されるJavascriptは、このUIのHTMLに対してXHtmlRequestを発行することができず、従ってMoai_AuthenticKeyの値をユーザ以外が自動的には読むことができないという仕組みになっています.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section MoaiAuthentication end -->
 
 
 <a name=XhrDMZ></a>
@@ -423,7 +427,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 	実のところ、MoaiでXhrDMZという機構を開発導入した背景もEasterからの要請を受けてのものです.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section XhrDMZ end -->
 
 
 <a name=config_cgi_myf></a>
@@ -686,7 +690,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section config_cgi_myf end -->
 
 
 <a name=ignore_hosts></a>
@@ -723,7 +727,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 	sockの部分は気にする必要はありませんが、接続の際に使ったソケットの番号を示しています.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section ignore_hosts end -->
 
 
 <a name=post_confirm></a>
@@ -752,7 +756,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 	</div></div>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section post_confirm end -->
 
 
 <a name=acceptable_host></a>
@@ -804,7 +808,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 	勿論、ルータやOSなどにあるファイアウォール機能でWAN(外部インターネット)からのポート8124への不要な接続を防止するのもセキュリティ上基本的な対策となります.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section acceptable_host end -->
 
 
 <a name=proxy1></a>
@@ -858,7 +862,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 	というわけでルータリセット等が使える状況ならばそちらの使用をお勧めします.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section proxy1 end -->
 
 
 <a name=proxy2></a>
@@ -917,7 +921,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 	その他の一般サイトにアクセスする場合は現在の外部プロキシが使われることになります.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section proxy2 end -->
 
 
 <a name=proxy3></a>
@@ -944,7 +948,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 	すなわちPolipoのconfig.cfgにおいて parentProxyをlocalhost:8124とする形になるでしょう.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section proxy3 end -->
 
 
 <a name=plugin></a>
@@ -972,7 +976,8 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 	興味があれば参照してください.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section plugin end -->
+
 
 
 <div class="card">
@@ -996,6 +1001,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 </div>
 
 
+
 <a name=Link></a>
 <h1 class="title"></h1>
 <hr>
@@ -1004,6 +1010,7 @@ Moaiトップページで「Moaiエンジンの設定」を選ぶと、Moaiの�
 	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moaiドキュメント(オンライン)</a></li>
 	<li><a class=MstyElemLink href=https://github.com/mr-moai-2016/znk_project>znk_project(github)</a></li>
 </ul><br>
+
 
 
 </div>

@@ -1,38 +1,40 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html><!-- master template moai -->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta http-equiv="Content-Script-Type" content="text/javascript">
-	<meta http-equiv="Content-Style-Type" content="text/css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="/msty.css" rel="stylesheet" type="text/css">
-	<link href="/bulma.css" rel="stylesheet" type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type"  content="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="/msty.css"  rel="stylesheet" type="text/css" />
+	<link href="/bulma.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
 </head>
 <body>
 <div class="section">
 <div class="container">
 <div class="content">
+
 <a name=TopBar></a>
 <p><b><img src="/imgs/here_landmark.png"> Moai+Easter 上級マニュアル</b></p>
-
-<a class=MstyElemLink href="/">トップページ</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/index.html">初級マニュアル</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">上級マニュアル</a> &nbsp;
-<a class=MstyElemLink href="/announcement.html">アナウンスメント</a> &nbsp;
-<a class=MstyElemLink href="/FAQ.html">FAQ</a> &nbsp;
-<br> <br>
-<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> &nbsp;
-<br> <br>
-<a class=MstyElemLink href="/moai2.0/customboy_reference.html">Overview and Tutorial</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/customboy_hints_Cookie.html">Cookie Hints</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/customboy_hints_PostVars.html">PostVars Hints</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/customboy_hints_Fingerprint.html">Fingerprint Hints</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/customboy_hints_Snippet.html">Snippet Hints</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/futaba_note.html">Futaba Note</a> &nbsp;
-<br> <br>
+<a class=MstyElemLink href="/">Moai</a> 
+<a class=MstyElemLink href="/moai2.0/index.html">Manual</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
+<a class=MstyElemLink href="/announcement.html">Annoucement</a> 
+<a class=MstyElemLink href="/FAQ.html">FAQ</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> 
+<a class=MstyElemLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> 
+<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/customboy_reference.html">Overview and Tutorial</a> 
+<a class=MstyElemLink href="/moai2.0/customboy_hints_Cookie.html">Cookie Hints</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/customboy_hints_PostVars.html">PostVars Hints</a> 
+<a class=MstyElemLink href="/moai2.0/customboy_hints_Fingerprint.html">Fingerprint Hints</a> 
+<a class=MstyElemLink href="/moai2.0/customboy_hints_Snippet.html">Snippet Hints</a> 
+<a class=MstyElemLink href="/moai2.0/futaba_note.html">Futaba Note</a> 
 
 <a name=AtFirst></a>
 <h1 class="title">はじめに</h1>
@@ -41,6 +43,7 @@
 	(主にふたばちゃんねるの例を題材とする).<br>
 </p>
 <br>
+
 
 
 <a name=Index></a>
@@ -59,9 +62,10 @@
 </ul><br>
 
 
+
 <a name=pv_js></a>
-<h1 class="title">Post variable : js</h1>
-<span class=MstyAuthor> (Category: futaba)</span>	この値は必ず on にしておかなければならない.<br>
+<h1 class="title">Post variable : js<span class=MstyAuthor> (Category: futaba)</span></h1>
+	この値は必ず on にしておかなければならない.<br>
 	<br>
 	名前の由来は<s><b>女子小学s</b></s>無論<b>J</b>ava<b>S</b>criptである.<br>
 	Javascriptを実行したかどうかを判断するためのものであり、/bin/base4qt.js を実行すると on に設定される仕組みとなっている.<br>
@@ -69,20 +73,20 @@
 	ふたばにおいてはこれを on にしておかないと「環境変数がありません(Javascriptがオフ？)」というエラーが表示され、投稿に失敗するのは周知の通りである.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section pv_js end -->
 
 
 <a name=pv_pthb></a>
-<h1 class="title">Post variable : pthb</h1>
-<span class=MstyAuthor> (Category: futaba)</span>	これについては<a class=MstyElemLink href=#pv_pthc>pthc</a>のセクションを参照して頂きたい.<br>
+<h1 class="title">Post variable : pthb<span class=MstyAuthor> (Category: futaba)</span></h1>
+	これについては<a class=MstyElemLink href=#pv_pthc>pthc</a>のセクションを参照して頂きたい.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section pv_pthb end -->
 
 
 <a name=pv_pthc></a>
-<h1 class="title">Post variable : pthc</h1>
-<span class=MstyAuthor> (Category: futaba)</span>	ptは<b>P</b>os<b>T</b>(あるいは<b>P</b>ost <b>T</b>ime) の意味であろう. h は不明である.<br>
+<h1 class="title">Post variable : pthc<span class=MstyAuthor> (Category: futaba)</span></h1>
+	ptは<b>P</b>os<b>T</b>(あるいは<b>P</b>ost <b>T</b>ime) の意味であろう. h は不明である.<br>
 	( <b>P</b>a<b>T</b><b>H</b> の可能性もありそうだが、現状の仕様とは意味が合わない. )<br>
 	他にも類似したものとして pthb や pthd などがあるが、なぜ a からではなく b から始まるのかも不明である.<br>
 	(筆者が知るよりさらに昔の仕様に由来するのかもしれない)<br>
@@ -99,20 +103,20 @@
 	一旦設定されると、CookieおよびBrowser CacheおよびlocalStorageこれら全てを消去しない限り同じ値が残り続ける.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section pv_pthc end -->
 
 
 <a name=pv_pthd></a>
-<h1 class="title">Post variable : pthd</h1>
-<span class=MstyAuthor> (Category: futaba)</span>	現状では使用されている気配はない(かつては使用されていたこともある).<br>
+<h1 class="title">Post variable : pthd<span class=MstyAuthor> (Category: futaba)</span></h1>
+	現状では使用されている気配はない(かつては使用されていたこともある).<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section pv_pthd end -->
 
 
 <a name=pv_ptua></a>
-<h1 class="title">Post variable : ptua</h1>
-<span class=MstyAuthor> (Category: futaba)</span>	ptは<b>P</b>os<b>T</b>(あるいは<b>P</b>ost <b>T</b>ime) の意味であろう.<br>
+<h1 class="title">Post variable : ptua<span class=MstyAuthor> (Category: futaba)</span></h1>
+	ptは<b>P</b>os<b>T</b>(あるいは<b>P</b>ost <b>T</b>ime) の意味であろう.<br>
 	uaは<b>U</b>ser<b>A</b>gentである.<br>
 	この値は頻繁にその意味が変更される歴史を持つ.<br>
 	最初期はnavigator.userAgentの文字列値をそのまま格納していたため、名前に ua という文字が含まれているのであろう.<br>
@@ -138,12 +142,12 @@
 	尚、CustomBoyエンジンではKnowledge-Baseによりこの値を自動的に生成する.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section pv_ptua end -->
 
 
 <a name=pv_scsz></a>
-<h1 class="title">Post variable : scsz</h1>
-<span class=MstyAuthor> (Category: futaba)</span>	名前の由来は <b>SC</b>reen<b>S</b>i<b>Z</b>e であろう. <br>
+<h1 class="title">Post variable : scsz<span class=MstyAuthor> (Category: futaba)</span></h1>
+	名前の由来は <b>SC</b>reen<b>S</b>i<b>Z</b>e であろう. <br>
 	<br>
 	この値は、あなたの使っているモニタの解像度と色深度の情報を示す.<br>
 	(Javascriptにこれを取得するAPIがあり、レス投稿(ptfk function)時に毎回 /bin/base4qt.jsでこれを取得しているようである)<br>
@@ -158,12 +162,12 @@
 	尚、CustomBoyエンジンではKnowledge-Baseによりこの値を自動的に生成する.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section pv_scsz end -->
 
 
 <a name=pv_pwd></a>
-<h1 class="title">Post variable : pwd</h1>
-<span class=MstyAuthor> (Category: futaba)</span>	名前の由来は <b>P</b>ass<b>W</b>or<b>D</b> である.<br>
+<h1 class="title">Post variable : pwd<span class=MstyAuthor> (Category: futaba)</span></h1>
+	名前の由来は <b>P</b>ass<b>W</b>or<b>D</b> である.<br>
 	<br>
 	この値は、レス投稿時のいわゆる「削除キー」に相当するものである.<br>
 	ユーザが明示的に指定してもよいが、空にしておけば適当な削除キー値が自動的に割り当てられる.<br>
@@ -173,12 +177,12 @@
 	ただしユーザ情報を初期化したい場合は、Cookieのpwdc値を一旦空にしておくとよい.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section pv_pwd end -->
 
 
 <a name=pv_flrv></a>
-<h1 class="title">Post variable : flrv</h1>
-<span class=MstyAuthor> (Category: futaba)</span>	注：現在のふたばちゃんねるではこれは廃止されたようですが、一応ここでの説明は残しておきます.<br>
+<h1 class="title">Post variable : flrv<span class=MstyAuthor> (Category: futaba)</span></h1>
+	注：現在のふたばちゃんねるではこれは廃止されたようですが、一応ここでの説明は残しておきます.<br>
 <br>
 	この値は、Fingerprint値と呼ばれるものが格納される.<br>
 	<br>
@@ -212,12 +216,12 @@
 	尚、CustomBoyエンジンではKnowledge-Baseによりこの値を自動的に生成する.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section pv_flrv end -->
 
 
 <a name=pv_flvv></a>
-<h1 class="title">Post variable : flvv</h1>
-<span class=MstyAuthor> (Category: futaba)</span>	注：現在のふたばちゃんねるではこれは廃止されたようですが、一応ここでの説明は残しておきます.<br>
+<h1 class="title">Post variable : flvv<span class=MstyAuthor> (Category: futaba)</span></h1>
+	注：現在のふたばちゃんねるではこれは廃止されたようですが、一応ここでの説明は残しておきます.<br>
 <br>
 	この値も<a class=MstyElemLink href=#pv_flrv>flrv</a>と同じくFingerprint値と呼ばれるものが格納される.<br>
 	flrvとflvvの違いはその取得する情報の種類だけである.<br>
@@ -226,7 +230,8 @@
 	尚、CustomBoyエンジンではKnowledge-Baseによりこの値を自動的に生成する.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section pv_flvv end -->
+
 
 
 <div class="card">
@@ -250,6 +255,7 @@
 </div>
 
 
+
 <a name=Link></a>
 <h1 class="title"></h1>
 <hr>
@@ -258,6 +264,7 @@
 	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moaiドキュメント(オンライン)</a></li>
 	<li><a class=MstyElemLink href=https://github.com/mr-moai-2016/znk_project>znk_project(github)</a></li>
 </ul><br>
+
 
 
 </div>

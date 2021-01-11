@@ -1,36 +1,38 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html><!-- master template moai -->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta http-equiv="Content-Script-Type" content="text/javascript">
-	<meta http-equiv="Content-Style-Type" content="text/css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="/msty.css" rel="stylesheet" type="text/css">
-	<link href="/bulma.css" rel="stylesheet" type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type"  content="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="/msty.css"  rel="stylesheet" type="text/css" />
+	<link href="/bulma.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
 </head>
 <body>
 <div class="section">
 <div class="container">
 <div class="content">
+
 <a name=TopBar></a>
 <p><b><img src="/imgs/here_landmark.png"> Moai+Easter 上級マニュアル</b></p>
-
-<a class=MstyElemLink href="/">トップページ</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/index.html">初級マニュアル</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">上級マニュアル</a> &nbsp;
-<a class=MstyElemLink href="/announcement.html">アナウンスメント</a> &nbsp;
-<a class=MstyElemLink href="/FAQ.html">FAQ</a> &nbsp;
-<br> <br>
-<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> &nbsp;
-<br> <br>
-<a class=MstyElemLink href="/moai2.0/moai_reference.html">エンジンの詳細</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/moai_filter.html">フィルターの詳細</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/moai_local_proxy.html">ローカルプロキシとしての使い方</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/hacking.html">プラグイン開発のためのヒント</a> &nbsp;
-<br> <br>
+<a class=MstyElemLink href="/">Moai</a> 
+<a class=MstyElemLink href="/moai2.0/index.html">Manual</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
+<a class=MstyElemLink href="/announcement.html">Annoucement</a> 
+<a class=MstyElemLink href="/FAQ.html">FAQ</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> 
+<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/moai_reference.html">エンジンの詳細</a> 
+<a class=MstyElemLink href="/moai2.0/moai_filter.html">フィルターの詳細</a> 
+<a class=MstyElemLink href="/moai2.0/moai_local_proxy.html">ローカルプロキシとしての使い方</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/hacking.html">プラグイン開発のためのヒント</a> 
 
 <a name=AtFirst></a>
 <h1 class="title">はじめに</h1>
@@ -38,6 +40,7 @@
 	この記事ではMoaiのplugin開発について、そのヒントを説明します.<br><br>
 </p>
 <br>
+
 
 
 <a name=Index></a>
@@ -52,6 +55,7 @@
 	<li><b><a class=MstyElemLink href=#plugin>プラグインインターフェース</a></b></li>
 	<li><b><a class=MstyElemLink href=#Znk_in_plugin>プラグインインターフェースで登場するlibZnk</a></b></li>
 </ul><br>
+
 
 
 <a name=lang></a>
@@ -110,7 +114,7 @@ C++を使っていない理由も簡単に述べておきます.<br>
 <b>こんなのやってらんない</b>ので現時点の Moai では不採用としました.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section lang end -->
 
 
 <a name=message></a>
@@ -120,7 +124,7 @@ C++を使っていない理由も簡単に述べておきます.<br>
 Moaiのライセンスは<a class=MstyElemLink href=http://www.kmonos.net/nysl target=_blank>NYSL</a>であり、某ライセンスのようなソースコード開示の義務はありません.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section message end -->
 
 
 <a name=dependency></a>
@@ -171,7 +175,7 @@ Moaiのライセンスは<a class=MstyElemLink href=http://www.kmonos.net/nysl t
 </ul>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section dependency end -->
 
 
 <a name=moai_src></a>
@@ -318,7 +322,7 @@ Moaiのライセンスは<a class=MstyElemLink href=http://www.kmonos.net/nysl t
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section moai_src end -->
 
 
 <a name=libZnk></a>
@@ -332,7 +336,7 @@ Moaiのライセンスは<a class=MstyElemLink href=http://www.kmonos.net/nysl t
 	時間があればそのうち詳細なドキュメントも用意したいところですが、いつになるかは未定です.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section libZnk end -->
 
 
 <a name=plugin></a>
@@ -454,7 +458,7 @@ Moaiプラグインでは以下のダイナミックロード可能なグロー�
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section plugin end -->
 
 
 <a name=Znk_in_plugin></a>
@@ -564,7 +568,8 @@ plugin開発において出現するlibZnk特有の型に関して、以下に�
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section Znk_in_plugin end -->
+
 
 
 <div class="card">
@@ -599,6 +604,7 @@ plugin開発において出現するlibZnk特有の型に関して、以下に�
 </div>
 
 
+
 <a name=Link></a>
 <h1 class="title"></h1>
 <hr>
@@ -607,6 +613,7 @@ plugin開発において出現するlibZnk特有の型に関して、以下に�
 	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moaiドキュメント(オンライン)</a></li>
 	<li><a class=MstyElemLink href=https://github.com/mr-moai-2016/znk_project>znk_project(github)</a></li>
 </ul><br>
+
 
 
 </div>

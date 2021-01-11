@@ -1,31 +1,33 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html><!-- master template moai -->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta http-equiv="Content-Script-Type" content="text/javascript">
-	<meta http-equiv="Content-Style-Type" content="text/css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="/msty.css" rel="stylesheet" type="text/css">
-	<link href="/bulma.css" rel="stylesheet" type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type"  content="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="/msty.css"  rel="stylesheet" type="text/css" />
+	<link href="/bulma.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
 </head>
 <body>
 <div class="section">
 <div class="container">
 <div class="content">
+
 <a name=TopBar></a>
 <p><b><img src="/imgs/here_landmark.png"> Moai+Easter 上級マニュアル</b></p>
-
-<a class=MstyElemLink href="/">トップページ</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/index.html">初級マニュアル</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">上級マニュアル</a> &nbsp;
-<a class=MstyElemLink href="/announcement.html">アナウンスメント</a> &nbsp;
-<a class=MstyElemLink href="/FAQ.html">FAQ</a> &nbsp;
-<br> <br>
-<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> &nbsp;
-<br> <br>
+<a class=MstyElemLink href="/">Moai</a> 
+<a class=MstyElemLink href="/moai2.0/index.html">Manual</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
+<a class=MstyElemLink href="/announcement.html">Annoucement</a> 
+<a class=MstyElemLink href="/FAQ.html">FAQ</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> 
+<a class=MstyElemLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> 
+<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> 
 
 <a name=AtFirst></a>
 <h1 class="title">はじめに</h1>
@@ -36,6 +38,7 @@
 	作成した実行バイナリとそれに付属するその他のファイルは、最終的に所定の位置へコピーする必要がありますが、この過程を<b>インストール</b>と呼びます.<br>
 </p>
 <br>
+
 
 
 <a name=Index></a>
@@ -59,15 +62,17 @@
 </ul><br>
 
 
+
 <a name=WhyWeCompile></a>
 <h1 class="title">なぜソースコードからコンパイルするのか？</h1>
-	Moaiはオープンソースなツールでありソースコードを公開していますが、世にある多くのツールと同様に実行形式(実行バイナリとも呼びます)も提供しています.<br>
-	これらはWindows版とLinux版とAndroid版の実行形式であり、それぞれの環境でただちに実行して使うことができます.<br>
-	勿論、提供されている実行形式をそのまま使っていただいてかまいません.<br>
-	多くの方は普通そうされるかと思います. そのような方についてはこの記事は不要です.<br>
-	ではなぜソースコードからわざわざコンパイルして使う方法をここで解説するのでしょうか？<br>
-	<br>
-	中にはこのバイナリが<b>安全であるという確証</b>がなければ安心して使えないという用心深い方もおられると思います.<br>
+	Moaiはオープンソースです(全ソースコードを余すことなく公開しています). また実行形式(実行バイナリとも呼びます)も提供しています.<br>
+	実行形式にはWindows版とLinux版とAndroid版があり、それぞれの環境でただちに実行して使うことができます.<br>
+	多くの方は普通そうされるかと思います. そのような方についてはこの記事の内容は不要なものです.<br>
+<br>
+	そもそもソースコードからわざわざコンパイルして使う動機にはどんなものがあるでしょうか？<br>
+<br>
+	普段は別に気にせず配布されている実行形式を使っているが、Moaiのソースコードにも興味あるのでコンパイルもしてみたいという技術派な方もおられることでしょう.<br>
+	また中にはこのバイナリが<b>安全であるという確証</b>がなければ安心して使えないという用心深い方もおられると思います.<br>
 	残念ながら「いくらこれは安全です」と作者である我々が言ったところで、ほとんど何の確証にもなりません.<br>
 	おかげさまで我々が今まで開発してきたツールのことを皆様は大分よく知っていて、そのような心配をなさる方も最近は見られなくなってはきたのですが、
 	そうではない方にとってはこれに関する唯一確実な方法はソースコードを見て納得してもらう他ありません. <br>
@@ -75,16 +80,19 @@
 	とはいえ、我々プログラマでさえオープンソースのツールを使うとき、そのコードの隅々まで読んでから使うなど稀なことです.<br>
 	ましてやプログラマでもない方にこれをせよというのは酷というものでしょう.<br>
 	<br>
-	ではどうすればよいでしょうか？ 現時点で我々の出せるその答えとしては以下のようなものです.<br>
+	ではどうすればよいでしょうか？ 現時点で我々の出せる答えとしては以下のようなものです.<br>
 	<ul>
 		<li><b>ソースコードが公開されている事実だけでよしとして、それ以上は気にしないという考え方.</b><br>
 		割とこのような方が多いのかもしれません. この記事の筆者もこのタイプです.<br>
+		ソースコードが公開されている時点で、一応、世界中の人間が全てをチェック可能な状況に置かれているということです.<br>
+		仮に大きな問題があった場合、誰か（詳しい人）がソースコードのどの箇所が問題かをピンポイントで指摘することも一応期待でき、<br>
+		逆にそのような報告が挙がっていない場合、一応これを安全性の担保とみなすこともできます. <br>
 		</li>
 		<br>
 		<li><b>ソースコードの内容を一応検査してから使う.</b><br>
-		あなたにプログラミングに詳しい知り合いがいるなら、このソースコードをざっくりとチェックしてもらう.<br>
-		そんな知り合いはいない方は、プログラミングを扱う掲示板などでこのツールのソースコードのありか(GithubのURL)を記す.<br>
-		そしてこのツールのソースコードについての意見を聞き、あなたなりの納得を得る.<br>
+		あなたにプログラミングに詳しい知り合いがいるなら、このソースコードをざっくりとチェックしてもらうことも可能もしれません.<br>
+		そんな知り合いはいない方は、プログラミングを扱う掲示板などでこのツールのソースコードのありか(GithubのURL)を記すと何か反応があるかもしれません.<br>
+		そしてこのツールのソースコードについての意見を聞き、あなたなりの納得を得ることができるかもしれません.<br>
 		</li>
 		<br>
 		<li><b>付属するソースコードを自らがコンパイルしてそれを使用する.</b><br>
@@ -97,10 +105,9 @@
 	全くの初心者でもわかるようこれでもかというくらい丁寧にその手順を書いたつもりです.<br>
 	機械的な作業なので言うほど難しくはない…と我々は思うのですが….<br>
 	<br>
-	普段は別に気にせず配布されている実行形式を使っているが、Moaiのソースコードにも興味あるのでコンパイルもしてみたいという技術派な方にとっても有用な内容となっています.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section WhyWeCompile end -->
 
 
 <a name=get_source_code></a>
@@ -113,7 +120,7 @@
 	これはお使いのPCのどのディレクトリへダウンロードして展開してもらっても構いません.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section get_source_code end -->
 
 
 <a name=introduction></a>
@@ -173,7 +180,7 @@
 			<div class=box>
 				VCの入手とインストール方法についてはここでは解説しません. <br>
 				多分、こちらを選ばれる方は、ある程度わかっている方だと思うので.<br>
-				Microsoftよりフリーで提供されているVCとして Visual Studio Express がありますが、通常はそれで十分です.<br>
+				Microsoftよりフリーで提供されているVCは色々ありますが、通常は最もローエンドなものでも上記の必須コマンドはすべて含まれています.<br>
 			</div>
 			</li>
 <br>
@@ -205,7 +212,7 @@
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section introduction end -->
 
 
 <a name=get_mingw></a>
@@ -376,7 +383,7 @@
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section get_mingw end -->
 
 
 <a name=compile_by_mingw></a>
@@ -413,7 +420,7 @@
 <br>
 <article class="message is-dark"><br>
 	<div class="message-header">
-		Moaiのコンパイルおよびインストール<br>
+		コンパイルおよびインストール<br>
 	</div>
 	<div class="message-body">
 		まず環境変数<b>ZNK_MINGW32_DIR</b>にMinGW32がインストールされたトップディレクトリを正しく設定します.<br>
@@ -458,165 +465,167 @@
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section compile_by_mingw end -->
 
 
 <a name=compile_by_vc></a>
 <h1 class="title">Windows版をコンパイルする(VCを使用)</h1>
-以下ではVC(Visual C++)でのコンパイル方法について説明します.<br>
-VCは既にお使いのPCにインストールされているものと仮定して話を進めます.<br>
-<br>
-Moaiのコンパイルはすべてコマンドラインベースで行われます.<br>
-IDEを起動する必要はありません.<br>
-<br>
 <article class="message is-dark"><br>
-	<div class="message-header">
-		VCでコマンドラインよりコンパイルする場合に関する基礎知識<br>
-	</div>
-	<div class="message-body">
-<br>
-		VCの場合、内部的にはnmakeコマンドがMakefile_vc.makを実行することでビルドが行われます.<br>
-		その際、いくつかの必要な環境変数をあらかじめ設定しておく必要があります.<br>
-		通常、これらを手動で設定する必要はなく、替わりに変数設定用バッチファイルを実行させます.<br>
+<div class="message-header">
+イントロダクション</div><div class="message-body">
+	以下ではVC(Visual C++)でのコンパイル方法について説明します.<br>
+	VCは既にお使いのPCにインストールされているものと仮定して話を進めます.<br>
 	<br>
-		この変数設定用バッチファイルはVCのインストールディレクトリ配下に存在するのですが、厄介なことにVCのバージョンやマシン環境によってそのありかやファイル名が異なるのです.<br>
-		例えばVC11.0のx86環境向けなら、これはvsvars32.bat という名前になっており、<br>
-<br>
-		<div class=MstyCode>
-			C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\Tools<br>
-		</div>
-<br>
-		などといったフォルダ内に存在します. あるいは<br>
-<br>
-		<div class=MstyCode>
-			C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin<br>
-		</div>
-<br>
-		などといったフォルダ内に同様の(しかし名前は異なる)ファイルが存在することもあります.<br>
-		またx64環境(VCではamd64やx86_amd64などと表記されます)向けの場合、詳細は省略しますが状況はさらに複雑です.<br>
-	</div>
-</article><br>
-<br>
-<br>
+	Moaiのコンパイルはすべてコマンドラインベースで行われます.<br>
+	IDEを起動する必要はありません( make_world.bat ファイルをダブルクリックして実行するだけなのでむしろIDEより楽です. )<br>
+</div></article><br>
 <article class="message is-dark"><br>
-	<div class="message-header">
-		必要なコマンド群<br>
-	</div>
-	<div class="message-body">
-		<a class=MstyElemLink href=#introduction>はじめてのコンパイル</a>では、C/C++での開発において最低限必要となる基本コマンドについて述べました.<br>
-		では、VC環境におけるこれらのコマンドはそれぞれ何に対応するかを以下に列挙しましょう.<br>
-		<ul>
-			<li><b>Cコンパイラ</b><br>
-			cl<br>
-			</li>
-			<li><b>C++コンパイラ</b><br>
-			cl<br>
-			</li>
-			<li><b>リンカ</b><br>
-			link<br>
-			</li>
-			<li><b>ライブラリアン</b><br>
-			lib<br>
-			</li>
-			<li><b>ビルドスクリプト</b><br>
-			nmake<br>
-			</li>
-		</ul>
-		これらのコマンドはVCをインストールすれば付属しています.<br>
-		さらに上述した環境変数設定用バッチファイルを実行させれば、これらのコマンドの存在するディレクトリへのPATHが設定されます.<br>
-		これでコマンドラインからこれらのコマンドが普通に使えるようになります.<br>
-	</div>
-</article><br>
-<br>
-<br>
+<div class="message-header">
+必要なコマンド群</div><div class="message-body">
+	<a class=MstyElemLink href=#introduction>はじめてのコンパイル</a>では、C/C++での開発において最低限必要となる基本コマンドについて述べました.<br>
+	では、VC環境におけるこれらのコマンドはそれぞれ何に対応するかを以下に列挙しましょう.<br>
+	<ul>
+		<li><b>Cコンパイラ</b><br>
+		cl<br>
+		</li>
+		<li><b>C++コンパイラ</b><br>
+		cl<br>
+		</li>
+		<li><b>リンカ</b><br>
+		link<br>
+		</li>
+		<li><b>ライブラリアン</b><br>
+		lib<br>
+		</li>
+		<li><b>ビルドスクリプト</b><br>
+		nmake<br>
+		</li>
+	</ul>
+	これらのコマンドはどのエディションのVCをインストールしても確実に付属しています.<br>
+</div></article><br>
 <article class="message is-dark"><br>
-	<div class="message-header">
-		Moaiのコンパイルおよびインストール<br>
-	</div>
-	<div class="message-body">
-		Moaiでは、通常は以下で述べる手順に従うことによりコンパイルを簡単に行うことが可能です.<br>
-		特にVC6.0以上VC14.0以下のx86環境向けならこれはうまく機能すると思います.<br>
+<div class="message-header">
+コンパイルおよびインストール</div><div class="message-body">
+	通常は以下で述べる手順に従うことによりコンパイルを簡単に行うことが可能です.<br>
+	特にVC6.0以上VC14.0以下のx86環境向けならこれはうまく機能すると思います.<br>
+<br>
+	しかし上で挙げたVCのバージョン以外では、この手順は失敗するかもしれません.<br>
+	その場合は、次の「トラブルシューティング」の項目をお試しください.<br>
 	<br>
-		しかし上で挙げたVCのバージョン以外では、この手順は失敗するかもしれません.<br>
-		その場合は、以下のNoteで述べます特別な環境変数をまずは明示的に指定した上で再度この手順をお試しください.<br>
-		<br>
-		では手順の説明に入ります.<br>
-		まずsrcフォルダの直下にある<b>make_world.bat</b>を実行します.<br>
-		<br>
-		<div class=MstyImgBox>
-			<img src=/imgs/auto_trigger_run_vc.png /><br>
-		</div>
-		<br>
-		古き良き時代を彷彿とさせるコマンドラインベースでのメニュー選択UIが表示されますので次の手順を行ってください.<br>
-		<ol>
-			<li>「3. switch debug-mode」を何回か選んでDEBUG_MODEを「optimize」にします.<br>
-			</li>
-			<li>「4. switch mkfid」を何回か選んでMKF_IDを「vc」にします.<br>
-			</li>
-			<li>「5. switch machine」を何回か選んでMACHINEを「x86」あるいは「x64」にします.<br>
-			</li>
-			<li>「1. make install」を選びます.<br>
-			</li>
-		</ol>
-		<br>
-		<div class=box>
-			ここで「選ぶ」というのは、一番先頭にある数字のキーを押せばよいです.<br>
-			またはその項目までカーソルキーで移動してEnterキーを押してもよいです.<br>
-			メニュー項目 3, 4, 5 については「選ぶ」毎にその値が循環的に変化していきます.<br>
-		</div>
-		VCが適切にインストールされているならば、これですべてのコンパイルが自動で行われます.<br>
-		それぞれのプロジェクトのフォルダ内にout_dirというフォルダが自動的に生成され、<br>
-		その中に目的の実行バイナリが生成されるはずです.<br>
-		<br>
-		<div class=box>
-			尚、上記メニュー項目 5 のMACHINEで「x64」を選んだ場合は64bit版バイナリが生成されます.<br>
-			ただし VCのバージョンによっては64bit用のコンパイルが可能なように色々と設定しておく必要があるかもしれません.<br>
-			こちらは初心者の方には若干敷居が高いです.<br>
-			32bit版バイナリでも64bit Windows上で動きますから、特に拘りのない方は32bit版のバイナリで十分です.<br>
-		</div>
-		さらに、srcディレクトリの一つ上の階層にmoai-v2.0-win32ディレクトリが生成され、<br>
-		コンパイルされた実行バイナリや設定ファイルなどの必要なものすべてが、そのディレクトリへとインストールされます.<br>
-		(なんらかの理由でこのインストール処理だけを省略したい、つまり純粋にコンパイルだけを行いたい場合は、<br>
-		「1. make install」の替わりに「0. make」を選んでください)<br>
-		<br>
-		以上でWindows版のMoaiのコンパイルとインストールはすべて完了です.<br>
-		お疲れ様でした.<br>
+	では手順の説明に入ります.<br>
+	まずsrcフォルダの直下にある<b>make_world.bat</b>を実行します.<br>
+	<br>
+	<div class=MstyImgBox>
+		<img src=/imgs/auto_trigger_run_vc.png /><br>
 	</div>
-</article><br>
-<br>
+	<br>
+	古き良き時代を彷彿とさせるコマンドラインベースでのメニュー選択UIが表示されますので次の手順を行ってください.<br>
+	<ol>
+		<li>「3. switch debug-mode」を何回か選んでDEBUG_MODEを「optimize」にします.<br>
+		</li>
+		<li>「4. switch mkfid」を何回か選んでMKF_IDを「vc」にします.<br>
+		</li>
+		<li>「5. switch machine」を何回か選んでMACHINEを「x86」あるいは「x64」にします.<br>
+		</li>
+		<li>「1. make install」を選びます.<br>
+		</li>
+	</ol>
+	<br>
+	<div class=box>
+		ここで「選ぶ」というのは、一番先頭にある数字のキーを押せばよいです.<br>
+		またはその項目までカーソルキーで移動してEnterキーを押してもよいです.<br>
+		メニュー項目 3, 4, 5 については「選ぶ」毎にその値が循環的に変化していきます.<br>
+	</div>
+	VCが適切にインストールされているならば、これですべてのコンパイルが自動で行われます.<br>
+	それぞれのプロジェクトのフォルダ内にout_dirというフォルダが自動的に生成され、<br>
+	その中に目的の実行バイナリが生成されるはずです.<br>
+	<br>
+	<div class=box>
+		尚、上記メニュー項目 5 のMACHINEで「x64」を選んだ場合は64bit版バイナリが生成されます.<br>
+		ただし VCのバージョンによっては64bit用のコンパイルが可能なように色々と設定しておく必要があるかもしれません.<br>
+		こちらは初心者の方には若干敷居が高いです.<br>
+		32bit版バイナリでも64bit Windows上で動きますから、特に拘りのない方は32bit版のバイナリで十分です.<br>
+	</div>
+	さらに、srcディレクトリの一つ上の階層にmoai-v2.0-win32ディレクトリが生成され、<br>
+	コンパイルされた実行バイナリや設定ファイルなどの必要なものすべてが、そのディレクトリへとインストールされます.<br>
+	(なんらかの理由でこのインストール処理だけを省略したい、つまり純粋にコンパイルだけを行いたい場合は、<br>
+	「1. make install」の替わりに「0. make」を選んでください)<br>
+	<br>
+	以上でWindows版のMoaiのコンパイルとインストールはすべて完了です.<br>
+	お疲れ様でした.<br>
+</div></article><br>
 <article class="message is-dark"><br>
-	<div class="message-header">
-		上記の手順で失敗する場合のトラブルシューティング<br>
+<div class="message-header">
+トラブルシューティング</div><div class="message-body">
+	Moaiのビルドシステムは、あなたのPCにインストールされているVCを自動的に認識します.<br>
+	内部的にはこの自動認識は src\bat_utils\setenv_vc.bat というbatファイルにおいて行われます.<br>
+	上記の手順で失敗する場合、この自動認識が失敗していると考えられます.<br>
+<br>
+	VCがインストールされている場合、VS{Ver}COMNTOOLSという形式の名前の環境変数が設定されているはずです.<br>
+	( {Ver}にはVCの内部バージョン番号が入ります. )<br>
+	例えばVisual Studio 2012の場合ですと、( 2012ではVCの内部バージョンは11.0になりますので )環境変数名は VS110COMNTOOLS です.<br>
+	そしてその値は<br>
+<br>
+	<div class=MstyCode>
+		C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\Tools<br>
 	</div>
-	<div class="message-body">
-		Moaiのビルドシステムは、あなたのPCにインストールされているVCを自動的に認識します.<br>
-		内部的にはこの自動認識は src\bat_utils\setenv_vc.bat というバッチファイルにおいて行われます.<br>
-		上記の手順で失敗する場合、この自動認識が失敗していると考えられます.<br>
 <br>
-		VCがインストールされている場合、VS??COMNTOOLS (??にはVCの内部バージョン番号が入る)という形式の名前の環境変数が設定されているはずです.<br>
-		これは例えばVisual Studio 2012の場合ですと、( 2012ではVCの内部バージョンは11.0になりますので )環境変数名は VS110COMNTOOLS であり、その値は<br>
+	などとなっています. これはVCのインストールディレクトリのパスを意味しており、src\bat_utils\setenv_vc.bat はこの値を参照します.<br>
+	この値により、以下に述べます<b>VC付属batファイル</b>の位置も明らかとなります.<br>
+</div></article><br>
+<article class="message is-dark"><br>
+<div class="message-header">
+VC付属batファイルとは？</div><div class="message-body">
+	VCの場合、内部的にはnmakeコマンドがMakefile_vc.makを実行することでビルドが行われます.<br>
+	その際、いくつかの必要な環境変数をあらかじめ設定しておく必要があります.<br>
+	通常、これらを手動で設定する必要はなく、替わりにVCに付属している(はずの)変数設定用batファイルを実行させます.<br>
+	以下の説明では便宜上、このbatファイルを<b>VC付属batファイル</b>と呼びます(一般的な呼称ではありません).<br>
 <br>
-		<div class=MstyCode>
-			C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\Tools<br>
-		</div>
+	VC付属batファイルはVCのインストールディレクトリ配下に存在するのですが、厄介なことにVCのバージョンやマシン環境によってそのありかやファイル名が異なるのです.<br>
+	例えばVC11.0のx86環境向けなら、これはvsvars32.bat という名前になっており、<br>
 <br>
-		などとなっています. これによりVCのインストールフォルダのパスが明らかとなるわけです.<br>
-		また、上記のNote「VCでのコンパイルに関する一般知識」でも述べましたが、このフォルダにはVCにおける変数設定用バッチファイルも存在します.<br>
+	<div class=MstyCode>
+		C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\Tools<br>
 	</div>
-</article><br>
 <br>
-では次にMoaiのビルドシステムで用意されている環境変数について説明します.<br>
-未知のバージョンのVCなどで上記の自動認識に失敗する場合でも、これらの環境変数をうまく指定することにより、Moaiのビルドシステムでのコンパイルが可能となります.<br>
+	などといったディレクトリ内に存在します. あるいは<br>
+<br>
+	<div class=MstyCode>
+		C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin<br>
+	</div>
+<br>
+	などといったディレクトリ内に同様の(しかし名前は異なる)ファイルが存在することもあります.<br>
+	またx64環境(VCではamd64やx86_amd64などと表記されます)向けの場合、詳細は省略しますが状況はさらに複雑です.<br>
+<br>
+	make_world.bat ビルドシステムで用意されている環境変数にうまく値を指定することにより、このディレクトリを認識させることができます.<br>
+	これにより未知のバージョンのVCでもコンパイルが可能となります.<br>
+	次の項目ではその環境変数について説明します.<br>
+</div></article><br>
 <br>
 <article class="message is-dark"><br>
 	<div class="message-header">
 		環境変数 ZNK_VSCOMNTOOLS<br>
 	</div>
 	<div class="message-body">
-		この環境変数が明示的に指定されている場合、src\bat_utils\setenv_vc.batは上記で述べた環境変数 VS??COMNTOOLS を参照する替わりにこのZNK_VSCOMNTOOLSの指定値を使います.<br>
+		この環境変数は、上記で述べた環境変数 VS{Ver}COMNTOOLS の代替です.<br>
+		この環境変数が明示的に指定されている場合、make_world.bat は替わりにこれを参照します.<br>
 <br>
-		src\bat_utils\setenv_vc.batは、この環境変数値が示すフォルダの配下に、さらに以下のbatファイル群が存在するかどうかを調査します.<br>
-		もしも存在するならそれを採用して実行するという流れになります.<br>
+		<div class=box>
+			例えばVC11の場合ですと<br>
+<br>
+			<div class=MstyCode>
+				C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\Tools<br>
+			</div>
+<br>
+			といった値に相当します( そもそもVC11の場合はこの値を明示的に指定する必要はないとは思いますが. )<br>
+		</div>
+<br>
+		まずお使いのVCバージョンにおけるVC付属batファイルが存在する位置を<b>あなたが</b>調べます.<br>
+		次に ZNK_VSCOMNTOOLS には、そのVC付属batファイルのある<b>ディレクトリ</b>のフルパスを指定します.<br>
+		最後に make_world.bat をダブルクリックして実行して下さい.<br>
+<br>
+		make_world.bat の内部では、ZNK_VSCOMNTOOLS の示すディレクトリの配下に、さらに以下のbatファイル群が存在するかどうかを調査しています.<br>
+		もしも存在するならそれをvc付属batファイルとみなして実行するという流れになります.<br>
 		<ul>
 			<li>vsvars32.bat</li>
 			<li>vsvars64.bat</li>
@@ -626,12 +635,15 @@ IDEを起動する必要はありません.<br>
 			<li>..\..\VC\bin\x86_amd64\vcvarsx86_amd64.bat</li>
 			<li>VsDevCmd.bat</li>
 		</ul>
-		よってお使いのVCにおいて上記のbatファイルの存在するフォルダの位置がわかれば、ZNK_VSCOMNTOOLSにそのフォルダのフルパスを指定すればよいことになります.<br>
 <br>
 		一つ注意点があります.<br>
-		例えば「Program Files」のように途中で半角スペースが入るフォルダ名の場合でもZNK_VSCOMNTOOLSで指定する文字列はダブルクォートで括らないようにして設定してください.<br>
+		例えば「Program Files」のように途中で半角スペースが入るディレクトリ名の場合でもZNK_VSCOMNTOOLSで指定する文字列はダブルクォートで括らないようにして設定してください.<br>
 		その理由は src\bat_utils\setenv_vc.bat の内部でZNK_VSCOMNTOOLSをダブルクォートで括って扱っているためです.<br>
-		このときバッチファイルの文法に起因して二重にダブルクォートで括ってしまう状況が発生してしまい、これによりうまく機能しません.<br>
+		このときbatファイルの文法に起因して二重にダブルクォートで括ってしまう状況が発生してしまい、これによりうまく機能しません.<br>
+<br>
+		この環境変数指定でもうまくいかない場合、あなたの使っているバージョンのVCでは、VC付属batファイルの名前が上記でリストされたもの以外である可能性があります.<br>
+		あるいは、何らかの特別な引数を付けて実行しなければならないのかもしれません.<br>
+		次に述べる ZNK_VC_SETENV32_CMD と ZNK_VC_SETENV32_ARGS、または ZNK_VC_SETENV64_CMD と ZNK_VC_SETENV64_ARGS では、さらに踏み込んでそこまで明示的に指定します.<br>
 	</div>
 </article><br>
 <br>
@@ -640,20 +652,28 @@ IDEを起動する必要はありません.<br>
 		環境変数 ZNK_VC_SETENV32_CMD と ZNK_VC_SETENV32_ARGS<br>
 	</div>
 	<div class="message-body">
-		環境変数ZNK_VC_SETENV32_CMDが明示的に指定されている場合、src\bat_utils\setenv_vc.batはその指定値をx86向け変数設定用バッチファイルのありか(フルパス)とみなします.<br>
-		例えばVC11の場合ですと<br>
+		環境変数ZNK_VC_SETENV32_CMDは、<b>x86</b>向けのVC付属batファイル<b>そのもの</b>の位置を(フルパスで)指定します.<br>
+		この環境変数が明示的に指定されている場合、make_world.batは、この値を優先して使います.<br>
+		( ZNK_VSCOMNTOOLS も指定している場合は、ZNK_VSCOMNTOOLSの値よりこの環境変数の値の方が優先されます. )<br>
 <br>
-		<div class=MstyCode>
-			C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\Tools\vsvars32.bat<br>
+		<div class=box>
+			例えばVC11の場合ですとZNK_VC_SETENV32_CMDは<br>
+<br>
+			<div class=MstyCode>
+				C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\Tools\vsvars32.bat<br>
+			</div>
+<br>
+			といった値に相当します( そもそもVC11の場合はこの値を明示的に指定する必要はないとは思いますが. )<br>
 		</div>
 <br>
-		などといった値が考えられます(VC11の場合はこの値を明示的に指定する必要はないとは思いますが).<br>
-		さらにこのバッチファイルになんらかのオプション引数を与えたいとします.<br>
+		さらにこのbatファイルになんらかのオプション引数を与えたいとします.<br>
 		その場合は、環境変数 ZNK_VC_SETENV32_ARGSにそのオプション引数を指定します.<br>
+<br>
+		make_world.bat の内部的には次のような実行が行われます.<br>
+		<div class=box><div class=MstyCode>cd make_world<br>%ZNK_VC_SETENV32_CMD%  %ZNK_VC_SETENV32_ARGS%<br>nmake -f Makefile_vc.mak install<br></div></div>
 <br>
 		ZNK_VSCOMNTOOLSのときと同様の注意点があります.<br>
 		途中で半角スペースが入る場合などであっても、指定する文字列はダブルクォートで括らないようにしてください.<br>
-		尚、この環境変数とZNK_VSCOMNTOOLSを両方設定した場合は、ZNK_VSCOMNTOOLSの値よりこの環境変数の値の方が優先されます.<br>
 	</div>
 </article><br>
 <br>
@@ -662,26 +682,58 @@ IDEを起動する必要はありません.<br>
 		環境変数 ZNK_VC_SETENV64_CMD と ZNK_VC_SETENV64_ARGS<br>
 	</div>
 	<div class="message-body">
-		環境変数ZNK_VC_SETENV64_CMDが明示的に指定されている場合、src\bat_utils\setenv_vc.batはその指定値をx64向け変数設定用バッチファイルのありか(フルパス)とみなします.<br>
-		例えばVC11の場合ですと<br>
+		環境変数ZNK_VC_SETENV64_CMDは、<b>x64</b>向けのVC付属batファイル<b>そのもの</b>の位置を(フルパスで)指定します.<br>
+		この環境変数が明示的に指定されている場合、make_world.batは、この値を優先して使います.<br>
+		( ZNK_VSCOMNTOOLS も指定している場合は、ZNK_VSCOMNTOOLSの値よりこの環境変数の値の方が優先されます. )<br>
 <br>
-		<div class=MstyCode>
-			C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\vsvarsx86_amd64.bat<br>
+		<div class=box>
+			例えばVC11の場合ですとZNK_VC_SETENV64_CMDは<br>
+<br>
+			<div class=MstyCode>
+				C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\vsvarsx86_amd64.bat<br>
+			</div>
+<br>
+			といった値に相当します( そもそもVC11の場合はこの値を明示的に指定する必要はないとは思いますが. )<br>
+<br>
+			尚、この例では最初の方が「Program Files (x86)」となっていて、一瞬変な感じがしますが、<br>
+			これはコンパイラ本体(cl.exeなど)はx86のexeとなっているということです.<br>
+			しかし一方、ユーザが作るx64版exe用のx64版ライブラリはこの内部にもちゃんと含まれていて、この場合でも正常にx64版exeのビルドは可能です.<br>
 		</div>
 <br>
-		などといった値が考えられます(VC11の場合はこの値を明示的に指定する必要はないとは思いますが).<br>
-		さらにこのバッチファイルになんらかのオプション引数を与えたいとします.<br>
+		さらにこのbatファイルになんらかのオプション引数を与えたいとします.<br>
 		その場合は、環境変数 ZNK_VC_SETENV64_ARGSにそのオプション引数を指定します.<br>
+<br>
+		make_world.bat の内部的には次のような実行が行われます.<br>
+		<div class=box><div class=MstyCode>cd make_world<br>%ZNK_VC_SETENV64_CMD%  %ZNK_VC_SETENV64_ARGS%<br>nmake -f Makefile_vc.mak install<br></div></div>
 <br>
 		ZNK_VSCOMNTOOLSのときと同様の注意点があります.<br>
 		途中で半角スペースが入る場合などであっても、指定する文字列はダブルクォートで括らないようにしてください.<br>
-		尚、この環境変数とZNK_VSCOMNTOOLSを両方設定した場合は、ZNK_VSCOMNTOOLSの値より<br>
-		この環境変数の値の方が優先されます.<br>
 	</div>
 </article><br>
+<br>
+<article class="message is-dark"><br>
+<div class="message-header">
+INCLUDEとLIBとPATHの指定(最終手段)</div><div class="message-body">
+	これは本当に最終手段です.<br>
+	<s>諦めてMinGWを使用して下さ</s><br>
+	コマンドプロンプトを開き、make_world.batに頼らずすべて自力で必要な環境変数の設定を行った上、nmakeを手動で実行します.<br>
+<br>
+	VCは究極的には環境変数INCLUDEに指定されたパスでヘッダファイルの場所を、また環境変数LIBに指定されたパスでライブラリファイルの場所を検索します.<br>
+	( ここはさすがに今後のいかなるバージョンのVCでも不変なラインかと思われます. )<br>
+	我々のソースコードではすべてを１から提供しますので必要なのは唯一VCの標準ライブラリのみです.<br>
+	これらのインクルードパスとライブラリパスを設定します. (これらの設定方法はググれば出てきます).<br>
+<br>
+	またコマンドプロンプトは一般に、環境変数PATHに指定されたパスで cl.exe, nmake.exe などの場所を検索します<br>
+	これらの位置を 環境変数PATHに追加しておく必要があります.<br>
+	( VCのバージョンによっては、cl.exe コマンドが依存するDLLなどが存在するパスも追加しておく必要があるかもしれません.<br>
+	この辺りが非常に厄介です. ここで明確に説明できない理由も、未知のVCのバージョンではその設定内容が断定できないためです. )<br>
+<br>
+	コマンドプロンプト上で上記をすべて自力で適切に設定しなければなりません.<br>
+	そして make_worldディレクトリへ入り、nmake -f Makefile_vc.mak install を実行します.<br>
+</div></article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section compile_by_vc end -->
 
 
 <a name=compile_on_cygwin></a>
@@ -792,7 +844,7 @@ IDEを起動する必要はありません.<br>
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section compile_on_cygwin end -->
 
 
 <a name=compile_on_msys></a>
@@ -1010,7 +1062,7 @@ IDEを起動する必要はありません.<br>
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section compile_on_msys end -->
 
 
 <a name=compile_on_others_windows></a>
@@ -1163,7 +1215,7 @@ IDEを起動する必要はありません.<br>
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section compile_on_others_windows end -->
 
 
 <a name=compile_on_linux></a>
@@ -1256,7 +1308,7 @@ IDEを起動する必要はありません.<br>
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section compile_on_linux end -->
 
 
 <a name=compile_for_android_term></a>
@@ -1474,7 +1526,7 @@ moai実行バイナリを直接起動する形になります.<br>
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section compile_for_android_term end -->
 
 
 <a name=compile_for_apk></a>
@@ -1487,7 +1539,7 @@ moai実行バイナリを直接起動する形になります.<br>
 	</div>
 	<div class="message-body">
 		一つ前のセクションでは、ターミナルエミュレータ上で動作するandroid版実行バイナリのコンパイル方法について述べました.<br>
-		これはAndroidを非常に(その正体であり核である)Linux的に見たやり方であり、それゆえに複雑な手順が必要となったわけです.<br>
+		これはAndroidを非常に(その正体であり核である)Linux的に見たやり方であり、それゆえに単にMoaiを起動するだけでも複雑な手順が必要となります.<br>
 	<br>
 		一方、通常Androidのアプリというものは apk ファイルという形をとって配布されインストールされます.<br>
 		apkファイルであれば、これをタップするだけでインストールが行えますし、インストールしたアプリはメニューやアイコンから起動することができます.<br>
@@ -1504,8 +1556,7 @@ moai実行バイナリを直接起動する形になります.<br>
 		ここではAndroid Studioは使用せず、最小限の構成で開発を進めます.<br>
 		必要なのはjre、gradle、android-sdk、android-ndkとなります.<br>
 <br>
-		必要最小限こと我々のモットーです.<br>
-		これこそが処理の透明性です.<br>
+		必要最小限こそ我々のモットーであり、処理の透明性を高めます.<br>
 		ただしこれはかなり茨の道であることも付け加えておきます.<br>
 	</div>
 </article><br>
@@ -1690,7 +1741,7 @@ moai実行バイナリを直接起動する形になります.<br>
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section compile_for_apk end -->
 
 
 <a name=about_libressl></a>
@@ -1719,7 +1770,7 @@ moai実行バイナリを直接起動する形になります.<br>
 	</ul>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section about_libressl end -->
 
 
 <a name=about_macos></a>
@@ -1731,7 +1782,8 @@ moai実行バイナリを直接起動する形になります.<br>
 	その他リンカldのオプションもおそらくMacOS独自のものを指定しなければならないでしょう.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section about_macos end -->
+
 
 
 <div class="card">
@@ -1766,6 +1818,7 @@ moai実行バイナリを直接起動する形になります.<br>
 </div>
 
 
+
 <a name=Link></a>
 <h1 class="title"></h1>
 <hr>
@@ -1774,6 +1827,7 @@ moai実行バイナリを直接起動する形になります.<br>
 	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moaiドキュメント(オンライン)</a></li>
 	<li><a class=MstyElemLink href=https://github.com/mr-moai-2016/znk_project>znk_project(github)</a></li>
 </ul><br>
+
 
 
 </div>
