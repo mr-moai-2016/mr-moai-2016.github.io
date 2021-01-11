@@ -1,25 +1,27 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html><!-- master template moai -->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta http-equiv="Content-Script-Type" content="text/javascript">
-	<meta http-equiv="Content-Style-Type" content="text/css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="/msty.css" rel="stylesheet" type="text/css">
-	<link href="/bulma.css" rel="stylesheet" type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type"  content="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="/msty.css"  rel="stylesheet" type="text/css" />
+	<link href="/bulma.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
 </head>
 <body>
 <div class="section">
 <div class="container">
 <div class="content">
+
 <a name=TopBar></a>
 <p><b><img src="/imgs/here_landmark.png"> Moai+Easter アナウンスメント</b></p>
-
-<a class=MstyElemLink href="/">トップページ</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/index.html">初級マニュアル</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/index_expert.html">上級マニュアル</a> &nbsp;
-<a class=MstyNowSelectedLink href="/announcement.html">アナウンスメント</a> &nbsp;
-<a class=MstyElemLink href="/FAQ.html">FAQ</a> &nbsp;
-<br> <br>
+<a class=MstyElemLink href="/">Moai</a> 
+<a class=MstyElemLink href="/moai2.0/index.html">Manual</a> 
+<a class=MstyElemLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
+<a class=MstyNowSelectedLink href="/announcement.html">Annoucement</a> 
+<a class=MstyElemLink href="/FAQ.html">FAQ</a> 
 
 <a name=AtFirst></a>
 <h1 class="title">はじめに</h1>
@@ -38,6 +40,7 @@
 <br>
 
 
+
 <a name=Index></a>
 <h1 class="title">目次</h1>
 <br>
@@ -52,114 +55,110 @@
 </ul><br>
 
 
+
 <a name=NextDevelopment></a>
 <h1 class="title">Moai 次期バージョンの開発状況</h1>
 次期バージョンMoai Ver2.3( コードネーム Raraku )のリリースに向け、現在開発中です.<br>
 次回のバージョンでは以下の新機能の導入や修正等を予定しています.<br>
 <br>
 <article class="message is-dark">
-	<div class="message-header">
-		プログラミング言語Raraku<br>
-	</div>
-	<div class="message-body">
-		Moai独自のプログラミング言語Raraku(Ver1.0)を搭載します.<br>
-		これは以下のようなものになる予定です.<br>
-		<ul>
-			<li>ソースコード(拡張子rrkのファイル)はRaraku コンパイラにより Raraku バイトコード(拡張子rrx)にコンパイルされる.</li>
-			<li>Raraku バイトコード(rrxファイル)は Raraku VM というスタック型仮想マシン上で動作する.</li>
-			<li>Moai CGIとして使う場合、rrxファイルをCGIとして実行する形となる.</li>
-			<li>静的型付け言語である.</li>
-			<li>C言語等で書かれた動的ライブラリ(DLLやSOファイル)の関数を呼び出せる.</li>
-		</ul>
-		この言語はこれ自体で単独のアプリなどの開発と実行が行えますが、<br>
-		Moaiシステムの観点からはMoai CGIの開発などをこれを用いて行えるようにすることが当面の主な狙いとなります.<br>
-	</div>
-</article>
+<div class="message-header">
+プログラミング言語Raraku</div><div class="message-body">
+	Moai独自のプログラミング言語Raraku(Ver1.0)を搭載します.<br>
+	これは以下のようなものになる予定です.<br>
+	<ul>
+		<li>マルチプラットフォームな静的型付け言語である.</li>
+		<li>ソースコード(拡張子rrksのファイル)はRaraku コンパイラにより Raraku オブジェクトファイル(拡張子rrko)にコンパイルされる.</li>
+		<li>複数のRarakuのコードを一つのライブラリや実行ファイル(rrkx)へリンクできる.</li>
+		<li>Raraku rrkxファイルは Raraku VM というスタック型仮想マシン上で動作する.</li>
+		<li>Web上からRarakuの開発が行えるUIを提供(Raraku Studio).</li>
+		<li>Raraku BIRDという仕組みを用いてHTML内にRaraku言語を埋め込み実行させることで、高度に柔軟なドキュメントを自動生成したり(Rongorongo)、<br>
+			CGIにおいて動的な処理ができる(Dynamic Raraku BIRD).<br>
+		</li>
+		<li>Moai CGIとして使う場合、Raraku BIRDを用いるか、rrkxファイルをCGIとして実行する形となる.</li>
+		<li>C言語等で書かれた動的ライブラリ(DLLやSOファイル)によって機能を拡張できる(Raraku Extens).<br>
+			これにより、RanoCGI(Moaiで使っているCGIのライブラリ)やSDL、OpenGL、Windows APIなどの関数をRaraku上から実行させることもできる.<br>
+		</li>
+	</ul>
+	この言語はこれ自体で単独のアプリなどの開発と実行をも行うことができますが、
+	Moaiシステムの観点からはMoai CGIの開発などをこれを用いて行えるようにすることが当面の主な狙いとなります.<br>
+	また、MoaiのBBS用pluginやフィルタ処理はVer2.3ではRarakuによって記述され直されています. <br>
+	ユーザはCコンパイラをわざわざインストールしなくてもRaraku Studioとテキストエディタさえあればこれらの開発や修正を行うこともできます.<br>
+</div></article>
 <br><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section NextDevelopment end -->
 
 
 <a name=WhatIsChanging_latest></a>
 <h1 class="title">Moai 最新バージョンの新機能および修正内容</h1>
-Moai最新版リリース( Ver2.2.3 コードネーム ResponsiveStone ) での<br>
-新機能、仕様ならびに不具合の修正等は以下のようになります.<br>
+Moai最新版リリース( Ver2.2.3 コードネーム ResponsiveStone ) での新機能、仕様ならびに不具合の修正等は以下のようになります.<br>
 <br>
 <article class="message is-dark">
-	<div class="message-header">
-		Ver2.2.3(Android APK版のみ提供となります)<br>
-	</div>
-	<div class="message-body">
-		<b>Android AArch64アーキテクチャ環境(arm64-v8a)およびAndroid 6.0以降(Runtime Permission)への対応</b><br>
+<div class="message-header">
+Ver2.2.3(Android APK版のみ提供となります*)</div><div class="message-body">
+	<b>Android AArch64アーキテクチャ環境(arm64-v8a)およびAndroid 6.0以降(Runtime Permission)への対応</b><br>
 <br>
-		この環境において、Moaiシステム全体が未対応であったためにEasterやVirtualUSERSの起動に失敗する不具合が発生していました.<br>
-		また、moai_profileディレクトリの生成に失敗したり、あるいはディレクトリ内への書き込みが許可されないことが原因で、<br>
-		VirtualUSERSで生成されたフィルターデータの保存に失敗する不具合が発生していました.<br>
-		この不具合を修正しました.<br>
-		<div class=box>
-			この問題(Issues 1)の解決にあたっては daikaimon 様に不具合報告と動作確認等をご協力頂きました. この場を借りてお礼申し上げます.<br>
-		</div>
-<br>
-		<b>Moai for Androidの起動画面において、Moai TopやEaster、VirtualUSERSなどを直接ブラウザで開くボタンを追加</b><br>
-<br>
-		今まで通り Moai for Android の画面を隠してからブラウザを開き、127.0.0.1:8124 へアクセスすることでも動作するのですが、<br>
-		ユーザへの利便性を若干改善すべく、画面内にMoai TopやEaster、VirtualUSERSをブラウザで直接開けるボタンを配置しました.<br>
-		このボタンを押すだけで自動的にブラウザが起動し、127.0.0.1:8124 へアクセスできます.<br>
+	この環境において、Moaiシステム全体が未対応であったためにEasterやVirtualUSERSの起動に失敗する不具合が発生していました.<br>
+	また、moai_profileディレクトリの生成に失敗したり、あるいはディレクトリ内への書き込みが許可されないことが原因で、
+	VirtualUSERSで生成されたフィルターデータの保存に失敗する不具合が発生していました.<br>
+	この不具合を修正しました.<br>
+	<div class=box>
+		この問題(Issues 1)の解決にあたっては daikaimon 様に不具合報告と動作確認等をご協力頂きました. この場を借りてお礼申し上げます.<br>
 	</div>
 <br>
-	<div class="message-header">
-		Ver2.2.2<br>
+	<b>Moai for Androidの起動画面において、Moai TopやEaster、VirtualUSERSなどを直接ブラウザで開くボタンを追加</b><br>
+<br>
+	今まで通り Moai for Android の画面を隠してからブラウザを開き、127.0.0.1:8124 へアクセスすることでも動作するのですが、
+	ユーザへの利便性を若干改善すべく、画面内にMoai TopやEaster、VirtualUSERSをブラウザで直接開けるボタンを配置しました.<br>
+	このボタンを押すだけで自動的にブラウザが起動し、127.0.0.1:8124 へアクセスできます.<br>
+</div></article>
+<article class="message is-dark">
+<div class="message-header">
+Ver2.2.2</div><div class="message-body">
+	<b>MoaiCGI起動に関する不具合の修正</b><br>
+<br>
+	Moai Ver2.2.1 Android APK版 において、動的ライブラリのシンボリックリンクの生成処理に誤りがあったため、
+	このライブラリに依存するようなすべてのMoaiCGI(たとえばEasterやVirtualUSERSなど)の起動に失敗する重大な不具合を修正しました.<br>
+	(この不具合は重大なため、旧Ver2.2.1 のapkのリンクも既に不具合のないものへと差し替えてあります).<br>
+<br>
+	<b>ふたばちゃんねるの各種機能に関する不具合の修正</b><br>
+<br>
+	Easterにおいて、ふたばちゃんねるの「手書き」、「レス削除」、「del」が正常に機能しない不具合がありましたが、
+	これが正常に機能するよう修正しました.<br>
+<br>
+	<b>ふたばちゃんねるのカタログdel機能に関する修正</b><br>
+<br>
+	Easterにおいて、ふたばちゃんねるの新機能「カタログからのdel」が正常に機能するよう修正しました.<br>
+</div></article>
+<article class="message is-dark">
+<div class="message-header">
+Ver2.2.1</div><div class="message-body">
+	<b>ふたばちゃんねるの引用機能追加に関する修正</b><br>
+<br>
+	ふたばちゃんねるの新機能として引用ポップアップ等が実装されましたが、
+	Easterを介するとこれに関する表示の乱れ等が発生したため、これを修正.<br>
+	また引用部分やEマークをマウスクリックすることにより、Easter独自の引用ポップアップが表示されるようにしました.<br>
+</div></article>
+<article class="message is-dark">
+<div class="message-header">
+Ver2.2</div><div class="message-body">
+	<b>Androidに関する既存の問題点の大幅な修正</b><br>
+<br>
+	Moai Ver2.1以前ではAndroid 5.0( Lollipop )以降におけるMoai起動の不具合などが確認されていました.<br>
+	この不具合が全面修正されています.<br>
+	また Moai Ver2.1以前ではAndroidで使用する場合ターミナルエミュレータを使う必要がありましたが、
+	Moai Ver2.2ではそれを不要とし、通常のアプリ同様apkファイルをタップすることでインストールを可能とし、
+	アイコンをタップすることでMoaiを起動可能となっています.<br>
+	<div class="box">
+		ただしapkファイルのGoogle Play経由での配布はせず、Moai公式サイトからこれをダウンロードする形となります.<br>
 	</div>
-	<div class="message-body">
-		<b>MoaiCGI起動に関する不具合の修正</b><br>
-<br>
-		Moai Ver2.2.1 Android APK版 において、動的ライブラリのシンボリックリンクの生成処理に誤りがあったため、<br>
-		このライブラリに依存するようなすべてのMoaiCGI(たとえばEasterやVirtualUSERSなど)の起動に失敗する重大な不具合を修正しました.<br>
-		(この不具合は重大なため、旧Ver2.2.1 のapkのリンクも既に不具合のないものへと差し替えてあります).<br>
-<br>
-		<b>ふたばちゃんねるの各種機能に関する不具合の修正</b><br>
-<br>
-		Easterにおいて、ふたばちゃんねるの「手書き」、「レス削除」、「del」が正常に機能しない不具合がありましたが、<br>
-		これが正常に機能するよう修正しました.<br>
-<br>
-		<b>ふたばちゃんねるのカタログdel機能に関する修正</b><br>
-<br>
-		Easterにおいて、ふたばちゃんねるの新機能「カタログからのdel」が正常に機能するよう修正しました.<br>
-	</div>
-<br>
-	<div class="message-header">
-		Ver2.2.1 <br>
-	</div>
-	<div class="message-body">
-		<b>ふたばちゃんねるの引用機能追加に関する修正</b><br>
-<br>
-		ふたばちゃんねるの新機能として引用ポップアップ等が実装されましたが、<br>
-		Easterを介するとこれに関する表示の乱れ等が発生したため、これを修正.<br>
-		また引用部分やEマークをマウスクリックすることにより、Easter独自の引用ポップアップが表示されるようにしました.<br>
-	</div>
-<br>
-	<div class="message-header">
-		Ver2.2 <br>
-	</div>
-	<div class="message-body">
-		<b>Androidに関する既存の問題点の大幅な修正</b><br>
-<br>
-		Moai Ver2.1以前ではAndroid 5.0( Lollipop )以降におけるMoai起動の不具合などが確認されていました.<br>
-		この不具合が全面修正されています.<br>
-		また Moai Ver2.1以前ではAndroidで使用する場合ターミナルエミュレータを使う必要がありましたが、<br>
-		Moai Ver2.2ではそれを不要とし、通常のアプリ同様apkファイルをタップすることでインストールを可能とし、<br>
-		アイコンをタップすることでMoaiを起動可能となっています.<br>
-		<div class="box">
-			ただしapkファイルのGoogle Play経由での配布はせず、Moai公式サイトからこれをダウンロードする形となります.<br>
-		</div>
-		またレスポンシブデザインの導入により、スマホでのユーザーマニュアルやツールの画面の見やすさ、使いやすさが改良されています.<br>
-	</div>
-</article>
-<br><br>
+	またレスポンシブデザインの導入により、スマホでのユーザーマニュアルやツールの画面の見やすさ、使いやすさが改良されています.<br>
+</div></article>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section WhatIsChanging_latest end -->
 
 
 <a name=MoaiFeature></a>
@@ -177,7 +176,7 @@ Moai最新版リリース( Ver2.2.3 コードネーム ResponsiveStone ) での<
 	また、その気になればあなたがCGIスクリプトを独自に開発し、それをMoai CGI上で実行させることもできます.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section MoaiFeature end -->
 
 
 <a name=WhatIsChanging_v2_0></a>
@@ -213,12 +212,12 @@ Moai最新版リリース( Ver2.2.3 コードネーム ResponsiveStone ) での<
 	<div class=box>
 		実はバージョン2.0以降でも旧来通りMoaiをローカルプロキシとして使うこともできます.<br>
 		ローカルプロキシの場合は基本的にどのようなサイトにでも常に機能するという強力さがあります.<br>
-		一方、バージョン2.0で導入されたEasterを使って仮想環境を実現する場合、<br>
+		一方、バージョン2.0で導入されたEasterを使って仮想環境を実現する場合、
 		その適用範囲はEasterがサポートするサイトに限られます.<br>
 	</div>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section WhatIsChanging_v2_0 end -->
 
 
 <a name=license></a>
@@ -232,7 +231,7 @@ Moai最新版リリース( Ver2.2.3 コードネーム ResponsiveStone ) での<
 	現時点での公式のソースリポジトリは https://github.com/mr-moai-2016/znk_project ですが再配布はご自由にどうぞ.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section license end -->
 
 
 <a name=as_is></a>
@@ -245,7 +244,7 @@ Moai最新版リリース( Ver2.2.3 コードネーム ResponsiveStone ) での<
 	from the use of this software.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section as_is end -->
 
 
 <a name=acknowledge></a>
@@ -257,7 +256,8 @@ Moai最新版リリース( Ver2.2.3 コードネーム ResponsiveStone ) での<
 	ポート番号8123はPolipoで使われていたものであり、それに敬意を表しMoaiではこれに続く後輩という意味で8124をデフォルトポートとしました.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section acknowledge end -->
+
 
 
 <div class="card">
@@ -275,10 +275,11 @@ Moai最新版リリース( Ver2.2.3 コードネーム ResponsiveStone ) での<
 			</div>
 		</div>
 		<div class="content">
-		  <time datetime="2016-1-1">2020/03/01</time>
+		  <time datetime="2016-1-1">2020/12/25</time>
 		</div>
 	</div>
 </div>
+
 
 
 <a name=Link></a>
@@ -289,6 +290,7 @@ Moai最新版リリース( Ver2.2.3 コードネーム ResponsiveStone ) での<
 	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moaiドキュメント(オンライン)</a></li>
 	<li><a class=MstyElemLink href=https://github.com/mr-moai-2016/znk_project>znk_project(github)</a></li>
 </ul><br>
+
 
 
 </div>
