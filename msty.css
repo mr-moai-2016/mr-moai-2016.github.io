@@ -333,13 +333,25 @@ body {
 }
 
 .MstyMsgConsole {
-	color: #223300;
+	color: #cccccc;
 	padding: 4px 8px;
-	background: #909060 none repeat scroll 0% 0%;
+	background: #555555 none repeat scroll 0% 0%;
 	border-radius: 6px;
 	margin-bottom: 5px;
 	text-decoration: none;
 	box-shadow: 5px 5px 5px #AAA;
+}
+.MstyMsgConsoleOK {
+	color: #77ff77;
+}
+.MstyMsgConsoleNG {
+	color: #ff7777;
+}
+.MstyMsgConsoleError {
+	color: #ff2222;
+}
+.MstyMsgConsoleFYI {
+	color: #ffff77;
 }
 
 .MstyQandALink {
@@ -413,18 +425,41 @@ body {
 #	border: 1px solid #3D803D;
 	padding: 3px 8px;
 	display: inline-block;
-	background: #E0E0B0 none repeat scroll 0% 0%;
+	background: #E0B0B0 none repeat scroll 0% 0%;
 	text-align: center;
 	border-radius: 10px;
 	margin-bottom: 5px;
 	text-decoration: none;
 }
+.MstyAutoLinkTarget:hover {
+	color: #000;
+#	border: 1px solid #3D803D;
+	padding: 3px 8px;
+	display: inline-block;
+	background: #B0B0E0 none repeat scroll 0% 0%;
+	text-align: center;
+	border-radius: 10px;
+	margin-bottom: 5px;
+	text-decoration: none;
+}
+
 .MstyAutoLinkOther {
 	color: #000;
 	border: 1px solid #3D803D;
 	padding: 3px 8px;
 	display: inline-block;
 #	background: #E0E0B0 none repeat scroll 0% 0%;
+#	text-align: center;
+	border-radius: 10px;
+	margin-bottom: 5px;
+	text-decoration: none;
+}
+.MstyAutoLinkOther:hover {
+	color: #000;
+	border: 1px solid #3D803D;
+	padding: 3px 8px;
+	display: inline-block;
+	background: #B0B0E0 none repeat scroll 0% 0%;
 #	text-align: center;
 	border-radius: 10px;
 	margin-bottom: 5px;
@@ -438,6 +473,54 @@ body {
 #	background: #E0E0B0 none repeat scroll 0% 0%;
 	text-align: center;
 	border-radius: 10px;
+	margin-bottom: 5px;
+	text-decoration: none;
+}
+
+.MstyCGILink {
+	color: #000;
+#	border: 1px solid #3D803D;
+	padding: 3px 8px;
+	display: inline-block;
+	background: #B0E0E0 none repeat scroll 0% 0%;
+	text-align: center;
+	border-radius: 10px;
+	margin-bottom: 5px;
+	text-decoration: none;
+}
+.MstyCGILink:hover {
+	color: #000;
+#	border: 1px solid #3D803D;
+	padding: 3px 8px;
+	display: inline-block;
+	background: #B0B0E0 none repeat scroll 0% 0%;
+	text-align: center;
+	border-radius: 10px;
+	margin-bottom: 5px;
+	text-decoration: none;
+}
+
+.MstyDetailLink {
+	color: #000;
+#	border: 1px solid #3D803D;
+	padding: 3px 8px;
+	display: inline-block;
+	background: #E0E0E0 none repeat scroll 0% 0%;
+	text-align: center;
+	border-radius: 10px;
+	margin-top:    5px;
+	margin-bottom: 5px;
+	text-decoration: none;
+}
+.MstyDetailLink:hover {
+	color: #000;
+#	border: 1px solid #3D803D;
+	padding: 3px 8px;
+	display: inline-block;
+	background: #B0B0E0 none repeat scroll 0% 0%;
+	text-align: center;
+	border-radius: 10px;
+	margin-top:    5px;
 	margin-bottom: 5px;
 	text-decoration: none;
 }
@@ -604,4 +687,7 @@ body {
 }
 .MstyVisible {
 	display: inline-block;
+}
+.MstyIcon16 {
+	margin-right: 1rem;
 }
