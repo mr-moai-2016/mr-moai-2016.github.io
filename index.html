@@ -85,7 +85,12 @@
 			<br>
 		</ul>
 		<br>
-		Linux版、Android版におけるlibresslの修正ファイルについては準備中ですのでもうしばらくお待ち下さい。
+		Linux版、Android版におけるlibresslの修正ファイルについては準備中ですのでもうしばらくお待ち下さい。<br>
+		<br>
+		尚、ソースコードからビルドしてお使いの方は、znk_project/libresslを一旦完全cleanし、
+		znk_project/libressl/cryptoのMakefile内でコンパイルオプション-DSIZEOF_TIME_T=8を指定した上で、
+		libtls-17.dll（Linux版の場合はlibtls-17.so）全体を再ビルドしてください。
+		その上でMoai全体をインストールし直すことで、ひとまず問題は解消すると思います。
 	</div>
 </article>
 <br>
