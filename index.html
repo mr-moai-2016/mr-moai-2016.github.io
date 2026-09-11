@@ -54,9 +54,9 @@
 	</div>
 	<div class="message-body">
 		ふたばちゃんねるにおいてHTTPSで通信した場合にeasterがクラッシュする不具合が発生しています
-		（HTTPSではなくHTTPでアクセスした場合は問題ありません）。
+		（HTTPSではなくHTTPでアクセスした場合は問題ありません）。<br>
 		これはMoaiディレクトリ内のHTTPSの処理を行うためのライブラリ（libressl）において、
-		HTTPS証明書の有効期間（Expire）の処理で誤判定が発生していることに起因します。
+		HTTPS証明書の有効期間（Expire）の処理で誤判定が発生していることに起因します。<br>
 		<br>
 		Moaiアップグレードに対応するには時間が掛かりそうなため、さしあたっては、以下の手順でファイルを差し替えてください。
 		<br>
@@ -69,7 +69,7 @@
 			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_rep/releases/download/v1.0.0/libressl-modified-win32.zip">libressl-modified-win32.zip</a>をダウンロードし、これを解凍します。<br>
 			解凍すると中にlibtls-17.dllという名前のファイルがありますので、
 			お使いのMoaiフォルダ（moai-v2.2-win32）内の同名のファイルをこれで上書きしてください。<br>
-
+			<br>
 			<li>Moai Windows 64bit版の場合</li>
 			<br>
 			libresslの実体ファイルはlibtls-17.dllであり、今回これが問題となっています。<br>
@@ -78,6 +78,7 @@
 			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_rep/releases/download/v1.0.0/libressl-modified-win64.zip">libressl-modified-win64.zip</a>をダウンロードし、これを解凍します。<br>
 			解凍すると中にlibtls-17.dllという名前のファイルがありますので、
 			お使いのMoaiフォルダ（moai-v2.2-win64）内の同名のファイルをこれで上書きしてください。<br>
+			<br>
 		</ul>
 		<br>
 		Linux版、Android版におけるlibresslの修正ファイルについては準備中ですのでもうしばらくお待ち下さい。
