@@ -28,6 +28,7 @@ function MstyUI_submitBtn_byId( form_id, cgi_urp, cgi_arg ){
 }
 
 function MstyUI_selectTab( id_ary, query_btn_id ){
+	var to_unvisible = false
 	var idx;
 	for( idx=0; idx<id_ary.length;  ++idx ){
 		var id     = id_ary[ idx ];
@@ -44,12 +45,15 @@ function MstyUI_selectTab( id_ary, query_btn_id ){
 			} else{
 				tgt.className = 'MstyUnvisible';
 				btn.className = 'MstyDetailLink';
+				to_unvisible = true
 			}
 		} else {
 			tgt.className = 'MstyUnvisible';
 			btn.className = 'MstyDetailLink';
+			to_unvisible = true
 		}
 	}
+	return to_unvisible
 }
 function MstyUI_categoryTab( tgt_id_ary, btn_cat_ary, query_btn_id ){
 	var idx;
