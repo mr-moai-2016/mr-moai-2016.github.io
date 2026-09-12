@@ -6178,6 +6178,7 @@ a.list-item {
   padding: 1.25em 1.5em;
 }
 
+/*
 .message-body code,
 .message-body pre {
   background-color: white;
@@ -6186,6 +6187,7 @@ a.list-item {
 .message-body pre code {
   background-color: transparent;
 }
+*/
 
 .modal {
   align-items: center;

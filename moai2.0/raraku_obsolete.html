@@ -1,0 +1,2593 @@
+<!DOCTYPE html>
+<html><!-- master template moai -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-type" content="text/html" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type"  content="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="/msty.css"  rel="stylesheet" type="text/css" />
+	<link href="/bulma.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
+	<link rel="stylesheet" href="/js/highlightjs/github-dark.css">
+	<!-- link rel="stylesheet" href="/js/highlightjs/atom-one-dark.css" -->
+	<script src="/js/highlightjs/cpp.js"></script>
+	<script src="/js/highlightjs/javascript.js"></script>
+	<script src="/js/highlightjs/dos.js"></script>
+	<script src="/js/highlightjs/makefile.js"></script>
+	<script src="/js/highlightjs/bash.js"></script>
+	<script src="/js/highlightjs/raraku.js"></script>
+	<script type="module" src="/js/highlightjs/highlight.js"></script>
+	<script type="module">
+		import HLJS from "/js/highlightjs/highlight.js";
+		HLJS.highlightAll();
+	</script>
+	<style>
+		code {
+		    font-family: "CourierNew", "Consolas", "Courier", monospace;
+			-moz-tab-size : 4;
+			tab-size      : 4;
+		}
+	</style>
+
+</head>
+<body>
+<div class="section">
+<div class="container">
+<div class="content">
+
+<a name=TopBar></a>
+<!-- p><b><img src="/imgs/here_landmark.png"> Moai+Easter Advanced Manual</b></p -->
+<p style="height: 40px; border: 0px;"><img src="/imgs/here_landmark.png"> <b>Moai+Easter Advanced Manual</b></p>
+<a class=MstyElemLink href="/">Moai</a> 
+<a class=MstyElemLink href="/moai2.0/index.html">Manual</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
+<a class=MstyElemLink href="/announcement.html">Annoucement</a> 
+<a class=MstyElemLink href="/FAQ.html">FAQ</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> 
+<a class=MstyElemLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> 
+<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/raraku1.html">Raraku言語</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/raraku1.html">Raraku言語マニュアル（前編）</a> 
+<a class=MstyElemLink href="/moai2.0/raraku2.html">Raraku言語マニュアル（後編）</a> 
+<a class=MstyElemLink href="/moai2.0/raraku_extens.html">Raraku Advanced document</a> 
+
+<a name=AtFirst></a>
+<h1 class="title">はじめに</h1>
+
+	Raraku言語チュートリアル:obsolete.
+<br>
+<br>
+
+
+
+<a name=Index></a>
+<h1 class="title">目次</h1>
+<br>
+<ul>
+	<li><b><a class=MstyElemLink href=#BBQ_old>BBQ(obsolete)</a></b></li>
+	<li><b><a class=MstyElemLink href=#user_def_function_old>ユーザ定義関数</a></b></li>
+	<li><b><a class=MstyElemLink href=#struct_copy_operator_old>構造体のコピー演算子(obsolete)</a></b></li>
+	<li><b><a class=MstyElemLink href=#switch_statement_old>switch文(obsolete)</a></b></li>
+	<li><b><a class=MstyElemLink href=#file_io_handler_old>ファイル入出力とハンドラ型(obsolete)</a></b></li>
+	<li><b><a class=MstyElemLink href=#object_oriented_old>Rarakuにおけるオブジェクト指向(for ~.)(obsolete)</a></b></li>
+	<li><b><a class=MstyElemLink href=#func_guard>グローバルスコープにおける関数呼び出しの制限</a></b></li>
+</ul><br>
+
+
+
+<a name=BBQ_old></a>
+<h1 class="title">BBQ(obsolete)</h1>
+
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">! # $ %
+&amp; = ~ ^
+| @ ? _
++ - * /
+, ; : .
+\
+</code></pre>
+	
+	<br>
+<br><br>
+	<b>「[`」と「`]」で囲まれた文字列</b>
+<br><br>
+	我々はこれをBBQ（Bracket BackQuote）記法と呼んでいます。
+	例えば以下のような記述です。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">[`hello`]
+</code></pre>
+	
+	<br>
+	BBQ記法の場合、「\」ではなく「$」文字がエスケープ文字となります。
+	ただしこの使い方は「\」の場合とは異なり、若干独特です。
+	まず「`」と「]」については、これらが単独で使われる場合は基本的にエスケープする必要はありませんが、
+	唯一「`]」という2文字の文字列（終了パターンに相当）を内部に記述したい場合は、これを「`$]」と記述します。
+	「$`]」ではありません。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">[`Bracket is ]`]
+[`Backquote is ``]
+[`End of pattern is `$]`]
+</code></pre>
+	
+	<br>
+	また「$n」で改行コードを、「$t」でタブ文字を、「$$」で「$」文字自体を記述できます
+	（これは「\」のときの使い方と似ています）。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">[`CR is $n`]
+[`tab is $t`]
+[`Dollar is $$`]
+</code></pre>
+	
+	<br>
+	BBQ記法ではエスケープ文字自体を「$」から別の文字へ変えることができます。
+	「$」が頻繁に使われるようなケースでは、別のエスケープ文字にしておくと便利です。
+	このためにはまず「[$」で始め、その直後に$の替わりとなるエスケープ文字を指定し、
+	その後に「`」を続け、文字列の中身を記述して最後に「`]」で終了します。
+<br><br>
+	例えば以下の例では、エスケープ文字を「$」から「~」に変えています。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">[$~`Dollar is $`]
+[$~`End of pattern is `~]`]
+[$~`CR is ~n`]
+[$~`tab is ~t`]
+[$~`Tilde is ~~`]
+</code></pre>
+	
+	<br>
+	上の例ではエスケープ文字は「$」ではなくなりましたので「$」についてはそのまま記述できます。
+	ただし今度は「~」がエスケープ文字となりましたので、「$」が行っていた仕事はすべて「~」が引き継ぎます。
+	すなわち「`]」という2文字の文字列については（$の部分をそのまま~に替えますので）「`~]」と記述する必要があります。
+	また「~n」で改行コードを、「~t」でタブ文字を、「~~」で「~」文字自体を記述する形に変更されます。
+<br><br>
+	<div class=box>
+		新しいエスケープ文字として使用可能な文字はどんな文字でもよいわけではなく、
+		以下の16個の記号文字に限られます（とはいえこれだけあれば十分でしょう）。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">! # $ %
+&amp; = ?
++ - * /
+, ; : .
+\
+</code></pre>
+	
+		<br>
+		ややこしいですが、まず記号文字列全体からいわゆる「何かを囲む系」（「{」「}」等や、クォート系の記号）が排除された残りを考え、
+		さらにそこからASCIIコードの0x40以降にある記号文字（「@」「^」「_」「|」「~」）を除外したものと考えると
+		多少は覚えやすいかもしれません（ただし「\」だけは（ASCIIコードは0x40以降ですが）例外的に認めるものとします）。
+<br><br>
+		<div class=box>
+			記号文字の中で「`」と「]」は終了パターンに含まれますので、そもそもエスケープ文字として機能させることができません。
+			その他の文字は意図的にそれをエスケープ文字として使用することを禁止しています。
+			柔軟性が増すメリットよりもその他のデメリットの方が大きいと判断したからです。
+<br><br>
+			何かを囲う記号のうち「[」「]」「{」「}」についてはASCIIコードの0x40以降となりますので（理由は後述しますが）除外します。
+			残りは「(」「)」「&lt;」「&gt;」になります。
+<br><br>
+			「(」「)」の場合、あまり問題にはならないように思います。
+			例えば仮に「(」をエスケープ文字として使う場合、「(」自体を文字列リテラルの中に埋め込みたい場合は「((」、
+			改行をしたい場合は「(n」のように書くことになりますが、（見た目は変さはともかく）
+			言語仕様で禁じるほどのことではないように思います。
+<br><br>
+			「&lt;」「&gt;」の場合、「(」「)」より望ましくない問題が起きる確率はやや上がると思います。
+			例えば仮に「&gt;」をエスケープ文字として使う場合、「&gt;」自体を文字列リテラルの中に埋め込みたい場合は「&gt;&gt;」、
+			改行をしたい場合は「&gt;n」のように書くことになります。
+			これは特にHTMLに関係したファイルを扱う場合、テキストエディタにおける挙動になんらかの悪影響を与えるかもしれません。
+			例えば、HTMLを自動生成するような環境用のファイル内にRaraku言語を埋め込むような状況を考えます。
+			このファイルのテキストエディタのインデントやハイライト設定をHTMLのもので流用した場合、
+			「&lt;」「&gt;」が書かれた部分がタグの開始/終了記号とみなされる状況は想定できます。
+			このとき「&gt;」が（エスケープ記号でなく）単なる文字列としてリテラル内に含まれていた場合、
+			おそらくそれは本当にHTMLのタグとしての記述ですから、問題にはならないでしょう。
+			ところが「&gt;」がエスケープ記号の場合、改行というリダイレクトとはまったく関係ない箇所に
+			「&gt;n」が場合によっては大量に記述されてしまうことになります。
+			その箇所は当然HTMLのタグとは全く関係ありませんから、問題が発生するだろうと考えられるわけです。
+			（かといって埋め込んだ箇所についてはあくまでRarakuのコードですので「&amp;lt;」などと書くこともできません）。
+<br><br>
+			テキストエディタ内の表記が崩れるだけならまだよいのですが、
+			「&gt;」と記号はシェルのリダイレクト記号と一致するため、
+			シェルスクリプトを文字列リテラルとして記述する場合、不安が残ります。
+			やや杞憂ぎみなシナリオかもしれませんが、例えば、「&gt;」をエスケープ記号としているある文字列リテラルがあり、
+			何かの拍子でそれをシェルスクリプトに書き換えるためにエスケープ記号を「&gt;」から別の文字へ変えたとします。
+			このとき文字列リテラル内の（元々改行を意味していた）「&gt;n」の部分は漏れなく修正しなければなりませんが、
+			万一この修正に漏れがあった場合、その部分に「&gt;n」というリダイレクト記号が出現することになり、
+			下手すると意図せずに n というファイル（あるいはnで始まる名前のファイル）を作成してしまうことになるかもしれません。
+			ただこれは別に「&gt;」が（エスケープ記号でなく）単なる文字列としてリテラル内に含まれていた場合でも同じ問題があるわけですが、
+			「&gt;」がエスケープ記号の場合、改行というリダイレクトとはまったく関係ない箇所に
+			「&gt;」がばら撒かれて記述されてしまうところにやや不安さが残るわけです。
+<br><br>
+			このような問題があることと、そのような問題がない状況だとしても普通は誰も「&lt;」「&gt;」をエスケープ文字としてチョイスできなくても困らないだろうということもあり、
+			「&lt;」「&gt;」についてはエスケープ文字とすることはできない仕様にしてあります。
+<br><br>
+			クォート系の文字の場合、インデントにまで影響を与えるということはあまりないかもしれませんが、
+			ハイライトに影響する可能性はあります。多くの言語ではダブルクォートによるリテラルのハイライトはうまく認識しますから、
+			逆に言えばこれからあまりにかけ離れるようなエスケープは避けた方がよいことになります。
+			例えば仮に「'」をエスケープ文字として使う場合、「'」自体を文字列リテラルの中に埋め込みたい場合は「''」、
+			改行をしたい場合は「'n」のように書くことになりますが、「'」の個数がリテラル内に奇数個ある場合、文字列リテラルの
+			終了記号における「'」のハイライトがその後に続くかもしれません。
+<br><br>
+			またアルファベットや英数字の使用を許すと、英単語や数字の並びにまでも、
+			エスケープ文字が含まれる可能性を与えてしまいます。
+			ASCIIコードの0x40以降にある記号文字を（「\」を除き）認めない理由については後述します。
+		</div>
+<br>
+		<div class=box>
+			最近の言語では文字列リテラルとして指定できる文字コードがUnicodeに限定されるものも多いですが、
+			Rarakuではそのような制限は設けていません。
+			例えばShift_JIS文字コードなどいわゆる古典的な文字コードには色々と問題があるのは重々承知しておりますが、
+			場合によってはそのようなもので記述しないとかえって煩雑になるケースも想定できなくもないため、
+			一応任意の文字コードが指定可能としてあります。
+<br><br>
+			そこでここでは（Unicodeを除いた）各国で主に使用されている文字コードを概観し、
+			文字コードにおけるどの領域の<b>記号文字</b>が比較的安全であるかを考えてみます。
+			問題が発生するのは、いわゆる全角文字を使用する国の文字コードにおける2byte目です
+			（iso-2022-jpやiso-2022-krなど、1byte目から節操なくASCIIコードの領域を用いるものもありますが、
+			これらをプログラミングのソースコードの中で使わざるを得ない状況というのは（Shift_JISなどよりもさらに）相当に限られるでしょう。
+			これらについては（ASCIIコードの全領域を使う以上）どのみちエスケープ文字に何を当てても、
+			それが全角文字に含まれる可能性があります）。
+<br><br>
+			日本では（Unicodeを除けば）WindowsではShift_JIS、LinuxではEUC-JPを使うことが多いと思われます。
+			EUC-JPではASCIIコードと被ることはありませんが、Shift_JISでは、その2byte目がASCIIコードの0x40以降と同じになる場合があります。
+			中国ではGB2312/GB18030、台湾や香港ではBig5、韓国ではJohab（KS X 1001）が主に使われるようですが、
+			これらについても、その2byte目がASCIIコード（の0x40以降）と同じになる場合があります。
+			厳密に言えばGB18030については、2byte目と4byte目がASCIIコードの0x30から0x39までと同じになる場合がありますが、
+			この範囲にあるのは数字だけであり、記号文字はありません。
+<br><br>
+			よって主要な文字コードに限れば、全角文字には、基本的には0x40未満のASCIIコードにおける記号文字は含まれないと考えることができ、
+			その範囲にある記号文字であればエスケープ文字として使用しても問題が発生することは実質的にはないとみなせます。
+<br><br>
+			記号文字列全体から「何かを囲む系の記号」を排除した残りは以下のものになります。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-raraku">! # $ %
+&amp; = ~ ^
+| @ ? _
++ - * /
+, ; : .
+\
+</code></pre>
+	
+			<br>
+			また0x40以上のコードにおける記号文字は以下の11個です。
+			上記からこれらを除外します。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-raraku">@ [ \ ] ^ _ ` { | } ~
+</code></pre>
+	
+			<br>
+			「[」「]」「`」「{」「}」は（「何かを囲む系」ですので）すでに除外されていますから、
+			結局「@」「\」「^」「_」「|」「~」の６つが問題で、これらを除外すればよいことになります。
+			ただし「\」だけは（理由は後で述べますが）例外として残します。
+			その結果が以下になります。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-raraku">! # $ %
+&amp; = ?
++ - * /
+, ; : .
+\
+</code></pre>
+	
+			<br>
+			これにより最初に述べた16個の文字が導出されたことになります。
+<br><br>
+			<div class=box>
+				「\」を例外的に認めたのは、この記号でエスケープすることを前提とした文字列というものは
+				（C言語やJavaを始めとして）非常に一般的に使われており、世界中に溢れかえっているからです。
+				それらの文字列をそのまま拝借してBBQの中に埋め込みたい場合、
+				「\」の指定が不可だとエスケープ文字を「\」から「$」等へ修正する手間が発生し、
+				その修正によりかえって誤りを入れてしまう可能性は十分考えられます。
+				そのような理由から「\」の指定だけは特別に認めているわけです。
+<br><br>
+				また「\」の危険性については少なくとも他の記号文字より、
+				（全角文字圏内の）プログラマにはよく認知されているのではないかと思われます。
+				これを敢えて使うにしても（他の記号文字と比べれば）逆に警戒してくれるであろうという期待も少しあります。
+<br><br>
+				とはいえ、新規に（Unicode以外での）全角文字列をリテラルとして書く場合は、
+				特に必要がなければエスケープ文字として「\」をいっしょに使うのはやはり避けるべきでしょう
+				（そのようなわけでBBQについてはデフォルトではエスケープ文字を$に設定しています）。
+			</div>
+		</div>
+	</div>
+<br>
+	BBQ記法ではエスケープ文字自体を無効にすることもできます。
+	このためにはまず「[$`」で始め、文字列の中身を記述して最後に「`]」で終了します。
+	ただしこのようにした場合、「`]」という文字列パターンを書くことは、もうどうやってもできなくなります。
+<br><br>
+	<div class=box>
+		念のために補足しますと、ここで言う「`]」という文字列パターンとは、「`」と「]」が2つこの順で連続して登場する文字列ということです。
+		「`」と「]」という文字がそれぞれ単独で出てきた場合は問題ありませんし、
+		また「]`」というように順番が逆のパターンの文字列でも問題ありません。
+	</div>
+<br>
+	例えば以下の例では、エスケープ文字を無効にしています。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">[$`Dollar is $`]
+[$`CR is
+`]
+[$`tab is	`]
+[$`Tilde is ~`]
+[$`End of pattern cannot be written.`]
+</code></pre>
+	
+	<br>
+	この場合、「`]」を除く任意の文字列を中身に書くことができます。
+	改行やタブ文字列についてもそれをそのまま書くことになりますから、実際字面上でそれが改行されたり
+	タブ文字として字下げされる形になります。
+	指定文字列に「`]」という文字列パターンが含まれない場合（多くの場合そうでしょうが）であれば、これは便利かもしれません。
+<br><br>
+	最後に一つ注意点として、BBQ記法を使う場合は最初の「[」と２番目の「`」の間に余分なスペース等を入れてはいけません。
+	このようにすると、この「[」は配列初期化子の意味として解釈されます
+	（配列初期化子については「配列」のセクションで詳述します）。
+<br><br>
+	BBQ記法についてまとめますと、例えばWindowsにおけるディレクトリのパスや正規表現のように「\」文字を頻繁に使用するような状況では便利です。
+	あるいはダブルクォートを頻繁に使うような場合にも向いています。
+	逆にたかだか1、2文字のごく短い文字列や「`]」という文字列パターンを頻繁に指定する必要がある状況には向いていませんが、そのような状況というのは相当に限られると思います。
+<br><br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section BBQ_old end -->
+
+
+<a name=user_def_function_old></a>
+<h1 class="title">ユーザ定義関数</h1>
+
+	<a name=AName_user_def_function_old_0></a><script type="text/javascript">var st_user_def_function_old_0_group_id_ary = [ "user_def_function_old_0" ];</script>
+<a class=MstyDetailLink id=user_def_function_old_0_btn onClick="if( MstyUI_selectTab( st_user_def_function_old_0_group_id_ary, this.id ) ){location.href = '#AName_user_def_function_old_0';}">参考: globalやnatvfuncキーワードでvoidを省略できない理由</a>
+<span id=user_def_function_old_0 class=MstyUnvisible>
+	<div class=box>
+		これらのキーワードは関数宣言と成り得ます。
+		そして関数宣言の場合、直後に来る識別子が戻り値の型なのかそれとも直後に来る変数等なのかをパーザで判断するのが難しい場合があるためです。
+<br><br>
+		今仮にこれらの宣言でもvoidが省略可能であったとしましょう。
+		以下のようにキーワードglobalで始まる関数宣言が連続している間は特に問題ありません。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">global my_func1() int
+global my_func2( void ) int
+global my_func3()
+global my_func4( x int )
+global my_func5( x int ) int
+</code></pre>
+	
+		<br>
+		しかし特に注意を要するのが次にconst文などが来る場合です。
+		例えば以下のようなケースではこのままですと問題が発生します。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">global my_func1() int
+global my_func2( void ) int
+global my_func3()
+const NPOS = -1 
+</code></pre>
+	
+		<br>
+		この場合、以下のように関数宣言の終わりとconst文の間に必ず「;」を入れる必要があります。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">global my_func1() int
+global my_func2( void ) int
+global my_func3()
+; /* この「;」で明示的に区切る必要がある */
+const NPOS = -1
+</code></pre>
+	
+		<br>
+		あるいは（こちらを推奨しますが）、戻り値がない場合でも明示的にvoidを付ければ問題ありません。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">global my_func1() int
+global my_func2( void ) int
+global my_func3() void  /* この場合なら「;」がなくてもOK */
+const NPOS = -1
+</code></pre>
+	
+		<br>
+		<div class=box>
+			このような仕様になっている理由は、関数の戻り値の型にはvaria、const、referを付けることができるためです
+			（詳しくは「refer文」のセクションで述べますがこれをtype-modifierと呼びます）。
+			上記でもしも「;」がなかった場合、関数宣言に続くconstがtype-modifierの一部なのかconst文の開始なのかがパーザで判断できません。
+			さらにNPOSは変数名であるのか予めユーザが定義して名前を付けた型なのかもパーザで判断できません。
+<br><br>
+			「=」まで読み込めばようやくconst文のconstであるらしいことはわかりますが、現在のRarakuのパーザではそこまで先読みはしません。
+			また仮にそこまで先読みできるようにパーザを強化したところで、これがvaria文である場合は「=」が省略できるケースがあり太刀打ちできません。
+			例えば「varia 識別子1 識別子2」といった形が続いている場合、識別子1が型名で識別子2が変数名である状況と区別がつかなくなります。
+		</div>
+<br>
+		関数宣言ではなく関数定義の場合であればまだ後ろに「{」が続くので判断が付きやすいですが、
+		かといって関数定義の方だけで void の省略を認めるのも宣言との表記上の一貫性がとれなくなりあまり望ましくありません。
+		そのため宣言側に戻り値のvoidを付ける場合は、定義側にも戻り値のvoidを付けることを推奨します。
+<br><br>
+		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_user_def_function_old_0_group_id_ary, 'user_def_function_old_0_btn' );location.href = '#AName_user_def_function_old_0';">Close</a>
+	</div>
+	</span>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section user_def_function_old end -->
+
+
+<a name=struct_copy_operator_old></a>
+<h1 class="title">構造体のコピー演算子(obsolete)</h1>
+
+	<h3>構造体のコピーヘルパー演算子</h3>
+<br>
+	構造体同士の代入を行うと、代入先は代入元と同じ構造体の実体を指し示す形になります。
+	この状態で代入元のメンバの値を変更すると、それに連動して代入先の該当メンバもその値に変わります。
+	また全く同様に代入先のメンバの値を変更すると、それに連動して代入元の該当メンバもその値に変わります。
+	次の例でこの様子を確認できます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">struct MyStruct {
+	i int
+}
+varia m1 MyStruct = { 10 }
+varia m2 MyStruct = { 20 }
+
+m1 = m2
+Rrk_print( "m1.i=" m1.i\n ) /* m1.i=20と表示される */
+Rrk_print( "m2.i=" m2.i\n ) /* m2.i=20と表示される */
+
+m2.i = 30
+Rrk_print( "m1.i=" m1.i\n ) /* m1.i=30と表示される */
+Rrk_print( "m2.i=" m2.i\n ) /* m2.i=30と表示される */
+
+m1.i = 40
+Rrk_print( "m1.i=" m1.i\n ) /* m1.i=40と表示される */
+Rrk_print( "m2.i=" m2.i\n ) /* m2.i=40と表示される */
+</code></pre>
+	
+	<br>
+	Rarakuにおいて構造体の代入は（構造体の）<b>シャローコピー</b>と呼ばれます。
+	シャローコピーは非常に高速ですが、上記のような性質を持つことに注意が必要です。
+<br><br>
+	一方、既に代入先は別の実体を指し示しており、それを維持したままその実体のメンバへ直接値をコピーしたい場合があります。
+	その場合、最も素直な方法は「m1.i = 30」のようにして、代入先のメンバに値を明示的に代入することです。
+<br><br>
+	<div class=box>
+		勿論、構造体の値がnullとなっている場合は、「.」演算子でそのメンバへアクセスするとランタイムエラーとなりますので
+		注意が必要です。
+	</div>
+<br>
+	次の例でメンバへの値の代入とその値の確認を行ってみます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">struct MyStruct {
+	i int
+}
+varia m1 MyStruct = { 10 }
+varia m2 MyStruct = { 20 }
+
+m1.i = 30
+Rrk_print( "m1.i=" m1.i\n ) /* m1.i=30と表示される */
+Rrk_print( "m2.i=" m2.i\n ) /* m2.i=20と表示される */
+
+m2.i = 40
+Rrk_print( "m1.i=" m1.i\n ) /* m1.i=30と表示される */
+Rrk_print( "m2.i=" m2.i\n ) /* m2.i=40と表示される */
+</code></pre>
+	
+	<br>
+	上の例では、m1.i と m2.i は独立に変化しており、したがって（それらの親となる）m1とm2は終始別の実体を指し続けていることがわかります。
+<br><br>
+	構造体のメンバ同士での代入、つまり「m1.i = m2.i」や「m1.j = m2.j」のように記述すれば、
+	（あくまで m1 と m2 は別の実体として）それぞれのメンバをコピーすることができます。
+	例えば次の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">struct MyStruct {
+	i int
+	j int
+}
+varia m1 MyStruct = { 10, 20 }
+varia m2 MyStruct = { 100, 200 }
+
+/* それぞれのメンバを個別にコピー */
+m1.i = m2.i
+m1.j = m2.j
+Rrk_print( "m1.i="m1.i  \,  "m1.j="m1.j \n ) /* m1.i=100, m1.j=200と表示される */
+Rrk_print( "m2.i="m2.i  \,  "m2.j="m2.j \n ) /* m1.i=100, m1.j=200と表示される */
+
+m2.i = 300
+Rrk_print( "m1.i=" m1.i\n ) /* m1.i=100と表示される */
+Rrk_print( "m2.i=" m2.i\n ) /* m2.i=300と表示される */
+</code></pre>
+	
+	<br>
+	上の例の最後で「m2.i = 300」を代入していますが、m1.iの値は100から変化しませんから、
+	これらは独立しています。
+	つまり確かにm1とm2は別の実体を指していることがわかります。
+<br><br>
+	このようにコピー元とコピー先のそれぞれが指し示す実体を別々なままにしつつ、
+	それぞれに対応するメンバーに関してまとめてコピーすることを（構造体の）<b>ディープコピー</b>と呼びます。
+	ディープコピーはシャローコピーに比べ低速ですが、このようなコピーが必要な場合もあります。
+<br><br>
+	ところで上の例では各構造体のメンバ i、j を直接指定してこれらを逐一コピーしていますが、
+	このようにすると例えばコードを修正してこの構造体に新しいメンバ k を追加した場合、
+	kに関するコピー処理「m1.k = m2.k」も忘れずに追加しなければならなくなります。
+	これはできれば避けたいところです。
+<br><br>
+	このようなコピーにおけるメンバの直接指定をできるだけ回避するため、
+	Rarakuではコピーヘルパー演算子「^copy」が用意されています。
+	先ほどの例をこのコピーヘルパー演算子を用いて書き換えると以下のようになります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">struct MyStruct {
+	i int
+	j int
+}
+varia m1 MyStruct = { 10, 20 }
+varia m2 MyStruct = { 100, 200 }
+
+m1^copy m2 /* コピーヘルパー演算子を用いる */
+Rrk_print( "m1.i="m1.i  \,  "m1.j="m1.j \n ) /* m1.i=100, m1.j=200と表示される */
+Rrk_print( "m2.i="m2.i  \,  "m2.j="m2.j \n ) /* m1.i=100, m1.j=200と表示される */
+
+m2.i = 300
+Rrk_print( "m1.i=" m1.i\n ) /* m1.i=100と表示される */
+Rrk_print( "m2.i=" m2.i\n ) /* m2.i=300と表示される */
+</code></pre>
+	
+	<br>
+	上記の「m1^copy m2」とある部分では、構造体のディープコピーを行っています。
+	すなわちm2の全メンバーをm1の該当するメンバーへコピーしています。
+	コピーヘルパー演算子においても代入演算子と同様の用語を使う場合があります。
+	例えば「^copy」の左側の式（この例ではm1）を左辺値、右側の式（この例ではm2）を右辺値などと呼称します。
+<br><br>
+	代入演算子「=」を使った「構造体同士の代入」（言い換えればシャローコピー）では、代入先と代入元の構造体の型が完全に一致していなくても
+	キャスト演算子を用いて代入可能な特別なルールがありましたが、似たようなルールがコピーヘルパー演算子「^copy」においても存在します。
+<br><br>
+	コピーヘルパー演算子では、左辺値の構造体のメンバの型の並びが右辺値の構造体のメンバの型の並びに完全に含まれており、
+	かつその出だしの並びも一致している場合、これを使用することができます（この点は「=」の場合と同じです）。
+	またこの条件を逆にした、すなわち左辺値と右辺値を入れ替えた場合でも使用が許可されます（この点は「=」の場合と異なります）。
+	例えば以下をご覧ください。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">struct Struct1 {
+	i   int
+	r   real
+}
+struct Struct2 {
+	ii  int
+	rr  real
+	c   conststr
+}
+
+varia s1 Struct1 = { 10, 20.5, }
+varia s2 Struct2 = { 30, 40.5, "hello" }
+
+s1^copy s2 /* OK */
+s2^copy s1 /* OK */
+</code></pre>
+	
+	<br>
+	上記においてStruct1のメンバの型の並びとStruct2のメンバの型の並びを比較しますと、
+	Struct1の方では int, real、Struct2の方では、int real, conststr となっており、
+	Struct1の全序列( int real )が Struct2 の開始の序列と一致しています。
+<br><br>
+	このような型の組み合わせの場合、「s1^copy s2」やそれを逆にした「s2^copy s1」という記述が許可されます。
+	このときs1とs2のメンバの個数のうち小さい方の個数分、それぞれのメンバが（上から順に）ディープコピーされるといった処理が行われます。
+<br><br>
+	例えば「s1^copy s2」では、s1のメンバの個数は2個、s2のメンバの個数は3個ですので、最初の2個分のメンバだけがコピーされます。
+	つまり、「s1.i = s2.ii」と「s1.r = s2.rr」がまとめて行われます
+	（残りのs2.cについては単に無視されます）。
+<br><br>
+	また逆に「s2^copy s1」では、s2のメンバの個数は3個、s1のメンバの個数は2個ですので、こちらもまた最初の2個分のメンバだけがコピーされます。
+	つまり、「s2.ii = s1.i」と「s2.rr = s1.r」がまとめて行われます
+	（残りのs2.cについては単に無視されます）。
+<br><br>
+	<h3>構造体のリカーシブコピーヘルパー演算子</h3>
+<br>
+	「^copy」演算子を使ったディープコピーでは、オペランドとなる構造体直下のメンバのみがコピー対象となります。
+	またこのときコピーされるのは「構造体ではないメンバ」に限られます。
+	つまり<b>構造体のメンバは完全に無視されます</b>（構造体のシャローコピーすら行われません）。
+<br><br>
+	int型やreal型やconststr型など単純なメンバのみから構成される構造体のディープコピーであれば、「^copy」演算子で何も問題ありません。
+	一方で、メンバとして構造体を持つような複雑な構造体では、この演算子だけでは万全とはなりません。
+	例えば以下をご覧ください。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">struct OtherStruct {
+	c conststr
+}
+struct MyStruct {
+	i   int
+	r   real
+	other OtherStruct
+}
+
+varia s1 MyStruct = {
+	10,
+	1.5,
+	{
+		"hello",
+	},
+}
+varia s2 MyStruct = {
+	20,
+	2.5,
+	{
+		"world",
+	},
+}
+
+s1^copy s2 /* s2のメンバをすべてs1へディープコピーしたいのだが... */
+
+Rrk_print( "s1.i=" s1.i \n ) /* OK: s1.i=20 と表示される */
+Rrk_print( "s1.r=" s1.r \n ) /* OK: s1.r=2.5 と表示される */
+Rrk_print( "s1.other.c=" s1.other.c \n ) /* NG: s1.other.c=hello と表示される（コピーされていない） */
+</code></pre>
+	
+	<br>
+	上の例では構造体s2からs1へディープコピーを行うため、「s1^copy s2」を実行していますが、
+	ここで行われるのは「s1.i = s2.i」、「s1.r = s2.r」の2つの処理だけです。
+	「s1.other = s2.other」だけがスキップされるのは、このotherが構造体のメンバであるためです。
+	「^copy」演算子では構造体のメンバに関する処理はプログラマに委ね、余計なことは一切しません。
+<br><br>
+	<div class=box>
+		「^copy」演算子の替わりに「^copy_s」演算子を使えば、上の例で「s1.other = s2.other」に該当する処理を
+		スキップせずに行わせることができます。
+		ただしこれは「=」を使った代入ですので、あくまでシャローコピーになっていることに注意してください。
+		other配下に至るメンバまで再帰的にディープコピーされているわけではありません。
+<br><br>
+		その上「^copy_s」演算子を使うと、s1.other が元々指し示していた実体の情報が失われます。
+		つまり「^copy_s」を使った後で、補足的にs1.otherとs2.otherについての個別コピーを記述するといったことができなくなります。
+		既にs1.otherはs2.otherと同じ実体を指し示してしまっているわけですから、（s1.otherが元々保持していた）コピー先の情報はもうないわけです。
+<br><br>
+		「^copy」演算子がデフォルトではそのようなシャローコピー等を一切しない仕様になっているのは、
+		そのような情報の消失を回避するためです。
+	</div>
+<br>
+	ではこのようにメンバとして構造体を持つような構造体の場合で、しかも配下に至るメンバまで再帰的にディープコピーするにはどうすればよいでしょうか？
+	「^copy」演算子と組み合わせつつ、配下に至るメンバについては補足的に直接指定してコピーすればそれは勿論可能ですが、
+	そのような直接的な記述をできるだけ避けたいとします。
+<br><br>
+	この場合、Rarakuでは「^copy_r」演算子を使うことによってこれを実現できます。
+	これを構造体の<b>リカーシブコピーヘルパー演算子(recursive-copy operator)</b>と呼びます。
+	上の例の場合であれば「^copy」の部分を、以下のように「^copy_r」に修正すればOKです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">struct OtherStruct {
+	c conststr
+}
+struct MyStruct {
+	i   int
+	r   real
+	other OtherStruct
+}
+
+varia s1 MyStruct = {
+	10,
+	1.5,
+	{
+		"hello",
+	},
+}
+varia s2 MyStruct = {
+	20,
+	2.5,
+	{
+		"world",
+	},
+}
+
+s1^copy_r s2 /* リカーシブコピーヘルパー演算子を使い、s2のメンバを再帰的にs1へディープコピー. */
+
+Rrk_print( "s1.i=" s1.i \n ) /* OK: s1.i=20 と表示される */
+Rrk_print( "s1.r=" s1.r \n ) /* OK: s1.r=2.5 と表示される */
+Rrk_print( "s1.other.c=" s1.other.c \n ) /* OK: s1.other.c=world と表示される */
+
+s2.other.c = "WORLD" /* コピー元のメンバを変更 */
+Rrk_print( "s1.other.c=" s1.other.c \n ) /* OK: s1.other.c=world と表示される. s1.otherとs2.otherは別の実体を指し示したまま. */
+</code></pre>
+	
+	<br>
+	ちなみにリカーシブコピーヘルパー演算子でも、左辺値の構造体のメンバの型の並びが右辺値の構造体のメンバの型の並びに完全に含まれており、
+	かつその出だしの並びも一致している場合、（型が完全に一致してはいませんが特例として）これを使用することができます。
+	また、その左辺値と右辺値を入れ替えた状況でもその使用が認められます。
+	つまりこの条件はコピーヘルパー演算子の場合と同じですが、リカーシブコピーヘルパー演算子ではその条件のチェックも再帰的に行われます。
+<br><br>
+	ただしこのリカーシブコピーヘルパー演算子でも万全ではないケースがあります。
+	例えば上の例で、コピー先かコピー元のメンバotherのどちらかがnull値であった場合、
+	そのメンバに関するコピーはスキップされます（そのメンバの扱いはプログラマに委ね、「^copy_r」演算子では何もしません）。
+<br><br>
+	また自己参照構造体においても同様のことが起こります。
+	リカーシブコピーヘルパー演算子は再帰的に構造体メンバへ入り込みながらコピーを行いますが、
+	このとき構造体メンバの型の循環を検出すると、（無限にコピーされるのを防ぐため）その構造体メンバについては何も行いません。
+	例えば以下をご覧ください。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">struct MyStruct {
+	i int
+	other OtherStruct
+}
+struct OtherStruct {
+	c  conststr
+	my MyStruct
+}
+
+varia s1 MyStruct = { 10, { "hello", { 1, null } } }
+varia s2 MyStruct = { 20, { "world", { 2, null } } }
+
+s1^copy_r s2
+Rrk_print( "s1.i=" s1.i \n ) /* OK: s1.i=20 と表示される */
+Rrk_print( "s1.other.c=" s1.other.c \n ) /* OK: s1.other.c=world と表示される */
+
+Rrk_print( "s1.other.my.i=" s1.other.my.i \n ) /* s1.other.my.i=1 と表示される. (コピーが行われていない） */
+</code></pre>
+	
+	<br>
+	上記では、MyStruct内にOtherStruct型のメンバotherがあり、OtherStructを経由して結局MyStructに戻りますから間接的には自己参照しており、
+	その自己参照が発生するメンバ my においては一切何も行いません。
+	その結果、s1.other.myへは何もコピーされず、当然そのメンバのs1.other.my.iの値も変わりません。
+<br><br>
+	このような場合、必要であれば残りのコピー処理はプログラマが直接明示的に記述する必要があります。
+	例えば以下のようになります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">struct MyStruct {
+	i int
+	other OtherStruct
+}
+struct OtherStruct {
+	c  conststr
+	my MyStruct
+}
+
+varia s1 MyStruct = { 10, { "hello", { 1, null } } }
+varia s2 MyStruct = { 20, { "world", { 2, null } } }
+
+s1^copy_r s2
+Rrk_print( "s1.i=" s1.i \n ) /* OK: s1.i=20 と表示される */
+Rrk_print( "s1.other.c=" s1.other.c \n ) /* OK: s1.other.c=world と表示される */
+
+s1.other.my^copy s2.other.my /* 構造体のメンバmyについても明示的にコピーを指示 */
+
+Rrk_print( "s1.other.my.i=" s1.other.my.i \n ) /* s1.other.my.i=2 と表示される */
+s2.other.my.i = 3
+Rrk_print( "s1.other.my.i=" s1.other.my.i \n ) /* s1.other.my.i=2 と表示される. s2.other.myとs1.other.myは異なる実体を指し示している. */
+</code></pre>
+	
+	<br>
+	<div class=box>
+		既に述べた通り「^copy_r」演算子では、構造体メンバがnullであったり、そのメンバが（自己参照構造体由来で）型の循環を起こすようなとき、
+		そのメンバにおけるコピー処理をスキップします。
+<br><br>
+		一方「^copy_rs」演算子というものもあり、これを使えば上記の場合においてコピーをスキップするのではなく、
+		替わりにnull値のコピーやシャローコピーを行わせることができます。
+		例えばコピー元（の構造体型メンバ）の値が null である場合は、コピー先（の構造体型メンバ）の値は強制的に null に変更されます。
+		逆にコピー元（の構造体型メンバ）の値が null でない場合は、その値がコピー先へシャローコピーされます。
+		そのメンバが（自己参照構造体由来で）型の循環を起こすような場合でも同様に処理されます。
+<br><br>
+		シャローコピーでも構わないような場合なら「^copy_r」の替わりに「^copy_rs」演算子を使うという選択肢もあります。
+		ただし「^copy_rs」演算子には「^copy_s」演算子と同じ問題点もあります。
+		すなわちこれを使うと、コピー先のメンバが元々指し示していた実体の情報が失われ、
+		後で補足的にコピー処理を記述するなどといったことができなくなります。
+	</div>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section struct_copy_operator_old end -->
+
+
+<a name=switch_statement_old></a>
+<h1 class="title">switch文(obsolete)</h1>
+
+	<h3>第1-switch文</h3>
+<br>
+	ある変数の整数値によって処理を分岐するには if 文を使って次のように書くのでした。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+if ival == 0 {
+	Rrk_print( "when ival is 0\n" )
+}: ival == 1 {
+	Rrk_print( "when ival is 1\n" )
+}: ival == 2 {
+	Rrk_print( "when ival is 2\n" )
+}: ival == 3 {
+	Rrk_print( "when ival is 3\n" )
+}: ival == 4 {
+	Rrk_print( "when ival is 4\n" )
+}:{
+	Rrk_print( "when ival is other\n" )
+}
+</code></pre>
+	
+	<br>
+	この例は ival の値が 0、1、2、3、4、それ以外によって処理を分岐するものです。
+<br><br>
+	<div class=box>
+		ちなみに「}: 条件式」は「} elif 条件式」、「}:{」は「} else {」のシンタックスシュガーです。
+	</div>
+<br>
+	switch文とはこのような整数値に応じた分岐処理をもう少しすっきり書くためのものです。
+<br><br>
+	Rarakuのswitch文には二通りの書式があります。
+	一つ目はブロック構造をより正確に表現した書式で、Rarakuではこれを<b>第1-switch文</b>と呼んでいます。
+	もう一つはそれを簡易化した書式で、Rarakuではこれを<b>第2-switch文</b>と呼んでいます。
+<br><br>
+	実際の用途ではおそらく第2-switch文の方が使いやすいとは思うのですが、まず最初は第1-switch文から説明します。
+	（こちらの方が色々と理にかなった記法ではあり、Rarakuのswitch文の真の構造を理解しやすいからです）。
+	これは以下のような書式になります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">switch 条件式
+case 候補値リテラル ブロック
+case 候補値リテラル ブロック
+…
+default ブロック
+</code></pre>
+	
+	<br>
+	この記法はDiksamと呼ばれる言語のswitch文とよく似ています（Diksamについては「参考文献」のセクションをご参照ください）。
+<br><br>
+	ここで「条件式」には判定対象となる変数を指定します。
+	第1-switch文の場合、条件式の直後に続くのはcase（またはdefault）キーワードであることに注意してください。
+	直後に続くのは「{」ではありません。
+<br><br>
+	「候補値リテラル」には条件式で指定した値の候補を指定しますが、
+	これらは条件式に指定したものと同じ型をもつリテラル式でなければなりません。
+	また、ここに指定可能なものは整数の数値リテラル、文字整数リテラル、列挙子、文字列リテラルに限られます。
+	（real型の数値リテラルを指定することはできません）。
+<br><br>
+	「case 候補値リテラル ブロック」は複数個指定することができ、必要な数だけそれを並べます。
+	（ただしこのとき「候補値リテラル」の値が他と重複してはいけません）。
+	「default ブロック」は0個または1個指定することができます。
+<br><br>
+	上の ival の値に応じて処理を分岐する例を第1-switch文で書き直したものを以下に示します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+switch ival
+case 0 {
+	Rrk_print( "when ival is 0\n" )
+}
+case 1 {
+	Rrk_print( "when ival is 1\n" )
+}
+case 2 {
+	Rrk_print( "when ival is 2\n" )
+}
+case 3 {
+	Rrk_print( "when ival is 3\n" )
+}
+case 4 {
+	Rrk_print( "when ival is 4\n" )
+}
+default {
+	Rrk_print( "when ival is other\n" )
+}
+</code></pre>
+	
+	<br>
+	毎回「ival ==」を書かなくてもよくなった分、if文よりスッキリしていることがわかります。
+	例えば ivalの値が0ならば case 0 とある部分のブロック内のみが実行され、それ以外はスキップされて最後へ制御を移動します。
+	同様に ivalの値が1ならば case 1 とある部分のブロック内のみが実行されるといった具合です。
+	ivalの値が0, 1, 2, 3, 4 のいずれでもなければ、default とある部分のブロック内のみが実行されます。
+<br><br>
+	<a name=AName_switch_statement_old_0></a><script type="text/javascript">var st_switch_statement_old_0_group_id_ary = [ "switch_statement_old_0" ];</script>
+<a class=MstyDetailLink id=switch_statement_old_0_btn onClick="if( MstyUI_selectTab( st_switch_statement_old_0_group_id_ary, this.id ) ){location.href = '#AName_switch_statement_old_0';}">参考: C言語のswitch文との違い</a>
+<span id=switch_statement_old_0 class=MstyUnvisible>
+	<div class=box>
+		この「参考」はC言語をご存知の方のみお読みください。
+<br><br>
+		第1-switch文の書式はC言語のswitch文とはかなり異なります。
+<br><br>
+		まず、switchに与える条件式を囲う「(」と「)」は書いても書かなくてもどちらでも構いません。
+		またその直後に即座にcaseキーワードかdefaultキーワードが続きます。
+		このときC言語のようにswitch文全体を「{」と「}」で囲いません。
+<br><br>
+		<div class=box>
+			一方で、後ほど説明する第2-switch文ではswitch文全体を「{」と「}」で囲います。
+		</div>
+<br>
+		そしてcaseキーワードとdefaultキーワード以外の文が来た時点でswitch文の範囲は終了とみなされます。
+<br><br>
+		この書式ではcase部の指定において（C言語のそれと異なり）後ろに必ずブロックを指定します。
+		このときそのブロックの開始と終わりとなる「{」と「}」を省略することはできません。
+<br><br>
+		<div class=box>
+			一方で、後ほど説明する第2-switch文ではこの「{」を「}」省略できます。
+		</div>
+<br>
+		このブロック内にvaria/const文による変数/定数を宣言することも可能です。
+		この場合、勿論ブロックを抜けるとそのスコープも終了します。
+<br><br>
+		<a name=AName_switch_statement_old_1></a><script type="text/javascript">var st_switch_statement_old_1_group_id_ary = [ "switch_statement_old_1" ];</script>
+<a class=MstyDetailLink id=switch_statement_old_1_btn onClick="if( MstyUI_selectTab( st_switch_statement_old_1_group_id_ary, this.id ) ){location.href = '#AName_switch_statement_old_1';}">参考: C言語のswitch文内でブロック無しでは変数宣言ができない理由</a>
+<span id=switch_statement_old_1 class=MstyUnvisible>
+		<div class=box>
+			C言語のswitch文内では以下のように（ブロックを使わずに）変数を直接宣言することはできません。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-cpp">/* C言語によるswitch文 */
+int ival = 0;
+
+switch( ival ){
+case 0:
+	int my_var = 9; /* コンパイルエラー */
+	break;
+case 1:
+	/* something */
+	break;
+default:
+	/* otherwise */
+	break;
+}
+</code></pre>
+	
+			<br>
+			C言語では「switch( ival ){ ... }」のように一見ブロックのようなものがついてはいますが、これは（通常の意味での）ブロックではありません。
+			C言語でも以下のようにして記述すれば、case内に変数を宣言することができます。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-cpp">/* C言語によるswitch文 */
+int ival = 0;
+
+switch( ival ){
+case 0:
+{
+	int my_var = 9; /* OK. */
+	break;
+}
+case 1:
+	/* something */
+	break;
+default:
+	/* otherwise */
+	break;
+}
+</code></pre>
+	
+			<br>
+			おそらくC言語がこのような仕様になっているのは、（もしcase内で変数を宣言したならば）
+			case部分を終了した時点でその変数のスコープを確実に終了させなければならないためだと思います。
+<br><br>
+			仮にここでスコープを終了せず、つまりswitch文を抜けたその後の処理でもそれらの変数にアクセスできる仕様であったとしましょう。
+			そのような仕様では以下のような場合問題が起こります。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-cpp">/* C言語によるswitch文 */
+int ival = 0;
+
+switch( ival ){
+case 0:
+	int my_var = 9; /* 仮にこれがコンパイルエラーにならず、case 0 部が終わった後でも使用可であると仮定する */
+	break;
+case 1:
+	/* ここではmy_varのアクセスは不可とすべき */
+	break;
+default:
+	/* otherwise */
+	break;
+}
+
+printf( my_var );
+</code></pre>
+	
+			<br>
+			この例では、変数 my_var が宣言されるのは case 0 を経由した場合のみです。
+			では case 1 を経由するとどうなるでしょう？
+			その場合、変数 my_var の宣言を経由せずにここへ来た状況ですからこれはアクセス不可とすべきです
+			（C言語の関数内では宣言部だけを特別に掻い摘んで実行するなどといったことも起こりません）。
+			スコープを case 0 部を終了した後まで引き伸ばしてしまうとここに矛盾が生じます。
+<br><br>
+			かといって「{」と「}」の指定なしにここでスコープが強制的に終了するのも、（スコープの範囲が）見た目わかりにくいです。
+			ですからC言語の場合、case 内での変数宣言が必要ならば「{」と「}」で明示的に囲い、
+			case内で自然にそのスコープを終端している形になるようにルール付けしているものと思われます。
+			また同時にその方がスコープの範囲がコード上で可視化、明確化します。
+<br><br>
+			なぜこんな話をするかと言うと、Rarakuにおける第1-switch文では、case 部でのブロック指定が必須になっていますが、
+			これはまさにこの考え方に準じたものだからです。
+			Rarakuではブロックの力を借りずともvaria/const文はどこにでも書けてしまいますが、
+			このブロックの記述があることで、case内で自然にそのスコープが終端している形にコードを明確化できます。
+<br><br>
+			<a class=MstyDetailLink onClick="MstyUI_selectTab( st_switch_statement_old_1_group_id_ary, 'switch_statement_old_1_btn' );location.href = '#AName_switch_statement_old_1';">Close</a>
+		</div>
+		</span>
+<br><br>
+		case部でのブロック内の処理が終わるとswitch文自体を終了します。
+		これはつまり「}」の部分でC言語で意味でのcase部のbreakが自動的に行われているようなものです。
+<br><br>
+		<div class=box>
+			仮にcase部のブロック内でbreak文を記述した場合、それはswitch文自体に作用するものではなくなります。
+			つまりswitch文の外にループ文があった場合等で、そのループ文を脱出する作用しか持ちません。
+		</div>
+<br>
+		これによりRarakuのcase部ではいわゆるfall-throughのような挙動を勝手には行いません。
+		そのような処理を行いたい場合は後述するfallthrough文を使って明示的に指定します（これはGo言語におけるfallthrough文に似ています）。
+<br><br>
+		第1-switch文ではdefault部の指定でも同様に後ろに必ずブロックを指定しますが、そのブロックにおける「{」と「}」を省略することはできません。
+<br><br>
+		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_switch_statement_old_0_group_id_ary, 'switch_statement_old_0_btn' );location.href = '#AName_switch_statement_old_0';">Close</a>
+	</div>
+	</span>
+<br><br>
+	case部の指定とdefault部の指定は、不要ならばなくても構いません。
+	極端な話、以下のように「switch 条件文」の直後に「;」をつければ、どちらの指定がないようなケースも許されます。
+	（その場合何もしませんので特に意味はない記述にはなりますが）。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+switch ival
+;
+</code></pre>
+	
+	<br>
+	また、以下のようにdefault部の指定はcase部の指定よりも上にあっても構いません
+	（ただしdefault部の指定を二つ以上書くことはできませんから、これより下はすべてcase文だけが来る形になります）。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+switch ival
+default {
+	Rrk_print( "when ival is other\n" )
+}
+case 0 {
+	Rrk_print( "when ival is 0\n" )
+}
+case 1 {
+	Rrk_print( "when ival is 1\n" )
+}
+</code></pre>
+	
+	<br>
+	if文では複数の条件式を次のようにまとめて分岐することができます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+if ival == 0 {
+	Rrk_print( "when ival is 0\n" )
+}: ival == 1 || ival == 2 {
+	Rrk_print( "when ival is 1 or 2\n" )
+}: ival == 3 || ival == 4 {
+	Rrk_print( "when ival is 3 or 4\n" )
+}:{
+	Rrk_print( "when ival is other\n" )
+}
+</code></pre>
+	
+	<br>
+	switch文でもこれに相当する書き方は可能で、次のように「case 候補値リテラル」を連続させて書きます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+switch ival 
+case 0 {
+	Rrk_print( "when ival is 0\n" )
+}
+case 1
+case 2
+{
+	Rrk_print( "when ival is 1 or 2\n" )
+}
+case 3
+case 4
+{
+	Rrk_print( "when ival is 3 or 4\n" )
+}
+default {
+	Rrk_print( "when ival is other\n" )
+}
+</code></pre>
+	
+	<br>
+	あるいは「case 候補値リテラル,候補値リテラル」といった形で「候補値リテラル」を「,」区切りで連続させて書くこともできます
+	（最後の候補値リテラルの後ろのカンマはつけてもつけなくても構いません）。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+switch ival 
+case 0 {
+	Rrk_print( "when ival is 0\n" )
+}
+case 1, 2 {
+	Rrk_print( "when ival is 1 or 2\n" )
+}
+case
+	3,
+	4, /* 最後のカンマはあってもなくてもOK */
+{
+	Rrk_print( "when ival is 3 or 4\n" )
+}
+default {
+	Rrk_print( "when ival is other\n" )
+}
+</code></pre>
+	
+	<br>
+	「候補値リテラル」にはvaria/const文で宣言した変数/定数を指定することはできません
+	（これについてはifより明確に劣る性質になります）。
+	例えば以下のような記述はコンパイルエラーとなります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+const zero = 0
+
+switch ival 
+case zero { /* （整数リテラルではなく）整数定数なのでコンパイルエラー */
+	Rrk_print( "when ival is 0\n" )
+}
+default {
+	Rrk_print( "when ival is other\n" )
+}
+</code></pre>
+	
+	<br>
+	<h3>第2-switch文</h3>
+<br>
+	第1-switch文の記法はブロックの記述が必須であり、そのおかげでスコープの範囲が明確になるという点では理にかなった良い記法だと思うのですが、
+	一方で毎回「{」と「}」を書くのも（特にcaseの数が多い場合）やはり面倒ではあります。
+	Rarakuではこれを少し簡略化して書ける第2-switch文というものがあります。
+	これは以下のような書式になります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">switch 条件式 {
+case 候補値リテラル : 文の集合
+case 候補値リテラル : 文の集合
+…
+default : 文の集合
+}
+</code></pre>
+	
+	<br>
+	この記法はGo言語のswitch文とよく似ています。
+<br><br>
+	第1-switch文との違いはまず「switch 条件式」の直後に「{」を記述するということです。
+	（そもそもRarakuのパーザはここに「case（またはdefault）」が来るのか「{」が来るのかで
+	第1-switch文なのか第2-switch文なのかを判断しています）。
+<br><br>
+	次に「case 候補値リテラル」の書式までは第1-switch文と完全に一緒ですが、
+	第2-switch文ではその直後に（C言語やGo言語などと同様に）「:」を記述します。
+	その後に文の集合を記述しますが、これは第1-switch文でのブロックの中味に相当するものです。
+	このとき第1-switch文では必須だった「{」と「}」の記述は不要になります（書いてもよいですけども）。
+<br><br>
+	ただしここで注意してほしいのは、実際にはこの「文の集合」の前後に暗黙のうちに「{」と「}」が記述されているとみなされるということです。
+	つまりここには（字面には現れませんが本当は）ブロックが存在しています。
+	例えばこの部分に変数の宣言をした場合、その変数のスコープはそのcase内でのみ有効ということです。
+	第2-switch文では「}」がない替わり次の「case（またはdefault）」が来た時点でこのブロックが終了しているとみなします。
+	第1-switch文と同様、ここでbreak文は不要です。
+<br><br>
+	キーワードdefaultの直後でも（C言語やGo言語と同様に）「:」を記述しその後に「文の集合」を記述します。
+	またこの「文の集合」も同様にその前後に暗黙の「{」と「}」が存在しているとみなされます。
+	最後に「}」を書きますが、ここでdefaultのブロックが終了し、同時にswitch文全体も終了となります。
+<br><br>
+	第2-switch文の例は以下のようになります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+switch ival {
+case 0  :
+	Rrk_print( "when ival is 0\n" )
+case 1  :
+	Rrk_print( "when ival is 1\n" )
+case 2  :
+	Rrk_print( "when ival is 2\n" )
+case 3  :
+	Rrk_print( "when ival is 3\n" )
+case 4  :
+	Rrk_print( "when ival is 4\n" )
+default :
+	Rrk_print( "when ival is other\n" )
+}
+</code></pre>
+	
+	<br>
+	この例は第1-switch文の説明で最初に示した例をそのまま第2-switch文で書き換えたものですが
+	やはり「{」と「}」がない分、こちらの方が字面はすっきりしていると思います。
+	そしてどちらかといえばこちらの方がC言語やGo言語により近い記述となっています。
+<br><br>
+	ただ繰り返しますが、第2-switch文の場合、実際には暗黙の「{」と「}」が存在している点には注意してください。
+	例えば以下のように、case 0 と case 1 において同じ名前の（しかし本当は実体は別の）変数 x を宣言できることになります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+switch ival {
+case 0  :
+	varia x = 10
+	Rrk_print( "when ival is 0\n" )
+case 1  :
+	varia x = 20 /* OK: case 0 内とはブロックが異なるため x の重複宣言とはならない */
+	Rrk_print( "when ival is 1\n" )
+default :
+	Rrk_print( "when ival is other\n" )
+}
+</code></pre>
+	
+	<br>
+	念のために補足しますと、上記は実際には第1-switch文で以下のように書いたのと完全に同じです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+switch ival
+case 0 {
+	varia x = 10
+	Rrk_print( "when ival is 0\n" )
+}
+case 1 {
+	varia x = 20 /* OK: case 0 内とはブロックが異なるため x の重複宣言とはならない */
+	Rrk_print( "when ival is 1\n" )
+}
+default {
+	Rrk_print( "when ival is other\n" )
+}
+</code></pre>
+	
+	<br>
+	また見方を変えれば以下のように、case 0 で x を宣言していたとしても、
+	case 1 ではそれはまだ宣言されていない変数とみなされることになります（この場合コンパイルエラーです）。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+switch ival {
+case 0  :
+	varia x = 10
+	Rrk_print( "when ival is 0\n" )
+case 1  :
+	varia y = x /* コンパイルエラー: x はまだ宣言されていない */
+	Rrk_print( "when ival is 1\n" )
+default :
+	Rrk_print( "when ival is other\n" )
+}
+</code></pre>
+	
+	<br>
+	念のために補足しますと、上記は実際には第1-switch文で以下のように書いたのと完全に同じです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+switch ival
+case 0 {
+	varia x = 10
+	Rrk_print( "when ival is 0\n" )
+}
+case 1 {
+	varia y = x /* コンパイルエラー: x はまだ宣言されていない */
+	Rrk_print( "when ival is 1\n" )
+}
+default {
+	Rrk_print( "when ival is other\n" )
+}
+</code></pre>
+	
+	<br>
+	以上が第1-switchと第2-switch文の違いとなります。
+<br><br>
+	それ以外の特徴については第1-switch文と同じです。
+	「候補値リテラル」の記法やcase文やdefaultが書ける順番や位置などのルールも第1-switch文と同じになります。
+	例えば第2-switch文でも「候補値リテラル」を複数同時に指定する場合は以下のように記述できます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+switch ival {
+case 0
+case 1 :
+	Rrk_print( "when ival is 0 or 1\n" )
+case 2, 3, :
+	Rrk_print( "when ival is 2 or 3\n" )
+case
+	4,
+	5,
+	6,
+	:
+	Rrk_print( "when ival is 4 or 5 or 6\n" )
+default :
+	Rrk_print( "when ival is other\n" )
+}
+</code></pre>
+	
+	<br>
+	ただしこれに関して一つ注意事項があります。
+	Rarakuの第2-switch文では「case x :」という形式を連続して記述することは許可されません。
+	例えば以下の例をご覧ください。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+switch ival {
+case 0 : /* コンパイルエラー */
+case 1 :
+	Rrk_print( "when ival is 0 or 1\n" )
+default :
+	Rrk_print( "when ival is other\n" )
+}
+</code></pre>
+	
+	<br>
+	Rarakuではこれはコンパイルエラーとなります。
+	「case 0 :」と「case 1 :」が連続して並んでいるからです。
+<br><br>
+	<div class=box>
+		これがもし「case 0」（コロンがない）と「case 1 :」が並んでいるならば問題ありません（「case 0,1 :」が指定されたのと同じと見なされます）。
+	</div>
+<br>
+	C言語やGo言語に慣れた方ですと一見問題ない文に見えるかもしれません。
+	ですが、このような並びはこれらの言語では全く別の意味で解釈されます。
+	C言語ではこのような並びは直後の処理に対する候補として、0と1が同時に指定されたものとみなされます。
+	一方、Go言語ではこのような並びはそれぞれ独立した候補値として解釈され、「case 0 :」の部分については何も処理されないものとみなされます。
+<br><br>
+	それではRarakuでは、そのどちらで解釈すべきでしょうか？
+	しかしどちらか一方に決めた瞬間、もう一方の言語に慣れたプログラマからすると意図せぬ動作になるかもしれません。
+	結局Rarakuでは両成敗し、このような表記を認めないのが一番安全と判断しました。
+	そのためコンパイルエラーになるようにしています。
+<br><br>
+	代替となる表記はいくつかありますし、これを禁止しても使い勝手も特に問題ないと思います。
+	例えばC言語に近い形で書きたければ以下のように書くこともできます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+switch ival {
+case 0   /* : をつけない */
+case 1   /* : をつけない */
+case 2 : /* 最後は : をつける(改行して:をつけても構いません) */
+	Rrk_print( "when ival is 0 or 1 or 2\n" )
+default :
+	Rrk_print( "when ival is other\n" )
+}
+</code></pre>
+	
+	<br>
+	逆にGo言語に近い形（つまり何もしないような挙動）で書きたければ以下のように書くこともできます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia ival = 2
+
+switch ival {
+case 0 : ;   /* 明示的に ; をつける */
+case 1 : {}  /* 明示的に{} をつける */
+case
+	2,
+	3,
+	: {} /* 明示的に{}をつける */
+case 4 :
+	Rrk_print( "when ival is 4\n" )
+default : /* 一番最後が空文なら特に問題なし */
+}
+</code></pre>
+	
+	<br>
+	「;」や「{}」を付けることでそこに何も文がないことを明示して書きます。
+	これにより「case 0 :」、「case 1 :」等が連続もしませんから、コンパイルエラーも回避できます。
+<br><br>
+	尚、このチュートリアルではこれ以降、第2-switch文を使います。
+	やはりこちらの方が実用上は便利だと考えられるからです。
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section switch_statement_old end -->
+
+
+<a name=file_io_handler_old></a>
+<h1 class="title">ファイル入出力とハンドラ型(obsolete)</h1>
+
+	<h3>ファイルを扱うためのハンドラ</h3>
+<br>
+	OSが管理するデバイスやファイル等の資源にアクセスする場合、システムが提供する専用の関数でそれらをのデバイス/資源をオープンし、
+	そのIDを取得する必要があります。そのようなIDの役割を果たす値の型をRaraku上ではハンドラ型と呼んでいます。
+	ハンドラ型の値の実体は整数ですが、算術演算は一切許可されない点が整数型と違います
+	（ただし「==」「!=」演算子による比較演算は可能です）。
+<br><br>
+	ハンドラ型の変数/定数を<b>ハンドラ</b>と呼びます。
+	ハンドラもまたこれまでの変数/定数と同様varia/const文により宣言できます。
+	ハンドラ型変数/定数には null を格納することもでき、特に変数宣言において明示的な初期化をしない場合はデフォルトでnullが格納されます。
+<br><br>
+	Rarakuが標準で提供しているハンドラ型の一つにRrkFileがあります。
+	以下ではこれを使った例を見てみます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">const fp RrkFile = Rrk_fopen( "test.txt", "rb" )
+if fp != null {
+	varia line string
+	varia text string
+	
+	while Rrk_fgets( line, fp ){
+		text &amp;= line
+	}
+	Rrk_print( text )
+	
+	Rrk_fclose( fp )
+} else {
+	Rrk_print( "Cannot open text.txt\n" )
+}
+</code></pre>
+	
+	<br>
+	この例では、RrkFileがハンドラ型となります。
+<br><br>
+	<div class=box>
+		この例ではわかりやすさのため敢えてRrkFileを付けていますが、
+		実際には以下のようにRrkFileを省略して記述することもできます。
+		これはRrk_fopenがRrkFileを返す関数であることから、const文の型が型推論できるためです。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">const fp = Rrk_fopen( "test.txt", "rb" )
+</code></pre>
+	
+		<br>
+	</div>
+<br>
+	Rrk_fopenは第1引数で与えた名前のファイルをオープンするための関数です。
+	第2引数の"rb"はそのファイルを「読み込みモード」で開くことを意味します。
+	この関数によりそのファイルに関連付けられたハンドラを取得することができます。
+	以降の処理はこのハンドラを介して、関連付けられたファイルに対する様々な処理を行うといった流れになります。
+<br><br>
+	ただしこの関数は失敗する場合もあることに注意してください。
+	その戻り値は、指定したファイルのオープンに成功した場合はそのファイルに関連付けられたハンドラとなりますが、
+	逆にそのオープンに失敗した場合 null となります。
+<br><br>
+	<div class=box>
+		ファイルのオープンに失敗する例を念のため挙げておきます。
+		例えば読み込みモードでファイルを開き、尚且つそこで指定したファイル名のファイルが実際には存在しない場合は
+		そのファイルのオープンに失敗します。
+	</div>
+<br>
+	この例では関数Rrk_fopenの戻り値をハンドラ型変数 fp に代入しています。
+	またその直後でRrk_fopenの成否を判定するため、if 文で fp が null であるか否かを調べています。
+	null でなかった場合、ファイルのオープンに成功していますので if 側のブロックを実行します。
+	逆に null であった場合、ファイルのオープンに失敗していますので else 側のブロックを実行し、
+	エラーメッセージを出力します。
+<br><br>
+	今、ファイルのオープンが成功し、if 側のブロックが実行されるとしましょう。
+	このブロック内の Rrk_fgets( line, fp ) は、テキストファイルから1行ずつ読み込むための標準関数です。
+	ここではハンドラ fp が指し示すファイルの中身をテキストファイルとみなしてそれを行単位で読み込み、
+	その内容をlineに格納しています。
+	このRrk_fgets は現在の行の読み込みに成功した場合は true を返し、次の行にフォーカスを移動します。
+	このようにして一番初めの行から順番に読み続け、ファイルの終端に至ると false を返します。
+	つまりこのとき上記のwhile文も終了します。
+<br><br>
+	その後、Rrk_print( text ) によりその値を表示しています。
+	while文の内部ではそのファイルの全行がtextへと連結されましたので、
+	最終的にtextにはそのファイルの全文が格納されているはずです。
+<br><br>
+	そのファイルに関する処理がすべて終わったら、もはやそのハンドラは不要になりますが、
+	必ず最後にそれをクローズしなければなりません。
+	その（ファイルの）ハンドラをクローズしているのがRrk_fclose( fp )です。
+<br><br>
+	<div class=box>
+		上記の例では、Rrk_fgetsにより取得したlineをtextという一つの大きな文字列に連結していましたが、
+		これを文字列の配列にプッシュする場合は注意が必要です。
+		例えば以下をご覧下さい。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">varia line_ary string[]
+const fp RrkFile = Rrk_fopen( "test.txt", "rb" )
+if fp != null {
+	varia line string
+	
+	while Rrk_fgets( line, fp ){
+		RrkStr_push_bk_cstr( line_ary, line ) /* 注意:Rrk_push_bkは使わないこと */
+	}
+	
+	Rrk_fclose( fp )
+} else {
+	Rrk_print( "Cannot open text.txt\n" )
+}
+/* line_aryを使った処理
+</code></pre>
+	
+		<br>
+		この例では、文字列の配列line_aryを宣言し、
+		Rrk_fgetsにより取得したlineをline_aryに格納しています。
+		この場合、Rrk_push_bkではなく、替わりに<b>RrkStr_push_bk_cstr</b>を使わなければなりません（std/strのインポートが必要です）。
+<br><br>
+		lineの値はline_aryの要素へ<b>ディープコピー</b>しなければなりませんが、Rrk_push_bkの場合はシャローコピーされてしまいます。
+		シャローコピーは単にlineの実体を参照するだけですから、このようにするとline_aryのすべての要素が同じlineの実体を参照することになり、
+		意図しない結果となるでしょう
+		（上記の場合、Rrk_fgetsで最後に取得した値がline_aryの全ての要素に格納されているような結果になると思います）。
+		一方、RrkStr_push_bk_cstrの場合、これがディープコピーされるため、意図した通りの結果になります。
+	</div>
+<br>
+	<h3>if文の条件式で変数宣言も同時に行う特殊記法</h3>
+<br>
+	前項の例ではグローバルスコープにハンドラ型定数fpを宣言しました。
+<br><br>
+	ところでこのときfpが必要になるのは直後のif文のブロック内部だけです。
+	このfpのスコープをこの箇所に限定して書けないものでしょうか？
+	一応以下のように一旦無名ブロックを作り、その中にこの処理を書けばfpのスコープをこの箇所に限定することはできます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">{
+	const fp = Rrk_fopen( "test.txt", "rb" )
+	if fp != null {
+		varia line string
+		varia text string
+	
+		while Rrk_fgets( line, fp ){
+			text &amp;= line
+		}
+		Rrk_print( text )
+	
+		Rrk_fclose( fp )
+	} else {
+		Rrk_print( "Cannot open text.txt\n" )
+	}
+}
+</code></pre>
+	
+	<br>
+	しかしこのようにするとインデントが一段深くなってしまいます。
+	また毎回このように書くのも面倒です。
+<br><br>
+	実はRarakuのif文には、まだ紹介していない別の書式が存在します。
+	それは条件式の部分で変数宣言を同時に行えるといったもので、その書式は「if 識別子 := 初期化式 ; 条件式」となります。
+	この書式を使うと、上記と全く同じ処理を以下のように記述できます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">if fp := Rrk_fopen( "text.txt", "rb" ); fp != null {
+	varia line string
+	varia text string
+
+	while Rrk_fgets( line, fp ){
+		text &amp;= line
+	}
+	Rrk_print( text )
+
+	Rrk_fclose( fp )
+} else {
+	Rrk_print( "Cannot open text.txt\n" )
+}
+</code></pre>
+	
+	<br>
+	if文の条件式の部分の中にいきなり「fp := Rrk_print( "text.txt", "rb" )」という文が入り込んでいますが、
+	この部分においてハンドラ型変数fpを宣言しています。その直後「;」を挟んで条件式が続きます。
+	if文が実際に評価するのはこの後半の条件式になります。またこの書式においては中間の「;」は必須となります。
+<br><br>
+	<div class=box>
+		for文の初期化文の中においてもこのような「:=」を使った記述が可能でしたが、if文における「:=」もあれと同様です。
+		尚、fpの型はRrk_fopenの戻り値がRrkFileであることから自動的に型推論されるため、記述不要です
+		（というより「fp」と「:=」の間にはそれは記述できません。明示的に型を指定したい場合は右辺をその型にキャストし、型推論させます）。
+	</div>
+<br>
+	<div class=box>
+		この書式はgo言語等で導入されているif文の書式と似ています。
+		ただし（C言語風に）以下のように全体を括弧で囲っても構いません（もっともC言語では中に「;」は書けませんけども）。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">if( fp := Rrk_fopen( "text.txt", "rb" ); fp != null ){
+}
+</code></pre>
+	
+	</div>
+<br>
+	上の例は一つ前の例と全く同じですから、fpのスコープはif側のブロックから始まり、else側のブロックまでとなります
+	（else側のブロックからでもこのfpが使用可能です）。
+	else側のブロック終了後はfpのスコープも終了します。
+<br><br>
+	<div class=box>
+		同様の記述をelif文に書くことも可能です。
+		例えば以下の通りです（あまり面白くない例ですが）。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">if     x := 10; x {
+	Rrk_print( "if:"   \=x \n )
+} elif y := 20; y {
+	Rrk_print( "elif:" \=x \, \=y \n )
+} else {
+	Rrk_print( "else:" \=x \, \=y \n )
+}
+</code></pre>
+	
+		<br>
+		上記ではif文でまず変数xが宣言され、次にelif文で変数yが宣言されます。
+		このときelif文やelse文のブロック内では変数xとyの両方にアクセスできます。
+		一方、if文のブロック内では変数yにはアクセスできないことに注意してください。
+		if文のブロックの時点ではまだ変数yは宣言されていないからです。
+		これは結局以下のように書いたのと結果的には同じです。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">{
+	varia x = 10
+	if x {
+		Rrk_print( "if:"   \=x \n )
+	} else {
+		varia y = 20
+		if y {
+			Rrk_print( "elif:" \=x \, \=y \n )
+		} else {
+			Rrk_print( "else:" \=x \, \=y \n )
+		}
+	}
+}
+</code></pre>
+	
+		<br>
+		<div class=box>
+			ユーザにとっては全く関係のない話ですが、Rarakuコンパイラの内部処理では、
+			このようにelif文が追加されるたびにブロック階層が深くなっていくわけではなく、
+			一番外側のブロックとif-elif-else自身のブロックだけで上記と同じスコープをうまくエミュレートできるように解析を行っています。
+		</div>
+<br>
+		では、この書式を用いてif文とelif文で同じ名前の変数を宣言した場合、何が起きるのでしょうか？
+		例えば次をご覧ください。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">if     x := 10; false {
+	Rrk_print( "if:"   \=x \n )
+} elif x := 20; true {
+	Rrk_print( "elif:" \=x \n )
+} else {
+	Rrk_print( "else:" \=x \n )
+}
+</code></pre>
+	
+		<br>
+		上記ではif文、elif文ともにxが宣言されています。
+		Rarakuでは上記のような場合、最初に現れたxは宣言、2度目以降に現れたxは代入文とみなします。
+		つまり、上記のelif文におけるxで新しい変数xが宣言されるわけではなく、if文で宣言したxが再利用され、
+		その値が20に更新されるということです。
+		従って上記の実行結果は「elif: x=20」と表示されます。
+		これは結局以下のように書いたのと同じです。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">{
+	varia x = 10
+	if false {
+		Rrk_print( "if:"   \=x \n )
+	} else {
+		x = 20 /* ここは代入文になる */
+		if true {
+			Rrk_print( "elif:" \=x \ \n )
+		} else {
+			Rrk_print( "else:" \=x \ \n )
+		}
+	}
+}
+</code></pre>
+	
+		<br>
+		<div class=box>
+			とはいえ、if-elif-elseの性質を考えてみれば、
+			elifにおいて「varia x = 20」のように新しい実体が宣言されるのと「x = 20」のように既にある実体が再利用されるのとは、
+			結局同じことです（メモリの増減や速度もこの場合ほとんど差はないでしょう）。
+			ここで特に代入文に展開する仕様になっているのは、Rarakuコンパイラの内部処理側の都合です。
+		</div>
+	</div>
+<br>
+	<h3>handler文</h3>
+<br>
+	ハンドラ型はhandler文を用いて「handler ハンドラ型名」といった書式で宣言されます。
+<br><br>
+	例えばRarakuがデフォルトで提供しているハンドラ型の一つである RrkBird は rrk_pkg/std/bird.rrkh 内で以下のように宣言されています。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">handler RrkBird
+</code></pre>
+	
+<br>
+	一方、先ほど見たハンドラ型 RrkFile は rrk_pkg/std/core.rrkh 内で以下のように宣言されています。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">handler RrkFile
+</code></pre>
+	
+<br>
+	<div class=box>
+		rrk_pkg/std/core.rrkh は特別なヘッダであり、すべてのRarakuプログラムでデフォルトでインポートされます。
+		つまりインポート文でこれを明示的にインポート（import std/core）する必要はありません。
+		逆に「import std/core」というインポート文を明示的に書いても特に問題はないですが、
+		Rarakuでは多重にインポートされることはないため、それは実質的には効果を持たない文になります。
+	</div>
+<br>
+	RrkBirdとRrkFileはどちらもハンドラ型の一種ではありますが、その型名が異なるため両者に互換性はありません。
+	つまり前者を後者に代入したりその逆を行うことはできません（そのような記述をするとコンパイルエラーとなります）。
+<br><br>
+	ハンドラ型は通常、Rarakuが提供するネイティブ関数の戻り値を受けるために使用されることが多いです。
+	そのためプログラマがhandler文を使ってハンドラ型を独自に定義/宣言することはあまりないかもしれません。
+	例えばRrkFileの場合、内部的にはC言語におけるファイルポインタ（FILE*) そのものになっており、
+	Raraku上ではそれをhandler文で宣言したRrkFileという名前の型として受け、それを使いまわす形になっています。
+<br><br>
+	<div class=box>
+		ちなみにRarakuではネイティブ関数を自作することもできますが、
+		その方法はこの入門編のレベルを超えますのでここでは割愛します。
+	</div>
+<br>
+	<h3>handler型をif文等の条件式や論理演算子に適用した場合の簡略記法</h3>
+<br>
+	一般にbool型変数にhandler型の値を代入することはできませんが、
+	if文などの条件分岐やwhile文などのループ文における条件式、あるいは論理演算子（「&amp;&amp;」「||」「!」）では、
+	例外的にhandler型を単独で指定できます（これは整数などの場合と同様です）。
+<br><br>
+	このとき、そのhandler型変数がnull以外の値に等しいならば true、null値に等しいならば false と評価されます。
+	例えば以下の例をご覧ください。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">const fp = Rrk_fopen( "test.txt", "rb" ) /* fp は RrkFile handler型 */
+if fp { /* if fp != null { と記述したのと全く同じ */
+	varia line string
+	varia text string
+	
+	while Rrk_fgets( line, fp ){
+		text &amp;= line
+	}
+	Rrk_print( text )
+	
+	Rrk_fclose( fp )
+} else {
+	Rrk_print( "Cannot open text.txt\n" )
+}
+</code></pre>
+	
+	<br>
+	ここで「if fp {」と記述した部分は「if fp != null{」と全く同じ意味になります。
+	「if !fp {」と記述した場合はこの対応が真逆になります（つまり「if fp == null{」と全く同じです）。
+<br><br>
+	その他「if fp1 &amp;&amp; fp2 {」、「if fp1 || fp2 {」などと記述することも可能で、
+	その場合も各ハンドラ型変数がnull値に等しいか否かで同様にbool値として評価されます。
+<br><br>
+	尚、この簡略記法と「:=」を用いた記法を組み合わせて以下のように記述することもできます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">if fp := Rrk_fopen( "test.txt", "rb" ); fp {
+	varia line string
+	varia text string
+	
+	while Rrk_fgets( line, fp ){
+		text &amp;= line
+	}
+	Rrk_print( text )
+	
+	Rrk_fclose( fp )
+} else {
+	Rrk_print( "Cannot open text.txt\n" )
+}
+</code></pre>
+	
+	<br>
+	さらに「:=」によって宣言された変数の識別子が、「;」の直後にただ一つだけある場合に限り、
+	後ろの「条件式」の部分を省略できます（ただしその場合でも「;」自体は省略できません）。
+	上の例での fp がまさにそれであり、「;」の直後の「fp」を省略できます。
+	つまり上の例と全く同じ処理を以下のように書くこともできます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">if fp := Rrk_fopen( "test.txt", "rb" ); {
+	varia line string
+	varia text string
+	
+	while Rrk_fgets( line, fp ){
+		text &amp;= line
+	}
+	Rrk_print( text )
+	
+	Rrk_fclose( fp )
+} else {
+	Rrk_print( "Cannot open text.txt\n" )
+}
+</code></pre>
+	
+	<br>
+	<a name=AName_file_io_handler_old_0></a><script type="text/javascript">var st_file_io_handler_old_0_group_id_ary = [ "file_io_handler_old_0" ];</script>
+<a class=MstyDetailLink id=file_io_handler_old_0_btn onClick="if( MstyUI_selectTab( st_file_io_handler_old_0_group_id_ary, this.id ) ){location.href = '#AName_file_io_handler_old_0';}">参考: 「;」を省略できない仕様にしている理由</a>
+<span id=file_io_handler_old_0 class=MstyUnvisible>
+	<div class=box>
+		Rarakuでは（C言語のように）「=」を使った代入文をif文の条件式に書くことはできませんが、
+		上で述べたように「:=」を使った宣言であれば、それと似たように記述することが可能です
+		（ただし「:=」は代入ではなく新規の変数の宣言とその初期化を行う演算子となります）。
+<br><br>
+		この記述において「;」も省略できる仕様にしてもよさそうに思えますが、
+		Rarakuではこの場合の「;」の記述は必須にしてあります。
+		これは例えば以下のように論理演算子「&amp;&amp;」や「||」をうっかり組み合わせて使った場合、
+		コンパイルエラーとするためです。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">if x := 10 &amp;&amp; y == 20 { /* コンパイルエラー: 「;」がない */
+	/* something */
+}
+</code></pre>
+	
+		<br>
+		おそらくこのように記述した場合、x と y の論理積を取る意図での記述だと思います。
+		しかし実際にはこれは「10 &amp;&amp; y == 20」の部分が「x :=」の右辺値としてまとめて解釈されてしまいます。
+		すなわち、仮にこの記述がコンパイルエラーとならなかった場合、以下の記述と同じになります。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">if x := ( 10 &amp;&amp; y == 20 ); {
+	/* something */
+}
+</code></pre>
+	
+		<br>
+		とはいえ「;」をつけた場合でも結局以下のように似たような記述は書けてしまいます。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">if x := 10 &amp;&amp; y == 20; {
+	/* something */
+}
+</code></pre>
+	
+		<br>
+		ただ少なくとも「;」が字面上に現れない場合よりも、この方が変数宣言部の終わりが明確化され、
+		プログラマが条件式を省略して書いているという意図も幾分はっきりします。
+		そのような理由で「;」が必須となっています。
+<br><br>
+		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_file_io_handler_old_0_group_id_ary, 'file_io_handler_old_0_btn' );location.href = '#AName_file_io_handler_old_0';">Close</a>
+	</div>
+	</span>
+<br><br>
+	さて、ここまでの例では、使い終わったファイルハンドルをクローズするために Rrk_fclose( fp ) を<b>一番最後</b>に呼び出していました。
+	これを忘れずに呼び出すなら何の問題もないのですが、
+	しかし<b>一番最後</b>という位置は書き忘れを生じやすいものです。
+<br><br>
+	実際のプログラミングでは Rrk_fclose はdefer文といっしょに使うのが望ましいでしょう。
+	これを使えば Rrk_fopen を記述した位置とほとんど同じ位置にRrk_fcloseを記述でき、この方が書き忘れが生じにくくなります。
+	defer文については次のセクションで詳しく説明しますので、是非とも合わせてお読みください。
+<br><br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section file_io_handler_old end -->
+
+
+<a name=object_oriented_old></a>
+<h1 class="title">Rarakuにおけるオブジェクト指向(for ~.)(obsolete)</h1>
+
+	Rarakuでは他の一般的なオブジェクト指向プログラミング言語に比べ、そのためだけの特別な構文はほとんど用意されておらず、
+	Rarakuでそれを行うためには、若干工夫する必要があります。
+<br><br>
+	<h3>クラスとメソッド</h3>
+<br>
+	クラスは構造体、メソッドはその構造体内に関数型のメンバを持たせることで実現します。
+	このときデフォルトメンバ初期化子の右辺に無名関数を与えると便利でしょう。
+	例えば以下のようになります。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">struct MyClass {
+	/* publicメンバm */
+	m = 0;
+
+	/* メソッドgetM */
+	getM = ^fun( self MyClass ) int { 
+		return self.m
+	}
+	/* メソッドsetM */
+	setM = ^fun( self MyClass, m int ){ 
+		self.m = m
+	}
+}
+varia myc MyClass = {} /* クラスのインスタンス */
+varia x int
+
+x = myc.~getM() /* メソッド呼び出し: 「x = myc.getM( myc )」 と書いたのと同じ */
+myc.~setM( 6 )  /* メソッド呼び出し: 「myc.setM( myc, 6 )」  と書いたのと同じ */
+</code></pre>
+	
+<br>
+	上の例では、構造体MyClassのgetMとsetMメンバをメソッドと見立てることができます。
+	無名関数でメソッドの実体を定義していますが、ここでこの無名関数の第1番目の引数の型を必ずMyClass型にします（引数の名前は何でも構いませんが、慣用的に使われる名前としてselfかthisが良いでしょう）。
+	そしてこの第1番目の引数をいわゆるクラスの自己とみなし、メンバへのアクセスはこれを介して記述します（上の例では「self.m」）。
+<br><br>
+	一方、外部からのメソッド呼び出しは「.~」演算子を用いて「クラスのインスタンス.~メソッド名( ... )」のように記述します。
+	例えばgetMを呼び出す場合は「myc.~getM()」、setMを呼び出す場合は「myc.~setM( 6 )」のように呼び出します。
+	このとき、「.~」演算子の右側の引数の指定は、構造体内の関数定義における第1番目の指定をスキップし、第2番目の引数から指定します（例えばmyc.~setM( 6 )など）。
+	構造体内の関数定義において第2番目の引数がない場合は、「.~」の右側の引数の指定は空となります（例えばmyc.~getM()など）。
+<br><br>
+	これは「.~」演算子の左側に来るクラスのインスタンスが第1番目の引数として暗黙のうちに与えられているのと同じようなものです。
+	抽象化した公式のように書くとするならば「X.~Y(...)」という記述は、「X.Y(X, ...)」という記述とほぼ同じといった感じになります。
+	例えば「myc.~getM()」は、替わりに「.」演算子を用いて「myc.getM( myc )」のように記述したのと同じになります。
+	また「myc.~setM( 6 )」も同様に「myc.setM( myc, 6 )」のように記述したのと同じになります。
+	「.」演算子の替わりに「.~」演算子を使うことで、このmycを2回書く手間が省けます。
+<br><br>
+	<div class=box>
+		ただし厳密に言えば「X.~Y(...)」と「X.Y(X, ...)」は全く同じではありません。
+		例えば以下のコードをご覧ください。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">struct MyClass {
+	/* publicメンバm */
+	m = 0;
+
+	/* メソッドgetM */
+	getM = ^fun( self MyClass ) int { 
+		return self.m
+	}
+	/* メソッドsetM */
+	setM = ^fun( self MyClass, m int ){ 
+		self.m = m
+	}
+}
+
+function getClass()-&gt;{
+	static varia st_myc MyClass = {}
+	Rrk_print( "getClass\n" )
+	return st_myc
+}
+
+varia x int
+x = getClass().~getM()            /* 「.~」によるメソッド呼び出し */
+x = getClass().getM( getClass() ) /* 「.」による関数型変数の直接呼び出し */
+</code></pre>
+	
+<br>
+		上の例ではgetClass()を用いてクラスのインスタンスを指定していますが、
+		「.~」を用いたメソッド呼び出しの場合はgetClass関数が実行されるのは１回になります。
+		それに対して「.」による関数型変数の直接呼出しの方ではgetClass関数が実行されるのは２回になります。
+		従ってより正確には、「.~」を用いたメソッド呼び出しは以下のように、一旦一時変数tmpにgetClassの結果を格納し、
+		そのtmpに対して「tmp.getM( tmp )」のように記述したのと同じになります。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">varia x int
+varia tmp = getClass()
+x = tmp.getM( tmp ) /* 「.」による関数型変数の直接呼び出し */
+</code></pre>
+	
+<br>
+	</div>
+<br>
+	<div class=box>
+		「.~」演算子では「X.~Y」といったように「( )」を省略して書くことができます。
+		このとき、Y がメソッドか（関数ではない）通常の構造体のメンバかによって、この演算子のふるまいが変わります。
+		もしも Y がメソッドならば「X.~Y( )」と引数なしで指定したのと同じ意味になり、つまりメソッド呼び出しになります。
+		Yが（関数ではない）通常の構造体のメンバならば、「X.Y」と指定したのと同じ意味になり、
+		単なる構造体のメンバへのアクセスとなります。
+		ちなみに「.」演算子で「X.Y」と指定した場合は、Yがメソッドであるかどうかに関わらず、それは常に構造体のメンバYへの直接のアクセスとなります。
+<br><br>
+		また「X.Y」は左辺値となることができますが、「X.~Y」は左辺値となることができません。
+		つまり「X.Y=10」といった代入文は記述可能ですが、「X.~Y=10」といった代入文を書いた場合はコンパイルエラーとなります。
+<br><br>
+		この性質を利用して、メンバにRead Onlyでアクセスする場合は常に「X.~Y」と記述するポリシーにしておくとよいかもしれません。
+		このようにしておくと、仮にメンバ Y を「function Y( self MyClass ) int」といったアクセサ Y （引数のない関数）に変更した場合でも
+		これを使っている側のコード内の「X.~Y」という記述を変更しなくて済みます。
+	</div>
+<br>
+	メソッドといっても構造体内のメンバは本当は関数型の変数に過ぎませんから、例えば以下のようにそれを別の関数型変数に代入し、
+	それを介して呼び出すことも可能です（ただしその場合は通常の関数呼び出しになりますから、第1引数の指定も必要です）。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">struct MyClass {
+	/* publicメンバm */
+	m = 0;
+
+	/* メソッドgetM */
+	getM = ^fun( self MyClass ) int { 
+		return self.m
+	}
+	/* メソッドsetM */
+	setM = ^fun( self MyClass, m int ){ 
+		self.m = m
+	}
+}
+varia myc MyClass = {} /* クラスのインスタンス */
+varia x int
+
+const setM = myc.setM /* 構造体のメンバsetMを別の関数型変数へ代入 */
+setM( myc, 7 ) /* 通常の関数呼び出し（「myc.~setM( 7 )」と同じ）*/
+</code></pre>
+	
+<br>
+	最後の行をご覧頂くとお分かりかと思いますが、このようにすると結局「.~」演算子を使って「myc.~setM( 7 )」と記述する替わりに「setM( myc, 7 )」と記述できます。
+	つまりこのようにすると「.~」演算子を使わずともmycを１回書くだけで済むようにすることはできます。
+	ただし場合によっては構造体がある種の名前空間のように働き、それに関数を包むことにより関数名の衝突を避けられる効果もあります。
+	後者の書き方ではその効果が失われることになりますが、名前衝突の恐れのないローカルなコンテキストでは後者の書き方でもよいでしょう。
+<br><br>
+	<h3>継承とポリモルフィズム</h3>
+<br>
+	Rarakuではいわゆる継承の機能は提供されません。
+	しかし構造体に親子関係を持たせることができますので、親の方をいわゆるインターフェースのようなものとして扱うことはできます。
+	ただしこの場合、親と子で共通に保有するメンバであっても、子ではそれを省略せずすべて記述しなければなりません。
+	また子の初期化において親の初期化処理に相当するものが自動的に行われるといったこともありません。
+	つまりRarakuではいわゆる差分プログラミングはできません。
+<br><br>
+	またポリモルフィズムに関しては、親と同じ関数型メンバを子に保有させ、子においてそのメソッドを実装します。
+	子のインスタンスを親の構造体へ代入し、そこからそのメソッドを呼び出した場合は子のメソッドが呼ばれることになります。
+	親のメソッドを明示的に呼び出したい場合はまず親のインスタンスを作り、そのメソッドを（「.」演算子を使って）子を引数に指定して呼び出すことになります。
+<br><br>
+	「無名関数」のセクションで挙げた例をこれらを使って書くと以下のようになります（ただし若干挙動を修正しています）。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">/* 抽象化可能な処理 */
+
+struct Animal { /* super class */
+	name conststr;
+	bark = ^fun( self Animal ){
+		Rrk_print( self.name " says ..." \n )
+	}
+}
+
+function actionAll( anim_ary Animal[] )
+{
+	foreach anim : anim_ary {
+		anim.~bark()
+	}
+}
+
+/* 具体的な実装 */
+
+struct Dog : Animal {
+	name = "Dog";
+	bark = ^fun( self Animal ){
+		Rrk_print( self.name " says " "Bow wow!\n" )
+	}
+}
+struct Cat : Animal {
+	name = "Cat";
+	bark = ^fun( self Animal ){
+		Rrk_print( self.name " says " "Meow meow!\n" )
+
+		varia super Animal = {}
+		super.bark( self ) /* 親のメソッドを子を引数として呼び出す */
+	}
+}
+struct Mouse : Animal {
+	name = "Mouse";
+	bark = ^fun( self Animal ){
+		Rrk_print( self.name " says " "Squeak squeak!\n" )
+		varia mouse Mouse = self-&gt;Mouse /* downcast */
+		if mouse {
+			Rrk_print( "  I like " mouse.favorite \n )
+		}
+	}
+	favorite = "Cheese";
+}
+
+/* 実際の使用 */
+
+varia st_anim_ary Animal[]
+{
+	varia a Dog = {}
+	Rrk_push_bk( st_anim_ary, a )
+}
+{
+	varia a Cat = {}
+	Rrk_push_bk( st_anim_ary, a )
+}
+{
+	varia a Mouse = {}
+	Rrk_push_bk( st_anim_ary, a )
+}
+
+/* actionAllの実行 */
+actionAll( st_anim_ary )
+</code></pre>
+	
+<br>
+	この例の実行結果は以下のようになります。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-bash">Dog says Bow wow!
+Cat says Meow meow!
+Cat says ...
+Mouse says Squeak squeak!
+  I like Cheese
+</code></pre>
+	
+<br>
+<br><br>
+	<h3>カプセル化（ファイルスコープの分離を利用）</h3>
+<br>
+	構造体内のメンバやメソッドは、必要なものを除いては他のファイル等から直接アクセスできないようにするべきです。
+	これをカプセル化と呼びます。
+	Rarakuでは構造体に親子関係を持たせ、子の構造体の方に他からは非公開となる内部実装を書き、それを実装ファイル内だけに閉じ込めます。
+	また他のファイルへの公開部分となるインターフェースをヘッダファイルに書くことでカプセル化を実現できます。
+<br><br>
+	まず以下のようにインターフェースを記述したヘッダを作成します（これをanimal.rrkhとしましょう）。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">/* インターフェース */
+
+functype FuncT_Bark( self Animal ) void
+
+struct Animal { /* super class */
+	name conststr;
+	bark FuncT_Bark;
+}
+
+function Animal_actionAll( anim_ary Animal[] )
+{
+	foreach anim : anim_ary {
+		anim.~bark()
+	}
+}
+
+struct Dog : Animal {
+	name conststr;
+	bark FuncT_Bark;
+	run  = ^fun( self Dog ){}
+}
+global Dog_create() Dog
+
+struct Cat : Animal {
+	name conststr;
+	bark FuncT_Bark;
+}
+global Cat_create() Cat
+
+struct Mouse : Animal {
+	name conststr;
+	bark FuncT_Bark;
+	setFavorite = ^fun( self Mouse, favorite conststr ){}
+}
+global Mouse_create() Mouse
+</code></pre>
+	
+<br>
+	Animalが一番トップに来る親であり、その子としてDog、Cat、Mouseなどがあります。
+	今回はそのDog、Cat、MouseにもさらにDogImpl、CatImpl、MouseImplという子が存在しますが、
+	それはこのヘッダ内には記述しません。
+	またこれらのDog、Cat、Mouse構造体のインスタンスは通常の構造体のように直接「={}」などで実体化して使うのではなく、
+	必ずDog_create、Cat_create、Mouse_create という関数（コンストラクタと呼ばれます）を使って実体化するものとします。
+	例えば以下のようなエントリーファイル（これをmain.rrksとしましょう）を作ってこのクラスを使用する形になるでしょう。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">/* 実際の使用 */
+
+import animal
+
+varia st_anim_ary Animal[]
+
+Rrk_push_bk( st_anim_ary, Dog_create() )
+Rrk_push_bk( st_anim_ary, Cat_create() )
+Rrk_push_bk( st_anim_ary, Mouse_create() )
+
+/* actionAllの実行 */
+Animal_actionAll( st_anim_ary )
+</code></pre>
+	
+<br>
+	最後にDogImpl、CatImpl、MouseImplという子、およびそれらを生成するDog_create、Cat_create、Mouse_create 関数の具体的な実装ですが、
+	これは別途ファイルを用意し（これを animal.rrks としましょう）、その中だけに閉じ込めて記述します。
+	このファイルはユーティライズファイルとなりますので「utilize」キーワードを指定します。
+	例えば以下のようになります。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">/* 具体的な実装 */
+utilize
+import animal
+
+struct DogImpl : Dog {
+	/* common */
+	name = "Dog";
+	bark = ^fun( self Animal ){
+		Rrk_print( self.name " says " "Bow wow!\n" )
+		varia impl Dog = self-&gt;Dog /* downcast */
+		if impl {
+			impl.~run()
+		}
+	}
+
+	/* public */
+	run = ^fun( self Dog ){ 
+		varia impl DogImpl = self-&gt;DogImpl /* downcast */
+		if impl {
+			Rrk_print( self.name " is running! stamina : " impl.stamina \n )
+			if impl.stamina &gt; 0 {
+				--impl.stamina;
+			}
+		}
+	}
+
+	/* private */
+	stamina = 100;
+}
+global Dog_create() Dog
+{
+	varia a DogImpl = {} ..a
+}
+
+struct CatImpl : Cat {
+	/* common */
+	name = "Cat";
+	bark = ^fun( self Animal ){
+		Rrk_print( self.name " says " "Meow meow!\n" )
+		varia impl CatImpl = self-&gt;CatImpl /* downcast */
+		if impl {
+			impl.~sleep()
+		}
+	}
+
+	/* private */
+	sleep = ^fun( self Cat ){ 
+		Rrk_print( "  " self.name " is sleeping...\n" )
+	}
+}
+global Cat_create() Cat
+{
+	varia a CatImpl = {} ..a
+}
+
+struct MouseImpl : Mouse {
+	/* common */
+	name = "Mouse";
+	bark = ^fun( self Animal ){
+		Rrk_print( self.name " says " "Squeak squeak!\n" )
+		varia impl MouseImpl = self-&gt;MouseImpl /* downcast */
+		if impl {
+			Rrk_print( "  I like " impl.favorite \n )
+		}
+	}
+
+	/* public */
+	setFavorite = ^fun( self Mouse, favorite conststr ){ 
+		varia impl MouseImpl = self-&gt;MouseImpl /* downcast */
+		if impl {
+			impl.favorite = favorite
+		}
+	}
+
+	/* private */
+	favorite = "Cheese";
+}
+global Mouse_create() Mouse
+{
+	varia a MouseImpl = {} ..a
+}
+</code></pre>
+	
+<br>
+	この例の実行結果は以下のようになります。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-bash">Dog says Bow wow!
+Dog is running! stamina : 100
+Cat says Meow meow!
+  Cat is sleeping...
+Mouse says Squeak squeak!
+  I like Cheese
+</code></pre>
+	
+<br>
+<br><br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section object_oriented_old end -->
+
+
+<a name=func_guard></a>
+<h1 class="title">グローバルスコープにおける関数呼び出しの制限</h1>
+
+	既に述べたようにRaraku言語ではグローバルスコープにおいても関数を呼び出すことができます。
+	ただしこれはどんな場合でも可能というわけではなく、複雑な制限があります。
+<br><br>
+	まず用語を定義しましょう。
+	以下の説明では、<b>グローバルスコープ</b>においてそのファイルで一番最初（一番上）にある<b>通常の関数呼び出し</b>のことを
+	<b>最初の関数呼び出し(First function call)</b>と呼びます（ただしネイティブ関数は含みません）。
+	またグローバルスコープにおいて関数呼び出しが一つもないならば<b>最初の関数呼び出しが存在しない</b>と呼びます。
+<br><br>
+	Rarakuでは最初の関数呼び出しが存在し、かつそれがなんらかの関数定義よりも前に存在する場合、
+	その関数呼び出しと同じ文（その関数呼び出しが所属する文）が<b>varia/const/refer文</b>であってはいけません。
+	また最初の関数呼び出しが存在し、かつそれがなんらかの関数定義よりも前に存在する場合、
+	その関数呼び出しとその（後ろにある）関数定義の間に<b>varia/const/refer文</b>が存在してははいけません。
+<br><br>
+	この説明だけではよくわからないと思いますので、以下でいくつかの例を出して説明します。
+<br><br>
+	まず一番簡単な例からいきましょう。
+	例えば次のようにすべての関数定義より後に最初の関数呼び出しが存在するなら、そもそもこの制限を考える必要もなく問題ありません。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">function getInt() int
+{
+	return 9
+}
+varia ival int
+
+function my_func() void
+{
+	/* something */
+}
+/* これ以降関数定義はないものとする */
+
+ival = getInt() /* 最初の関数呼び出しはすべての関数定義より後なのでOK. */
+</code></pre>
+	
+<br>
+	あるいはすべてのvaria/const/refer文が最初の関数呼び出しより前にあるか、
+	最後の関数定義より後ろにあるならばこれも問題ありません。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">varia ival1 int /* OK: 最初の関数呼び出しmy_func()より前のvaria文である */
+varia ival2 int /* OK: 最初の関数呼び出しmy_func()より前のvaria文である */
+
+function getInt() int
+{
+	return 9
+}
+varia ival3 int /* OK: 最初の関数呼び出しmy_func()より前のvaria文である */
+
+my_func() /* 最初の関数呼び出し */
+
+function my_func() void
+{
+	/* something */
+}
+/* これ以降関数定義はないものとする */
+
+varia ival int /* OK: 最後の関数定義より後にあるvaria文である */
+</code></pre>
+	
+<br>
+	面倒であれば、常に上記のように書かなければならないと考えて頂いても構わないと思いますが、
+	ここから少し細かいルールを見ていきます。
+	例えば以下の例はコンパイルエラーとなります。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">function getInt() int
+{
+	return 9
+}
+
+/* NG! my_func関数の定義より前に最初の関数呼び出しが存在し、かつそれが所属する文がvaria文である */
+varia ival int = getInt()
+
+function my_func() void
+{
+	/* something */
+}
+</code></pre>
+	
+<br>
+	上記の例ではmy_funcという関数定義より前に最初の関数呼び出し（getInt関数の呼び出し）が存在しており、
+	しかもそれが所属する文がvaria文であるため、NGとなります。
+<br><br>
+	また以下の例はコンパイルエラーとなります。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">function getInt() int
+{
+	return 9
+}
+
+getInt() /* 最初の関数呼び出し */
+
+/* NG! my_func関数の定義と最初の関数呼び出しの間にあるvaria文である */
+varia ival int = 9
+
+function my_func() void
+{
+	/* something */
+}
+</code></pre>
+	
+<br>
+	上記の例ではmy_funcという関数定義より前に最初の関数呼び出し（getInt関数の呼び出し）が存在しており、
+	しかもその下にあるvaria文がmy_funcの関数定義より上にある（最初の関数呼び出しと関数定義の間に挟まれている）ため、NGとなります。
+<br><br>
+	ただしこの制限には例外があります。
+	これまでの説明での「最初の関数呼び出し」とはあくまで「通常の」関数の呼び出しであり、
+	ネイティブ関数の呼び出しは「最初の関数呼び出し」とはみなされません。
+	例えは以下の例はOKです。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">// natvfunc RrkSys_getCPUBit() int /* ネイティブ関数 */
+
+function getInt() int
+{
+	return 9
+}
+
+varia cpu_bit int = RrkSys_getCPUBit() /* OK : これはネイティブ関数であるため「最初の関数呼び出し」とはみなされない */
+
+varia ival int = 9 /* OK: 「最初の関数呼び出し」はまだ発生していない */
+
+ival = getInt() /* 最初の関数呼び出し */
+
+function my_func() void
+{
+	/* something */
+}
+</code></pre>
+	
+<br>
+	上の例では、最初の関数呼び出しは getInt() であることに注意してください（ネイティブ関数RrkSys_getCPUBitではありません）。
+<br><br>
+	念のために補足しますが、これはあくまでグローバルスコープでの制限です。
+	関数内においてはこのような制限は一切ありません。
+	例えば以下の例は、my_func関数の定義より前にvaria文(ivalの宣言)、getInt関数の呼び出しがありますが、
+	それはmain関数内でのことなのでこの制限とは全く関係なくOKです。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">function getInt() int
+{
+	return 9
+}
+function main() void
+{
+	/* OK: ここはグローバルスコープではなく関数内である */
+	varia ival int = getInt()
+}
+function my_func() void
+{
+	/* something */
+}
+</code></pre>
+	
+<br>
+	また関数外であっても以下のようにconst/varia/refer文がグローバルブロックの内側にあるものについては、
+	最初の関数呼び出しと関数定義の間に挟まれているとは<b>みなされません</b>。
+	つまり以下のような場合もOKです。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">function getInt() int
+{
+	return 9
+}
+getInt() /* 最初の関数呼び出し */
+{
+	/* OK: 最初の関数呼び出しとmy_func関数の定義の間にあるvaria文ではあるが、ブロック内である */
+	varia ival int
+}
+function my_func() void
+{
+	/* something */
+}
+</code></pre>
+	
+<br>
+	念のために補足しますが、上の例と反対の関係、つまり以下のように最初の関数呼び出しの方だけがブロック内にある場合は
+	（const/varia/refer文の方がグローバルスコープにあるため）、コンパイルエラーとなります。
+<br><br>
+	
+	
+<pre class=hljs><code class="language-raraku">function getInt() int
+{
+	return 9
+}
+{
+	getInt() /* 最初の関数呼び出し（グローバルなブロックにある場合でも「最初の関数呼び出し」とみなされる） */
+}
+/* NG: 最初の関数呼び出しとmy_func関数の定義の間にあるvaria文であり、コンパイルエラー */
+varia ival int
+function my_func() void
+{
+	/* something */
+}
+</code></pre>
+	
+<br>
+<div class=box>
+	このようにかなり複雑な制限を設けたのは、グローバル変数が未初期化の状態で関数呼び出しが行われ、
+	かつ呼び出された関数内でその未初期化であるグローバル変数にアクセスする可能性を排除するためです。
+</div>
+<br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section func_guard end -->
+
+
+
+<div class="card">
+	<u><b>This article was written by:</b></u><br>
+	<div class="card-content">
+		<div class="media">
+			<div class="media-left">
+				<figure class="image is-48x48">
+				<img src="/imgs/moai.png" alt="none image">
+				</figure>
+			</div>
+			<div class="media-content">
+				<p class="title is-4">Mr.Moai</p>
+				<p class="subtitle is-6">@znk project</p>
+			</div>
+		</div>
+		<div class="content">
+		  <time datetime="2016-1-1">2022/03/17</time>
+		</div>
+	</div>
+</div>
+
+
+
+<a name=Link></a>
+<h1 class="title"></h1>
+<hr>
+<ul>
+	<li><a class=MstyElemLink href=#TopBar>一番上へ</a></li>
+	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moaiドキュメント(オンライン)</a></li>
+	<li><a class=MstyElemLink href=https://github.com/mr-moai-2016/znk_project>znk_project(github)</a></li>
+</ul><br>
+
+
+
+</div>
+</div>
+</div>
+</body>
+</html>

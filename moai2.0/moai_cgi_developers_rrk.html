@@ -1,0 +1,4228 @@
+<!DOCTYPE html>
+<html><!-- master template moai -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-type" content="text/html" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type"  content="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="/msty.css"  rel="stylesheet" type="text/css" />
+	<link href="/bulma.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
+	<link rel="stylesheet" href="/js/highlightjs/github-dark.css">
+	<!-- link rel="stylesheet" href="/js/highlightjs/atom-one-dark.css" -->
+	<script src="/js/highlightjs/cpp.js"></script>
+	<script src="/js/highlightjs/javascript.js"></script>
+	<script src="/js/highlightjs/dos.js"></script>
+	<script src="/js/highlightjs/makefile.js"></script>
+	<script src="/js/highlightjs/bash.js"></script>
+	<script src="/js/highlightjs/raraku.js"></script>
+	<script type="module" src="/js/highlightjs/highlight.js"></script>
+	<script type="module">
+		import HLJS from "/js/highlightjs/highlight.js";
+		HLJS.highlightAll();
+	</script>
+	<style>
+		code {
+		    font-family: "CourierNew", "Consolas", "Courier", monospace;
+			-moz-tab-size : 4;
+			tab-size      : 4;
+		}
+	</style>
+
+</head>
+<body>
+<div class="section">
+<div class="container">
+<div class="content">
+
+<a name=TopBar></a>
+<!-- p><b><img src="/imgs/here_landmark.png"> Moai+Easter Advanced Manual</b></p -->
+<p style="height: 40px; border: 0px;"><img src="/imgs/here_landmark.png"> <b>Moai+Easter Advanced Manual</b></p>
+<a class=MstyElemLink href="/">Moai</a> 
+<a class=MstyElemLink href="/moai2.0/index.html">Manual</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
+<a class=MstyElemLink href="/announcement.html">Annoucement</a> 
+<a class=MstyElemLink href="/FAQ.html">FAQ</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> 
+<a class=MstyElemLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> 
+<a class=MstyElemLink href="/moai2.0/raraku1.html">Raraku言語</a> 
+<br>
+<a class=MstyNowSelectedLink href="/moai2.0/moai_cgi_developers_rrk.html">RarakuでCGI入門</a> 
+<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">C言語でCGI</a> 
+<a class=MstyElemLink href="/moai2.0/mkfgen.html">mkfgenリファレンス</a> 
+
+<a name=AtFirst></a>
+<h1 class="title">はじめに</h1>
+
+	Raraku言語は我々Moai開発チームが独自に開発したプログラミング言語であり、Moai Ver2.3よりデフォルトで付属します。
+	この記事では、Raraku言語使ってMoai上で動くCGIプログラミングの方法について述べます。
+	これはCGIを全く作ったことがない方向けのチュートリアルとなります。
+	またプログラミングを少し齧ったことがある程度の知識があえば望ましいですが、
+	まったくゼロの方でも（テキストエディタの使い方や改行コードの意味、
+	コマンドプロンプトやターミナルでのCUI操作などの基本的な知識があれば）
+	頑張れば多分おおよその雰囲気は掴めるかと思います。
+<br><br>
+	尚、以下で紹介しているサンプルコードのライセンスはすべて<a class=MstyElemLink href="http://www.kmonos.net/nysl" target=_blank>NYSL</a>とします。
+<br>
+<br>
+
+
+
+<a name=Index></a>
+<h1 class="title">目次</h1>
+<br>
+<ul>
+	<li><b><a class=MstyElemLink href=#MoaiCGI_hello>Hello World</a></b></li>
+	<li><b><a class=MstyElemLink href=#MoaiCGI_evar1>Hello 環境変数</a></b></li>
+	<li><b><a class=MstyElemLink href=#MoaiCGI_query_string1>Hello Query String</a></b></li>
+	<li><b><a class=MstyElemLink href=#MoaiCGI_moai_auth>Hello Moai AuthenticKey</a></b></li>
+	<li><b><a class=MstyElemLink href=#MoaiCGI_post1>Hello Post1</a></b></li>
+	<li><b><a class=MstyElemLink href=#MoaiCGI_post2>Hello Post2</a></b></li>
+	<li><b><a class=MstyElemLink href=#MoaiCGI_transfer_chunked>Transfer-Encoding: chunked転送モードとRrkFile_flush</a></b></li>
+	<li><b><a class=MstyElemLink href=#MoaiCGI_hello_template>テンプレートHTMLを使って表示する.</a></b></li>
+	<li><b><a class=MstyElemLink href=#MoaiCGI_progress>時間のかかる処理の途中経過を表示する</a></b></li>
+	<li><b><a class=MstyElemLink href=#MoaiCGI_at_end>おわりに</a></b></li>
+</ul><br>
+
+
+
+<a name=MoaiCGI_hello></a>
+<h1 class="title">Hello World</h1>
+
+	<h3>実行テスト</h3>
+<br>
+	プログラミングにおいて（プログラマが記述する）処理の羅列を<b>ソースコード</b>と呼び、
+	ソースコードが書かれたファイルを<b>ソースファイル</b>と呼びます。
+	ソースファイルはそのまま実行できる場合もありますし、
+	<b>コンパイル</b>という過程を経てバイナリファイルに変換しないと実行できない場合もあります。
+	ちなみにRarakuではその両方が可能です。
+<br><br>
+	まずはソースファイルhello.rrksを用意しましたのでこれを実行してみます。
+	これは Moai CGI で単純にメッセージを出力するようなソースファイルです
+	（尚、以降のサンプルを実行（青いリンクをクリック）するにはMoaiを起動しておく必要があります）。
+<br><br>
+	<a class=MstyCGILink href="http://127.0.0.1:8124/cgis/cgi_developers/hello.rrks" target=_blank>Execute : hello.rrks</a>
+	<br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/download.rrks?filename=hello.rrks" target=_blank>Download(hello.rrks)</a>
+	<a name=AName_MoaiCGI_hello_0></a><script type="text/javascript">var st_MoaiCGI_hello_0_group_id_ary = [ "MoaiCGI_hello_0" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_hello_0_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_hello_0_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_hello_0';}">View source code (110 lines)</a>
+<span id=MoaiCGI_hello_0 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-raraku">
+#=*
+ * このファイル（拡張子rrks）はRaraku言語のソースコードファイルです。
+ * C言語式の /* ... */ や #if 0 ... #endif も使用可能です。
+ * またRaraku独自の #* ... *# で囲う形式もあります。
+ * コメント内に「#*」や「*#」といった文字列を含む場合、
+ * 「#」と「*」の間に「=」を入れたもので囲います。
+ * コメントで指定されたテキスト領域はRarakuの実行においては無視されます。
+ *=#
+
+// Rarakuでは「//」から行末までがコメントです。
+# Rarakuでは「# 」（#と半角スペースの並び）から行末までがコメントです。
+
+/*
+ * import文は、簡単に言えばこのファイル以外のRarakuプログラムが提供する機能をこのファイルで
+ * 使うための宣言です。今回はstd/fileが提供する機能をこのファイルで使用するため、std/fileを
+ * インポートしています。
+ * 尚、std/fileはファイル入出力に関する機能を提供するもので、このファイル内ではプリフィックスが
+ * RrkFileから始まるものがstd/file由来になります（このファイルでは最後の方でこれを呼び出しています）。
+ */
+import std/file
+
+#*
+ * このRarakuプログラムは、Moai CGI で簡単な挨拶を表示させます。
+ * 挨拶を表示させる部分は高々数行で終わりますが、ここでのポイントはそれ以外の部分、
+ * つまりCGI起動のための事前準備の処理を学ぶことにあります。
+ *
+ * CGIを作成する場合、始めにHTTPヘッダを標準出力に印字する必要があります。Raraku言語において、
+ * 文字列を標準出力に印字するための関数は Rrk_print となります。「"」と「"」で囲まれたものや
+ * 「@'」と「'」で囲まれたものを文字列リテラルと呼びますが、これも文字列の一種です。一般に
+ *
+ *   Rrk_print( "string literal" )
+ *   Rrk_print( @'文字列リテラル' )
+ *
+ * といった形式で文字列リテラルを標準出力に印字できます。
+ * 全角文字からなる文字列を囲う場合は「@'」と「'」で囲うことをお勧めします（その方が安全だからです）。
+ * 尚、Raraku言語ではC言語とは異なり、行末の「;」はほとんどのケースで不要です。
+ *#
+
+/*
+ * HTTPヘッダでは \r\n で改行を記述します。ところがWindowsの場合、デフォルトではこれでは
+ * 問題となります。Windowsでも \r\n で記述できるようにするため、以下の2行を実行します
+ * （これは標準入力と標準出力をバイナリモードへ変換するためのもので、このプログラムが終了
+ * するまで有効となります）。
+ */
+Rrk_setMode( RrkStdIOKind_e_stdin,  true )
+Rrk_setMode( RrkStdIOKind_e_stdout, true )
+
+/*
+ * ここではHTTPヘッダを出力します。Rarakuでは「&amp;」演算子を使うことで文字列（string）の連結が行えます。
+ * 例えば以下の通りです。
+ *
+ *   "string1"  &amp;  "string2"  &amp;  "string3"
+ *
+ * ただしRrk_print関数内に文字列リテラルが連続する場合、この「&amp;」を省略できます
+ * （省略せずに「&amp;」を記述しても構いません）。
+ *
+ * HTTPヘッダの終わりには\r\nを一つおきますが、この指定は必須です。
+ */
+Rrk_print(
+	"Content-Type: text/html;\r\n"
+	"Pragma: no-cache\r\n"
+	"Cache-Control: no-cache\r\n"
+	"\r\n" /* HTTPヘッダの終わりを示す改行(必須) */
+)
+
+/*
+ * ここまででHTTPヘッダは終わりです。ここから先はHTTPヘッダではないので、改行は\nで構いません。
+ * ここからはHTML本体をRrk_printで出力します。
+ *
+ * 「@'」と「'」で囲った文字列リテラルの場合、中身の文字列を改行することができます
+ * （正確にはこれはヒアドキュメントと呼ばれます）。
+ * Rarakuではヒアドキュメント内の生の改行は必ず \n に変換されます。
+ * 以下では「@'」ではなく「@|'」としていますが、行頭の余計なインデント文字（タブ文字）を自動で除去します。
+ */
+Rrk_print( @|'
+	&lt;!DOCTYPE html&gt;
+	&lt;html&gt;
+	&lt;head&gt;
+	&lt;META http-equiv="Content-type" content="text/html; charset=Shift_JIS"&gt;
+	&lt;META http-equiv="Content-Script-Type" content="text/javascript"&gt;
+	&lt;META http-equiv="Content-Style-Type" content="text/css"&gt;
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+	&lt;link href="/bulma.css" rel="stylesheet" type="text/css" /&gt;
+	&lt;/head&gt;
+')
+
+/*
+ * Raraku言語において const キーワードは定数の宣言と初期化を意味し、
+ *
+ *   const 名前 型 = 定数の値
+ *
+ * という順序で指定します（ただし右辺の「定数の値」より型が推定できる場合は「型」の
+ * 指定は省略できます。
+ * 
+ * 尚、Rrk_print関数内に文字列リテラルと定数が隣合う場合も、文字列連結演算子「&amp;」を省略できます
+ * （省略せずに「&amp;」を記述しても構いません）。
+ */ 
+const greeting = "Hello World"
+Rrk_print(
+	"&lt;body&gt;\n"
+	"&lt;div class=section&gt;\n"
+	greeting " on &lt;b&gt;Moai CGI&lt;/b&gt;.\n"
+	"&lt;/div&gt;\n"
+	"&lt;/body&gt;&lt;/html&gt;\n"
+)
+
+# 上記の内容をこのタイミングで標準出力へ確実に出力させます。Rrk_stdoutはファイルハンドラ
+# と呼ばれる型の一種で標準出力を意味し、Rrk_fflushは指定されたファイルハンドラ（ここでは
+# Rrk_stdoutで標準出力）の内容を確実に出力させるための関数です。
+RrkFile_flush( RrkFile_stdout() )
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_hello_0_group_id_ary, 'MoaiCGI_hello_0_btn' );location.href = '#AName_MoaiCGI_hello_0';">Close</a></div>
+</span>
+	<!--
+	Moaiを起動した状態で上の左のリンクを開くと、いきなり次のような画面が表示されるかと思いますが、
+	これはMoai CGIのセキュリティー機構が働いたためです（以降のサンプルでは当面はこの画面が最初に表示されます）。
+	とりあえず画面の指示に従って「Please retry this」を押してください。
+	ブラウザに「Hello World on Moai CGI.」と表示されるかと思います。
+<br><br>
+	<div class=box>
+		<img src=/imgs/cgi_unauthorized.png>
+	</div>
+<br>
+	<a name=AName_MoaiCGI_hello_1></a><script type="text/javascript">var st_MoaiCGI_hello_1_group_id_ary = [ "MoaiCGI_hello_1" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_hello_1_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_hello_1_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_hello_1';}">参考: Moai認証キー</a>
+<span id=MoaiCGI_hello_1 class=MstyUnvisible>
+	<div class=box>
+		最初に開いたURLは http://127.0.0.1:8124/cgis/cgi_developers/protected/hello.rrks でした。
+		しかし「Please retry this」ボタンを押した後では、URLが違っています。
+		このURLは http://127.0.0.1:8124 と /cgis の間に、<b>/authentic/16桁の16進数列</b>というパターンが挿入された形となっています。
+		この16桁の16進数列の部分を<b>Moai認証キー(Moai_AuthenticKey)</b>と呼びます。
+<br><br>
+		XhrDMZに隔離されたjavascriptは、このMoai認証キーの値を知ることができません。
+		これを利用して、安全ではないかもしれないjavascriptが実行される可能性のあるHTMLを表示させる場合はそれをXhrDMZへ置き、
+		一方、安全であることが確実で重要な処理を行うCGIなどをMoai WebServer上でそれぞれ分離して実行させれば、
+		互いに干渉する範囲を小さくでき、セキュリティはより強固なものになります。
+		これはMoai CGI独自の機能の一つです。
+		XhrDMZについて興味ある方は<a class=MstyElemLink href=/moai2.0/moai_reference.html#XhrDMZ>こちら</a>を参照してください。
+<br><br>
+		悪意ある外部スクリプトからこのCGIが自動実行されるのを防止するなどの効果が期待できるため、
+		Moai CGI エンジンを開発するにあたって、この protected に置かれたCGIに関しては、
+		最初にこのような画面を表示し、「Please retry this」ボタンでMoai_AuthenticKeyを付加する仕様にしました。
+<br><br>
+		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_hello_1_group_id_ary, 'MoaiCGI_hello_1_btn' );location.href = '#AName_MoaiCGI_hello_1';">Close</a>
+	</div>
+	</span>
+	-->
+<br><br>
+	<h3>Rarakuのコメント</h3>
+<br>
+	では hello.rrks の中身の解説に入りましょう。
+	まずファイル名に付いている拡張子 rrks はRaraku言語のソースファイルであることを示します。
+	Raraku言語を記述する場合は基本的にはファイル名の拡張子を rrks にしておかなければなりません。
+<br><br>
+	hello.rrks では、Moai CGI で簡単な挨拶を表示させます。
+	挨拶を表示させる部分は高々数行で終わりますが、ここでのメインはそれ以外の部分、
+	つまりCGI起動のための事前準備の処理を学ぶことにあります。
+<br><br>
+	多くの場合、ソースファイル中にはそのソースコードの意味を説明するためのコメントが含まれています。
+	Rarakuにおいて、「//」が現れた位置からその行末まではコメントであり、
+	その範囲に書かれた内容はRarakuの実行においては無視されます
+	（これを利用して、プログラマが自由な説明を記述できるというわけです）。
+	また「# 」（#と半角スペースの並び）が現れた位置からその行末までもコメントです。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">// Rarakuでは「//」から行末までがコメントです。
+# Rarakuでは「# 」（#と半角スペースの並び）から行末までがコメントです。
+</code></pre>
+	
+	<br>
+	複数行に渡ってコメントしたい場合は、「/* ... */」や「#if0 ... #endif」を使用することもできます。
+	「#* ... *#」で囲う形式もあります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">/*
+   これはいわゆるC言語などで使用されてきたスタイルのコメントです。
+*/
+
+/**
+ * このように行頭に「 * 」を付けて
+ * その行がコメント行であることを分かりやすくする記法も
+ * よく使われます。
+ */
+
+#if 0
+   これはいわゆるC言語のプリプロセッサで使用されてきたスタイルのコメントです。
+   説明を書くよりもコードを一時的に無効にしたいような場合に使用します。
+   このスタイルのコメントはネストが可能です（/* ... */ ではネストができません）。
+#endif
+
+#=*
+ * これはRaraku独自のスタイルのコメントです。
+ * 「#*」は必ず行頭に記述する必要があります。
+ * コメント内に「#*」や「*#」といった文字列を含む場合、
+ * 「#」と「*」の間に「=」を入れたもので囲います。
+*=#
+</code></pre>
+	
+	<br>
+	<h3>import文</h3>
+<br>
+	次にimport文について説明します。
+	import文は、簡単に言えば（このhello.rrksファイル以外の）他のRarakuプログラムが提供する機能を、
+	この hello.rrks 内で使うための宣言です。今回はstd/fileが提供する機能をこのファイルで使用するため、
+	std/fileを以下のようにしてインポートしています。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">import std/file
+</code></pre>
+	
+	<br>
+	尚、std/fileはファイル入出力に関する機能を提供するもので、
+	このファイル内ではプリフィックスがRrkFileから始まるものがstd/file由来になります
+	（このファイルでは最後の方でこれを呼び出しています）。
+<br><br>
+	<h3>HTTPヘッダの出力</h3>
+<br>
+	多くのプログラミング言語では<b>文字列（string）</b>を処理の対象として取り扱います。
+	この文字列を表現する記法は色々あるのですが、最も基本的な記法は対象文字列を「"」と「"」で囲うといったものです。
+	例えば「"hello"」と記述すると、「hello」といった文字列をソースコード上で表現したことになります。
+	このように「"」と「"」で囲うことにより、文字列をソースコード上に直接記述したものを<b>文字列リテラル</b>と呼びます。
+<br><br>
+	<div class=box>
+		「"」と「"」で囲わなかった場合、通常それはソースコード上においては文字列とは別の意味になります。
+		そのためにこの両サイドの「"」は必要になります。
+	</div>
+<br>
+	文字列は標準出力に印字することでその内容を確認できます。
+	通常のプログラミング入門講座ではその一番初めに「"hello world"」といった文字列リテラルをWindowsのコマンドプロンプトや
+	Linuxのターミナル上で表示させる例を紹介することがよく行われます。
+<br><br>
+	今回の記事はCGIプログラミング入門ですのでそれについては省略しますが、標準出力自体はCGIでも必須になります。
+	Raraku言語において、文字列を標準出力に印字するには「Rrk_print( "string literal" )」といった書式で記述します。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">Rrk_print( "string literal" )
+</code></pre>
+	
+	<br>
+	このとき標準出力に印字されるのは「string literal」の部分になります（両サイドの「"」は含まれません）。
+	「"」と「"」で囲う記法以外にも「@'」と「'」で囲う記法もあり、これも文字列リテラルと呼びます。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">Rrk_print( @'文字列リテラル' )
+</code></pre>
+	
+	<br>
+	全角文字からなる文字列を囲う場合は「"」と「"」よりも「@'」と「'」で囲うことをお勧めします（その方が安全だからです）。
+	Rarakuにおいて文字列リテラルの中身の文字コードは（ISO-2022-JP以外であれば）何でも構いません。
+<br><br>
+	「Rrk_print(...)」のように識別子の直後に括弧で囲ったものが来る形式を<b>関数（function）</b>と呼びます。
+	また関数を使うことを特に<b>関数呼び出し（function call）</b>と呼びます。
+	「その関数が具体的に何をするものか」が定義された部分は、通常「関数呼び出し」とはまた別の離れた場所にあり、
+	この関数を使っている側からは（その関数について既に知ってない限り）その機能は直ちにはわかりません
+	（その関数の定義部を確認するか、ドキュメント等を読んでその機能を確認する必要があります）。
+	ただ通常はある程度わかりやすい名前が付いており、それがどんなものかを連想しやすくはなっているとは思います。
+<br><br>
+	CGIを作成する場合、まず始めに以下のような<b>HTTPヘッダ</b>と呼ばれる文字列を<b>標準出力</b>に印字する必要があります。
+<br><br>
+		
+	
+<pre class=hljs><code>Content-Type: text/html;
+Pragma: no-cache
+Cache-Control: no-cache
+
+</code></pre>
+	
+	<br>
+	<b>HTTPヘッダの改行コードは\r\n</b>としなければなりませんので注意しましょう。
+	また上記で最後に一つ空行がありますが、それはこの部分にも（上記ではわかりにくいですが）単独で「\r\n」が存在するためです。
+	さらにCGIでは、HTTPヘッダの記述後に続けてHTMLを記述しますが、
+	そのHTMLがそのままブラウザに渡されて表示される仕組みとなっています。
+<br><br>
+	<a name=AName_MoaiCGI_hello_2></a><script type="text/javascript">var st_MoaiCGI_hello_2_group_id_ary = [ "MoaiCGI_hello_2" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_hello_2_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_hello_2_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_hello_2';}">参考: HTTPヘッダ</a>
+<span id=MoaiCGI_hello_2 class=MstyUnvisible>
+	<div class=box>
+		HTTPヘッダの中身についても少しだけ話をしておきましょう。一般にHTTPヘッダは次のような書式を持つ行の連続です。
+<br><br>
+		<div class=box>キー名: 値</div>
+<br>
+		CGIの場合ブラウザに内容をキャッシュさせたくない場合がほとんどであると考えられます。
+		ブラウザにこれを指示するため、PragmaキーとCache-Controlキーの値を「no-cache」とします。
+		また繰り返しになりますが、HTTPヘッダの終わりには\r\nを一つおきますが、この指定は必須です。
+<br><br>
+		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_hello_2_group_id_ary, 'MoaiCGI_hello_2_btn' );location.href = '#AName_MoaiCGI_hello_2';">Close</a>
+	</div>
+	</span>
+<br><br>
+	ところがWindowsの場合、デフォルトではこの「\r\n」による改行が字面通りに行われないため問題となります。
+	WindowsやLinuxなどで統一して \r\n で記述できるようにするため、以下の2行を実行します
+	（これは標準入力と標準出力をバイナリモードへ変換するためのもので、現在の実行プログラムが終了するまでこの指定は有効となります）。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">Rrk_setMode( RrkStdIOKind_e_stdin,  true )
+Rrk_setMode( RrkStdIOKind_e_stdout, true )
+</code></pre>
+	
+	<br>
+	これでようやく上述のHTTPヘッダを標準出力する準備が整いました。
+	Rarakuのソースコード上では例えば以下のようにします。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">Rrk_print(
+	"Content-Type: text/html;\r\n"
+	"Pragma: no-cache\r\n"
+	"Cache-Control: no-cache\r\n"
+	"\r\n" /* HTTPヘッダの終わりを示す改行(必須) */
+)
+</code></pre>
+	
+	<br>
+	「"」と「"」で囲った文字列リテラルの場合、その中身に「\」と「r」を続けて書くとそれは（その二文字で）一つの改行コード \r を意味します。
+	同様にその中身に「\」と「n」を続けて書くとそれは（その二文字で）一つの改行コード \n を意味します。
+<br><br>
+	Rarakuでは「&amp;」演算子を使うことで、文字列（string）の連結を行うことができます。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">"string1" &amp; "string2" &amp; "string3"
+</code></pre>
+	
+	<br>
+	ただしRrk_print関数の括弧内に文字列リテラルが連続する場合、この「&」を省略できます（省略せず記述しても構いません）。
+	上記のHTTPヘッダの記述ではこれを利用して、「&」演算子なしで文字列を連結しています。
+<br><br>
+	<h3>HTMLの出力</h3>
+<br>
+	ここまででHTTPヘッダは終わりです。ここからはHTML本体をRrk_printで出力します。
+	HTMLの場合、その改行コードは（\r\nではなく）\nで構いません。
+	ですがその前に「@'」と「'」で囲った文字列リテラル（正確にはこれはヒアドキュメントと呼ばれます）について
+	もう少し詳しく説明しましょう。
+<br><br>
+	「@'」と「'」で囲った文字列リテラル（ヒアドキュメント）の場合、
+	（「"」と「"」で囲った場合と異なり）「\」と「n」を続けて書いてもそれは改行の意味ではなく
+	字面通りそれら二文字が連続している意味になります。
+	またヒアドキュメントの場合、中身の文字列に「生の改行」を入れることができます（「"」と「"」で囲った場合は「生の改行」を入れることはできません）。
+	ヒアドキュメント内にこのような「生の改行」を書くと、その改行コードは（現在のファイルの改行コードがどうなっているかに関わらず）
+	必ず \n と解釈されます。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">Rrk_print( @|'
+	&lt;!DOCTYPE html&gt;
+	&lt;html&gt;
+	&lt;head&gt;
+	&lt;META http-equiv="Content-type" content="text/html; charset=Shift_JIS"&gt;
+	&lt;META http-equiv="Content-Script-Type" content="text/javascript"&gt;
+	&lt;META http-equiv="Content-Style-Type" content="text/css"&gt;
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+	&lt;link href="/bulma.css" rel="stylesheet" type="text/css" /&gt;
+	&lt;/head&gt;
+')
+</code></pre>
+	
+	<br>
+	<div class=box>
+		尚、上記では「@'」ではなく「@|'」としていますが、このように「@」と「'」の間に「|」を加えると
+		各行の行頭にある余計なインデント文字（タブ文字）を自動で除去します。
+	</div>
+	<div class=box>
+		参考までに上記を敢えて「"」と「"」で囲った文字列リテラルで書きますと、
+		以下のようになります。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">Rrk_print(
+	"&lt;!DOCTYPE html&gt;\n"
+	"&lt;html&gt;\n"
+	"&lt;head&gt;\n"
+	"&lt;META http-equiv=\"Content-type\" content=\"text/html; charset=Shift_JIS\"&gt;\n"
+	"&lt;META http-equiv=\"Content-Script-Type\" content=\"text/javascript\"&gt;\n"
+	"&lt;META http-equiv=\"Content-Style-Type\" content=\"text/css\"&gt;\n"
+	"&lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"&gt;\n"
+	"&lt;link href=\"/bulma.css\" rel=\"stylesheet\" type=\"text/css\" /&gt;\n"
+	"&lt;/head&gt;\n"
+)
+</code></pre>
+	
+		<br>
+		「"」と「"」で囲った文字列リテラルでは中身を直接改行できませんので、
+		行末部分に明示的に「\n」を記述する必要があります。
+		また、中身の「"」は全て「\"」と書かなければなりません（さもなくば文字列リテラルがそこで終了してしまいます）。
+		このように「"」の（文字列リテラルの終了子としての）意味を打ち消す「\」を<b>エスケープ文字</b>と呼びます。
+	</div>
+<br>
+	<h3>定数の宣言と型</h3>
+<br>
+	ここまで長かったですがようやく「挨拶」を出力する部分を書く段階に来ました。
+	しかしその前に定数の宣言方法について説明しましょう。
+	Rarakuにおいて const キーワードは定数の宣言と初期化を意味し、
+<br><br>
+	<div class=box>const 名前 型 = 定数の値</div>
+<br>
+	という順序で指定します。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">const greeting conststr = "Hello World"
+</code></pre>
+	
+	<br>
+	上記は、greetingが定数の名前、conststrが定数の型、"Hello World"が定数の値です。
+	定数の名前はプログラマが自由に付けることができ、以降の処理では名前を介してその定数を参照します。
+	ただし定数の名前においては全角文字は使用できません。
+	使用可能な文字は半角英数字と「_」だけであり、しかも一番最初の文字は数字であってはいけません。
+	このような条件を満たす文字の並びを<b>識別子（identifier）</b>と呼びます。
+<br><br>
+	「=」の左側は<b>左辺（式）</b>、右側は<b>右辺（式）</b>と呼ばれます。
+	このとき左辺と右辺の型は一致させなければなりません。
+	conststrは（中身が書き換え不能な）文字列であることを示す型です。
+	一方、"Hello World"という文字列リテラルも、（中身が書き換え不能な）文字列を意味しますので、
+	この例では左辺と右辺の型は一致しています（逆にこれが一致しない場合はエラーとなります）。
+<br><br>
+	この「=」は「両辺が数学的に等しい」という意味ではなく、
+	（両辺が数値型や文字列型の場合）「今から左辺に右辺の値を格納する」といった意味になります。
+	（あるいは数値型以外の場合、「今から左辺が右辺の内容を指し示すようにする」といった意味になります）。
+<br><br>
+	右辺の「定数の値」から、左辺の型が何であるべきか推定できる場合、「型」の指定は省略できます
+	（これを一般に<b>型推論</b>と呼びます）。
+	例えば以下では型であるconststrを省略しています。
+	"Hello World"の型から、greetingの型はconststrであることが推定できるからです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">const greeting = "Hello World"
+</code></pre>
+	
+	<br>
+	このgreeting定数と文字列リテラルを連結し、挨拶を出力させましょう。
+	以下のようになります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">const greeting = "Hello World"
+Rrk_print(
+	"&lt;body&gt;\n"
+	greeting " on &lt;b&gt;Moai CGI&lt;/b&gt;.\n"
+	"&lt;/body&gt;&lt;/html&gt;\n"
+)
+</code></pre>
+	
+	<br>
+	Rrk_print関数の括弧内においては、
+	文字列リテラルと文字列リテラルが隣り合う場合だけでなく、
+	上記のように文字列リテラルと定数が隣合う場合も、
+	文字列連結演算子「&」を省略できます（省略せず記述しても構いません）。
+<br><br>
+	ここまででメインの処理の記述は終わりましたが、OSは上記の内容を（効率上の理由により）標準出力へ出力するのを遅延させる場合があります。
+	しかしCGIではそのような遅延をされても困るので、このタイミングで標準出力へ確実に出力させる必要があります。
+	そのため hello.rrks の最後において以下の処理を実行しています。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">RrkFile_flush( RrkFile_stdout() )
+</code></pre>
+	
+	<br>
+	RrkFile_flush と RrkFile_stdout はともにstd/file内で宣言されている関数です
+	（最初にimport std/fileを実行したのは、ここでこれらを使用したかったためです）。
+	RrkFile_stdout() は標準出力を意味するRrkFile型のオブジェクトを返します。
+	またRrkFile_flushはそれを受けて、標準出力の内容を確実に出力させるための関数です。
+<br><br>
+	<h3>Hello Worldのまとめ</h3>
+<br>
+	hello.rrksについては以上です。
+	「Hello World」という単純な文字列を表示するだけのプログラムですが、
+	ここまで随分盛り沢山であったと思います。
+	このようにプログラミングに初めて触れる（あるいは初めてのプログラミング言語に触れる）場合、
+	それがたとえ単純なものであっても、学習すべき文法が大量に現れます。
+	（プログラミング言語に限った話ではないかもしれませんが）最初が一番大変です。
+	慌てずじっくりまいりましょう。
+<br><br>
+	<div class="box">
+		Rarakuについてのさらなる詳細は<a class=MstyElemLink href="http://127.0.0.1:8124/moai2.0/raraku.html" target=_blank>Rarakuマニュアル</a>
+		をご覧下さい。
+		これはRarakuについての完全なマニュアルになります。
+	</div>
+<br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section MoaiCGI_hello end -->
+
+
+<a name=MoaiCGI_evar1></a>
+<h1 class="title">Hello 環境変数</h1>
+
+	<h3>CGIの環境変数</h3>
+<br>
+	このセクションでは Moai CGI で使われる環境変数の内容をテスト出力します。
+<br><br>
+	<a class=MstyCGILink href="http://127.0.0.1:8124/cgis/cgi_developers/evar.rrks" target=_blank>Execute : evar.rrks</a>
+	<br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/download.rrks?filename=evar.rrks" target=_blank>Download(evar.rrks)</a>
+	<a name=AName_MoaiCGI_evar1_0></a><script type="text/javascript">var st_MoaiCGI_evar1_0_group_id_ary = [ "MoaiCGI_evar1_0" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_evar1_0_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_evar1_0_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_evar1_0';}">View source code (104 lines)</a>
+<span id=MoaiCGI_evar1_0 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-raraku">
+import std/cgi
+import std/htp_util
+import std/file
+
+/* 
+ * Rarakuにおいて function キーワードは関数の宣言および定義を意味します。
+ * 仮引数は、「名前 型」という順序で指定します。
+ * 仮引数の指定の後ろに関数の戻り値の型を指定します（この例ではvoid）。
+ */ 
+function show_result( evar RrkCGIEVar ) void
+{
+
+	/*
+	 * Rarakuのヒアドキュメントにおいて、生の改行はデフォルトでは \n に変換されます。
+	 * また「@|'」で始めますと行頭の余計なインデント文字を自動で削除します。
+	 * しかしさらに「@|'」の替わりに「@|/"\r\n"'」を使いますと、生の改行はデフォルトでは \r\n に変換されるようになります。
+	 * 以下ではこれを利用してHTTPヘッダをより簡易に記述しています（最終行には敢えて空行を入れ、\r\nが一つ入るようにしています）。
+	 */
+	Rrk_print( @|/"\r\n"'
+		Content-Type: text/html; charset=Shift_JIS
+		Pragma: no-cache
+		Cache-Control: no-cache
+
+	')
+	
+	Rrk_print( @|'
+		&lt;!DOCTYPE html&gt;
+		&lt;html&gt;
+		&lt;head&gt;
+		&lt;META http-equiv="Content-type" content="text/html; charset=utf-8"&gt;
+		&lt;META http-equiv="Content-Script-Type" content="text/javascript"&gt;
+		&lt;META http-equiv="Content-Style-Type" content="text/css"&gt;
+		&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+		&lt;link href="/bulma.css" rel="stylesheet" type="text/css" /&gt;
+		&lt;/head&gt;
+	')
+	
+	Rrk_print( @'
+		&lt;body&gt;
+		&lt;div class="section"&gt;
+		Moai CGI Enviroment Variables:&lt;br&gt;
+	')
+
+	Rrk_print( "&lt;pre&gt;\n" )
+
+	/*
+	 * Rarakuで「\=」はバックスラッシュオペレータと呼ばれます。
+	 * 「\=X」のように書くと（Xが単純な形であれば）それは「"X=" &amp; X」のように展開されます。
+	 * Xの値を確認したい場合に（Xを冗長に二回書く手間が省け）便利です。
+	 */
+	const msg string = (
+		\=evar.server_name_     \n
+		\=evar.server_port_     \n
+		\=evar.content_type_    \n
+		\=evar.content_length_  \n
+		\=evar.remote_addr_     \n
+		\=evar.remote_host_     \n
+		\=evar.remote_port_     \n
+		\=evar.request_method_  \n
+		\=evar.query_string_    \n
+		\=evar.http_cookie_     \n
+		\=evar.http_user_agent_ \n
+		\=evar.http_accept_     \n
+	)
+	/* msg内にある一切のHTMLタグの効果を打ち消す */
+	RrkHtpUtil_negateHtmlTagEffection( msg )
+	Rrk_print( msg )
+
+	Rrk_print( "&lt;/pre&gt;\n" )
+
+	Rrk_print( "&lt;/div&gt; &lt;!-- section --&gt;\n" )
+	Rrk_print( "&lt;/body&gt;&lt;/html&gt;" \n )
+	
+	/* 
+	 * Rarakuの代入や初期化において、右辺の型から左辺の型が推定可能な場合、左辺の型の指定を省略して記述することもできます。
+	 * 下記では本来は「const stdout RrkFile = RrkFile_stdout()」と書くべきところですが、
+	 * 右辺であるRrkFile_stdout()はRrkFile型であることが明らかであるため、その左辺も自動的にRrkFile型とみなされ、
+	 * その記述を省略できます。
+	 * ただしこのように書くとどんな型が使われているのか字面上では少し分かりにくくなるため、このサンプルでは
+	 * 省略可能なケースでも敢えて省略せずに書くこともあります。
+	 */ 
+	//const stdout RrkFile = RrkFile_stdout()
+	const stdout = RrkFile_stdout()
+	RrkFile_flush( stdout )
+}
+
+/**
+ * Moai CGIにおける全環境変数を取得。
+ * RrkCGIEVar は環境変数の値文字列をメンバとして含む構造体です。
+ */
+const evar RrkCGIEVar = RrkCGI_getEVar()
+
+/**
+ * Windowsにおける標準入力、標準出力における \n =&gt; \r\n 自動変換を無効にします。
+ */
+Rrk_setMode( RrkStdIOKind_e_stdin,  true )
+Rrk_setMode( RrkStdIOKind_e_stdout, true )
+
+/**
+ * 環境変数群evarの内容の出力です。
+ * 長くなるため、サブルーチン化します。
+ */
+show_result( evar )
+
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_evar1_0_group_id_ary, 'MoaiCGI_evar1_0_btn' );location.href = '#AName_MoaiCGI_evar1_0';">Close</a></div>
+</span>
+<br><br>
+	CGIプログラミングでは<b>環境変数（environment variable）</b>を介して、クライアントやサーバに関するさまざまな情報を取得します。
+	環境変数といえばOSで定義されているものですが、CGIの環境変数はOSで定義するのではなくWebサーバによって定義されます。
+<br><br>
+	例えばCGIの環境変数で重要なものとしては、QUERY_STRING, CONTENT_TYPE, HTTP_COOKIE, SERVER_NAME, SERVER_PORT などがありますが、
+	Windowsで「システムのプロパティ」から「環境変数」のダイアログを開いてみても、通常このような環境変数は定義されてません。
+	Linuxでも同じで、envコマンドを実行してもそれらしき環境変数は見当たりません。
+<br><br>
+	WebサーバはCGIプログラムの実行要求を受け取ると、CGI用のプロセスを一つ立ち上げます。
+	そしてそれに先立ち、クライアントやサーバに関する環境変数をそのプロセス内だけから参照できる形で一時的にセットします。
+	そのため、OSでは定義されているはずのない環境変数がCGIプログラム内だけからは定義されているように見えるわけです。
+<br><br>
+	<div class=box>
+		グローバル変数/ローカル変数という言葉をご存知の方ならば、
+		OSで定義されている環境変数はグローバル変数に、CGIの環境変数はローカル変数に相当するというように
+		（その関係性を比喩的に）考えてもよいかもしれません。
+	</div>
+<br>
+	では実際にこれらを取得する方法です。
+	Rarakuでは関数 Rrk_getenv によって環境変数を取得できます。
+	それが最も基本的で原始的な手段ではあるのですが、しかしそれよりも便利な関数 RrkCGI_getEVar が std/cgiで宣言されていますので、
+	この記事ではそれを使います（そのため std/cgi をインポートしています）。
+<br><br>
+	evar.rrks 内ではこれに該当する部分は最後のあたりにあります。
+<br><br>
+	<div class=box>
+		evar.rrks 内の前半にある「function show_result( evar RrkCGIEVar ) void」から「}」までの範囲はユーザ定義関数と呼ばれるものですが、
+		これはこのファイルの一番最後で呼び出されて実行されます。
+		逆に言えば、ファイルの一番最後に到達するまでこの中身は実行されないということでもあります。
+		このようにプログラムの実行順序が下から上へと移る場合もあります。
+		このユーザ定義関数の中身については後で詳しく解説しますので、まずは一旦これを読み飛ばしてください。
+	</div>
+<br>
+	ファイルの最後の方へスクロールすると以下のような記述があるはずです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">/**
+ * Moai CGIにおける全環境変数を取得。
+ * RrkCGIEVar は環境変数の値文字列をメンバとして含む構造体です。
+ */
+const evar RrkCGIEVar = RrkCGI_getEVar()
+</code></pre>
+	
+	<br>
+	右辺にRrkCGI_getEVar関数の呼び出しを与えることによって、左辺でRrkCGIEVar型のデータを取得することができます。
+	左辺のRrkCGIEVar型定数evarには、この初期化によりMoai CGIが提供する全ての環境変数が格納されます。
+	RrkCGIEVar型のデータはいくつかのデータを一まとめにしたものであり、
+	このようなものを一般に<b>構造体（struct）</b>と呼びます。
+<br><br>
+	<h3>構造体</h3>
+<br>
+	構造体に含まれるデータのことを<b>メンバ（menber）</b>あるいは<b>フィールド（field）</b>と呼びます。
+	構造体は通常「構造体定数名.メンバ名」という書式で、各データへアクセスできます。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">import std/cgi
+
+const evar RrkCGIEVar = RrkCGI_getEVar()
+
+Rrk_print( "evar.query_string_=" evar.query_string_ )
+Rrk_print( "evar.content_type_=" evar.content_type_ )
+</code></pre>
+	
+	<br>
+	RrkCGIEVar型の構造体では、メンバとしてquery_string_やcontent_type_が含まれており、
+	上記では構造体定数名がevarですので、それぞれ「ever.query_string_」や「ever.content_type_」と記述することで両者にアクセスできます。
+	また両者はどちらも文字列型です（今回は両者の型が偶々どちらも文字列型でしたが、
+	構造体の中身では各メンバがそれぞれ固有の型を保持しますので、一般にはその型は異なります）。
+<br><br>
+	RrkCGIEVarは std/cgi で宣言されていますが、
+	この std/cgi とは具体的にはRarakuがインストールされたディレクトリ内のrrk_pkg/std/cgi.rrkhファイルを意味します。
+<br><br>
+	<div class=box>
+		Moaiをインストールした場合、その中にいっしょにRarakuもインストールされます。
+		よって今回の場合、この「Rarakuがインストールされたディレクトリ」とは
+		「Moaiをインストールしたディレクトリ」であると考えて構いません。
+	</div>
+<br>
+	テキストエディタでこのファイルを開くと、以下のような記述があるのが確認できると思います。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">struct RrkCGIEVar {
+	server_name_     string
+	server_port_     string
+	content_type_    string
+	content_length_  string
+	remote_addr_     string
+	remote_host_     string
+	remote_port_     string
+	request_method_  string
+	query_string_    string
+	http_cookie_     string
+	http_user_agent_ string
+	http_accept_     string
+}
+</code></pre>
+	
+	<br>
+	「struct RrkCGIEVar {」から「}」までで囲まれた部分がこの構造体のメンバになります。
+	これを見ると確かにquery_string_やcontent_type_がRrkCGIEVarのメンバとして含まれており、
+	しかもそれらが文字列型（string型）として宣言されていることがわかります。
+<br><br>
+	ただし、ここには「=」や右辺は記述されておらず、これらの値が具体的に何なのかまでは確認できません。
+	これらに具体的に値を格納するのはRrkCGI_getEVar関数の仕事であり、
+	その処理を行う本当の実体は std/std.rrkx ファイルになります。
+<br><br>
+	通常のプログラミングでは、このファイルの中身がどうなっているのかまで知る必要はありません。
+	と言うより std/std.rrkx ファイルは（処理を高速化させるためコンパイル化された）バイナリファイルとなっており、
+	この中身を人の目で直接確認するのは難しいでしょう。
+	（このコンパイル化が行われる前の状態の）RrkCGI_getEVar関数のソースコードにあたるものは、
+	Rarakuのソース（raraku/rrk_src/std/cgi.rrks）として公開しておりますので、
+	中身に興味がある方はそちらを参照してもらうのが一番よいですが、
+	ここではせっかくですのでRrkCGI_getEVar関数の定義部だけを抜粋したものを以下に示しましょう。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">global RrkCGI_getEVar() RrkCGIEVar
+{
+	function getenv( key conststr ) conststr {
+		varia val = Rrk_getenv( key )
+		return val ? val : ""
+	}
+	varia evar RrkCGIEVar
+	evar.server_name_    = getenv( "SERVER_NAME" )
+	evar.server_port_    = getenv( "SERVER_PORT" )
+	evar.content_type_   = getenv( "CONTENT_TYPE" )
+	evar.content_length_ = getenv( "CONTENT_LENGTH" )
+	evar.remote_addr_    = getenv( "REMOTE_ADDR" )
+	evar.remote_host_    = getenv( "REMOTE_HOST" )
+	evar.remote_port_    = getenv( "REMOTE_PORT" )
+	evar.request_method_ = getenv( "REQUEST_METHOD" )
+	evar.query_string_   = getenv( "QUERY_STRING" )
+	evar.http_cookie_    = getenv( "HTTP_COOKIE" )
+	evar.http_user_agent_= getenv( "HTTP_USER_AGENT" )
+	evar.http_accept_    = getenv( "HTTP_ACCEPT" )
+	return evar
+}
+</code></pre>
+	
+	<br>
+	関数呼び出し「RrkCGI_getEVar()」により、プログラムの実行は一時的に上記の定義部（「{」と「}」で囲まれた内部）へと移ります。
+	定義部の一番初めにある「function getenv」は環境変数を取得する<b>ローカル関数</b>と呼ばれるものですが、
+	今回はこの中身を気にする必要はありません。とりあえずこれにより以下のgetenvで環境変数の値が取得できると考えてください。
+<br><br>
+	その直ぐ下にある「varia evar RrkCGIEVar」では、RrkCGIEVar型の構造体の<b>変数（variable）</b>を宣言しています。
+	「const」では定数を宣言しましたが、それの替わりに「varia」を使用した場合は変数を宣言します。
+	こちらは重要です。
+	このようにconstやvariaで始まる文を、Rarakuではそれぞれ<b>const文</b>、<b>varia文</b>と呼びます。
+<br><br>
+	<div class=box>
+		尚、Rarakuでは（C言語などとは異なり）、ほとんどのケースで文の最後に「;」をつける必要はありません。
+		ただし付けても構いません。
+	</div>
+<br>
+	<b>変数</b>は定数と異なり、宣言が終わった後でさらに値を格納することができます。
+	これを<b>代入</b>と呼びます。
+<br><br>
+	<div class=box>
+		ただしこの記事では、特に「初期化」と明確に区別したい文脈では、<b>代入</b>ではなく<b>再代入</b>と呼ぶことにします。
+		文脈によっては変数宣言時の初期化で「=」によって値を格納することを「代入」と呼称することもあり、
+		単に「代入」と呼ぶとこれとの区別が紛らわしいからです。
+	</div>
+<br>
+	上記では evar 変数の宣言（初期化）の時点では、各メンバに値は何も格納されていません。
+	一方、その宣言が終わった後、Rrk_getenv関数ですべての環境変数を取得し、それらを対応するすべてのメンバに代入（再代入）しています。
+<br><br>
+	最後にある「return evar」は<b>return文</b>と呼ばれ、この関数の<b>戻り値</b>を（evarとして）指定するものになります。
+	関数の戻り値とは、その関数を外側から呼び出して右辺として指定した時、
+	そこにあたかもその戻り値が指定されたのと同じような状況を実現させるためのものです。
+	また同時にreturn文によってこの関数の定義部での実行はこれで終了し、
+	プログラムの実行は再び元の位置（正確には関数呼び出し「RrkCGI_getEVar()」の直後）へ移ります。
+	この関数（RrkCGI_getEVar）を外側から呼び出したものを改めて以下に再掲します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">const evar RrkCGIEVar = RrkCGI_getEVar()
+</code></pre>
+	
+	<br>
+	上記の「RrkCGI_getEVar()」の部分では、あたかもその戻り値（内部の変数evar）がそこに指定されたのと
+	同じような状況が実現します。
+	これによって内部の変数evarから外部にある定数evarへの値の受け渡しが可能になるわけです。
+<br><br>
+	<h3>ユーザ定義関数</h3>
+<br>
+	RrkCGI_getEVar関数はRarakuがデフォルトで提供する関数です。
+	一方、Rarakuのユーザ（プログラマ）が自分でオリジナルの関数を作ることもできます。
+	これを<b>ユーザ定義関数</b>と呼びます。
+<br><br>
+	evar.rrks 内ではshow_resultという名前でユーザ定義関数を作成しており、
+	以下のように「function show_result( evar RrkCGIEVar ) void」から「}」までの範囲がshow_resultの<b>定義部</b>になります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">/* 
+ * Rarakuにおいて function キーワードは関数の宣言および定義を意味します。
+ * 仮引数は、「名前 型」という順序で指定します。
+ * 仮引数の指定の後ろに関数の戻り値の型を指定します（この例ではvoid）。
+ */ 
+function show_result( evar RrkCGIEVar ) void
+{
+	/* 長いため途中省略 */
+}
+</code></pre>
+	
+	<br>
+	ユーザ関数の定義部は「function」キーワードから始まります。
+	次にその関数の名前（関数名）が続きます（上記ではshow_resultが関数名です）。
+	関数名はプログラマが自由に指定可能ですが、その名前は識別子の条件を満たさなければなりません。
+	関数名の後には括弧で囲まれた部分が続きますが、この括弧の中身は<b>関数の仮引数（function parameter）</b>と呼ばれます。
+	上記では「evar RrkCGIEVar」が仮引数であり、evarが仮引数の名前、RrkCGIEVarが仮引数の型となります。
+	このように仮引数は「名前 型」という順序で指定します。
+<br><br>
+	最後に仮引数の後ろにこの関数の戻り値の型を指定します。
+	RrkCGI_getEVar関数では戻り値の型はRrkCGIEVar型でしたが、一方で戻り値のない関数というものもあり、
+	このshow_result関数はまさにそれに相当します。
+	このように戻り値のない関数の場合、戻り値の型として「void」と指定します。
+<br><br>
+	evar.rrks の一番最後において、以下のように上記の関数show_resultを呼び出しています。
+	この関数呼び出しにより、プログラムの実行は上記の関数show_resultの定義部の一番初めへと移ります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">/**
+ * 環境変数群evarの内容の出力です。
+ * 長くなるため、サブルーチン化します。
+ */
+show_result( evar )
+</code></pre>
+	
+	<br>
+	関数呼び出しの括弧の中身には、定数や変数、文字列リテラルなど（関数定義部の仮引数とは違ってある意味具体的なもの）を指定でき、
+	これを<b>関数の実引数（function argument）</b>と呼びます。
+	上記では関数呼び出し「show_result( evar )」の実引数として evar が指定されており、
+	これは関数定義部の仮引数におけるevarへ反映されます。
+<br><br>
+	この実引数から仮引数へ受け渡しにより、関数呼び出しの外側における情報を関数定義部の内側へ受け渡すことが可能になります。
+	今回、show_result内部でもこの（外側の）evarの情報が必要となるため、このような指定を行っているというわけです。
+	尚、実引数と仮引数を明確に区別する必要のない文脈では、これらを単に<b>引数</b>と呼ぶこともあります。
+<br><br>
+	このユーザ定義関数show_resultは、一番最後の「}」へ至るかあるいはreturn文に遭遇するとその実行を終了し、
+	プログラムの実行を元の関数呼び出しの位置（正確にはその関数呼び出しの直後）に戻します。
+	今回のevar.rrksでは関数呼び出し「show_result( evar )」の直後にはもう何もありませんので、
+	show_resultの実行が終了した時点で evar.rrks 自体の処理も終了となります。
+	それでは次にshow_result内で具体的に何が行われるか、その定義部の詳細について説明しましょう。
+<br><br>
+	<h3>ヒアドキュメントによるHTTPヘッダの指定</h3>
+<br>
+	show_result内で最初に行っているのはHTTPヘッダの標準出力です。
+	evar.rrksもCGIプログラムですので、hello.rrksの時と同様にまず最初にHTTPヘッダを標準出力する必要があります。
+	hello.rrksで行っていた処理を以下に再掲します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">Rrk_print(
+	"Content-Type: text/html;\r\n"
+	"Pragma: no-cache\r\n"
+	"Cache-Control: no-cache\r\n"
+	"\r\n" /* HTTPヘッダの終わりを示す改行(必須) */
+)
+</code></pre>
+	
+	<br>
+	上記のように記述しても全く問題はないのですが、今回はヒアドキュメントを使ってこれをもっとすっきりと書く方法を紹介しましょう。
+	ただしRarakuのヒアドキュメントにおいて、生の改行はデフォルトでは \n に変換されます。
+	しかし既に述べた通り、HTTPヘッダでは必ず「\r\n」で改行しなければなりません。
+	またHTTPヘッダにおいては行頭に余計なインデント文字（タブ文字）を付けてはいけません。
+	ヒアドキュメントでHTTPヘッダを書く場合、この二点の問題を解決しなければなりません。
+	そこで以下のようにヒアドキュメントを「@'」ではなく「@|/"\r\n"'」で始めて記述します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">Rrk_print( @|/"\r\n"'
+	Content-Type: text/html; charset=Shift_JIS
+	Pragma: no-cache
+	Cache-Control: no-cache
+
+')
+</code></pre>
+	
+	<br>
+	ヒアドキュメントにおいて「@'」ではなく「@|'」で始めますと行頭の余計なインデント文字を自動で削除します。
+	また「@'」ではなく「@/"\r\n"'」で始めますと、生の改行が（\nではなく） \r\n に変換されるようになります。
+	上記の「@|/"\r\n"'」はこの二つの合わせ技です。
+	ただし「|」と「/"\r\n"」は必ず「@」と「'」の間にあり、しかも「|」は「/"\r\n"」より必ず先に記述しなければなりません。
+	ちなみに最終行には空行を一つ入れてありますが、これも必須です。
+	これによりこの部分に\r\nが一つ入るようにしています。
+<br><br>
+	<h3>バックスラッシュオペレータ</h3>
+<br>
+	show_result内の中程では構造体変数evarの全メンバの値を確認表示するためのの文字列msgを作成しています。
+	その部分を以下に抜粋します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">const msg string = (
+	\=evar.server_name_     \n
+	\=evar.server_port_     \n
+	\=evar.content_type_    \n
+	\=evar.content_length_  \n
+	\=evar.remote_addr_     \n
+	\=evar.remote_host_     \n
+	\=evar.remote_port_     \n
+	\=evar.request_method_  \n
+	\=evar.query_string_    \n
+	\=evar.http_cookie_     \n
+	\=evar.http_user_agent_ \n
+	\=evar.http_accept_     \n
+)
+RrkHtpUtil_negateHtmlTagEffection( msg )
+Rrk_print( msg )
+</code></pre>
+	
+	<br>
+	構造体のメンバを確認するのに単に「evar.server_name_」と記述した場合、
+	確かにそれによってevar.server_name_の中身の値は表示されるのですが、
+	そのメンバの名前の情報が付加されていないため、実際に実行したときそれがどのメンバの値なのかがわかりにくくなります。
+	そのため、メンバ名を意味するプリフィックスを付けて「"evar.server_name_=" &amp; evar.server_name_」と記述したいところですが、
+	このようにすると今度は「evar.server_name_」というコードを冗長に二回記述する必要があります。
+	しかもこれを構造体の全メンバにおいて行わなければなりません。
+<br><br>
+	Rarakuでは「\=」という特殊な演算子が用意されており、これはバックスラッシュオペレータと呼ばれます。
+	「\=X」のように書くと（Xが単独の識別子か構造体のメンバへのアクセスの形であれば）それは「"X=" &amp; X」のように自動的に展開されます。
+	Xの値を確認したい場合に（Xを冗長に二回書く手間が省け）便利です。
+	また、Rarakuでは（文字列リテラル内ではない）コード中に直に「\n」と記述することもでき、
+	これは"\n"と全く同じ意味になります（単に「"」二つ分を省略して記述できるというものになります）。
+<br><br>
+	上記の例ではこれらを使って一つの文字列に連結したものをmsgとしています。
+	また関数RrkHtpUtil_negateHtmlTagEffectionでは、引数として指定した msg の中身にHTMLとして特殊な意味を持つ記号
+	（タグの開始終了の&gt;や&lt;や&amp;で始まる文字コードの指定など）が含まれていた場合、
+	それらを単なる文字として字面通り表示されるように変換しています。
+	最後にRrk_print( msg )によりこれを標準出力します。
+<br><br>
+	<h3>Hello環境変数のまとめ</h3>
+<br>
+	evar.rrksについては以上です。
+	このセクションで登場した関数の概念はプログラミングにおいて非常に重要です。
+	しっかり把握した上で次へ進みましょう。
+<br><br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section MoaiCGI_evar1 end -->
+
+
+<a name=MoaiCGI_query_string1></a>
+<h1 class="title">Hello Query String</h1>
+
+	<h3>Query String</h3>
+<br>
+	このセクションでは Moai CGI へQuery Stringを渡し、それをCGIスクリプト側から取得して内容を表示してみます。
+<br><br>
+	<a class=MstyCGILink href="http://127.0.0.1:8124/cgis/cgi_developers/query_string.rrks?mode=cat&sort=1" target=_blank>Execute : query_string.rrks?mode=cat&sort=1</a>
+	<br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/download.rrks?filename=query_string.rrks" target=_blank>Download(query_string.rrks)</a>
+	<a name=AName_MoaiCGI_query_string1_0></a><script type="text/javascript">var st_MoaiCGI_query_string1_0_group_id_ary = [ "MoaiCGI_query_string1_0" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_query_string1_0_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_query_string1_0_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_query_string1_0';}">View source code (87 lines)</a>
+<span id=MoaiCGI_query_string1_0 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-raraku">
+import std/cgi
+import std/file
+import std/htp_util
+
+/**
+ * functionキーワードによる関数の定義では、
+ * 関数の戻り値の型がvoidの場合、それを省略して記述することも可能。
+ */
+function show_result( post_vars RrkVar[] )
+{
+
+	/* Output HTTP Header for CGI */
+	Rrk_print( @|/"\r\n"'
+		Content-Type: text/html;
+		Pragma: no-cache
+		Cache-Control: no-cache
+	
+	')
+	
+	/* Output HTML for CGI */
+	Rrk_print( @'
+		&lt;!DOCTYPE html&gt;
+		&lt;html&gt;
+		&lt;head&gt;
+		&lt;META http-equiv="Content-type" content="text/html; charset=utf-8"&gt;
+		&lt;META http-equiv="Content-Script-Type" content="text/javascript"&gt;
+		&lt;META http-equiv="Content-Style-Type" content="text/css"&gt;
+		&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+		&lt;link href="/bulma.css" rel="stylesheet" type="text/css" /&gt;
+		&lt;/head&gt;
+	')
+	
+	Rrk_print( @'
+		&lt;body&gt;
+		&lt;div class="section"&gt;
+		PostVars from Query String: &lt;br&gt;
+	')
+
+	Rrk_print( "&lt;pre&gt;\n" )
+	/***
+	 * for文により配列post_varsの全要素にアクセス
+	 */
+	varia msg  string = ""
+	varia i    uint
+	const size uint = Rrk_numof(post_vars)
+	for i=0; i&lt;size; ++i {
+		const var RrkVar = post_vars[ i ]
+		if u := RrkPrim_getStr( var.prim_ ); {
+			msg &amp;= ( var.name_ " = [" u.val_ "]\n" )
+		}
+	}
+
+	/* XSS対策. msg内にある一切のHTMLタグの効果を打ち消す */
+	RrkHtpUtil_negateHtmlTagEffection( msg )
+	Rrk_print( msg )
+	Rrk_print( "&lt;/pre&gt;\n" )
+
+	Rrk_print( "&lt;/div&gt; &lt;!-- section --&gt;\n" )
+	Rrk_print( "&lt;/body&gt;&lt;/html&gt;\n" )
+	
+	const stdout = RrkFile_stdout()
+	RrkFile_flush( stdout )
+}
+
+/* CGIにおける環境変数を取得 */
+const evar = RrkCGI_getEVar()
+
+/* Query Stringを取得 */
+const query_str = RrkCGI_getQueryStr( evar )
+
+/* Post変数群格納用のRrkVar型構造体の配列の宣言 */
+varia post_vars RrkVar[]
+
+/* Query Stringを &amp; 記号で分割し、Post変数群を取得 */
+RrkCGI_splitQueryStr( post_vars, query_str, false )
+
+/* Windowsにおける標準入力、標準出力における \n =&gt; \r\n 自動変換を無効にする */
+Rrk_setMode( RrkStdIOKind_e_stdin,  true )
+Rrk_setMode( RrkStdIOKind_e_stdout, true )
+
+/***
+ * 環境変数群evarの内容の出力
+ * 長くなるため、サブルーチン化
+ */
+show_result( post_vars )
+
+
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_query_string1_0_group_id_ary, 'MoaiCGI_query_string1_0_btn' );location.href = '#AName_MoaiCGI_query_string1_0';">Close</a></div>
+</span>
+<br><br>
+	そもそも<b>Query String</b>とは何でしょうか？
+	URLの後ろの方に「?」文字があるのをご覧になったことがあるかもしれません。
+	その「?」文字よりさらに後ろにある文字列の部分をQuery Stringと呼びます。
+<br><br>
+	Query Stringは「name=val」という形式の文字列の羅列となっており、これが複数ある場合はさらに &amp; 文字でこれらが連結されています。
+	つまり一般に、「name1=val1<b>&amp;</b>name2=val2<b>&amp;</b>name3=val3 …」という形式になっています。
+	通常はnameの部分になんらかの意味のあるわかりやすい名前をつけます。
+	そして = 文字に続けてそれに対する値を付加することで、CGIプログラムへの<b>引数</b>を指定する形になります。
+<br><br>
+	<div class=box>
+		関数の引数というのを既に説明しましたが、このようにCGIプログラムそのものにも引数を指定することができます。
+	</div>
+<br>
+	Query Stringの内容をCGI側で獲得するにはどうすればよいでしょうか？
+	そのためには<b>環境変数QUERY_STRING</b>を参照しなければなりません。
+	前のセクションではRrkCGI_getEVarにより、Moai CGIにおける全環境変数を格納したRrkCGIEVar構造体を取得できました。
+	この構造体内のメンバquery_string_が環境変数QUERY_STRINGの値を保持しますので、結局のところこれを参照すればよいことになります。
+<br><br>
+	次の処理として、この evar.query_string_ の解析を行います。
+	これには RrkCGI_splitQueryStr を使いましょう。
+	この関数は、query_string を &amp; 文字で分割し、さらにそれぞれの「key=val」という形式の塊(Token)において、そのkeyとvalにあたる部分を取得し、
+	最終的にRrkVar型構造体の<b>配列</b>という形に変換します。
+	ですがこの先に進む前に、まずそもそも配列とは何かを説明しましょう。
+<br><br>
+	<h3>配列</h3>
+<br>
+	<b>配列（array）</b>とは構造体と同じくいくつかのデータを一まとめにしたものです。
+	構造体ではそれに含まれるデータをメンバと呼びましたが、配列ではそれを<b>要素（element）</b>と呼びます。
+	また構造体では各メンバ毎に固有の型を持っていました（従ってメンバ毎に型が異なっていても構わないのでした）が、
+	配列では全要素が同一の型でなければなりません。
+	例えば「文字列の配列」と言った場合、その要素はすべて文字列となります。
+	文字列の配列を宣言するには型指定において「string[]」と記述します。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia str_ary string[]
+</code></pre>
+	
+	<br>
+	配列は宣言時においては空です（要素を一つも持ちません）。
+	これに要素を追加するには文字列の配列の場合はRrk_push_bk_cstr関数、文字列の配列以外の場合はRrk_push_bkを用います。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia str_ary string[]
+Rrk_push_bk_cstr( str_ary, "hello" )
+Rrk_push_bk_cstr( str_ary, "world" )
+</code></pre>
+	
+	<br>
+	上記ではRrk_push_bk_cstrに二つの実引数を与えています。
+	このように関数の引数は複数存在することもあり、その場合は各引数を「,」で区切って指定します。
+	また1番めの引数を第1引数、2番めの引数を第2引数、N番めの引数を第N引数などと呼びます
+	（仮引数と実引数の区別を明確にしたい場合は第N仮引数、第N実引数などと呼びます）。
+<br><br>
+	関数の仮引数と実引数の個数は一致していなければなりません。
+	例えばRrk_push_bk_cstr関数では2個の仮引数がありますので、それに指定すべき実引数も2個でなければならないということです。
+<br><br>
+	また関数の各仮引数と各実引数の対応する型は通常は一致していなければなりません。
+	例えばRrk_push_bk_cstr関数では第1仮引数は文字列の配列型（conststr[]型）、第2仮引数は文字列型（conststr型）で宣言/定義されていますので、
+	Rrk_push_bk_cstr関数の呼び出し側においても同様に、文字列の配列型の実引数（str_ary）と、文字列型の実引数（"hello"や"world"）
+	をこの順番で与えなければなりません。
+<br><br>
+	<div class=box>
+		Rrk_push_bk_cstr関数はRarakuのインストールディレクトリ内のrrk_pkg/std/core.rrkhに宣言/定義されています。
+		その部分を抜粋したものを以下に示します。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-raraku">function Rrk_push_bk_cstr( varia const ary conststr[], cstr conststr ){
+	Rrk_push_bk( ary, cstr-&gt;string /* clone */ )
+}
+</code></pre>
+	
+		<br>
+		これを見ると確かに第1仮引数のaryがconststr[]型、第2仮引数のcstrがconststr型になっているのが確認できます。
+<br><br>
+		<div class=box>
+			「varia const」とある部分はダブルモディファイアと呼ばれますが、これについてはこの記事のレベルを超えますので気にする必要はありません。
+			また「{」と「}」で囲まれた中身についても今は気にする必要はありませんが、
+			ざっくり言えば、指定されたcstrのコピーを作ってそれを配列aryへ追加するといったことを行っています。
+		</div>
+<br>
+		尚、rrk_pkg/std/core.rrkh内に宣言/定義されているものは特別であり、
+		特に何もインポートすることなくデフォルトで使用することができます。
+	</div>
+<br>
+	次に配列の各要素にアクセスする記法について説明しましょう。
+	そのためには「配列の変数名」「[」「配列のインデックス」「]」といった記法を用います。
+	ここで<b>配列のインデックス（index）</b>とは何番目の配列であるかを示す0以上の整数値です。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia str_ary string[]
+Rrk_push_bk_cstr( str_ary, "hello" )
+Rrk_push_bk_cstr( str_ary, "world" )
+
+Rrk_print( str_ary[0] \n )
+Rrk_print( str_ary[1] \n )
+</code></pre>
+	
+	<br>
+	上記ではRrk_push_bk_cstr関数によって配列str_aryに2個の要素が追加されています。
+	その2個の要素にアクセスするためにそれぞれ「str_ary[0]」、「str_ary[1]」といった記法を用い、
+	それをRrk_print関数で標準出力しています。
+	上記の実行結果は以下のようになります。
+<br><br>
+		
+	
+<pre class=hljs><code>hello
+world
+</code></pre>
+	
+	<br>
+	<b>配列のインデックスは 0 から開始する</b>ことに注意してください。
+	つまり1番目の要素にアクセスするにはインデックスとして 0 を、
+	2番目の要素にアクセスするにはインデックスとして 1 をそれぞれ指定します。
+	もっと一般的に言えば、その配列にN個（N&gt;0）の要素が存在する場合、
+	配列のインデックスとして 0 から N-1 までが指定できるということです。
+	もしも仮に N 以上の整数を指定した場合はRarakuはエラーで停止します（これを<b>ランタイムエラー</b>と呼びます）。
+<br><br>
+	<div class=box>
+		RarakuではGC（Garbage Collection）でメモリ管理していますので
+		（C言語などのように）配列の使用後にそれを解放するような処理の記述は不要です。
+	</div>
+<br>
+	<h3>RrkVar型構造体の配列</h3>
+<br>
+	配列の要素として構造体を指定することもできます。
+	例えばRrkVar型構造体の配列を宣言するには以下のようにします。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">import std/var
+
+varia post_vars RrkVar[]
+</code></pre>
+	
+	<br>
+	RrkVar型構造体はRarakuのインストールディレクトリ内のrrk_pkg/std/var.rrkhに宣言/定義されています
+	（そのため最初にimport std/varを実行しています）。
+	RrkVar型構造体の宣言部分だけを以下に抜粋します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">struct RrkVar {
+	name_ string
+	misc_ string
+	misc_type_ int
+	prim_ RrkPrim^? = null
+};
+</code></pre>
+	
+	<br>
+	上記を見ると、RrkVar型構造体には4つのメンバ（name_、misc_、misc_type_、prim_）があることが確認できます。
+	post_varsはさらにこれを配列としたものですので、
+	（post_varsには）4に配列の要素数を乗算した個数分のデータが含まれることになります。
+<br><br>
+	<div class=box>
+		実際にはメンバprim_の型であるRrkPrimも構造体となっており、
+		そのメンバを考慮するとさらに多くの個数のデータを含む可能性もあります。
+	</div>
+<br>
+	<h3>三項演算子とnull</h3>
+<br>
+	さてここでQuery Stringの話に戻りましょう。少し間が開いたので改めて流れを振り返っておきます。
+	RrkCGI_getEVarによりRrkCGIEVar型構造体evarを取得し、
+	この構造体内のメンバ evar.query_string_ がQuery Stringの値を保持しますので、これをRrkCGI_splitQueryStr関数を用いて解析するという話でした。
+	RrkCGI_splitQueryStr関数は、evar.query_string_ の値を元に
+	最終的に「RrkVar型構造体の配列」という形に変換します（最終的な生成物はpost_varsに格納されます）。
+	query_string.rrks内でここまでの処理を行っている部分を以下に抜粋します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">/* CGIにおける環境変数を取得 */
+const evar = RrkCGI_getEVar()
+
+/* Query Stringを取得 */
+const query_str = RrkCGI_getQueryStr( evar )
+
+/* Post変数群格納用のRrkVar型構造体の配列の宣言 */
+varia post_vars RrkVar[]
+
+/* Query Stringを &amp; 記号で分割し、Post変数群を取得 */
+RrkCGI_splitQueryStr( post_vars, query_str, false )
+</code></pre>
+	
+	<br>
+	RrkCGI_getQueryStr関数とRrkCGI_splitQueryStr関数については、
+	RrkCGI_getEVar関数と同様に std/cgi（ファイルとしてはrrk_pkg/std/cgi.rrkh）において宣言/定義されています。
+	これらが宣言/定義されている部分だけを以下に抜粋します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">function RrkCGI_getQueryStr( evar RrkCGIEVar ) const string {
+	const void_str string = ""
+	return evar.query_string_ ? evar.query_string_ : void_str
+}
+
+global RrkCGI_splitQueryStr( varia post_vars RrkVar[], query_str conststr, is_unescape_val bool ) void
+</code></pre>
+	
+	<br>
+	RrkCGI_getQueryStrについては上記でその定義部（「{」と「}」で囲まれた部分）を確認することができます。
+	一般にfunctionキーワードで始まる関数では、その定義部もいっしょに付属して記述されるため、
+	このように中身を即座に確認可能です。
+	一方、RrkCGI_splitQueryStrについては、その定義部（「{」と「}」で囲まれた部分）は付属していません。
+	一般にglobalキーワードで始まる関数では、その定義部は別のファイル（rrksファイル）に記述されます。
+<br><br>
+	<div class=box>
+		尚、globalキーワードで始まる関数をわざわざ別ファイルにする理由は色々あるのですが、
+		例えばその定義部の記述が複雑で何行にも渡るため、rrkh内に書くと単純に邪魔であるという理由もあります。
+	</div>
+<br>
+	関数RrkCGI_getQueryStrの内部におけるreturn文については解説が必要でしょう。
+	このreturn文では「evar.query_string_ ? evar.query_string_ : void_str」と指定されています。
+	これは「X ? Y : Z」という形式をとっている<b>式（expression）</b>の一種であり、
+	一般には<b>三項演算子（ternary operator）</b>と呼ばれます。
+	この式の意味は「Xの値が真（true）である場合はこの式の値を Y とし、さもなくば（Xの値が偽（false）である場合は）
+	この式の値を Z とせよ」となります。
+	従って「evar.query_string_ ? evar.query_string_ : void_str」の意味は
+	evar.query_string_ が真であれば evar.query_string_ をそのまま返し、さもなくば void_str を返すというものになります。
+<br><br>
+	ところでevar.query_string_ は単なる文字列ですが、これが真であるとか偽であるとは何を意味するのでしょうか？
+	evar.query_string_ は元を辿ればRrkCGI_getEVar内でRrk_getenv関数によって取得された環境変数QUERY_STRINGの値となります。
+	もし仮にこの環境変数が定義されていないような状況でRrk_getenvを呼び出した場合、Rrk_getenvは<b>null</b>と呼ばれる特殊な値を返します。
+	この場合、結果的にevar.query_string_の値もnullになります。
+	そして文字列の場合、その値が null でなければ真、nullであれば偽と見なされます。
+<br><br>
+	<div class=box>
+		もっとも、MoaiのWebサーバでは環境変数QUERY_STRINGは（たとえその中身が空文字であっても）必ず定義されておりますし、
+		Moai以外のWebサーバでもそうなっていることが多いと思いますので、CGIプログラミングでevar.query_string_を参照する文脈である限りは
+		これがnullになることは実質的にはほぼないと考えられますが、
+		ここでは万全を期して関数RrkCGI_getQueryStrを介してこの値を取得しています。
+	</div>
+<br>
+	<h3>if-else文</h3>
+<br>
+	rrk_pkg/std/cgi.rrkhファイルで宣言されたglobal関数の場合、その定義部は、
+	Rarakuのソースファイルディレクトリ内のrrk_src/std/cgi.rrksファイルに記述されています。
+	ただしMoaiのインストールディレクトリにはこれは付属されていないため、この中身を確認するには
+	githubで公開されているRarakuのソースファイルを閲覧する必要があります。
+<br><br>
+	関数RrkCGI_splitQueryStrもglobal関数となっており、その定義部はcgi.rrksファイルに存在するのですが、
+	そこからRrkCGI_splitQueryStr関数の定義部分だけを抜粋したものを以下に示します。
+<br><br>
+	以下の全容を詳細に把握する必要は全くありませんが、ざっくりとした処理の雰囲気だけでも掴むと
+	RrkCGI_splitQueryStrが結局何を生成しているのかといった理解がより深まるかと思います。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">global RrkCGI_splitQueryStr( varia post_vars RrkVar[], query_string conststr, is_unescape_val bool ) void
+{
+	varia stmts string[]
+
+	/***
+	 * &amp;に関してsplitする.
+	 */
+	RrkStr_addSplitC( stmts,
+			query_string, 0, Rrk_NPOS,
+			'&amp;', false, 8 )
+	/***
+	 * URL unescapeしたものをpost_varsに登録.
+	 */
+	foreach stmt : stmts {
+		const key string = ""
+		const val string = ""
+		const key_unesc string = ""
+		RrkStr_getKeyAndVal( stmt, 0, RrkStr_leng(stmt),
+				"=", "",
+				key, val )
+		RrkHtpURL_unescapeStr( key_unesc, key, 0, Rrk_NPOS )
+
+		/* 多重登録防止 */
+		if Rrk_NPOS == RrkVarAry_find( post_vars, key_unesc ) {
+			varia var RrkVar = {}
+			var.name_ = key_unesc
+			var.misc_type_ = RrkHtpPostVarKind_e_None-&gt;int
+			var.prim_ = RrkPrim_create( RrkPrim_e_Str )
+
+			varia var_str string
+			RrkPrim_str( var.prim_, var_str )
+			if is_unescape_val {
+				RrkHtpURL_unescapeStr( var_str, val, 0, Rrk_NPOS )
+			} else {
+				RrkStr_set( var_str, val )
+			}
+			Rrk_push_bk( post_vars, var )
+		} /* endof if */
+	}
+}
+</code></pre>
+	
+	<br>
+	詳細を把握する必要はないとは述べましたが、上記には文法上重要なポイントも含まれますので、
+	その部分については解説を加えましょう。
+	繰り返しますがここはざっくりとした理解で十分です。
+<br><br>
+	まずRrkStr_addSplitC関数の呼び出しでは、query_stringを'&amp;'を区切り文字とみなして分割し、
+	その分割した文字列群を文字列の配列stmtsへ格納します。
+<br><br>
+	次にforeach文と呼ばれる<b>ループ文</b>（ループ文については後で詳しく述べます）によって、
+	配列stmtsの各要素をstmtという名前をつけてアクセスします。
+	ここで各要素 stmt は、「key=val」という形式をとった文字列になっていますので、
+	RrkStr_getKeyAndVal関数の呼び出しで、これをkeyとvalに分割します。
+<br><br>
+	RrkHtpURL_unescapeStr関数ではURLエンコーディングされた文字列をオリジナルの文字列に復元します。
+	これはちょっと今回の趣旨から脱線する話になるのでよくわからなければ気にしなくてもOKです。
+<br><br>
+	RrkVarAry_find関数の呼び出しでは、配列post_varsの中に含まれるすべての要素、すなわちRrkVar型構造体の要素を調べ、
+	そのRrkVar構造体のメンバname_がkey_unescと等しいものが存在するか否かを調べています。
+	これが存在する場合、この関数はその要素のインデックスを返し、存在しない場合はRrk_NPOSと呼ばれる特殊な整数を返します。
+<br><br>
+	「if Rrk_NPOS == RrkVarAry_find( post_vars, key_unesc )」のようにキーワードifで始まるものを<b>if文</b>と呼び、
+	その直後にある「{」から「} /* endof if */」とある行までの中身を<b>ifブロック</b>と呼びます
+	（コメント「/* endof if */」の部分は本当はなくても構いませんが、今回は位置をわかりやすくするためこれを書いています）。
+	if文では、ifの直後に指定された<b>条件式</b>（この例では「Rrk_NPOS == RrkVarAry_find( post_vars, key_unesc ）」の部分が真であれば、
+	ifブロックが実行され、偽であればifブロックを実行しません。
+<br><br>
+	今これが真である場合（つまり配列post_varsの中に、まだRrkVar構造体のメンバname_がkey_unescと等しいものが存在しない場合）を考えましょう。
+	この場合に限り、ifブロックが実行されます。
+	ifブロックでは最初にRrkVar構造体varを宣言し、これを新しく生成しています。
+	この部分だけを抜粋すると以下になります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia var RrkVar = {}
+var.name_ = key_unesc
+var.misc_type_ = RrkHtpPostVarKind_e_None-&gt;int
+var.prim_ = RrkPrim_create( RrkPrim_e_Str )
+
+varia var_str string
+RrkPrim_str( var.prim_, var_str )
+if is_unescape_val {
+	RrkHtpURL_unescapeStr( var_str, val, 0, Rrk_NPOS )
+} else {
+	RrkStr_set( var_str, val )
+}
+</code></pre>
+	
+	<br>
+	上記ではまだ説明していない「{}」や「-&gt;」といった記号、RrkHtpPostVarKind_e_None、RrkPrim_create、RrkPrim_e_Str、
+	RrkPrim_str、RrkStr_set などが登場しますが、これらについては今は気にする必要はありません。
+	ここでは<b>要するに新しくRrkVar型構造体varを作り、そこにキーと文字列値を格納している</b>という理解で十分です。
+<br><br>
+	ただ一点注意して欲しいのは、今現在ifブロックの中を見ているわけですが、
+	そのifブロックの中にさらにもう一つのif文（if is_unescape_val）とifブロックが登場することもあるということです。
+	このように<b>if文はネストすることができます</b>。
+<br><br>
+	このif文（if is_unescape_val）の後ろにキーワードelseが続いていますが、これを<b>else文</b>と呼びます。
+	elseの直後にある「{」から「}」とある行までの中身を<b>elseブロック</b>と呼びます。
+	else文は（それが存在する場合は）必ずif文の直後に続くため、両者をまとめて<b>if-else文</b>と呼ぶこともあります。
+	if-else文では直後に指定された条件式が真の場合はifブロックが実行され、
+	条件式が偽の場合はelseブロックが実行されます。
+	例えば上記では、is_unescape_val の値が真の場合は、「RrkHtpURL_unescapeStr( var_str, val, 0, Rrk_NPOS )」が実行され、
+	そうではなく is_unescape_val の値が偽の場合は、「RrkStr_set( var_str, val )」が実行されるということです。
+<br><br>
+	最後の「Rrk_push_bk( post_vars, var )」では新しく生成したRrkVar構造体varをpost_varsに追加しています。
+<br><br>
+	ここまでをまとめますと、結局RrkCGI_splitQueryStr関数内で行われていることは、
+	query_stringを分割して解析しつつ、そこに指定されているキーが既にpost_varsに存在しているかをif文で確認しつつ、
+	まだ存在しないならば新しくRrkVar型構造体varを作ってpost_varsに追加するといった処理になります。
+<br><br>
+	<div class=box>
+		Rrk_push_bkはジェネリクスと呼ばれる特殊な関数で、その第1引数には任意の配列型を指定できます。
+		第2引数にはその配列の要素の型に合致するものであれば指定できます。
+	</div>
+<br>
+	以上かなりおおまかに大急ぎでRrkCGI_splitQueryStr関数の定義全体を概観しました。
+	プログラムのソースコードを読む上では事細かに詳細を追って行く場合が重要である場合もあれば、
+	今回のように全体をざっくりと概観する視点が大事になることもあります。
+	このような緩急をつけた読み方が出来るようになるにはかなりの修練と慣れも必要ですが、
+	これについてはコードを読む経験を重ねれば追々身についていくと思います。
+<br><br>
+	<h3>for文</h3>
+<br>
+	では残ったshow_result関数の解説に入りましょう。
+	今回は以下のような形になっています。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">/**
+ * functionキーワードによる関数の定義では、
+ * 関数の戻り値の型がvoidの場合、それを省略して記述することも可能。
+ */
+function show_result( post_vars RrkVar[] )
+{
+	/* 長いので中身は省略 */
+}
+</code></pre>
+	
+	<br>
+	今回のshow_result関数は前回のevar.rrksとは異なり、引数としてRrkVar[]型をとります。
+	戻り値の型は前回と同じくvoidです。
+	ただ今回のshow_resultではこのvoidを省略して記述しています。
+	このようにfunctionキーワードで始まる関数の定義では、その戻り値の型がvoidの場合、それを省略して記述することが可能です。
+<br><br>
+	関数の中身については前回のevar.rrksとかなりの部分が同じなので、その部分の説明は省略しますが、
+	今回は新しく以下のような記述があります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">/***
+ * for文により配列post_varsの全要素にアクセス
+ */
+varia msg  string = ""
+varia i    uint
+const size uint = Rrk_numof(post_vars)
+for i=0; i&lt;size; ++i {
+	const var RrkVar = post_vars[ i ]
+	varia str string
+	RrkPrim_str( var.prim_, str )
+	msg &amp;= ( var.name_ " = [" str "]\n" )
+}	
+</code></pre>
+	
+	<br>
+	上記でuintとあるのは非負整数型を意味します。
+	例えば「varia i uint」は、変数 i が0以上の整数であることを宣言しています。
+<br><br>
+	Rrk_numof関数は任意の配列型を実引数として指定できる特殊な関数で、
+	指定した配列の要素数を戻り値として返します。
+	戻り値の型はuint型です。
+<br><br>
+	<div class=box>
+		このように任意の型の引数を指定できる特殊な関数をジェネリクスと呼びます。
+		ただし指定できる型が完全に自由というわけではなく、例えば何らかの配列型でなければならないといった
+		ある種の制限を設けることができます（この制限が存在することがジェネリクスにおいて重要です）。
+	</div>
+<br>
+	キーワードforに続く文をfor文と呼びます。
+	for文は「for 初期化文 ; 条件式 ; 後処理文 ブロック」という書式になります。
+<br><br>
+	「初期化文」とは一番初めに一回だけ実行される特殊な文です。
+	「文」とは書きましたがどんな文でもここに指定できるわけではなく、
+	識別子で始まる形式の文（代入の形式をした文や単純な関数呼び出し）などに限られます。
+	例えば上記の「i=0」がこれに相当します。
+	直後にある「;」は必ず記述しなければなりません（たとえ初期化文に何も指定しなくともこの「;」だけは必須です）。
+<br><br>
+	次の「条件式」と「後処理文」の説明は少し後回しにしてブロックの説明を先にしましょう。
+<br><br>
+	<b>ブロック</b>とは「{」と「}」で囲まれた領域を意味します。
+	これまでもif文においてはifブロック、else文においてはelseブロックが登場しましたが、あれもブロックの一種です。
+	同様にfor文においてはforブロックが後ろに続くわけです。
+	そしてfor文とはこのブロックの中身を繰り返し実行するための文です。
+	このように後続するブロックの中身を繰り返し実行するための文を一般に<b>ループ文</b>と呼びます。
+	ただしそれを何回繰り返すのかを規定する部分が必要で、for文の場合それは「条件式」と「後処理文」になります。
+<br><br>
+	<b>条件式</b>はif文の説明でも登場しましたが、for文にも存在します。
+	for文ではブロックの実行に先立ってこの条件式の値が真であるか偽であるかが判定されます。
+	この条件式の真偽判定のことを<b>（条件式の）評価</b>と呼びます。
+	for文では条件式の評価が真である限り、forブロックが繰り返し実行されます。
+	例えば上記では「i&lt;size」の部分が条件式に相当し、
+	これが真と評価される限り上記のforブロックは繰り返し実行されることになります。
+	尚、この条件式の後ろにある「;」も必ず記述する必要があります。
+<br><br>
+	「後処理文」とはforブロックの実行後に処理される特殊な文です。
+	「文」とは書きましたがどんな文でもここに指定できるわけではなく、
+	指定可能なのは、インクリメント形式の文や代入の形式をした文、単純な関数呼び出しなどに限られます。
+	<b>インクリメント</b>とは整数型の変数に1を加算することです。
+	例えば上記の「++i」がこれに相当します。
+	forブロックを一回実行するとこの「後処理文」もその後に必ず実行されますので、
+	forブロックが何回か実行されるとこのiの値も次々と増加して行くことになります。
+	やがてsizeの値と同じになるはずですが、このとき条件式「i&lt;size」の評価は偽となります
+	（この条件式はiの値がsize<b>未満</b>の場合のみ真となるからです。
+	ただしiは0から始めていますのでforブロックは調度size回実行されることに注意しましょう）。
+	条件式が偽になった時点でforブロックはもはや実行されなくなり、for文全体も終了します。
+<br><br>
+	forブロックの中身についても少し解説しておきます。
+	この部分だけを以下に抜粋します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">const var RrkVar = post_vars[ i ]
+varia str string
+RrkPrim_str( var.prim_, str )
+msg &amp;= ( var.name_ " = [" str "]\n" )
+</code></pre>
+	
+	<br>
+	post_varsはRrkVar型構造体の配列でしたから、「post_vars[ i ]」と記述した場合、
+	そのi番目（ただしiは0から始まります）の要素にアクセスします。
+	続くRrkPrim_strではvar.prim_メンバの中身から文字列を抜き出してstrに格納しています。
+	このstrは、Query Stringに含まれる「key=val」という形式の文字列の右辺（val）に相当する値になっています。
+	一方、var.name_は、その形式の左辺（name）に相当する値です。
+	「msg &= ( var.name_ " = [" str "]\n" )」では、それらの値を確認表示するための文字列をmsgへ連結しています。
+	このmsgは後でRrk_printにより標準出力されます。
+<br><br>
+	<h3>foreach文</h3>
+<br>
+	ここまででquery_string.rrksの解説は終わりになりますが、前項でfor文について紹介したので
+	foreach文についても説明しておきましょう。
+	foreach文を使うとfor文で必要であった一時変数iやsizeなどを準備する必要がなくなり、
+	配列要素へのアクセスの記述も少し楽になります。
+	またforeach文の方がRaraku内部で一時変数iにあたるものを管理しているため、for文より若干高速になる場合もあります。
+<br><br>
+	foreach文もfor文と同じくループ文であり、「foreach 要素参照用変数 : 配列変数名 ブロック」という書式になります。
+	前項でfor文によって記述していた部分をforeach文によって書き換えると以下のようになります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">/***
+ * foreach文により配列post_varsの全要素にアクセス
+ */
+varia msg  string = ""
+foreach var : post_vars {
+	varia str string
+	RrkPrim_str( var.prim_, str )
+	msg &amp;= ( var.name_ " = [" str "]\n" )
+}	
+</code></pre>
+	
+	<br>
+	始めに「foreach var : post_vars」と記述していますが、このvarの部分が「要素参照用変数」であり、
+	post_varsの部分が「配列変数名」です。
+	このforeach文におけるvarは、for文で言えば「const var RrkVar = post_vars[ i ]」と記述していた部分に相当します。
+	またこのvarは、foreach文のブロックが実行されるたびにpost_vars[0]、post_vars[1]、...、post_vars[size-1]を指し示すよう自動的に更新されます。
+	このようにしてpost_varsの全要素にアクセスすることができるわけです。
+	尚かつ、post_varsの最後の要素を指し示したブロックの実行が終了した時点でforeach文自体の繰り返し処理も終了します。
+	そのため、for文の「for i=0; i&lt;size; ++i」のように明確に繰り返し回数を指定したり、iの値をインクリメントする処理がなくとも、
+	ちょうどsize回の繰り返し処理が可能になります。
+<br><br>
+	ただforeach文は簡潔に書ける反面、for文に比べ柔軟性は失われます。
+	例えば配列要素全体ではなくある一部分だけを処理するような場合には向いていません。
+	foreach文では繰り返し回数の指定が明確にはできないためです。
+	とは言え、実際のプログラミングにおいては配列要素全体にアクセスするような処理は頻繁に発生します。
+	そのような場合はforeach文の方が便利でしょう。
+<br><br>
+	<h3>Query Stringのまとめ</h3>
+<br>
+	このセクションでは配列や三項演算子、if-else文、for文、foreach文について学びました。
+	配列を使うと動的にサイズが変動するようなデータの処理を行うことができます。
+	またif-else文、for文、foreach文を使うと、この配列に対して
+	ある条件を満たす要素を見つけ出すといったいわゆる「検索」に相当するような処理を記述することができます。
+<br><br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section MoaiCGI_query_string1 end -->
+
+
+<a name=MoaiCGI_moai_auth></a>
+<h1 class="title">Hello Moai AuthenticKey</h1>
+
+	<h3>実行テスト</h3>
+<br>
+	このセクションでは Moai_AuthenticKey について説明します。
+	以下はこれを取得して表示するためのRarakuのコードです。
+<br><br>
+	<a class=MstyCGILink href="http://127.0.0.1:8124/cgis/cgi_developers/moai_auth.rrks" target=_blank>Execute : moai_auth.rrks</a>
+	<br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/download.rrks?filename=moai_auth.rrks" target=_blank>Download(moai_auth.rrks)</a>
+	<a name=AName_MoaiCGI_moai_auth_0></a><script type="text/javascript">var st_MoaiCGI_moai_auth_0_group_id_ary = [ "MoaiCGI_moai_auth_0" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_moai_auth_0_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_moai_auth_0_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_moai_auth_0';}">View source code (140 lines)</a>
+<span id=MoaiCGI_moai_auth_0 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-raraku">
+import std/cgi
+import std/file
+import std/htp_util
+import std/str_path
+
+function I_getMoaiAuthKey( auth_key string, ermsg string ) bool
+{
+	function I_getMoaiDir( moai_dir string, ermsg string ) bool
+	{
+		static const dsp   = '/'
+		static const depth = 8u
+		RrkStr_set( moai_dir, "../" )
+		if !RrkStrPath_searchParentDir( moai_dir, depth, "target.myf", RrkDirType_e_File, dsp ) {
+			if ermsg {
+				ermsg &amp;= "[NG]: RrkCGICtx : Error : Searching moai_dir is failure. target.myf does not found."
+			}
+			RrkStr_clear( moai_dir )
+			return false
+		}
+		return true
+	}
+	function I_loadAuthenticKey( authentic_key string, moai_dir conststr ) bool
+	{
+		const path = ( moai_dir "authentic_key.dat" )
+		if fp := RrkFile_open( path, "rb" ); {
+			defer RrkFile_close( fp )
+			RrkStr_clear( authentic_key )
+			RrkFile_getLine( fp, authentic_key )
+			return true
+		}
+		return false
+	}
+
+	const moai_dir string = ""
+
+	/***
+	 * moaiディレクトリの自動検出.
+	 */
+	if !I_getMoaiDir( moai_dir, ermsg ) {
+		/* error */
+		ermsg &amp;= "[NG]: RrkCGICtx : Error : moai_dir is not found.\n"
+		return false
+	}
+	ermsg &amp;= @$'[OK]: RrkCGICtx : moai_dir is detected : [${moai_dir}].' \n
+
+	/***
+	 * authentic_key のロード.
+	 * (このキーの実体は、moaiが起動している場合必ずmoai_dir直下に存在します)
+	 */
+	if !I_loadAuthenticKey( auth_key, moai_dir ) {
+		/* error */
+		ermsg &amp;= "[NG]: RrkCGICtx : Error : Moai authentic_key cannot load.\n"
+		return false
+	}
+	return true
+}
+
+
+/**
+ * functionキーワードによる関数の定義では、
+ * 関数の戻り値の型がvoidの場合、それを省略して記述することも可能。
+ */
+function show_result( post_vars RrkVar[] )
+{
+	const ermsg string = ""
+
+	/* Output HTTP Header for CGI */
+	Rrk_print( @|/"\r\n"'
+		Content-Type: text/html;
+		Pragma: no-cache
+		Cache-Control: no-cache
+	
+	')
+
+	/* Output HTML for CGI */
+	Rrk_print( @|'
+		&lt;!DOCTYPE html&gt;
+		&lt;html&gt;
+		&lt;head&gt;
+		&lt;META http-equiv="Content-type" content="text/html; charset=utf-8"&gt;
+		&lt;META http-equiv="Content-Script-Type" content="text/javascript"&gt;
+		&lt;META http-equiv="Content-Style-Type" content="text/css"&gt;
+		&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+		&lt;link href="/bulma.css" rel="stylesheet" type="text/css" /&gt;
+		&lt;/head&gt;
+	')
+
+	const body  string = ""
+	const auth_key string = ""
+	varia is_auth = false
+
+	if !I_getMoaiAuthKey( auth_key, ermsg ) {
+		RrkCGIStr_addDefaultSyntaxStyle( body, "RrkMsgConsole" )
+		body &amp;= "&lt;div class=RrkMsgConsole&gt;\n"
+		RrkHtpUtil_specialErmsgSyntax( ermsg, "RrkMsgConsole" )
+		RrkHtpUtil_replaceNLtoHtmlBR( ermsg )
+		body &amp;= ermsg
+		body &amp;= "&lt;/div&gt;\n"
+		goto FUNC_END
+	}
+	body &amp;= ( "Moai_AuthenticKey=[" auth_key "]&lt;br&gt;\n" )
+
+FUNC_END:
+	Rrk_print( @|'
+	&lt;body&gt;
+		&lt;div class="section"&gt;
+	')
+	Rrk_print( body )
+	Rrk_print( @|'
+		&lt;/div&gt; &lt;!-- section --&gt;
+	&lt;/body&gt;&lt;/html&gt;
+	')
+	
+	const stdout = RrkFile_stdout()
+	RrkFile_flush( stdout )
+}
+
+/* CGIにおける環境変数を取得 */
+const evar = RrkCGI_getEVar()
+
+/* Query Stringを取得 */
+const query_str = RrkCGI_getQueryStr( evar )
+
+/* Post変数群格納用のRrkVar型構造体の配列の宣言 */
+varia post_vars RrkVar[]
+
+/* Query Stringを &amp; 記号で分割し、Post変数群を取得 */
+RrkCGI_splitQueryStr( post_vars, query_str, false )
+
+/* Windowsにおける標準入力、標準出力における \n =&gt; \r\n 自動変換を無効にする */
+Rrk_setMode( RrkStdIOKind_e_stdin,  true )
+Rrk_setMode( RrkStdIOKind_e_stdout, true )
+
+/***
+ * 環境変数群evarの内容の出力
+ * 長くなるため、サブルーチン化
+ */
+show_result( post_vars )
+
+
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_moai_auth_0_group_id_ary, 'MoaiCGI_moai_auth_0_btn' );location.href = '#AName_MoaiCGI_moai_auth_0';">Close</a></div>
+</span>
+<br><br>
+	<b>Moai_AuthenticKey</b>とは、今現在起動しているMoaiが固有で割り当てている認証キーで、16桁の16進数となります。
+	この次のセクションではPOSTについて学びますが、その前段階としてこれを取り挙げるのは、
+	単にPOSTするよりこのような認証キーを付加してPOSTした方がより安全性が高まるためです。
+<br><br>
+	CGIへのPOSTはJavascriptから自動的に行うこともできます。
+	この記事はJavascriptの講座ではありませんが、そのメカニズムを理解するために、
+	一旦 XMLHttpRequest について説明しましょう。
+	例えばJavascript上から、以下のようなコードで指定したサイトへ自動的にPOSTすることができます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-javascript">function checkPost( filename ){
+	var data = {
+		 "emal":"sage"
+		,"com": "Test"
+	};
+
+	var xhr = newXhr();
+
+	xhr.open( "POST", "http://127.0.0.1:8124/cgis/cgi_developers/" + filename );
+	xhr.onreadystatechange = function() {
+		if( xhr.readyState == 4 ){
+			if( typeof xhr.status != "undefined" ){
+				if( xhr.status == 200 ){
+					var tgt = document.getElementById( "result" );
+					var text = xhr.responseText;
+					tgt.innerHTML = text;
+				} else {
+					var tgt = document.getElementById( "result" );
+					var text = "status code = " + xhr.status;
+					tgt.innerHTML = text;
+				}
+			}
+		}
+	};
+	xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
+	xhr.send( EncodeHTMLForm( data ) );
+}
+</code></pre>
+	
+	<br>
+	上記の data の部分がこれまでに学んだpost_varsにあたるもので、
+	このコードはこれを xhr.open の第2引数で指定したサイトへPOSTするものになります。
+	またこのコードによるPOSTは、それがPOSTされるサーバとは別の位置にあるJavascriptからも行うことができます
+	（ただしすぐ後で述べますが、そのような位置にあるJavascriptからの実行の場合、上記の「xhr.responseText」の値は取得不能です）。
+<br><br>
+	さて、POSTされるサーバ側でこのようなJavascriptでの投稿を拒否したければ、
+	これがJavascriptからの投稿か否かを判別する情報が必要となり、そのための情報がMoai_AuthenticKeyとなります。
+	Moai_AuthenticKeyはPOSTされるサーバ側からユーザに向けて発行されます。
+	POST時にこのキーもいっしょに含めて投稿すれば、このキーが指定されていないか、その値が異なる場合は無効な投稿とみなし、
+	その投稿を棄却することができます。
+<br><br>
+	しかしこのMoai_AuthenticKeyの値をJavascript上から自動的に取得される恐れはないでしょうか？
+	実はPOSTされるサーバとは別のURLに置かれたJavascriptからの実行の場合、
+	このMoai_AuthenticKeyをJavascript上から取得することはできません。
+	というのは、Javascript上でサーバから発行されたHTMLの内容を取得するには、上記の「xhr.responseText」の値を調べる必要がありますが、
+	POSTされるサーバとは別のURLに置かれたJavascriptからの実行の場合、xhr.responseTextの値を取得することはできないためです。
+	よってJavascript上から自動的にMoai_AuthenticKeyを取得し、それを元に自動的にPOSTするといったようなことは、
+	（POSTされるサーバとは別のURLのJavascriptからは）不可能となります。
+<br><br>
+	以下はそれを確かめるための実験となります。
+<br><br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/publicbox/moai_auth.html" target=_blank>moai_auth(by xhr_auth(8124))</a>
+	<a class=MstyElemLink href="http://127.0.0.1:8125/cgis/cgi_developers/publicbox/moai_auth.html" target=_blank>moai_auth(by xhr_dmz(8125))</a>
+<br><br>
+	上記のmoai_auth.html内における「checkGet(moai_auth.rrks)」と「checkGet(moai_auth.rrks)」は
+	いずれも「http://127.0.0.1:8124/cgis/cgi_developers/moai_auth.rrks」が出力するMoai_AuthenticKeyを（Javascriptから）取得しようとするものです。
+	このとき、これとポート番号が同じ8124側からの実行ではMoai_AuthenticKeyが（これらのJavascriptから）取得できるのに対し、
+	これとポート番号が異なる8125側からの実行ではMoai_AuthenticKeyが（これらのJavascriptから）取得できません。
+	8125側での実行では「status code = 0」などと表示されるかと思います。
+	これはサーバからの受信が失敗していることを意味し、同時にMoai_AuthenticKeyの受信も不可であることを意味します。
+<br><br>
+	<h3>ローカル関数</h3>
+<br>
+	ではここからはmoai_auth.rrksのコードの解説に入りましょう。
+	moai_auth.rrksはサーバ側からユーザに向けてMoai_AuthenticKeyを発行するためのCGIプログラムになります。
+<br><br>
+	このプログラムは大きく二つの関数からなり、最初がI_getMoaiAuthKey関数、二番目がshow_result関数となります。
+	show_result関数については今までと同じ結果のHTTPヘッダやHTMLを標準出力するものですが、
+	その最初あたりでI_getMoaiAuthKey関数を呼び出しています。
+<br><br>
+	I_getMoaiAuthKey関数の内部をよく見ると、その中にさらにI_getMoaiDir関数とI_loadAuthentickKey関数が定義されていることがわかります。
+	このように関数内に定義された関数をRarakuでは<b>ローカル関数</b>と呼びます。
+<br><br>
+	<div class=box>
+		より正確にはグローバルブロック内にfunctionキーワードで宣言された関数もローカル関数と呼ばれますが、
+		それについては今回は置いておきます。
+	</div>
+<br>
+	これらのローカル関数は、この関数内だけから呼び出すことができます（この関数の外からは呼び出すことは通常はできません）。
+	わざわざそのような制限を設けるのは、その方が全体の依存関係の見通しがよくなるからです。
+	これらをこの関数の外で（ローカル関数としてではなく通常の関数として）定義することもできますが、
+	そのように記述するとこれらの関数に依存する関数がどれであるかを考えるとき、
+	その考慮範囲をファイル全体に広げなければならなくなります。
+	ローカル関数として定義することで、これらがこの関数内限定で呼ばれることが瞬時にわかるため、
+	依存関係を考慮する範囲と労力を小さくすることができます。
+<br><br>
+	I_getMoaiDir関数は、Moaiがインストールされたトップディレクトリのパスを得るための関数です。
+	以下にその定義部分だけを抜粋します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">function I_getMoaiDir( moai_dir string, ermsg string ) bool
+{
+	static const dsp   = '/'
+	static const depth = 8u
+	RrkStr_set( moai_dir, "../" )
+	if !RrkStrPath_searchParentDir( moai_dir, depth, "target.myf", RrkDirType_e_File, dsp ) {
+		if ermsg {
+			ermsg &amp;= "[NG]: RrkCGICtx : Error : Searching moai_dir is failure. target.myf does not found."
+		}
+		RrkStr_clear( moai_dir )
+		return false
+	}
+	return true
+}
+</code></pre>
+	
+	<br>
+	内部で呼び出されるRrkStrPath_searchParentDir関数は、現在のCGIプログラム(moai_auth.rrks）が置かれたディレクトリを上へ順に辿り、
+	target.myfファイルが存在するディレクトリを探します。
+	それが存在するディレクトリを発見した場合、そのディレクトリのパスをmoai_dir変数へ格納します。
+<br><br>
+	I_loadAuthenticKey関数は、moai_dirディレクトリに存在するはずのauthentic_key.datファイルを開き、
+	その第１行目に書かれてある文字列をauthentic_key変数へ格納します。
+	実際、Moaiではこのauthentic_key.datファイルの第１行目に書かれてある内容がMoai_AuthenticKeyそのものになります。
+	以下にその定義部分だけを抜粋します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">function I_loadAuthenticKey( authentic_key string, moai_dir conststr ) bool
+{
+	const path = ( moai_dir "authentic_key.dat" )
+	if fp := RrkFile_open( path, "rb" ); {
+		defer RrkFile_close( fp )
+		RrkStr_clear( authentic_key )
+		RrkFile_getLine( fp, authentic_key )
+		return true
+	}
+	return false
+}
+</code></pre>
+	
+	<br>
+	上記ではまだ紹介していない文法事項が含まれています。
+	例えばif文の条件式の中に「:=」が使われていたり、defer文と呼ばれるものが使われています。
+	これらの詳しい意味については次のセクションで詳しく述べるのでここでは置いておきます。
+	とりあえず今の段階ではRrkFile_open関数でpathに指定されたファイルを開き、
+	RrkFile_getLine関数でそのファイルの内容を一行だけ読み、最後にRrkFile_close関数でそのファイルを閉じるといった流れを
+	大まかに認識しておくだけで十分です。
+<br><br>
+	I_getMoaiAuthKey関数で行われていることは、これら二つを単純に呼び出し、
+	それらが失敗した場合はermsgにエラーメッセージを格納することです。
+	以下にその処理を行っている部分だけを抜粋します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">const moai_dir string = ""
+
+/***
+ * moaiディレクトリの自動検出.
+ */
+if !I_getMoaiDir( moai_dir, ermsg ) {
+	/* error */
+	ermsg &amp;= "[NG]: RrkCGICtx : Error : moai_dir is not found.\n"
+	return false
+}
+ermsg &amp;= @$'[OK]: RrkCGICtx : moai_dir is detected : [${moai_dir}].' \n
+
+/***
+ * authentic_key のロード.
+ * (このキーの実体は、moaiが起動している場合必ずmoai_dir直下に存在します)
+ */
+if !I_loadAuthenticKey( auth_key, moai_dir ) {
+	/* error */
+	ermsg &amp;= "[NG]: RrkCGICtx : Error : Moai authentic_key cannot load.\n"
+	return false
+}
+return true
+</code></pre>
+	
+	<br>
+	上記において、これらが二つとも成功した場合は、最終的にauth_keyにMoai_AuthenticKeyが格納されることになります。
+<br><br>
+	<h3>goto文</h3>
+<br>
+	show_result関数内ではI_getMoaiAuthKey関数を呼び出し、その結果をif文で評価しています。
+	以下にその処理を行っている部分だけを抜粋します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">	if !I_getMoaiAuthKey( auth_key, ermsg ) {
+		RrkCGIStr_addDefaultSyntaxStyle( body, "RrkMsgConsole" )
+		body &amp;= "&lt;div class=RrkMsgConsole&gt;\n"
+		RrkHtpUtil_specialErmsgSyntax( ermsg, "RrkMsgConsole" )
+		RrkHtpUtil_replaceNLtoHtmlBR( ermsg )
+		body &amp;= ermsg
+		body &amp;= "&lt;/div&gt;\n"
+		goto FUNC_END
+	}
+	body &amp;= ( "Moai_AuthenticKey=[" auth_key "]&lt;br&gt;\n" ) /* X */
+
+FUNC_END:
+</code></pre>
+	
+	<br>
+	I_getMoaiAuthKeyが成功した場合は、if文の後ろにある「/* X */」とある部分において、
+	Moai_AuthenticKeyの値を表示するためのbody文字列を組み立てます。
+	一方、I_getMoaiAuthKeyが失敗した場合は、ifブロック内部において、エラーメッセージを表示するためのbody文字列を組み立てます。
+	このifブロック内部のRrkCGIStr_addDefaultSyntaxStyleやRrkHtpUtil_specialErmsgSyntaxはエラーメッセージを一部色づけするための設定です。
+	また、RrkHtpUtil_replaceNLtoHtmlBRでは、ermsg内に含まれる改行コードをHTMLの「&lt;br&gt;」に置換しています。
+	ifブロック内部の最後にある「goto FUNC_END」は<b>goto文</b>と呼ばれるもので、
+	「FUNC_END:」と書かれた位置までの処理を飛ばして一気にジャンプします
+	（よってこのとき、「/* X */」と書かれた部分は実行されないことになります）。
+	一般にgoto文はこのようなエラーハンドリング（エラーが発生した場合に適切に処置すること）においてよく使われます。
+	<!--
+	<a class=MstyCGILink href="http://127.0.0.1:8124/cgis/cgi_developers/post1.rrks" target=_blank>Execute : post1.rrks</a>
+	<a class=MstyCGILink href="http://127.0.0.1:8124/cgis/cgi_developers/protected/post1.rrks" target=_blank>Execute : protected/post1.rrks</a>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/download.rrks?filename=post1.rrks" target=_blank>Download(post1.rrks)</a>
+	<a name=AName_MoaiCGI_moai_auth_1></a><script type="text/javascript">var st_MoaiCGI_moai_auth_1_group_id_ary = [ "MoaiCGI_moai_auth_1" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_moai_auth_1_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_moai_auth_1_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_moai_auth_1';}">View source code (0 lines)</a>
+<span id=MoaiCGI_moai_auth_1 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-raraku">
+[cannot open file : [../../../../../neko_dev/znk_project/src/cgi_developers/protected/post1.rrks]]</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_moai_auth_1_group_id_ary, 'MoaiCGI_moai_auth_1_btn' );location.href = '#AName_MoaiCGI_moai_auth_1';">Close</a></div>
+</span>
+<br><br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/publicbox/test_unknown.html" target=_blank>test_unknown(by xhr_auth(8124))</a>
+	<a class=MstyElemLink href="http://127.0.0.1:8125/cgis/cgi_developers/publicbox/test_unknown.html" target=_blank>test_unknown(by xhr_dmz(8125))</a>
+<br><br>
+	8125
+	getHello : GET:OK Cannot get xhr.responseText;
+	setPost(protected/post1.rrks) : GET:NG POST:NG
+	setPost(post1.rrks) : GET:OK POST:OK Cannot get xhr.responseText;
+<br><br>
+	8124
+	getHello : GET:OK Can get xhr.responseText;
+	setPost(protected/post1.rrks) : GET:NG POST:NG
+	setPost(post1.rrks) : GET:OK POST:OK Can get xhr.responseText;
+<br><br>
+	-->
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section MoaiCGI_moai_auth end -->
+
+
+<a name=MoaiCGI_post1></a>
+<h1 class="title">Hello Post1</h1>
+
+	<h3>実行テスト</h3>
+<br>
+	今回はフォームの内容をCGIへPOSTします。
+	ブラウザ上からPOSTした情報をCGIプログラム側でどうやって受信するのかをみます。
+<br><br>
+	<a class=MstyCGILink href="http://127.0.0.1:8124/cgis/cgi_developers/post1.rrks" target=_blank>Execute : post1.rrks</a>
+	<br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/download.rrks?filename=post1.rrks" target=_blank>Download(post1.rrks)</a>
+	<a name=AName_MoaiCGI_post1_0></a><script type="text/javascript">var st_MoaiCGI_post1_0_group_id_ary = [ "MoaiCGI_post1_0" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_post1_0_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_post1_0_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_post1_0';}">View source code(post1.rrks) (179 lines)</a>
+<span id=MoaiCGI_post1_0 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-raraku">
+import std/cgi
+import std/file
+import std/str_path
+import std/htp_util
+import moai_cgi
+
+function I_getAuthKey( auth_key string, ermsg string ) bool
+{
+	return MoaiCGI_getAuthKey( auth_key, ermsg )
+}
+function I_isAuth( post_vars RrkVar[], auth_key conststr, ermsg string ) bool
+{
+	return MoaiCGI_isAuth( post_vars, auth_key, ermsg )
+}
+function I_showErrorMsg( ermsg string, charset conststr^? ) void
+{
+	const ans string = ""
+	const css_file_urp = ""
+	const syntax_cls_prefix = "RrkMsgConsole"
+	const additional_head string = ""
+
+	/* Output HTTP Header for CGI */
+	RrkCGIStr_addHttpHdr( ans, null )
+
+	RrkCGIStr_addCssLink( additional_head, css_file_urp )
+	RrkCGIStr_addDefaultSyntaxStyle( additional_head, syntax_cls_prefix )
+
+	RrkCGIStr_beginHtml( ans, null, charset, additional_head )
+
+	ans &amp;= "&lt;div class=RrkMsgConsole&gt;\n"
+	RrkHtpUtil_specialErmsgSyntax( ermsg, syntax_cls_prefix )
+	RrkHtpUtil_replaceNLtoHtmlBR( ermsg )
+	ans &amp;= ermsg
+	ans &amp;= "&lt;/div&gt;\n"
+
+	RrkCGIStr_endHtml( ans )
+	Rrk_print( ans )
+
+	const stdout = RrkFile_stdout()
+	RrkFile_flush( stdout )
+}
+
+
+function saveWord8( word8 conststr ) bool
+{
+	varia result_filename string  = "";
+
+	result_filename = "result_word8.txt"
+	if fp := RrkFile_open( result_filename, "wb" ); {
+		defer RrkFile_close( fp )
+		RrkFile_print( fp, word8 )
+		return true
+	}
+	return false
+}
+
+
+/**
+ * functionキーワードによる関数の定義では、
+ * 関数の戻り値の型がvoidの場合、それを省略して記述することも可能。
+ */
+function show_result( post_vars RrkVar[], auth_key conststr, ermsg string )
+{
+	const is_auth = I_isAuth( post_vars, auth_key, ermsg )
+
+	/* Output HTTP Header for CGI */
+	const http_hdr  string = ""
+	RrkCGIStr_addHttpHdr( http_hdr, null )
+	Rrk_print( http_hdr )
+
+	/* Output HTML for CGI */
+	Rrk_print( @|'
+		&lt;!DOCTYPE html&gt;
+		&lt;html&gt;
+		&lt;head&gt;
+		&lt;META http-equiv="Content-type" content="text/html; charset=utf-8"&gt;
+		&lt;META http-equiv="Content-Script-Type" content="text/javascript"&gt;
+		&lt;META http-equiv="Content-Style-Type" content="text/css"&gt;
+		&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+		&lt;link href="/bulma.css" rel="stylesheet" type="text/css" /&gt;
+		&lt;/head&gt;
+	')
+
+	const body string = ""
+	
+	body &amp;= @$|++'
+		Moai CGI very simple post test.&lt;br&gt; &lt;br&gt;
+		&lt;form action=post1.rrks method=POST enctype=multipart/form-data&gt;
+			&lt;input type=hidden name=Moai_AuthenticKey value="${auth_key}"&gt;
+			&lt;input style="max-width:200px;" class=input type=text name=word8 placeholder="Word8" size=8 maxlength=12 value=""&gt;
+			&lt;br&gt;
+			&lt;input style="padding:0.4em 1em;" type=submit value="Submit"&gt;&lt;br&gt;
+		&lt;/form&gt;
+	'
+	body &amp;= ( "is_auth=" is_auth "&lt;br&gt;"\n )
+
+	if is_auth {
+		varia ext      = ""
+		varia is_image = false
+		varia msg      string   = ""
+		varia word8    string
+	
+		foreach var : post_vars {
+			/* 変数の名前. */
+			const name = var.name_
+	
+			if var.misc_type_ == RrkHtpPostVarKind_e_BinaryData-&gt;int {
+				/* none */
+			} elif name == "word8" {
+				/* inputタグやtextareaタグ等に由来するStringデータ. */
+				if u := RrkPrim_getStr( var.prim_ ); {
+					const orig_size = RrkStr_leng(u.val_)
+					word8 = u.val_
+					if RrkStr_leng( word8 ) &gt; 8 {
+						RrkStr_releng( word8, 8 )
+					}
+					msg &amp;= @$'word8=[${word8}] (original size=[${orig_size}])' \n
+				}
+			} else {
+				/* none */
+			}
+		}
+		saveWord8( word8 )
+		
+		RrkHtpUtil_negateHtmlTagEffection( msg ) # for XSS
+		body &amp;= msg
+	}
+
+	Rrk_print( @|'
+	&lt;body&gt;
+		&lt;div class="section"&gt;
+	')
+	Rrk_print( body )
+	Rrk_print( @|'
+		&lt;/div&gt; &lt;!-- section --&gt;
+	&lt;/body&gt;&lt;/html&gt;
+	')
+	
+	const stdout = RrkFile_stdout()
+	RrkFile_flush( stdout )
+}
+
+/* CGIにおける環境変数を取得 */
+const evar = RrkCGI_getEVar()
+
+/* Query Stringを取得 */
+const query_str = RrkCGI_getQueryStr( evar )
+
+/* Post変数群格納用のRrkVar型構造体の配列の宣言 */
+varia post_vars RrkVar[]
+
+/* Query Stringを &amp; 記号で分割し、Post変数群を取得 */
+RrkCGI_splitQueryStr( post_vars, query_str, false )
+
+/* Windowsにおける標準入力、標準出力における \n =&gt; \r\n 自動変換を無効にする */
+Rrk_setMode( RrkStdIOKind_e_stdin,  true )
+Rrk_setMode( RrkStdIOKind_e_stdout, true )
+
+/**
+ * CGIにおけるフォームの投稿データをpost_varsへと取得します.
+ * またこの関数においては第1引数evarの指定も必要となります.
+ */
+const ermsg string = ""
+RrkCGI_getPostedFormData( evar, post_vars,
+			true, ermsg )
+
+const auth_key string = ""
+varia is_auth = false
+if !I_getAuthKey( auth_key, ermsg ) {
+	I_showErrorMsg( ermsg, null )
+}
+
+/***
+ * 環境変数群evarの内容の出力
+ * 長くなるため、サブルーチン化
+ */
+show_result( post_vars, auth_key, ermsg )
+
+
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_post1_0_group_id_ary, 'MoaiCGI_post1_0_btn' );location.href = '#AName_MoaiCGI_post1_0';">Close</a></div>
+</span>
+	<br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/download.rrks?filename=moai_cgi.rrkh" target=_blank>Download(moai_cgi.rrkh)</a>
+	<a name=AName_MoaiCGI_post1_1></a><script type="text/javascript">var st_MoaiCGI_post1_1_group_id_ary = [ "MoaiCGI_post1_1" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_post1_1_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_post1_1_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_post1_1';}">View source code(moai_cgi.rrkh) (91 lines)</a>
+<span id=MoaiCGI_post1_1 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-raraku">
+import std/cgi
+import std/file
+import std/str_path
+
+function MoaiCGI_getAuthKey( auth_key string, ermsg string ) bool
+{
+	function I_getMoaiDir( moai_dir string, ermsg string ) bool
+	{
+		static const dsp   = '/'
+		static const depth = 8u
+		RrkStr_set( moai_dir, "../" )
+		if !RrkStrPath_searchParentDir( moai_dir, depth, "target.myf", RrkDirType_e_File, dsp ) {
+			if ermsg {
+				ermsg &amp;= "[NG]: RrkCGICtx : Error : Searching moai_dir is failure. target.myf does not found."
+			}
+			RrkStr_clear( moai_dir )
+			return false
+		}
+		return true
+	}
+	function I_loadAuthenticKey( authentic_key string, moai_dir conststr ) bool
+	{
+		const path = ( moai_dir "authentic_key.dat" )
+		if fp := RrkFile_open( path, "rb" ); {
+			defer RrkFile_close( fp )
+			RrkStr_clear( authentic_key )
+			RrkFile_getLine( fp, authentic_key )
+			return true
+		}
+		return false
+	}
+
+	const moai_dir string = ""
+
+	/***
+	 * moaiディレクトリの自動検出.
+	 */
+	if !I_getMoaiDir( moai_dir, ermsg ) {
+		/* error */
+		ermsg &amp;= "[NG]: RrkCGICtx : Error : moai_dir is not found.\n"
+		return false
+	}
+	ermsg &amp;= @$'[OK]: RrkCGICtx : moai_dir is detected : [${moai_dir}].' \n
+
+	/***
+	 * authentic_key のロード.
+	 * (このキーの実体は、moaiが起動している場合必ずmoai_dir直下に存在します)
+	 */
+	if !I_loadAuthenticKey( auth_key, moai_dir ) {
+		/* error */
+		ermsg &amp;= "[NG]: RrkCGICtx : Error : Moai authentic_key cannot load.\n"
+		return false
+	}
+	return true
+}
+
+function MoaiCGI_isAuth( post_vars RrkVar[], auth_key conststr, ermsg string ) bool
+{
+	const idx = RrkVarAry_find( post_vars, "Moai_AuthenticKey" )
+	if idx != Rrk_NPOS {
+		if u := RrkPrim_getStr( post_vars[idx].prim_ ); u &amp;&amp; u.val_ == auth_key {
+			/* authenticated */
+			return true
+		}
+	}
+	ermsg &amp;= "[NG]: RrkCGICtx : Error : Not authenticated.\n"
+	return false
+}
+
+function MoaiCGI_makeErrorMsgHtml( ans string, ermsg string, charset conststr^? ) void
+{
+	const css_file_urp = ""
+	const syntax_cls_prefix = "RrkMsgConsole"
+	const additional_head string = ""
+
+	/* Output HTTP Header for CGI */
+	RrkCGIStr_addHttpHdr( ans, null )
+
+	RrkCGIStr_addCssLink( additional_head, css_file_urp )
+	RrkCGIStr_addDefaultSyntaxStyle( additional_head, syntax_cls_prefix )
+
+	RrkCGIStr_beginHtml( ans, null, charset, additional_head )
+
+	ans &amp;= "&lt;div class=RrkMsgConsole&gt;\n"
+	RrkHtpUtil_specialErmsgSyntax( ermsg, syntax_cls_prefix )
+	RrkHtpUtil_replaceNLtoHtmlBR( ermsg )
+	ans &amp;= ermsg
+	ans &amp;= "&lt;/div&gt;\n"
+
+	RrkCGIStr_endHtml( ans )
+}
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_post1_1_group_id_ary, 'MoaiCGI_post1_1_btn' );location.href = '#AName_MoaiCGI_post1_1';">Close</a></div>
+</span>
+<br><br>
+	このCGIプログラムは二つの仕事を同時に行っています。
+	一つはクライアントが送信するためのフォームを表示することであり、
+	もう一つはクライアントが送信したフォームの内容を取得してその結果を表示することです。
+<br><br>
+	フォーム表示では、以下のようなHTMLに相当する内容がブラウザ上に表示されます（一部簡略化しています）。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-javascript">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;META http-equiv="Content-type" content="text/html; charset=utf-8"&gt;
+	&lt;META http-equiv="Content-Script-Type" content="text/javascript"&gt;
+	&lt;META http-equiv="Content-Style-Type" content="text/css"&gt;
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+	&lt;link href="/bulma.css" rel="stylesheet" type="text/css" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	Moai CGI very simple post test.&lt;br&gt; &lt;br&gt;
+	&lt;form action=post1.rrks method=POST enctype=multipart/form-data&gt;
+		&lt;input type=hidden name=Moai_AuthenticKey value="0123456789ABCDEF"&gt;
+		&lt;input style="max-width:200px;" class=input type=text name=word8 placeholder="Word8" size=8 maxlength=12 value=""&gt;
+		&lt;br&gt;
+		&lt;input style="padding:0.4em 1em;" type=submit value="Submit"&gt;&lt;br&gt;
+	&lt;/form&gt;
+&lt;/body&gt;&lt;/html&gt;
+</code></pre>
+	
+	<br>
+	上記の「&lt;input type=hidden name=Moai_AuthenticKey value="0123456789ABCDEF"&gt;」において
+	Moai_AuthenticKeyがセットされ、これはフォームから送信されるデータの一部となります。
+<br><br>
+	<div class=box>
+		尚、ここで表示されているMoai_AuthenticKeyの値はダミーであり、実際にはMoai起動時に決定されるほぼランダムな値が設定されます。
+	</div>
+<br>
+	CGIでは標準入力よりクライアントが送信したフォームの内容を取得する仕様となっています。
+	ですが毎回そのような処理を書くのも大変ですので、
+	大抵は言語毎にそれを取得するための専用のライブラリが設けられています。
+	Rarakuでもこれに相当するものとしてRrkCGI_getPostedFormData関数が用意されていますので、これを利用します。
+	これを呼び出している部分だけを以下に抜粋します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">/**
+ * CGIにおけるフォームの投稿データをpost_varsへと取得します.
+ * またこの関数においては第1引数evarの指定も必要となります.
+ */
+const ermsg string = ""
+RrkCGI_getPostedFormData( evar, post_vars,
+			true, ermsg )
+</code></pre>
+	
+	<br>
+	上記ではRrkCGI_getPostedFormData関数により、クライアントが送信したフォームの内容が存在するならばそれを取得し、
+	それを整理したものをpost_varsに格納します。
+	post_varsはRrkCGI_splitQueryStr関数からも（query_strを元にして）既に取得していますが、
+	RrkCGI_getPostedFormData関数によってさらに追加でその内容を取得するということです。
+<br><br>
+	次に一つ前のセクションでも述べたMoai_AuthenticKeyの取得とその値のチェックをします。
+	ただし今回はshow_result関数に入る前の時点でこれを実行しておきます。
+	またエラーメッセージの表示処理については、I_showErrorMsg関数として独立させています。
+	これに該当する部分を以下に抜粋します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">const auth_key string = ""
+varia is_auth = false
+if !I_getAuthKey( auth_key, ermsg ) {
+	I_showErrorMsg( ermsg, null )
+}
+is_auth = I_isAuth( post_vars, auth_key, ermsg )
+</code></pre>
+	
+	<br>
+	I_getAuthKey関数、I_isAuth関数の中身の処理はこれからも繰り返し使うことになるため、
+	その中身をMoaiCGI_getAuthKey関数とMoaiCGI_isAuth関数として独立させ、これをmoai_cgi.rrkhに移動させています。
+	これにより、moai_cgi.rrkhをインポートするだけでこれらの関数が使用可能になります。
+	結局、今回のI_getAuthKey関数、I_isAuth関数は以下のようにこれらの関数を単に呼び出しているだけですが、
+	このような関数を<b>wrapper</b>と呼びます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">function I_getAuthKey( auth_key string, ermsg string ) bool
+{
+	return MoaiCGI_getAuthKey( auth_key, ermsg )
+}
+function I_isAuth( post_vars RrkVar[], auth_key conststr, ermsg string ) bool
+{
+	return MoaiCGI_isAuth( post_vars, auth_key, ermsg )
+}
+</code></pre>
+	
+	<br>
+	I_showErrorMsg関数の中身についても簡単に説明しておきます。
+	以下はこの関数の実装部の抜粋です。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">function I_showErrorMsg( ermsg string, charset conststr^? ) void
+{
+	const ans string = ""
+	const css_file_urp = ""
+	const syntax_cls_prefix = "RrkMsgConsole"
+	const additional_head string = ""
+
+	/* Output HTTP Header for CGI */
+	RrkCGIStr_addHttpHdr( ans, null )
+
+	RrkCGIStr_addCssLink( additional_head, css_file_urp )
+	RrkCGIStr_addDefaultSyntaxStyle( additional_head, syntax_cls_prefix )
+
+	RrkCGIStr_beginHtml( ans, null, charset, additional_head )
+
+	ans &amp;= "&lt;div class=RrkMsgConsole&gt;\n"
+	RrkHtpUtil_specialErmsgSyntax( ermsg, syntax_cls_prefix )
+	RrkHtpUtil_replaceNLtoHtmlBR( ermsg )
+	ans &amp;= ermsg
+	ans &amp;= "&lt;/div&gt;\n"
+
+	RrkCGIStr_endHtml( ans )
+	Rrk_print( ans )
+
+	const stdout = RrkFile_stdout()
+	RrkFile_flush( stdout )
+}
+</code></pre>
+	
+	<br>
+	今まではHTTPヘッダの書式に少し慣れてもらうため、これを手動で記述してきましたが、
+	実はRarakuにはこれを生成するための標準関数RrkCGIStr_addHttpHdrが用意されているため、上記ではそれを使っています。
+	続くRrkCGIStr_addCssLink、RrkCGIStr_addDefaultSyntaxStyle、RrkCGIStr_beginHtml関数では
+	HTMLの開始の部分を生成しています。
+	さらにRrkHtpUtil_specialErmsgSyntax、RrkHtpUtil_replaceNLtoHtmlBR関数ではermsgをHTML用に色づけし改行するための変換を行っており、
+	最後のRrkCGIStr_endHtmlでHTMLの最後の部分を生成しています。
+<br><br>
+	<h3>if文の条件式で変数宣言も同時に行う特殊記法</h3>
+<br>
+	is_authの値がtrueの場合、post_varsから"word8"に該当するデータが抽出され、saveWord8関数によってその値がファイルに保存されます。
+	以下は、saveWord8関数の実装部分を抜粋したものです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">function saveWord8( word8 conststr ) bool
+{
+	varia result_filename string  = "";
+
+	result_filename = "result_word8.txt"
+	if fp := RrkFile_open( result_filename, "wb" ); {
+		defer RrkFile_close( fp )
+		RrkFile_print( fp, word8 )
+		return true
+	}
+	return false
+}
+</code></pre>
+	
+	<br>
+	Rarakuのif文では「変数名 := 右辺」といった書式を用いることで条件式の中に変数を宣言できます。
+	例えば上記では、「fp := RrkFile_open( result_filename, "wb" )」の部分がこれに該当します。
+	RrkFile_open関数は、ファイルのオープンが成功した場合はRrkFile型の値を返し、失敗した場合はnullを返します。
+<br><br>
+	その直後に「;」が来ていますが、この記法を用いる場合はこの「;」の記述は必須になります。
+	上記では「;」の後ろには他に何も記述がなく即座に「{」が始まりますが、この場合「;」と「{」の間に
+	変数名（この例ではfp）が省略されているものとみなされます。
+	よってこの場合、if文の条件式としては最終的にfpの値が評価され、その値がnullでなければifブロックの中が実行され、
+	nullであれば実行されないことになります。
+<br><br>
+	<h3>defer文</h3>
+<br>
+	次に上記の例におけるifブロックの中身について説明しましょう。
+	最初に「defer RrkFile_close( fp )」とありますが、これは<b>defer文</b>と呼ばれるものになります。
+	deferの後ろには関数呼び出しの形式を指定します。
+	このとき、この関数がこの位置でただちに呼び出されるわけではなく、
+	その呼び出しがsaveWord8関数終了時にまで遅延（defer）されます。
+<br><br>
+	RrkFile_openで開いたファイルはfpという変数の値として保持され、
+	そのfpは例えばRrkFile_print関数（文字列をファイルへ書き込む関数）などで使用されます。
+	また、fpを使い終わった後は、通常それをRrkFile_close関数で閉じなければなりません。
+	そのため、これに準じて素直に考えるならば、上記においてはRrkFile_print関数を実行した後の位置で、
+	RrkFile_close関数を呼び出すというのが本来の指定順序となります。
+<br><br>
+	しかし（上記はまだRrkFile_print関数が一行あるだけですのでRrkFile_close関数の記述を忘れることはないかもしれませんが）
+	一般にはRrkFile_open関数の呼び出しから距離が離れれば離れるほど、RrkFile_close関数を記述し忘れる確率が高くなると考えられます。
+	そのため、RrkFile_open関数の呼び出しの直後に「defer RrkFile_close( fp )」のような記述を予めしておく方が、
+	この種の書き忘れをする確率は下がると考えられ、望ましいわけです。
+<br><br>
+	<h3>ヒアドキュメントにおける変数の埋め込み</h3>
+<br>
+	pos1.rrksでは、以下のようなコードでフォーム表示を行っています（最初に見たHTMLを出力している処理になります）。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">body &amp;= @$|++'
+	Moai CGI very simple post test.&lt;br&gt; &lt;br&gt;
+	&lt;form action=post1.rrks method=POST enctype=multipart/form-data&gt;
+		&lt;input type=hidden name=Moai_AuthenticKey value="${auth_key}"&gt;
+		&lt;input style="max-width:200px;" class=input type=text name=word8 placeholder="Word8" size=8 maxlength=12 value=""&gt;
+		&lt;br&gt;
+		&lt;input style="padding:0.4em 1em;" type=submit value="Submit"&gt;&lt;br&gt;
+	&lt;/form&gt;
+'
+</code></pre>
+	
+	<br>
+	上記はヒアドキュメントを記述してそれを文字列変数bodyへ連結しています。
+	このヒアドキュメントの開始は「@$|++'」と指定されていますが、このように「@」の直後に「$」を指定することによって、
+	ヒアドキュメント内に<b>変数の埋め込み</b>を行うことができます。
+	上記では「${auth_key}」と記述された部分がこれに相当し、この部分に変数auth_keyの値を埋め込むことができます。
+	ただし、「@」の直後に「$」を指定しなかった場合は、この「${auth_key}」はこの文字通りに解釈されます。
+	また、今回のように「@」の直後に「$」と「|++」を同時に指定する場合、必ず「$」の方を「|++」より先に記述しなければならないことにご注意ください。
+<br><br>
+	<div class=box>
+		ちなみにヒアドキュメントの開始において「|++」と指定した場合、一旦行頭の余計なインデントを除去した後に、
+		再び２レベル分インデントすることを意味します。
+	</div>
+<br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section MoaiCGI_post1 end -->
+
+
+<a name=MoaiCGI_post2></a>
+<h1 class="title">Hello Post2</h1>
+
+	<h3>実行テスト</h3>
+<br>
+	今回は前回の続きのような内容です。
+	前回のpost1.rrksを改造し、画像の投稿なども行えるように改良してみます。
+<br><br>
+	<a class=MstyCGILink href="http://127.0.0.1:8124/cgis/cgi_developers/post2.rrks" target=_blank>Execute : post2.rrks</a>
+	<br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/download.rrks?filename=post2.rrks" target=_blank>Download(post2.rrks)</a>
+	<a name=AName_MoaiCGI_post2_0></a><script type="text/javascript">var st_MoaiCGI_post2_0_group_id_ary = [ "MoaiCGI_post2_0" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_post2_0_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_post2_0_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_post2_0';}">View source code(post2.rrks) (228 lines)</a>
+<span id=MoaiCGI_post2_0 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-raraku">
+import std/cgi
+import std/file
+import std/str_path
+import std/htp_util
+import std/dir
+import moai_cgi
+
+function I_getAuthKey( auth_key string, ermsg string ) bool
+{
+	return MoaiCGI_getAuthKey( auth_key, ermsg )
+}
+function I_isAuth( post_vars RrkVar[], auth_key conststr, ermsg string ) bool
+{
+	return MoaiCGI_isAuth( post_vars, auth_key, ermsg )
+}
+function I_showErrorMsg( ermsg string, charset conststr^? ) void
+{
+	const ans string = ""
+	MoaiCGI_makeErrorMsgHtml( ans, ermsg, charset )
+	Rrk_print( ans )
+
+	const stdout = RrkFile_stdout()
+	RrkFile_flush( stdout )
+}
+function saveAsResultFile( ext conststr, data uint8[], data_size uint ) bool
+{
+	varia result_filename string  = "";
+	varia write_size      uint
+
+	RrkDir_mkdirPath( "publicbox/tmp", '/' )
+	result_filename = ( "publicbox/tmp/result_file." ext )
+	if fp := RrkFile_open( result_filename, "wb" ); {
+		defer RrkFile_close( fp )
+		write_size =  RrkFile_write( fp, data, data_size )
+	}
+	return write_size == data_size
+}
+function saveAsTextFile( text conststr ) bool
+{
+	varia result_filename string  = "";
+
+	RrkDir_mkdirPath( "publicbox/tmp", '/' )
+	result_filename = "publicbox/tmp/result_text.txt"
+	if fp := RrkFile_open( result_filename, "wb" ); {
+		defer RrkFile_close( fp )
+		RrkFile_print( fp, text )
+		return true
+	}
+	return false
+}
+function show_result( post_vars RrkVar[], auth_key conststr, ermsg string )
+{
+	const is_auth = I_isAuth( post_vars, auth_key, ermsg )
+
+	/* Output HTTP Header for CGI */
+	const http_hdr  string = ""
+	RrkCGIStr_addHttpHdr( http_hdr, null )
+	Rrk_print( http_hdr )
+
+	/* Output HTML for CGI */
+	Rrk_print( @|'
+		&lt;!DOCTYPE html&gt;
+		&lt;html&gt;
+		&lt;head&gt;
+		&lt;META http-equiv="Content-type" content="text/html; charset=utf-8"&gt;
+		&lt;META http-equiv="Content-Script-Type" content="text/javascript"&gt;
+		&lt;META http-equiv="Content-Style-Type" content="text/css"&gt;
+		&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+		&lt;link href="/bulma.css" rel="stylesheet" type="text/css" /&gt;
+		&lt;/head&gt;
+	')
+
+	const body string = ""
+	
+	body &amp;= @$|++'
+		Moai CGI Post for multipart/form-data.&lt;br&gt; &lt;br&gt;
+		&lt;form action=post2.rrks method=POST enctype=multipart/form-data&gt;
+			&lt;input type=hidden name=Moai_AuthenticKey value="${auth_key}"&gt;
+			&lt;input style="max-width:400px;" class=input type=text name=email placeholder="E-mail" size=28&gt;&lt;br&gt;
+			&lt;textarea class=textarea name=com placeholder="Comment" cols=48 rows="4"&gt;&lt;/textarea&gt;&lt;br&gt;
+			&lt;!--&lt;b&gt;添付File&lt;/b&gt;&lt;input style="padding:0.4em 1em;" type=file name=upfile &gt;&lt;br&gt;--&gt;
+			&lt;div class="file"&gt;
+				&lt;label class="file-label"&gt;
+					&lt;input class="file-input" type="file" name=upfile&gt;
+					&lt;span class="file-cta"&gt;&lt;span class="file-label"&gt;添付ファイル&lt;/span&gt;&lt;/span&gt;
+				&lt;/label&gt;
+			&lt;/div&gt;
+			&lt;br&gt;
+			&lt;input style="padding:0.4em 1em;" type=submit value="Submit"&gt;&lt;br&gt;
+		&lt;/form&gt;
+		&lt;ul&gt;
+			&lt;li&gt;添付File : GIF, JPG, PNG, WEBM. 2000KBまで&lt;/li&gt;
+		&lt;/ul&gt;
+	'
+	body &amp;= ( "is_auth=" is_auth "&lt;br&gt;"\n )
+
+	if is_auth {
+		body &amp;= "&lt;pre&gt;\n"
+		body &amp;= "PostVars:.\n"
+	
+		varia ext      = ""
+		varia is_image = false
+		varia msg      string   = ""
+	
+		foreach var : post_vars {
+			/* 変数の名前. */
+			const name = var.name_
+	
+			//Rrk_print( \=var \, \=var.name_ \n )
+			//Rrk_print( \=var.misc_type_ \, RrkHtpPostVarKind_e_BinaryData-&gt;int \n )
+			if u := RrkPrim_getBfr( var.prim_ ); u &amp;&amp; var.misc_type_ == RrkHtpPostVarKind_e_BinaryData-&gt;int {
+				/**
+				 * misc_type_がRrkHtpPostVarKind_e_BinaryDataの場合
+				 * これは添付ファイルを意味します.
+				 */
+				const filename  = var.misc_
+				const data = u.val_
+				const data_size = Rrk_numof( data )
+				
+				/* ZnkS_get_extension の戻り値はファイルの拡張子となる */
+				ext = RrkStr_get_extension( filename, '.' )
+				
+				lambda addErrorMsg( prefix conststr, detail conststr ){
+					const delimitor = ( detail == "" ) ? "" : " : "
+					msg &amp;= @$'${prefix} : ${name} : original filename=${filename}' &amp; delimitor &amp; detail &amp; \n
+				}
+	
+				if data_size &gt; 2000000 { # 2000KB以上
+					is_image = false
+					addErrorMsg( "Binary", "Error : This is too large." )
+				} else {
+					/**
+					 * 文字列が等しいかの比較を行う.
+					 * ただし大文字小文字の区別はしない.
+					 */
+					if(  RrkStr_eqCase( ext, "jpg" )
+					  || RrkStr_eqCase( ext, "png" )
+					  || RrkStr_eqCase( ext, "gif" )
+					  || RrkStr_eqCase( ext, "webm" )
+					){
+						/* 画像ファイルの拡張子であった場合はこのデータをresult_file.ext として保存 */
+						addErrorMsg( "Image", "Report : " \=data_size )
+						if( saveAsResultFile( ext, data, data_size ) ){
+							is_image = true;
+						} else {
+							is_image = false;
+							addErrorMsg( "Image", "Error : fwrite error." )
+						}
+					} else {
+						is_image = false;
+						addErrorMsg( "Binary", "" )
+					}
+				}
+			} elif u := RrkPrim_getStr( var.prim_ ); {
+				RrkStr_leng( u.val_ )
+				/* inputタグやtextareaタグ等に由来するStringデータ. */
+				msg &amp;= @$'${name} = [${u.val_}] (size=[${RrkStr_leng(u.val_)}])' \n
+			}
+		}
+		saveAsTextFile( msg )
+		
+		RrkHtpUtil_negateHtmlTagEffection( msg ) # for XSS
+		if is_image {
+			/* 画像ファイルであった場合はimgタグによりそれを表示. */
+			msg &amp;= "&lt;br&gt;...\n"
+			msg &amp;= @$'&lt;img src="./publicbox/tmp/result_file.${ext}"&gt;' \n
+			msg &amp;= "&lt;br&gt;\n"
+		}
+		body &amp;= msg
+		body &amp;= "&lt;/pre&gt;\n"
+	
+		body &amp;= "&lt;pre&gt;\n"
+		body &amp;= "Ermsg:\n"
+		body &amp;= ermsg
+		body &amp;= "&lt;/pre&gt;\n"
+	}
+
+	Rrk_print( @|'
+	&lt;body&gt;
+		&lt;div class="section"&gt;
+	')
+	Rrk_print( body )
+	Rrk_print( @|'
+		&lt;/div&gt; &lt;!-- section --&gt;
+	&lt;/body&gt;&lt;/html&gt;
+	')
+	
+	const stdout = RrkFile_stdout()
+	RrkFile_flush( stdout )
+}
+
+/* CGIにおける環境変数を取得 */
+const evar = RrkCGI_getEVar()
+
+/* Query Stringを取得 */
+const query_str = RrkCGI_getQueryStr( evar )
+
+/* Post変数群格納用のRrkVar型構造体の配列の宣言 */
+varia post_vars RrkVar[]
+
+/* Query Stringを &amp; 記号で分割し、Post変数群を取得 */
+RrkCGI_splitQueryStr( post_vars, query_str, false )
+
+/* Windowsにおける標準入力、標準出力における \n =&gt; \r\n 自動変換を無効にする */
+Rrk_setMode( RrkStdIOKind_e_stdin,  true )
+Rrk_setMode( RrkStdIOKind_e_stdout, true )
+
+/**
+ * CGIにおけるフォームの投稿データをpost_varsへと取得します.
+ * またこの関数においては第1引数evarの指定も必要となります.
+ */
+const ermsg string = ""
+RrkCGI_getPostedFormData( evar, post_vars,
+			true, ermsg )
+
+const auth_key string = ""
+varia is_auth = false
+if !I_getAuthKey( auth_key, ermsg ) {
+	I_showErrorMsg( ermsg, null )
+}
+
+/***
+ * 環境変数群evarの内容の出力
+ * 長くなるため、サブルーチン化
+ */
+show_result( post_vars, auth_key, ermsg )
+
+
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_post2_0_group_id_ary, 'MoaiCGI_post2_0_btn' );location.href = '#AName_MoaiCGI_post2_0';">Close</a></div>
+</span>
+	<br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/download.rrks?filename=moai_cgi.rrkh" target=_blank>Download(moai_cgi.rrkh)</a>
+	<a name=AName_MoaiCGI_post2_1></a><script type="text/javascript">var st_MoaiCGI_post2_1_group_id_ary = [ "MoaiCGI_post2_1" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_post2_1_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_post2_1_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_post2_1';}">View source code(moai_cgi.rrkh) (91 lines)</a>
+<span id=MoaiCGI_post2_1 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-raraku">
+import std/cgi
+import std/file
+import std/str_path
+
+function MoaiCGI_getAuthKey( auth_key string, ermsg string ) bool
+{
+	function I_getMoaiDir( moai_dir string, ermsg string ) bool
+	{
+		static const dsp   = '/'
+		static const depth = 8u
+		RrkStr_set( moai_dir, "../" )
+		if !RrkStrPath_searchParentDir( moai_dir, depth, "target.myf", RrkDirType_e_File, dsp ) {
+			if ermsg {
+				ermsg &amp;= "[NG]: RrkCGICtx : Error : Searching moai_dir is failure. target.myf does not found."
+			}
+			RrkStr_clear( moai_dir )
+			return false
+		}
+		return true
+	}
+	function I_loadAuthenticKey( authentic_key string, moai_dir conststr ) bool
+	{
+		const path = ( moai_dir "authentic_key.dat" )
+		if fp := RrkFile_open( path, "rb" ); {
+			defer RrkFile_close( fp )
+			RrkStr_clear( authentic_key )
+			RrkFile_getLine( fp, authentic_key )
+			return true
+		}
+		return false
+	}
+
+	const moai_dir string = ""
+
+	/***
+	 * moaiディレクトリの自動検出.
+	 */
+	if !I_getMoaiDir( moai_dir, ermsg ) {
+		/* error */
+		ermsg &amp;= "[NG]: RrkCGICtx : Error : moai_dir is not found.\n"
+		return false
+	}
+	ermsg &amp;= @$'[OK]: RrkCGICtx : moai_dir is detected : [${moai_dir}].' \n
+
+	/***
+	 * authentic_key のロード.
+	 * (このキーの実体は、moaiが起動している場合必ずmoai_dir直下に存在します)
+	 */
+	if !I_loadAuthenticKey( auth_key, moai_dir ) {
+		/* error */
+		ermsg &amp;= "[NG]: RrkCGICtx : Error : Moai authentic_key cannot load.\n"
+		return false
+	}
+	return true
+}
+
+function MoaiCGI_isAuth( post_vars RrkVar[], auth_key conststr, ermsg string ) bool
+{
+	const idx = RrkVarAry_find( post_vars, "Moai_AuthenticKey" )
+	if idx != Rrk_NPOS {
+		if u := RrkPrim_getStr( post_vars[idx].prim_ ); u &amp;&amp; u.val_ == auth_key {
+			/* authenticated */
+			return true
+		}
+	}
+	ermsg &amp;= "[NG]: RrkCGICtx : Error : Not authenticated.\n"
+	return false
+}
+
+function MoaiCGI_makeErrorMsgHtml( ans string, ermsg string, charset conststr^? ) void
+{
+	const css_file_urp = ""
+	const syntax_cls_prefix = "RrkMsgConsole"
+	const additional_head string = ""
+
+	/* Output HTTP Header for CGI */
+	RrkCGIStr_addHttpHdr( ans, null )
+
+	RrkCGIStr_addCssLink( additional_head, css_file_urp )
+	RrkCGIStr_addDefaultSyntaxStyle( additional_head, syntax_cls_prefix )
+
+	RrkCGIStr_beginHtml( ans, null, charset, additional_head )
+
+	ans &amp;= "&lt;div class=RrkMsgConsole&gt;\n"
+	RrkHtpUtil_specialErmsgSyntax( ermsg, syntax_cls_prefix )
+	RrkHtpUtil_replaceNLtoHtmlBR( ermsg )
+	ans &amp;= ermsg
+	ans &amp;= "&lt;/div&gt;\n"
+
+	RrkCGIStr_endHtml( ans )
+}
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_post2_1_group_id_ary, 'MoaiCGI_post2_1_btn' );location.href = '#AName_MoaiCGI_post2_1';">Close</a></div>
+</span>
+<br><br>
+	show_resultに入る前の処理の流れはpost1.rrksと全く同じです。
+	ただしI_showErrorMsgの実装についてはmoai_cgi.rrkhに移し、替わりにMoaiCGI_makeErrorMsgHtml関数を（I_showErrorMsg関数の）中で呼び出しています。
+<br><br>
+	今回のフォームには、E-mailを追加するための入力フィールドとコメントを記述するためのテキストエリア、
+	さらに添付ファイルを追加するためのダイアログを表示させるためのボタンが備わっています。
+	Moai_AuthenticKeyをhidden属性としてこれらのデータといっしょに送信するようになっている点は前回と同じです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-javascript">Moai CGI Post for multipart/form-data.&lt;br&gt; &lt;br&gt;
+&lt;form action=post2.rrks method=POST enctype=multipart/form-data&gt;
+
+	&lt;input type=hidden name=Moai_AuthenticKey value="0123456789ABCDEF"&gt;
+	&lt;input style="max-width:400px;" class=input type=text name=email placeholder="E-mail" size=28&gt;&lt;br&gt;
+	&lt;textarea class=textarea name=com placeholder="Comment" cols=48 rows="4"&gt;&lt;/textarea&gt;&lt;br&gt;
+
+	&lt;!--&lt;b&gt;添付File&lt;/b&gt;&lt;input style="padding:0.4em 1em;" type=file name=upfile &gt;&lt;br&gt;--&gt;
+	&lt;div class="file"&gt;
+		&lt;label class="file-label"&gt;
+			&lt;input class="file-input" type="file" name=upfile&gt;
+			&lt;span class="file-cta"&gt;&lt;span class="file-label"&gt;添付ファイル&lt;/span&gt;&lt;/span&gt;
+		&lt;/label&gt;
+	&lt;/div&gt;
+	&lt;br&gt;
+	&lt;input style="padding:0.4em 1em;" type=submit value="Submit"&gt;&lt;br&gt;
+
+&lt;/form&gt;
+</code></pre>
+	
+	<br>
+	<h3>lambda関数</h3>
+<br>
+	pos2.rrksでは、is_authがtrueの場合はpost_vars全体の値を報告し、
+	その中に画像ファイルのデータが含まれる場合はそれを別途ファイルに保存します。
+	これを行っているのが以下のforeach文になります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">foreach var : post_vars {
+	/* 変数の名前. */
+	const name = var.name_
+
+	//Rrk_print( \=var \, \=var.name_ \n )
+	//Rrk_print( \=var.misc_type_ \, RrkHtpPostVarKind_e_BinaryData-&gt;int \n )
+	if u := RrkPrim_getBfr( var.prim_ ); u &amp;&amp; var.misc_type_ == RrkHtpPostVarKind_e_BinaryData-&gt;int {
+		/**
+		 * misc_type_がRrkHtpPostVarKind_e_BinaryDataの場合
+		 * これは添付ファイルを意味します.
+		 */
+		const filename  = var.misc_
+		const data = u.val_
+		const data_size = Rrk_numof( data )
+		
+		/* ZnkS_get_extension の戻り値はファイルの拡張子となる */
+		ext = RrkStr_get_extension( filename, '.' )
+		
+		lambda addErrorMsg( prefix conststr, detail conststr ){
+			const delimitor = ( detail == "" ) ? "" : " : "
+			msg &amp;= @$'${prefix} : ${name} : original filename=${filename}' &amp; delimitor &amp; detail &amp; \n
+		}
+
+		if data_size &gt; 2000000 { # 2000KB以上
+			is_image = false
+			addErrorMsg( "Binary", "Error : This is too large." )
+		} else {
+			/**
+			 * 文字列が等しいかの比較を行う.
+			 * ただし大文字小文字の区別はしない.
+			 */
+			if(  RrkStr_eqCase( ext, "jpg" )
+			  || RrkStr_eqCase( ext, "png" )
+			  || RrkStr_eqCase( ext, "gif" )
+			  || RrkStr_eqCase( ext, "webm" )
+			){
+				/* 画像ファイルの拡張子であった場合はこのデータをresult_file.ext として保存 */
+				addErrorMsg( "Image", "Report : " \=data_size )
+				if( saveAsResultFile( ext, data, data_size ) ){
+					is_image = true;
+				} else {
+					is_image = false;
+					addErrorMsg( "Image", "Error : fwrite error." )
+				}
+			} else {
+				is_image = false;
+				addErrorMsg( "Binary", "" )
+			}
+		}
+	} elif u := RrkPrim_getStr( var.prim_ ); {
+		RrkStr_leng( u.val_ )
+		/* inputタグやtextareaタグ等に由来するStringデータ. */
+		msg &amp;= @$'${name} = [${u.val_}] (size=[${RrkStr_leng(u.val_)}])' \n
+	}
+}
+</code></pre>
+	
+	<br>
+	post_varsの要素であるRrkVar型のメンバmisc_type_の値が「RrkHtpPostVarKind_e_BinaryData-&gt;int」に等しい場合は
+	バイナリデータであることを意味し、それ以外の場合は文字列のデータです。
+	上記のほとんどの処理はこのバイナリデータを処理するためのものとなります。
+	「lambda addErrorMsg」では<b>lambda関数</b>を定義しています。
+	これはざっくり言えばローカル関数のようなものですが、ローカル関数との違いはこれを含むshow_result関数内のローカル変数に
+	（このlambda関数の内部から）普通にアクセスできることです。
+	例えばaddErrorMsgの内部で使用されている msg、name、filenameなどの変数はすべてshow_result関数内で宣言されたものですが、
+	lambda関数では特に何もすることなく、これらにアクセスできます。
+<br><br>
+	<div class=box>
+		逆に通常のローカル関数でこれらにアクセスする場合、関数の引数としてこれらを指定しなければなりません。
+		このように書くとlambda関数さえあればローカル関数が不要であるかのように思えるかもしれませんが、そうでもありません。
+<br><br>
+		確かにlambda関数の方が自由度が高く柔軟と言えますが、
+		自由度があることと制限があるということは、プログラミング言語においてはトレードオフの関係にあるということは既に説明しました。
+		例えば変数と定数の関係です。
+		lambda関数とローカル関数の関係もこれに当てはまると考えることもできます。
+		実際、自由にアクセスできるということは、一方でそれだけ変数の値の変遷を追うのが難しくなるという問題を孕みます。
+		例えば関数の外で宣言されたどの変数に依存し、またそれらにどのようにアクセスするのか
+		（読み込み専用なのか更新もされ得るのか）は、lambda関数においては（それが仮引数として明記されていない分）
+		ローカル関数よりも判読し辛いと考えられます。
+		また、効率面においてはlambda関数よりローカル関数の方が優れています。
+		そのためRarakuではこれらの両方が用意されており、状況に応じて適切な方を使用できるようになっています。
+	</div>
+<br>
+	その他、post2.rrks では saveAsResultFileとsaveAsTextFileが新しく追加されています。
+	saveAsTextFileについては前回解説したsaveWord8と内容はほぼ同じで、特に新しい事項はありません。
+	saveAsResultFileについては、RrkFile_write関数が使われており、これはバイナリデータ data（第2引数で指定） を
+	指定したサイズ（第3引数で指定）分だけファイルに書き込む関数です。
+	テキストファイルとは異なり、画像はバイナリデータですので、RrkFile_print関数ではなくRrkFile_write関数を使う必要があります。
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section MoaiCGI_post2 end -->
+
+
+<a name=MoaiCGI_transfer_chunked></a>
+<h1 class="title">Transfer-Encoding: chunked転送モードとRrkFile_flush</h1>
+
+	<h3>実行テスト</h3>
+<br>
+	今回はRaraku自体の文法の話というよりも、 Moai CGI でTransfer-Encoding: chunked 転送モードがどのように機能しているかを確認してみます。
+	これが一体何なのか、そしてRarakuコード側でどのような記述に対応して機能するのかも説明します。
+<br><br>
+	<a class=MstyCGILink href="http://127.0.0.1:8124/cgis/cgi_developers/transfer_chunked.rrks" target=_blank>Execute : transfer_chunked.rrks</a>
+	<br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/download.rrks?filename=transfer_chunked.rrks" target=_blank>Download(transfer_chunked.rrks)</a>
+	<a name=AName_MoaiCGI_transfer_chunked_0></a><script type="text/javascript">var st_MoaiCGI_transfer_chunked_0_group_id_ary = [ "MoaiCGI_transfer_chunked_0" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_transfer_chunked_0_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_transfer_chunked_0_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_transfer_chunked_0';}">transfer_chunked.rrksの全ソースコード (83 lines)</a>
+<span id=MoaiCGI_transfer_chunked_0 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-raraku">
+import std/file
+import std/time
+
+function show_result()
+{
+	const stdout = RrkFile_stdout()
+
+	# Output HTTP Header for CGI
+	Rrk_print( @|/"\r\n"'
+		Content-Type: text/html;
+		Pragma: no-cache
+		Cache-Control: no-cache
+	
+	')
+	
+	# Output HTML for CGI
+	Rrk_print( @'
+		&lt;!DOCTYPE html&gt;
+		&lt;html&gt;
+		&lt;head&gt;
+		&lt;META http-equiv="Content-type" content="text/html; charset=utf-8"&gt;
+		&lt;META http-equiv="Content-Script-Type" content="text/javascript"&gt;
+		&lt;META http-equiv="Content-Style-Type" content="text/css"&gt;
+		&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+		&lt;link href="/bulma.css" rel="stylesheet" type="text/css" /&gt;
+		&lt;/head&gt;
+	')
+
+	Rrk_print( @'
+		&lt;body&gt;
+		&lt;div class="section"&gt;
+		Moai CGI Transfer chunked test.&lt;br&gt;
+	')
+
+	lambda flush(){
+		RrkFile_flush( stdout )
+	}
+	lambda wait(){
+		RrkTime_sleep( 1000 )
+	}
+
+	flush()
+	wait()
+
+
+	Rrk_print( "Chunk1+flush&lt;br&gt;\n" )
+	flush()
+	# バッファに何もない場合は何も起こらない.
+	# (0-sizeなchunkが送信されることはない)
+	flush()
+	wait()
+
+	Rrk_print( "Chunk2+flush&lt;br&gt;\n" )
+	flush()
+	wait()
+
+	Rrk_print( "C" )
+	/* flush を実行しなと、通常は中途半端な状態でchunkは送信されない */
+	flush()
+	wait()
+
+	/* C + hunk3 =&gt; Chunk3 */
+	Rrk_print( "hunk3+flush&lt;br&gt;\n" )
+	flush()
+
+	Rrk_print( "Chunk4&lt;br&gt;\n" ) /* 改行を入れただけではchunkは送信されない */
+	wait()
+
+	Rrk_print( "End." )
+
+	Rrk_print( "&lt;/div&gt; &lt;!-- section --&gt;\n" )
+	Rrk_print( "&lt;/body&gt;&lt;/html&gt;\n" )
+	/* 最後のfflushは別になくともプロセスの終了で自動的に送信される */
+}
+
+/***
+ * for Windows : change stdin/stdout to binary-mode.
+ */
+Rrk_setMode( RrkStdIOKind_e_stdin,  true )
+Rrk_setMode( RrkStdIOKind_e_stdout, true )
+
+show_result();
+
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_transfer_chunked_0_group_id_ary, 'MoaiCGI_transfer_chunked_0_btn' );location.href = '#AName_MoaiCGI_transfer_chunked_0';">Close</a></div>
+</span>
+<br><br>
+	CGIプログラムでRrk_printにより標準出力した文字列のデータは、ブラウザ上にHTMLとして表示されるのでした。
+	これはCGIプログラムからWebServerへ、そしてWebServerからブラウザへとデータがパイプライン方式で転送されていくことで実現します。
+	このデータが大量である場合そのデータ全体が完成するのを待つのではなく、
+	出来上がったものから逐次ブラウザへと運ばれていった方が効率がよいです。
+	そのためにデータ全体を適切なサイズとタイミングでいくつかの断片に区切りながら転送します。
+	この断片データを<b>チャンク(chunk)</b>と呼びます。
+<br><br>
+	Transfer-Encoding とは転送するための符号化方式といったような意味ですから、
+	つまり Transfer-Encoding: chunked 転送モード とはそのようなチャンクに分けて転送する方式を意味します。
+	このチャンクのフォーマットを大まかに説明すると、まずサイズの情報があって改行、次にデータ本体が来て改行、
+	このような形のものが一つのチャンクデータとなります.
+	あとはこの繰り返しです.
+<br><br>
+	Rarakuプログラムにおいて具体的にこのような転送を指示することはできませんが、
+	通常は<b>RrkFile_flush 関数の呼び出しで chunk が区切られて送信</b>されます。
+	Moai WebServerは(というか一般的にWebServerは)、RrkFile_flush（内部的にはC言語のfflush関数の呼び出し）を感知すると
+	それを即座にchunkとしてブラウザへ転送します。
+<br><br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section MoaiCGI_transfer_chunked end -->
+
+
+<a name=MoaiCGI_hello_template></a>
+<h1 class="title">テンプレートHTMLを使って表示する.</h1>
+
+	<h3>実行テスト</h3>
+<br>
+	今までのサンプルではCGI上で表示させるHTMLを出力させるためにRrk_printなどを用いて標準出力していました。
+	あるいはその文字列が長い場合などではヒアドキュメントを用いてきました。
+	しかしある纏まったドキュメントを出力する場合、やはりコード中にそれを全部書いては煩わしい場合もあります。
+<br><br>
+	特に動的な出力をさせるのでなければ別途HTMLファイルを用意し、単純にそれを読み込んで表示できれば便利です。
+	テンプレートHTMLはそのためのテキストデータファイルです。
+	ここではCGI上でテンプレートHTMLを使って大量のHTMLを便利に表示させる方法について解説します。
+<br><br>
+	<a class=MstyCGILink href="http://127.0.0.1:8124/cgis/cgi_developers/hello_template.rrks" target=_blank>Execute : hello_template.rrks</a>
+	<br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/download.rrks?filename=hello_template.rrks" target=_blank>Download(hello_template.rrks)</a>
+	<a name=AName_MoaiCGI_hello_template_0></a><script type="text/javascript">var st_MoaiCGI_hello_template_0_group_id_ary = [ "MoaiCGI_hello_template_0" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_hello_template_0_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_hello_template_0_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_hello_template_0';}">hello_template.rrksの全ソースコード (39 lines)</a>
+<span id=MoaiCGI_hello_template_0 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-raraku">
+import std/cgi
+import std/file
+import std/htp_util
+import std/bird
+import std/str_fio
+
+
+function show_result( evar RrkCGIEVar, post_vars RrkVar[] )
+{
+	/* RrkBirdの生成. */
+	varia bird RrkBird = RrkBird_create( "#[", "]#" )
+
+	/* BIRDタグの登録. */
+	RrkBird_regist( bird, "your_name", "Mr.Moai" )
+
+	/* テンプレートHTMLを読み込み、BIRDタグを展開して表示. */
+	varia text string
+	RrkCGIStr_addTemplateHTML( text, bird, "publicbox/hello_template.html", "utf-8" )
+	Rrk_print( text )
+
+	/* RrkBirdはどこからも参照されなくなった時点で自動的に破棄される. */
+}
+
+/***
+ * Get Environment Variables for CGI
+ */
+const evar = RrkCGI_getEVar()
+
+const query_str = RrkCGI_getQueryStr( evar )
+varia post_vars RrkVar[] = []
+RrkCGI_splitQueryStr( post_vars, query_str, false )
+
+/***
+ * for Windows : change stdin/stdout to binary-mode.
+ */
+Rrk_setMode( RrkStdIOKind_e_stdin,  true )
+Rrk_setMode( RrkStdIOKind_e_stdout, true )
+
+show_result( evar, post_vars )
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_hello_template_0_group_id_ary, 'MoaiCGI_hello_template_0_btn' );location.href = '#AName_MoaiCGI_hello_template_0';">Close</a></div>
+</span>
+<br><br>
+	<h3>ネイティブオブジェクト</h3>
+<br>
+	まず RrkBird 型について説明しましょう。
+	これは std/bird において定義されているため、まずはこれをimportしておきます。
+<br><br>
+	RrkBirdとはやや奇妙な名前ですが、
+	これはBIRD(Basic Intrinsic Replacement Directive)タグと呼ばれるものを扱うためのものとなります
+	 (ちなみにこれは元はlibZnkが独自で提供するものであり、従って一般的な用語ではありません) 。
+<br><br>
+	BIRDタグは開始記号（この記事では「#[」とします） と終了記号（この記事では「]#」とします） で識別子を囲ったタグであり、
+	その識別子の値（文字列）がRrkBird内部に登録されているならば、BIRDタグの部分はその値（文字列）に展開されるといったものになります。
+	つまりRrkBirdとはこのBIRDタグの識別子とその値を包括管理するデータ型です. 
+<br><br>
+	まだちょっとよく意味がわからないと思いますので具体的な例を挙げて説明しましょう。
+	以下のような内容を持つテンプレートHTMLを考えます。
+<br><br>
+		
+	
+<pre class=hljs><code>&lt;html&gt;&lt;body&gt;
+Hello #[your_name]#!&lt;br&gt;
+Your age is #[your_age]#&lt;br&gt;
+&lt;/body&gt;&lt;/html&gt;
+</code></pre>
+	
+	<br>
+	今RrkBird型の変数が、your_nameについては"Mr.Moai"、your_ageについては"100"といった文字列データを保持しているものとしましょう。
+	これを上記のテンプレートに適用すると以下のように展開されます。
+<br><br>
+		
+	
+<pre class=hljs><code>&lt;html&gt;&lt;body&gt;
+Hello Mr.Moai!&lt;br&gt;
+Your age is 100&lt;br&gt;
+&lt;/body&gt;&lt;/html&gt;
+</code></pre>
+	
+	<br>
+	このような展開処理を行うためのものがRrkBirdです。
+<br><br>
+	さて、RrkBirdは以下のようにRrkBird_create関数を用いて生成します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia bird RrkBird = RrkBird_create( "#[", "]#" )
+</code></pre>
+	
+	<br>
+	ちなみに上記の（birdの直後にある）RrkBirdは省略可能ですが、今回はわかりやすさのために敢えて省略せずに書いています。
+	RrkBird_create関数には二つの引数があり、この部分にBIRDタグの開始記号と終了記号を指定します。
+<br><br>
+	次に、以下のようにRrkBird_regist関数を用いて、キーに対する値を登録します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">/* BIRDタグの登録. */
+RrkBird_regist( bird, "your_name", "Mr.Moai" )
+</code></pre>
+	
+	<br>
+	上記では your_nameというキーに対し、"Mr.Moai" という値を登録しています。
+<br><br>
+	最後に RrkCGIStr_addTemplateHTML関数により指定されたファイルをテンプレートとして、
+	RrkBirdを適用して展開します。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">varia text string
+RrkCGIStr_addTemplateHTML( text, bird, "publicbox/hello_template.html", "utf-8" )
+Rrk_print( text )
+</code></pre>
+	
+	<br>
+	上記ではテンプレートファイルとしてpublicbox/hello_template.htmlを指定しており、
+	その展開結果は text 変数に格納されます。
+<br><br>
+	RrkBirdの使用方法については以上です。
+	ところでRarakuでは<b>ネイティブオブジェクト</b>と呼ばれるものがあり、RrkBirdもこれに該当します。
+	一般にネイティブオブジェクトは特別な関数を使用して生成する必要がありますが、
+	一方で、使用後は特に何もしなくてもそれがどこからも参照されなくなった時点で自動的に破棄されます。
+	よって、RrkBirdもRrkBird_create関数により生成されましたが、これを使用し終わった後は特に何もする必要はなく、
+	その破棄は自動的に行われます。
+<br><br>
+	<div class=box>
+		実は既に登場したRrkFileもネイティブオブジェクトです。
+		RrkFileはRrkFile_openで指定したファイルを開き、RrkFile_close関数でこれを閉じるといったものでしたが、
+		RrkFile自体がネイティブオブジェクトであるため、万一RrkFile_close関数の呼び出しを忘れたとしても
+		それがどこからも参照されなくなったタイミングで自動的に破棄され、RrkFile_close関数に相当するものが内部で呼び出されます。
+		ただしRrkFileの場合はOSの資源を直接利用するといった性質のものでもあります。
+		そのためこの機構はあくまで保険と考えて、通常はdefer文等を用いてRrkFile_closeを明示的に呼び出す方がよいでしょう。
+	</div>
+<br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section MoaiCGI_hello_template end -->
+
+
+<a name=MoaiCGI_progress></a>
+<h1 class="title">時間のかかる処理の途中経過を表示する</h1>
+
+	<h3>実行テスト</h3>
+<br>
+	CGI で時間のかかる処理を行いたい場合、その進捗状況を表示するにはどうすればよいでしょうか？
+	このセクションではその方法について考えます。
+<br><br>
+	<a class=MstyCGILink href="http://127.0.0.1:8124/cgis/cgi_developers/progress.rrks" target=_blank>Execute : progress.rrks</a>
+	<br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/download.rrks?filename=progress.rrks" target=_blank>Download(progress.rrks)</a>
+	<a name=AName_MoaiCGI_progress_0></a><script type="text/javascript">var st_MoaiCGI_progress_0_group_id_ary = [ "MoaiCGI_progress_0" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_progress_0_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_progress_0_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_progress_0';}">progress.rrksの全ソースコード (153 lines)</a>
+<span id=MoaiCGI_progress_0 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-raraku">
+import std/cgi
+import std/htp_util
+import std/bird
+import std/str_fio
+import std/time
+import std/dir
+
+varia st_count int = 0;
+
+
+struct ProgInfo{
+	pascua_state_dir_ = ""
+	filepath_state_   = ""
+	filepath_msg_     = ""
+	filepath_ermsg_   = ""
+	id_               = ""
+}
+
+function ProgInfo_create( pascua_state_dir conststr, id conststr )-&gt;
+{
+	varia info ProgInfo
+	info.pascua_state_dir_ = pascua_state_dir
+	info.filepath_state_   = ( info.pascua_state_dir_ "/" id ".state" )
+	info.filepath_msg_     = ( info.pascua_state_dir_ "/" id ".msg"   )
+	info.filepath_ermsg_   = ( info.pascua_state_dir_ "/" id ".ermsg" )
+	info.id_ = id
+	return info
+}
+function ProgInfo_mkdir( info ProgInfo )
+{
+	RrkDir_mkdirPath( info.pascua_state_dir_, '/', null )
+}
+function ProgInfo_reset( info ProgInfo, is_clear_msg bool )
+{
+	/***
+	 * @note
+	 * A completely empty string may result in an error with XMLHttpRequest.
+	 */
+	varia path conststr
+
+	path = info.filepath_state_
+	RrkStrFIO_writeCStrFile( "PascuaProgress_end", Rrk_NPOS, path )
+
+	if is_clear_msg {
+		path = info.filepath_msg_
+		RrkStrFIO_writeCStrFile( "None.", Rrk_NPOS, path )
+	}
+
+	path = info.filepath_ermsg_
+	RrkStrFIO_writeCStrFile( " ", Rrk_NPOS, path )
+}
+function ProgInfo_begin( info ProgInfo )
+{
+	RrkStrFIO_writeCStrFile( "PascuaProgress_begin", Rrk_NPOS, info.filepath_state_ )
+	RrkStrFIO_writeCStrFile( "[FYI]: Please wait.",  Rrk_NPOS, info.filepath_msg_ )
+}
+function ProgInfo_end( info ProgInfo, ermsg string )
+{
+	if ermsg {
+		RrkStrFIO_writeStrFile( ermsg, info.filepath_ermsg_ )
+	}
+	RrkStrFIO_writeCStrFile( "PascuaProgress_end", Rrk_NPOS, info.filepath_state_ )
+}
+function ProgInfo_update( info ProgInfo, msg conststr )
+{
+	/**
+	 * @note
+	 * The longer a file is open for writing, the more time it is blocked from being read by Javascript.
+	 * Therefore, the file should be closed as quickly as possible here.
+	 */
+	if fp := RrkFile_open( info.filepath_msg_, "wb" ); {
+		defer RrkFile_close( fp )
+		RrkFile_print( fp, msg )
+	}
+}
+function ProgInfo_cleanFiles( info ProgInfo )
+{
+	RrkDir_deleteFile( info.filepath_state_  )
+	RrkDir_deleteFile( info.filepath_msg_    )
+	RrkDir_deleteFile( info.filepath_ermsg_  )
+}
+
+
+const prog_info_id = "upgrade"
+const prog_info = ProgInfo_create( "publicbox/tmp/pascua_state", prog_info_id )
+ProgInfo_mkdir( prog_info )
+ProgInfo_reset( prog_info, true )
+
+function very_long_work( ermsg string )
+{
+	ProgInfo_begin( prog_info )
+	ermsg &amp;= @$'[FYI]: ${^func_name} : begin' \n
+
+	while st_count &lt;= 100 {
+		ProgInfo_update( prog_info, "[FYI]: progress:" st_count "%" )
+		++st_count;
+		RrkTime_sleep( 100 ) /* sleeping 100msec */
+
+		if st_count == 50 {
+			ermsg &amp;= @$'[FYI]: ${^func_name} : count is 50.' \n
+		}
+	}
+
+	ermsg &amp;= @$'[FYI]: ${^func_name} : end' \n
+	ProgInfo_end( prog_info, ermsg )
+	RrkTime_sleep( 3000 )
+	ProgInfo_cleanFiles( prog_info )
+}
+
+function printTemplateHTML( evar RrkCGIEVar, bird RrkBird, template_html_file conststr, charset conststr ) bool
+{
+
+	varia result = false
+	varia src string
+
+	RrkCGIStr_addHttpHdr( src, charset )
+	if RrkStrFIO_loadTextFile( src, template_html_file, null ) {
+		result = RrkBird_expandSelf( bird, src )
+	}:{
+		RrkCGIStr_beginHtml( src, null, charset, "" )
+		varia str string = @$'[NG]: Error : Cannot load template_file=[${template_html_file}]' \n
+		RrkHtpUtil_specialErmsgSyntax( str, "RrkMsgConsole" )
+		src &amp;= str
+		RrkCGIStr_endHtml( src )
+	}
+	Rrk_print( src )
+	return result
+}
+
+/***
+ * Get Environment Variables for CGI
+ */
+const evar = RrkCGI_getEVar()
+
+/***
+ * for Windows : change stdin/stdout to binary-mode.
+ */
+Rrk_setMode( RrkStdIOKind_e_stdin,  true )
+Rrk_setMode( RrkStdIOKind_e_stdout, true )
+
+/* まずJavascript progress.jsを含んだHTMLを表示させる. */
+varia bird = RrkBird_create( "#[", "]#" )
+RrkBird_regist( bird, "prog_info_id", prog_info_id )
+printTemplateHTML( evar, bird, "publicbox/progress.html", "utf-8" )
+
+const stdout = RrkFile_stdout()
+RrkFile_flush( stdout )
+/* Broken-Pipeを強制的に引き起こし、Web Server側でのReadループを強制終了させる. */
+RrkStdIO_close( RrkStdIOKind_e_stdout )
+
+/* 時間のかかる処理. */
+const ermsg string = ""
+very_long_work( ermsg )
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_progress_0_group_id_ary, 'MoaiCGI_progress_0_btn' );location.href = '#AName_MoaiCGI_progress_0';">Close</a></div>
+</span>
+	<br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/download.rrks?filename=publicbox/progress.html" target=_blank>Download(publicbox/progress.html)</a>
+	<a name=AName_MoaiCGI_progress_1></a><script type="text/javascript">var st_MoaiCGI_progress_1_group_id_ary = [ "MoaiCGI_progress_1" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_progress_1_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_progress_1_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_progress_1';}">progress.htmlの全ソースコード (37 lines)</a>
+<span id=MoaiCGI_progress_1 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-raraku">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;&lt;!-- master template customboy --&gt;
+&lt;head&gt;
+	&lt;META http-equiv="Content-type" content="text/html; charset=utf-8"&gt;
+	&lt;meta http-equiv="Content-Script-Type" content="text/javascript" /&gt;
+	&lt;meta http-equiv="Content-Style-Type"  content="text/css" /&gt;
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+	&lt;link href="/msty.css" rel="stylesheet" type="text/css" /&gt;
+	&lt;!--&lt;script type="text/javascript" src="publicbox/pascua/pascua_progress.js" &gt;&lt;/script&gt;--&gt;
+	&lt;script type="text/javascript" src="/cgis/cgi_developers/publicbox/pascua/pascua_progress.js" &gt;&lt;/script&gt;
+	&lt;script type="text/javascript"&gt;
+		//var pascua_state = "publicbox/tmp/pascua_state";
+		var pascua_state = "/cgis/cgi_developers/publicbox/tmp/pascua_state";
+		PascuaProgressInfo_issue(
+			pascua_state + "/#[prog_info_id]#.state",
+			pascua_state + "/#[prog_info_id]#.msg",
+			pascua_state + "/#[prog_info_id]#.ermsg",
+			"PascuaProgress_#[prog_info_id]#_msg",
+			null
+		);
+	&lt;/script&gt;
+	&lt;script type="text/javascript"&gt;
+		PascuaProgress_setFunc_OnEnd( function(){
+			/* none */
+		});
+	&lt;/script&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+	CGI Progress test.
+	&lt;div class=MstyMsgConsole id=PascuaProgress_#[prog_info_id]#_msg&gt;&amp;nbsp;&lt;/div&gt;
+	&lt;br&gt;
+	error log.
+	&lt;div class=MstyMsgConsole id=PascuaProgress_ermsg&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_progress_1_group_id_ary, 'MoaiCGI_progress_1_btn' );location.href = '#AName_MoaiCGI_progress_1';">Close</a></div>
+</span>
+	<br>
+	<a class=MstyElemLink href="http://127.0.0.1:8124/cgis/cgi_developers/download.rrks?filename=publicbox/pascua/pascua_progress.js" target=_blank>Download(publicbox/pascua/pascua_progress.js)</a>
+	<a name=AName_MoaiCGI_progress_2></a><script type="text/javascript">var st_MoaiCGI_progress_2_group_id_ary = [ "MoaiCGI_progress_2" ];</script>
+<a class=MstyDetailLink id=MoaiCGI_progress_2_btn onClick="if( MstyUI_selectTab( st_MoaiCGI_progress_2_group_id_ary, this.id ) ){location.href = '#AName_MoaiCGI_progress_2';}">pasqua_progress.jsの全ソースコード (263 lines)</a>
+<span id=MoaiCGI_progress_2 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-raraku">
+/* 0-byte avoidance */
+
+var PascuaProgress = (function(){ /* module-pattern */
+	'use strict';
+
+	/* public function */
+	/***
+	 * new XmlHttpRequest
+	 */
+	function newXhr()
+	{
+		var xhr = false;
+		if( typeof ActiveXObject != "undefined" ){
+			try {
+				xhr = new ActiveXObject( "Microsoft.XMLHTTP" );
+			} catch (e) {
+				xhr = false;
+			}
+		}
+		if( !xhr &amp;&amp; typeof XMLHttpRequest != "undefined" ){
+			xhr = new XMLHttpRequest();
+		}
+		return xhr;
+	}
+
+	function newInfo( state_path, msg_path, ermsg_path, dst_element_id, func_on_end ){
+	
+		function PP_newPPXhr( path ){
+		    this.xhr_       = PascuaProgress.newXhr();
+			/***
+			 * 0 : New of xhr GET.
+			 * 1 : In the middle of xhr GET response.
+			 * 2 : Done of xhr GET.
+			 */
+			this.xhr_phase_ = 0;
+			this.text_      = "";
+			this.path_      = path;
+			this.count_404_ = 0;
+		}
+		function PP_gain_viaXhr( pp_xhr )
+		{
+			var xhr = pp_xhr.xhr_;
+			pp_xhr.xhr_phase_ = 1;
+		
+			xhr.open( "GET", pp_xhr.path_ + '?PascuaProgress_date=' + new Date().getTime() );
+			xhr.onreadystatechange = function() {
+				if( xhr.readyState == 4 ){
+					var is_404 = false;
+					if( typeof xhr.status != "undefined" ){
+						if( xhr.status == 404 ){
+							++pp_xhr.count_404_;
+							is_404 = true;
+						}
+					}
+					if( !is_404 ){
+						pp_xhr.text_ = xhr.responseText;
+					}
+					pp_xhr.xhr_phase_ = 2;
+				} else if( xhr.readyState == 2 ){
+					/* @note: In IE8/IE9, xhr.status is not defined */
+					if( typeof xhr.status != "undefined" ){
+						if( xhr.status == 404 ){
+							++pp_xhr.count_404_;
+						}
+					}
+				}
+			};
+			xhr.send( null );
+		}
+		function PP_interpretState( info )
+		{
+			if( info.state_ == "PascuaProgress_end" ){
+				/* end */
+				info.state_ = "";
+				clearInterval( info.interval_id_ );
+				if( info.func_on_end_ != null ){
+					info.func_on_end_();
+				}
+				info.is_final_ = true;
+			} else if( info.state_ == "PascuaProgress_begin" ){
+				/* begin */
+				/* skip */
+			} else {
+				/* update display */
+				console.log( "PascuaProgressInfo : PP_interpretState : general string : " + info.state_ );
+			}
+		}
+		function PP_updatePhase( pp_xhr )
+		{
+			var phase = pp_xhr.xhr_phase_
+			if(        phase == 0 ){
+				/* Try to get new-state */
+				PP_gain_viaXhr( pp_xhr );
+			} else if( phase == 1 ){
+				/* In the middle of xhr response : skip */
+			} else {
+				/* done */
+			}
+		}
+		function PP_processXhrState( info ){
+			var pp_xhr = info.pp_xhr_state_;
+			if( pp_xhr.xhr_ ){
+				PP_updatePhase( pp_xhr );
+	
+				if( pp_xhr.xhr_phase_ == 2 ){
+					/* done */
+					pp_xhr.xhr_phase_ = 0;
+					info.state_ = pp_xhr.text_.replace( /\r?\n$/g, '' );
+					PP_interpretState( info );
+				}
+			} else {
+				console.log( "PascuaProgress : setInterval : xhr is null" );
+				clearInterval( info.interval_id_ );
+			}
+			if( pp_xhr.count_404_ &gt;= 3 ){
+				console.log( "PascuaProgress : PP_processXhrState : detected 404" );
+				clearInterval( info.interval_id_ );
+			}
+		};
+		function PP_writeToDst( dst_element_id, text, is_add ){
+			var lines = text.split( '\n' )
+			var i=0;
+			for( i=0; i&lt;lines.length; ++i ){
+				var line = lines[ i ];
+				//var str = text;
+				line = line.replace( /\r/g, '' );
+				line = line.replace( /&amp;/g, '&amp;amp;' );
+				line = line.replace( /&lt;/g, '&amp;lt;' );
+				line = line.replace( /&gt;/g, '&amp;gt;' );
+				line = line.replace( /^\[FYI\]:/g, '[&lt;span class=MstyMsgConsoleFYI&gt;FYI&lt;/span&gt;]:' );
+				line = line.replace( /^\[TRY\]:/g, '[&lt;span class=MstyMsgConsoleTRY&gt;TRY&lt;/span&gt;]:' );
+				line = line.replace( /^\[NG\]:/g,  '[&lt;span class=MstyMsgConsoleNG&gt;NG&lt;/span&gt;]:' );
+				line = line.replace( /^\[OK\]:/g,  '[&lt;span class=MstyMsgConsoleOK&gt;OK&lt;/span&gt;]:' );
+				lines[ i] = line
+			}
+			var str = lines.join( '&lt;br&gt;\n' );
+			var dst = document.getElementById( dst_element_id );
+			if( dst == null ){
+				//alert( "dst is null. id=(" + dst_element_id + ")" );
+			}
+			if( is_add ){
+				dst.innerHTML += str;
+			} else {
+				dst.innerHTML =  str;
+			}
+		}
+		function PP_processFinalMsg( dst_element_id, pp_xhr, is_add ){
+			PP_updatePhase( pp_xhr );
+			if( pp_xhr.xhr_phase_ == 2 ){
+				/* done */
+				pp_xhr.xhr_phase_ = 0;
+				PP_writeToDst( dst_element_id, pp_xhr.text_, is_add ) /* OK */
+			} else {
+				var count = 0;
+				var final_interval_id = setInterval( function(){
+					PP_updatePhase( pp_xhr );
+					if( pp_xhr.xhr_phase_ == 2 ){
+						/* done */
+						pp_xhr.xhr_phase_ = 0;
+						PP_writeToDst( dst_element_id, pp_xhr.text_, is_add )
+						clearInterval(final_interval_id); /* OK */
+					} else {
+						++count;
+						if( count &gt;= 3 ){
+							PP_writeToDst( dst_element_id,
+								"[NG]: PascuaProgress : PP_processXhrMsg : Internal error : Cannot read report msg.\n", is_add )
+							clearInterval(final_interval_id);
+						} else {
+							/* retry */
+						}
+					}
+				}, 500 );
+			}
+		}
+		function PP_processXhrMsg( info ){
+			var pp_xhr_msg   = info.pp_xhr_msg_;
+			var pp_xhr_ermsg = info.pp_xhr_ermsg_;
+
+			if( !pp_xhr_msg.xhr_ ){
+				console.log( "PascuaProgress : PP_processXhrMsg : pp_xhr_msg.xhr_ is null" );
+				info.is_final_ = false;
+				clearInterval( info.interval_id_ );
+				return;
+			}
+			if( pp_xhr_msg.count_404_ &gt;= 3 ){
+				console.log( "PascuaProgress : PP_processXhrMsg : detected 404 (pp_xhr_msg)" );
+				info.is_final_ = false;
+				clearInterval( info.interval_id_ );
+				return;
+			}
+			if( !pp_xhr_ermsg.xhr_ ){
+				console.log( "PascuaProgress : PP_processXhrMsg : pp_xhr_ermsg.xhr_ is null" );
+				pp_xhr_ermsg = null;
+			}
+			if( pp_xhr_ermsg.count_404_ &gt;= 3 ){
+				console.log( "PascuaProgress : PP_processXhrMsg : detected 404 (pp_xhr_ermsg)" );
+				pp_xhr_ermsg = null;
+			}
+
+			if( info.is_final_ ){
+				info.is_final_ = false;
+				PP_processFinalMsg( info.dst_element_id_, pp_xhr_msg, false );
+				if( pp_xhr_ermsg ){
+					PP_processFinalMsg( "PascuaProgress_ermsg", pp_xhr_ermsg, true );
+				}
+			} else {
+				PP_updatePhase( pp_xhr_msg );
+				//console.log( "PascuaProgress : PP_processXhrMsg : pp_xhr_msg.xhr_phase_=" + pp_xhr_msg.xhr_phase_ + " pp_xhr_msg=" + pp_xhr_msg.text_ );
+				if( pp_xhr_msg.xhr_phase_ == 2 ){
+					/* done */
+					pp_xhr_msg.xhr_phase_ = 0;
+					PP_writeToDst( info.dst_element_id_, pp_xhr_msg.text_, false )
+				}
+			}
+		};
+		function PP_createInterval( info )
+		{
+			var cb_func = function(){
+				PP_processXhrState( info );
+				PP_processXhrMsg(   info );
+			};
+			return setInterval( cb_func, 500 );
+		}
+		this.state_          = "";
+		this.dst_element_id_ = dst_element_id;
+	    this.pp_xhr_state_   = new PP_newPPXhr( state_path );
+	    this.pp_xhr_msg_     = new PP_newPPXhr( msg_path );
+	    this.pp_xhr_ermsg_   = new PP_newPPXhr( ermsg_path );
+		this.interval_id_    = PP_createInterval( this );
+		this.func_on_end_    = func_on_end;
+		this.is_final_       = false;
+	}
+	return {
+		newXhr:  newXhr,
+		newInfo: newInfo,
+		__endof_public__: function(){}
+	};
+
+})(); /* enodof PascuaProgress */
+
+
+var PascuaProgress_info_list = [];
+function PascuaProgressInfo_issue( state_path, msg_path, ermsg_path, dst_element_id, func_on_end )
+{
+	PascuaProgress_info_list.push( new PascuaProgress.newInfo(
+		state_path, msg_path, ermsg_path, dst_element_id, func_on_end ) );
+}
+
+
+
+var PascuaProgress_result_url  = "";
+function PascuaProgress_setResultURL( result_url ){
+	PascuaProgress_result_url = result_url;
+}
+function PascuaProgress_replaceOnResult(){
+	location.replace( PascuaProgress_result_url );
+}
+
+
+var PascuaProgress_func_on_end = null;
+function PascuaProgress_setFunc_OnEnd( func_on_end ){
+	PascuaProgress_func_on_end = func_on_end;
+}
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_MoaiCGI_progress_2_group_id_ary, 'MoaiCGI_progress_2_btn' );location.href = '#AName_MoaiCGI_progress_2';">Close</a></div>
+</span>
+<br><br>
+	今回はRarakuとしては新しい内容はあまりないですが、
+	HTMLとJavascriptについて複雑なコードが登場するため、別の意味で少し難しいかもしれません。
+<br><br>
+	まず最初にprogress.rrks 内において、ProgInfo_create関数により、ProgInfo構造体を生成します。
+	以下にその部分を抜粋します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">const prog_info_id = "upgrade"
+const prog_info = ProgInfo_create( "publicbox/tmp/pascua_state", prog_info_id )
+ProgInfo_mkdir( prog_info )
+ProgInfo_reset( prog_info, true )
+</code></pre>
+	
+	<br>
+	この構造体は後で使用しますが、進捗状況を管理するためのデータです。
+	ProgInfo_create関数の第１引数には進捗状況を一時的に保持するファイルが置かれるパスが指定されており、
+	さらに第２引数にはそのファイル名を指定しています。今回の場合、prog_info_id の値は 「upgrade」となっておりますので、
+	upgrade.state、upgrade.msg、upgrade.ermsgの三つのファイルが
+	publicbox/tmp/pascua_stateディレクトリ内に一時ファイルとして生成される形になります。
+	続いてProgInfo_mkdirではそのディレクトリの生成を行い、
+	ProgInfo_resetではそのディレクトリ内にこれら三つのファイルを初期状態を意味する内容で一旦生成します。
+<br><br>
+	次に（progress.rrksファイルのずっと下の方になりますが）、printTemplateHTML関数を呼び出します。
+	その部分を以下に抜粋します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">/* まずJavascript progress.jsを含んだHTMLを表示させる. */
+varia bird = RrkBird_create( "#[", "]#" )
+RrkBird_regist( bird, "prog_info_id", prog_info_id )
+printTemplateHTML( evar, bird, "publicbox/progress2.html", "utf-8" )
+</code></pre>
+	
+	<br>
+	上記ではまずRrkBirdに"prog_info_id"をキーとして定数prog_info_idの値を登録します。
+	また「publicbox/progress2.html」をテンプレートファイルとして読み込みこれを表示させます。
+<br><br>
+	printTemplateHTMLの中身についても簡単に説明しておきます。
+	この関数の定義は以下のようになっています。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">function printTemplateHTML( evar RrkCGIEVar, bird RrkBird, template_html_file conststr, charset conststr ) bool
+{
+	varia result = false
+	varia src string
+
+	RrkCGIStr_addHttpHdr( src, charset )
+	if RrkStrFIO_loadTextFile( src, template_html_file, null ) {
+		result = RrkBird_expandSelf( bird, src )
+	}:{
+		RrkCGIStr_beginHtml( src, null, charset, "" )
+		varia str string = @$'[NG]: Error : Cannot load template_file=[${template_html_file}]' \n
+		RrkHtpUtil_specialErmsgSyntax( str, "RrkMsgConsole" )
+		src &amp;= str
+		RrkCGIStr_endHtml( src )
+	}
+	Rrk_print( src )
+	return result
+}
+</code></pre>
+	
+	<br>
+	RrkStrFIO_loadTextFile関数（std/str_fioで宣言されています）は、指定されたテキストファイルの全文を読みこんでそれを変数
+	（上記の例ではsrc）に格納するためのものです。ここではさらにRrkBird_expandSelf関数ではsrcをbirdにより展開しています。
+	今回birdには prog_info_id が登録されており、progress2.html内の以下の箇所において、
+	BIRDタグ「#[prog_info_id]#」が展開されます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-javascript">&lt;script type="text/javascript"&gt;
+	var pascua_state = "publicbox/tmp/pascua_state";
+	PascuaProgressInfo_issue(
+		pascua_state + "/#[prog_info_id]#.state",
+		pascua_state + "/#[prog_info_id]#.msg",
+		pascua_state + "/#[prog_info_id]#.ermsg",
+		"PascuaProgress_#[prog_info_id]#_msg",
+		null
+	);
+&lt;/script&gt;
+...途中略...
+&lt;body&gt;
+	CGI Progress test.
+	&lt;div class=MstyMsgConsole id=PascuaProgress_#[prog_info_id]#_msg&gt;&amp;nbsp;&lt;/div&gt;
+	&lt;br&gt;
+	error log.
+	&lt;div class=MstyMsgConsole id=PascuaProgress_ermsg&gt;&lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+	
+	<br>
+	最後にRrk_print関数により、srcの内容（progress2.htmlがbirdにより展開された内容）を一旦標準出力します。
+<br><br>
+	printTemplateHTML関数の呼び出しが終った後は、以下のようにRrkFile_flush関数を呼び出し、
+	先ほど行った src の内容の標準出力を確実に実行させます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">const stdout = RrkFile_stdout()
+RrkFile_flush( stdout )
+</code></pre>
+	
+	<br>
+	さて、ここでこの次の処理に注意してください。
+	これがやや難解ですが以下のような処理を行います。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">/* Broken-Pipeを強制的に引き起こし、Web Server側でのReadループを強制終了させる. */
+RrkStdIO_close( RrkStdIOKind_e_stdout )
+</code></pre>
+	
+	<br>
+	上記では標準出力のファイルディスクリプタであるstdoutをクローズしています。
+	一旦これをクローズすると、CGIプログラム上で標準出力を行うことはもうできなくなります。
+	つまり標準出力によるHTMLの生成はここで完全に終了です。
+	これにより、（progress.rrksを起動した）Web Server側に、progress.rrksの実行があたかも終了したかのように見せかけることができます
+	（しかしながら実際にはprogress.rrksプログラム自体はまだ続きます）。
+	Web Server側ではprogress.rrksの実行が終了したと認識しますので、ブラウザ側にこれまで標準出力した内容をすべて送信し、
+	ブラウザもまたこれを受信し、通常のCGIプログラムの送受信がこれにて一区切りつきます。
+<br><br>
+	ところがブラウザが受信したprogress2.htmlではpascua_progress.jsが起動するようになっており、
+	このpascua_progress.jsは、（タイマーにより）ある種のファイルの内容を決められた時間置きに監視する処理を行います。
+	そしてそのファイルの内容に応じて現在ブラウザに表示された内容を動的に書き換えます。
+<br><br>
+	なんとなく進捗状況を表示するための仕組みが見えてきたかもしれませんが、まだよくわからないかもしれません。
+	progress.rrksの実行はまだ続いており、こちらではある種のファイルの内容を更新します。
+	一方、pascua_progress.jsの方の実行もブラウザ上で続いており、そちらでは同じくある種のファイルの内容を監視しつつ
+	動的に画面の描写を行います。
+<br><br>
+	先にprogress.rrksの方を確認しましょう。
+	RrkStdIO_close関数の呼び出しの後は、「時間のかかる処理」としてvery_long_work関数を呼び出しています。
+	今この中で以下のように非常に時間のかかる処理を行うものとしましょう。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-raraku">function very_long_work( ermsg string )
+{
+	ProgInfo_begin( prog_info )
+	ermsg &amp;= @$'[FYI]: ${^func_name} : begin' \n
+
+	while st_count &lt;= 100 {
+		ProgInfo_update( prog_info, "[FYI]: progress:" st_count "%" )
+		++st_count;
+		RrkTime_sleep( 100 ) /* sleeping 100msec */
+
+		if st_count == 50 {
+			ermsg &amp;= @$'[FYI]: ${^func_name} : count is 50.' \n
+		}
+	}
+
+	ermsg &amp;= @$'[FYI]: ${^func_name} : end' \n
+	ProgInfo_end( prog_info, ermsg )
+	RrkTime_sleep( 3000 )
+	ProgInfo_cleanFiles( prog_info )
+}
+</code></pre>
+	
+	<br>
+	上記で実際にやっていることは単にカウンタを更新してRrkTime_sleep関数で適当な時間休むといったものですが、
+	とりあえずこれはサンプルですのでここでは「時間のかかる処理」をこれで代用するものとしましょう。
+<br><br>
+	さて、ここでようやく最初に生成した構造体prog_infoを使うわけですが、
+	まずこれを引数としてProgInfo_begin関数を呼び出します。
+	これによりpublicbox/tmp/pascua_stateディレクトリ内にあるupgrade.stateの内容がPascuaProgress_beginに、
+	またupgrade.msgの内容が「[FYI]: Please wait.」に変更されます。
+<br><br>
+	このとき同時にpascua_progress.jsでは、このupgradeファイルの内容を確認しています。
+	upgrade.stateの内容がPascuaProgress_beginになったことでpascua_progress.js側に進捗状況の表示を開始すべきといった情報を伝達することができ、
+	またupgrade.msgの内容が「[FYI]: Please wait.」になったことでpascua_progress.jsはこれをユーザへの報告用メッセージとしてブラウザに表示します。
+	より正確にはprogress2.html内の以下のように記述された部分（idがPascuaProgress_upgrade_msgとなっているdivタグ）に
+	この内容を書き込みます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-javascript">CGI Progress test.
+&lt;div class=MstyMsgConsole id=PascuaProgress_upgrade_msg&gt;&amp;nbsp;&lt;/div&gt;
+&lt;br&gt;
+</code></pre>
+	
+	<br>
+	<div class=box>
+		このようにprogress.rrksとpascua_progress.js（progress2.html）を行ったり来たりしながら説明していきますので混乱しないように注意してください。
+	</div>
+<br>
+	続いてprogress.rrks側へ戻り、（very_long_work関数内の）whileループの実行に入ります。
+	whileブロック内では一定の時間間隔をもってProgInfo_updateが呼び出されます。
+	この関数ではupgrade.msgの内容を指定した文字列で書き換えます
+	（ちなみに上記の例ではst_countを「進捗を表すパーセンテージ」と見立てています）。
+<br><br>
+	このとき同時にpascua_progress.jsでは、このupgrade.msgファイルの内容を確認し、
+	この内容をユーザへの報告用メッセージとしてブラウザに表示します。
+	より正確には（先ほどと同じく）progress2.html内のidがPascuaProgress_upgrade_msgとなっているdivタグにこれを書き込みます
+	（このとき、このタグでそれまでに表示されていたメッセージは消去されます）。
+<br><br>
+	続いてprogress.rrks側へ戻り、whileループを抜けた後の部分を見て行きます。
+	ProgInfo_end関数により、それまでに取得したermsgの内容をupgrade.ermsgに書き込みます（これは最終的なログメッセージの確認用です）。
+	またupgrade.stateファイルの内容を「PascuaProgress_end」に書き換えます。
+<br><br>
+	このとき同時にpascua_progress.jsでは、upgrade.ermsgファイルの内容を確認し、
+	progress2.html内の以下のように記述された部分（idがPascuaProgress_ermsgとなっているdivタグ）に
+	この内容を書き込みます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-javascript">error log.
+&lt;div class=MstyMsgConsole id=PascuaProgress_ermsg&gt;&lt;/div&gt;
+</code></pre>
+	
+	<br>
+	また、upgrade.stateファイルの内容が「PascuaProgress_end」になっていることから、
+	pascua_progress.jsの実行をここで終了し、進捗状況の表示を終了します。
+	Webブラウザを使用しているユーザから見れば、この段階で進捗状況の表示も含め、すべての表示が完了となります。
+<br><br>
+	最後にprogress.rrks側でProgInfo_cleanFiles関数を呼び出し、
+	一時ファイルであるupgrade.state、upgrade.msg、upgrade.ermsgをすべて消去します。
+	これでvery_long_work関数の実行も終了し、progress.rrks側の実行もこれですべて完了になります。
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section MoaiCGI_progress end -->
+
+
+<a name=MoaiCGI_at_end></a>
+<h1 class="title">おわりに</h1>
+
+<br><br>
+	これでRaraku言語によるCGIチュートリアルは終わりです。
+	お疲れ様でした。
+	この講座があなたのCGI開発の一助となれば幸いです。
+<br><br>
+	またRarakuにはまだまだ沢山の機能があり、このチュートリアルで扱ったのはそのうちのわずかです。
+	Raraku言語の文法事項についてもこのチュートリアルでは非常に駆け足で説明しており、
+	所によってはやや説明が不十分な箇所もあるかもしれません。
+	Rarakuについてもっと本格的に学びたい方は<a class=MstyElemLink href="http://127.0.0.1:8124/moai2.0/raraku.html" target=_blank>Raraku言語マニュアル</a>
+	をご覧下さい。
+	これはRarakuについての完全なマニュアルになります。
+<br><br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section MoaiCGI_at_end end -->
+
+
+
+<div class="card">
+	<u><b>This article was written by:</b></u><br>
+	<div class="card-content">
+		<div class="media">
+			<div class="media-left">
+				<figure class="image is-48x48">
+				<img src="/imgs/moai.png" alt="none image">
+				</figure>
+			</div>
+			<div class="media-content">
+				<p class="title is-4">Mr.Moai</p>
+				<p class="subtitle is-6">@znk project</p>
+			</div>
+		</div>
+		<div class="content">
+		  <time datetime="2016-1-1">2024/06/12</time>
+		</div>
+	</div>
+</div>
+
+
+
+<a name=Link></a>
+<h1 class="title"></h1>
+<hr>
+<ul>
+	<li><a class=MstyElemLink href=#TopBar>一番上へ</a></li>
+	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moaiドキュメント(オンライン)</a></li>
+	<li><a class=MstyElemLink href=https://github.com/mr-moai-2016/znk_project>znk_project(github)</a></li>
+</ul><br>
+
+
+
+</div>
+</div>
+</div>
+</body>
+</html>

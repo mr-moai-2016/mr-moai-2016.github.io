@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html><!-- master template moai -->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8">
+	<meta http-equiv="Content-type" content="text/html" />
 	<meta http-equiv="Content-Script-Type" content="text/javascript" />
 	<meta http-equiv="Content-Style-Type"  content="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link href="/msty.css"  rel="stylesheet" type="text/css" />
 	<link href="/bulma.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
+	<link rel="stylesheet" href="/js/highlightjs/github-dark.css">
+	<!-- link rel="stylesheet" href="/js/highlightjs/atom-one-dark.css" -->
+	<script src="/js/highlightjs/cpp.js"></script>
+	<script src="/js/highlightjs/javascript.js"></script>
+	<script src="/js/highlightjs/dos.js"></script>
+	<script src="/js/highlightjs/makefile.js"></script>
+	<script src="/js/highlightjs/bash.js"></script>
+	<script src="/js/highlightjs/raraku.js"></script>
+	<script type="module" src="/js/highlightjs/highlight.js"></script>
+	<script type="module">
+		import HLJS from "/js/highlightjs/highlight.js";
+		HLJS.highlightAll();
+	</script>
+	<style>
+		code {
+		    font-family: "CourierNew", "Consolas", "Courier", monospace;
+			-moz-tab-size : 4;
+			tab-size      : 4;
+		}
+	</style>
 
 </head>
 <body>
@@ -16,7 +38,8 @@
 <div class="content">
 
 <a name=TopBar></a>
-<p><b><img src="/imgs/here_landmark.png"> Moai+Easter 上級マニュアル</b></p>
+<!-- p><b><img src="/imgs/here_landmark.png"> Moai+Easter 上級マニュアル</b></p -->
+<p style="height: 40px; border: 0px;"><img src="/imgs/here_landmark.png"> <b>Moai+Easter 上級マニュアル</b></p>
 <a class=MstyElemLink href="/">Moai</a> 
 <a class=MstyElemLink href="/moai2.0/index.html">Manual</a> 
 <a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
@@ -28,6 +51,7 @@
 <a class=MstyNowSelectedLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> 
 <a class=MstyElemLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> 
 <a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> 
+<a class=MstyElemLink href="/moai2.0/raraku1.html">Raraku言語</a> 
 <br>
 <a class=MstyElemLink href="/moai2.0/customboy_reference.html">Overview and Tutorial</a> 
 <a class=MstyElemLink href="/moai2.0/customboy_hints_Cookie.html">Cookie Hints</a> 
@@ -38,15 +62,33 @@
 
 <a name=AtFirst></a>
 <h1 class="title">はじめに</h1>
-<p>
-	ここではCustomBoyが取り扱うSnippetコードの真偽値に関する情報を列挙する.<br>
-	<br>
-	これらはBrowser毎に異なる真偽値のパターンを持つため、Browser解析等で有用である.<br>
-	そしてその情報はCustomBoyエンジンのKnowledge-baseにも内蔵されており、通常は特にユーザが何も設定せずとも、CustomBoyあるいはVirtualUSERSの実行結果に自動的に反映される.<br>
-	<br>
-	一般ユーザがこの記事に記載されたパターンの詳細を気にする必要は全くないが、万一CustomBoyエンジンが内蔵するKnowledge-baseでは問題が発生した場合は、<br>
-	ここにある情報を元にエキスパートユーザが手動でそのパターンを修正することもできる.<br>
-</p>
+
+	ここではCustomBoyが取り扱うSnippetコードの真偽値に関する情報を列挙します。
+	この真偽値はブラウザの種類やそのバージョンを推定するのに利用できます。
+	またCustomBoyエンジンでもこれらの情報を用いて処理を行っています。
+<br><br>
+	<div class=box>
+		とはいえ一般ユーザがこの記事に記載されたパターンの詳細を気にする必要は全くありません。
+		万一CustomBoyのデフォルトのKnowledge-baseでは問題が発生する場合、
+		究極的にはここにある情報を元にエキスパートユーザが手動でKnowledge-baseのソースコードを修正し、
+		CustomBoyの挙動を再構築することもできます。
+<br><br>
+		Ver2.3よりこのようなことをするのにCコンパイラは不要となりました。
+		Ver2.3よりCustomBoyのKnowledge-baseのソースコードはすべてRaraku言語で記述されており、
+		またMoai自体にRarakuコンパイラが付属しているためです。
+	</div>
+<br>
+	<div class=box>
+		この記事は<a class=MstyElemLink href="https://developer.mozilla.org/en-US/docs/Web/API" target=_blank>MDN</a>を主要な一次情報源としていますが、
+		その他様々なサイトの情報や筆者による実験も鑑みた上で総合的にこの記事を作成しています。
+		従って、その内容がMDNの記載とは一致しない項目もあります。
+		また世にあるすべてのブラウザを実際にインストールして結果を確認することは勿論できませんので、
+		内容に多少の誤差が含まれる可能性はご了承ください。
+<br><br>
+		尚、MDNの記事は日々新しくなっており、古いブラウザの情報が削除されてしまっている場合があります（例えばIEなど）。
+		その場合、<a class=MstyElemLink href="https://udn.realityripple.com" target=_blank>Unified XUL Platform MDN Backup</a>を参考にするとよいでしょう。
+	</div>
+<br>
 <br>
 
 
@@ -74,7 +116,6 @@
 	<li><b><a class=MstyElemLink href=#Snp_PerformanceNow>Snp_PerformanceNow</a></b></li>
 	<li><b><a class=MstyElemLink href=#Snp_AudioContext>Snp_AudioContext</a></b></li>
 	<li><b><a class=MstyElemLink href=#Snp_IndexedDB>Snp_IndexedDB</a></b></li>
-	<li><b><a class=MstyElemLink href=#Snp_WindowStyles>Snp_WindowStyles</a></b></li>
 	<li><b><a class=MstyElemLink href=#Snp_SendBeacon>Snp_SendBeacon</a></b></li>
 	<li><b><a class=MstyElemLink href=#Snp_GetGamepads>Snp_GetGamepads</a></b></li>
 	<li><b><a class=MstyElemLink href=#Snp_NavLanguages>Snp_NavLanguages</a></b></li>
@@ -85,22 +126,23 @@
 	<li><b><a class=MstyElemLink href=#Snp_NavGetBattery>Snp_NavGetBattery</a></b></li>
 	<li><b><a class=MstyElemLink href=#Snp_Presto>Snp_Presto</a></b></li>
 	<li><b><a class=MstyElemLink href=#Snp_LtChrome14>Snp_LtChrome14</a></b></li>
-	<li><b><a class=MstyElemLink href=#Snp_ChromiumInFutaba>Snp_ChromiumInFutaba</a></b></li>
 	<li><b><a class=MstyElemLink href=#Snp_Touch>Snp_Touch</a></b></li>
 	<li><b><a class=MstyElemLink href=#Snp_FacileMobile>Snp_FacileMobile</a></b></li>
 	<li><b><a class=MstyElemLink href=#Snp_Webkit>Snp_Webkit</a></b></li>
+	<li><b><a class=MstyElemLink href=#SnpAdd_ChromiumInFutaba>SnpAdd_ChromiumInFutaba</a></b></li>
+	<li><b><a class=MstyElemLink href=#SnpAdd_WindowStyles>SnpAdd_WindowStyles</a></b></li>
 </ul><br>
 
 
 
 <a name=Snp_LtIE6></a>
 <h1 class="title">Snp_LtIE6</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		typeof window.addEventListener == 'undefined' <br>
-		&amp;&amp; typeof document.documentElement.style.maxHeight == 'undefined'<br>
+		typeof window.addEventListener == 'undefined' 
+		&amp;&amp; typeof document.documentElement.style.maxHeight == 'undefined'
 	</div></div>
-	IE6以前のみtrue<br>
+	IE6以前のみtrue
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_LtIE6 end -->
@@ -108,12 +150,12 @@
 
 <a name=Snp_LtIE7></a>
 <h1 class="title">Snp_LtIE7</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		typeof window.addEventListener == 'undefined'<br>
-		&amp;&amp; typeof document.querySelectorAll == 'undefined'<br>
+		typeof window.addEventListener == 'undefined'
+		&amp;&amp; typeof document.querySelectorAll == 'undefined'
 	</div></div>
-	IE7以前のみtrue<br>
+	IE7以前のみtrue
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_LtIE7 end -->
@@ -121,12 +163,12 @@
 
 <a name=Snp_LtIE8></a>
 <h1 class="title">Snp_LtIE8</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		typeof window.addEventListener == 'undefined'<br>
-		&amp;&amp; typeof document.getElementsByClassName == 'undefined'<br>
+		typeof window.addEventListener == 'undefined'
+		&amp;&amp; typeof document.getElementsByClassName == 'undefined'
 	</div></div>
-	IE8以前のみtrue<br>
+	IE8以前のみtrue
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_LtIE8 end -->
@@ -134,11 +176,11 @@
 
 <a name=Snp_IE9></a>
 <h1 class="title">Snp_IE9</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!document.uniqueID &amp;&amp; document.documentMode==9<br>
+		!!document.uniqueID &amp;&amp; document.documentMode==9
 	</div></div>
-	IE9のみtrue<br>
+	IE9のみtrue
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_IE9 end -->
@@ -146,11 +188,11 @@
 
 <a name=Snp_IE10></a>
 <h1 class="title">Snp_IE10</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!document.uniqueID &amp;&amp; document.documentMode==10<br>
+		!!document.uniqueID &amp;&amp; document.documentMode==10
 	</div></div>
-	IE10のみtrue<br>
+	IE10のみtrue
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_IE10 end -->
@@ -158,11 +200,11 @@
 
 <a name=Snp_IE11></a>
 <h1 class="title">Snp_IE11</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!document.uniqueID &amp;&amp; document.documentMode==11<br>
+		!!document.uniqueID &amp;&amp; document.documentMode==11
 	</div></div>
-	IE11のみtrue<br>
+	IE11のみtrue
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_IE11 end -->
@@ -170,12 +212,12 @@
 
 <a name=Snp_Trident></a>
 <h1 class="title">Snp_Trident</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!document.uniqueID<br>
+		!!document.uniqueID
 	</div></div>
-	Trident Rendering Engineを使っている場合はtrue.<br>
-	IEはこれを使っているためtrue.<br>
+	Trident Rendering Engineを使っている場合はtrue.
+	IEはこれを使っているためtrue.
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_Trident end -->
@@ -183,14 +225,14 @@
 
 <a name=Snp_Edge></a>
 <h1 class="title">Snp_Edge</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		'-ms-scroll-limit' in document.documentElement.style<br>
-		&nbsp;&nbsp; &amp;&amp; '-ms-ime-align' in document.documentElement.style<br>
-		&nbsp;&nbsp; &amp;&amp; !window.navigator.msPointerEnabled<br>
+		'-ms-scroll-limit' in document.documentElement.style
+		&nbsp;&nbsp; &amp;&amp; '-ms-ime-align' in document.documentElement.style
+		&nbsp;&nbsp; &amp;&amp; !window.navigator.msPointerEnabled
 	</div></div>
-	色々並べてあるが上二つはすべてMS製Browserに存在する特性であり、最後にIEのみに存在する特性を除外していることから、Edgeか否かを判定する.<br>
-	Edgeの場合はtrue.<br>
+	色々並べてあるが上二つはすべてMS製ブラウザに存在する特性であり、最後にIEのみに存在する特性を除外していることから、Edgeか否かを判定する.
+	Edgeの場合はtrue.
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_Edge end -->
@@ -198,12 +240,12 @@
 
 <a name=Snp_Gecko></a>
 <h1 class="title">Snp_Gecko</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		'MozAppearance' in document.documentElement.style<br>
+		'MozAppearance' in document.documentElement.style
 	</div></div>
-	Gecko Rendering Engineを使っている場合はtrue<br>
-	Firefoxはこれを使っているためtrue.<br>
+	Gecko Rendering Engineを使っている場合はtrue
+	Firefoxはこれを使っているためtrue.
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_Gecko end -->
@@ -211,12 +253,21 @@
 
 <a name=Snp_MozillaSidebar></a>
 <h1 class="title">Snp_MozillaSidebar</h1>
-	以下のJavascriptコードを実行した結果である.<br>
-	<div class=box><div class=MstyCode>
-		!!window.sidebar<br>
-	</div></div>
-	Mozilla Sidebarが存在する場合はtrue.<br>
-	Firefoxにはこれが存在するためtrue.<br>
+
+	以下のJavascriptコードを実行した結果です。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-javascript">!!window.sidebar
+</code></pre>
+	
+	<br>
+	Mozilla Sidebarが存在する場合はtrueとなります。
+	名前から分かる通り、これはFirefox固有のpropertyです。
+	PC版のFirefoxにはこれが存在するためtrueとなります。
+	ただしAndroid版やiPhone版のFirefoxではこれは存在しないためfalseとなります
+	（Android版やiPhone版では替わりにSnp_TouchやSnp_FacileMobileなどがtrueとなります）。
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_MozillaSidebar end -->
@@ -224,11 +275,11 @@
 
 <a name=Snp_NavigatorOnline></a>
 <h1 class="title">Snp_NavigatorOnline</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		typeof window.navigator.onLine != 'undefined'<br>
+		typeof window.navigator.onLine != 'undefined'
 	</div></div>
-	Browserがオンラインで動作しているかどうかを示す真偽値を返す.<br>
+	ブラウザがオンラインで動作しているかどうかを示す真偽値を返す.
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_NavigatorOnline end -->
@@ -236,12 +287,12 @@
 
 <a name=Snp_SessionStorage></a>
 <h1 class="title">Snp_SessionStorage</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!window.sessionStorage<br>
+		!!window.sessionStorage
 	</div></div>
-	BrowserにsessionStorage機構が存在するか否かを示す.<br>
-	Browserの対応状況は以下が目安である(MDNによる).<br>
+	ブラウザにsessionStorage機構が存在するか否かを示す.
+	ブラウザの対応状況は以下が目安である(MDNによる).
 	<ul>
 		<li>Chrome: 5以上</li>
 		<li>Firefox(Gecko): 2以上</li>
@@ -259,14 +310,14 @@
 
 <a name=Snp_FunctionX5></a>
 <h1 class="title">Snp_FunctionX5</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		(function x(){})[-5] == 'x'<br>
+		(function x(){})[-5] == 'x'
 	</div></div>
-	このFunctionX5テストとは、Firefox Ver3.xにのみ存在するコード特性を検査するというもの.<br>
-	'function x(){}' を文字列として見た場合、その -5 番目の文字(最後から5番目)は 'x' となっている.<br>
-	Firefox Ver3.x ではこのような暗黙の文字列変換が行われるようで、その特性が存在するかを検証するコードである.<br>
-	Firefox Ver3.xのみtrue.<br>
+	このFunctionX5テストとは、Firefox Ver3.xにのみ存在するコード特性を検査するというもの.
+	'function x(){}' を文字列として見た場合、その -5 番目の文字(最後から5番目)は 'x' となっている.
+	Firefox Ver3.x ではこのような暗黙の文字列変換が行われるようで、その特性が存在するかを検証するコードである.
+	Firefox Ver3.xのみtrue.
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_FunctionX5 end -->
@@ -274,11 +325,11 @@
 
 <a name=Snp_DocCurrentScript></a>
 <h1 class="title">Snp_DocCurrentScript</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		typeof document.currentScript != 'undefined'<br>
+		typeof document.currentScript != 'undefined'
 	</div></div>
-	以下の環境においてtrue.<br>
+	以下の環境においてtrue.
 	<ul>
 		<li>Chrome: 29以上</li>
 		<li>Firefox(Gecko): 4以上</li>
@@ -291,11 +342,11 @@
 
 <a name=Snp_EventSource></a>
 <h1 class="title">Snp_EventSource</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		typeof(EventSource) != 'undefined'<br>
+		typeof(EventSource) != 'undefined'
 	</div></div>
-	以下の環境においてtrue.<br>
+	以下の環境においてtrue.
 	<ul>
 		<li>Chrome: 9以上</li>
 		<li>Firefox(Gecko): 6以上</li>
@@ -308,11 +359,11 @@
 
 <a name=Snp_Crypto></a>
 <h1 class="title">Snp_Crypto</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!window.crypto &amp;&amp; !!window.crypto.getRandomValues<br>
+		!!window.crypto &amp;&amp; !!window.crypto.getRandomValues
 	</div></div>
-	以下の環境においてtrue.<br>
+	以下の環境においてtrue.
 	<ul>
 		<li>Chrome: 11以上</li>
 		<li>Firefox(Gecko): 21以上</li>
@@ -327,11 +378,11 @@
 
 <a name=Snp_PerformanceNow></a>
 <h1 class="title">Snp_PerformanceNow</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!window.performance &amp;&amp; !!window.performance.now<br>
+		!!window.performance &amp;&amp; !!window.performance.now
 	</div></div>
-	以下の環境においてtrue.<br>
+	以下の環境においてtrue.
 	<ul>
 		<li>Chrome: 20以上</li>
 		<li>Firefox(Gecko): 15以上</li>
@@ -346,11 +397,11 @@
 
 <a name=Snp_AudioContext></a>
 <h1 class="title">Snp_AudioContext</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!window.AudioContext<br>
+		!!window.AudioContext
 	</div></div>
-	以下の環境においてtrue.<br>
+	以下の環境においてtrue.
 	<ul>
 		<li>Chrome: 10以上</li>
 		<li>Firefox(Gecko): 25以上</li>
@@ -364,12 +415,12 @@
 
 <a name=Snp_IndexedDB></a>
 <h1 class="title">Snp_IndexedDB</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!window.indexedDB<br>
+		!!window.indexedDB
 	</div></div>
-	これはBrowserにindexedDB機構が存在するか否かを示す.<br>
-	Browserの対応状況は以下が目安である(MDNによる).<br>
+	これはブラウザにindexedDB機構が存在するか否かを示す.
+	ブラウザの対応状況は以下が目安である(MDNによる).
 	<ul>
 		<li>Chrome: 23以上</li>
 		<li>Firefox(Gecko): 10以上</li>
@@ -388,34 +439,13 @@
 <br><!-- Section Snp_IndexedDB end -->
 
 
-<a name=Snp_WindowStyles></a>
-<h1 class="title">Snp_WindowStyles</h1>
-	以下のJavascriptコードを実行した結果である.<br>
-	<div class=box><div class=MstyCode>
-		!!window.styles<br>
-	</div></div>
-	このSnippetはふたばちゃんねるにおいて独自に設定されているものである.<br>
-	(少なくとも他のサイトでは、私はこのようなコードを見たことがない)<br>
-	そしてMDNなどのよく知られたどのドキュメントを参照しても、window objectの中にstylesというpropertyは記載されていない.<br>
-	<br>
-	果たしてこのpropertyを持つBrowserが世界に存在するのであろうか？<br>
-	これまで私が試したすべてのBrowserにおいて、このコードがtrueとなるものは発見されなかった.<br>
-	<br>
-	<div class=box>
-		ちなみにwindow objectの中のstatusというpropertyならば、Gecko 1.9.1以降ならば存在する.<br>
-	</div>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br><!-- Section Snp_WindowStyles end -->
-
-
 <a name=Snp_SendBeacon></a>
 <h1 class="title">Snp_SendBeacon</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!window.navigator.sendBeacon<br>
+		!!window.navigator.sendBeacon
 	</div></div>
-	以下の環境においてtrue.<br>
+	以下の環境においてtrue.
 	<ul>
 		<li>Chrome: 39以上</li>
 		<li>Firefox(Gecko): 31以上</li>
@@ -428,11 +458,11 @@
 
 <a name=Snp_GetGamepads></a>
 <h1 class="title">Snp_GetGamepads</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!navigator.getGamepads<br>
+		!!navigator.getGamepads
 	</div></div>
-	以下の環境においてtrue.<br>
+	以下の環境においてtrue.
 	<ul>
 		<li>Chrome: 21以上</li>
 		<li>Firefox(Gecko): 29以上</li>
@@ -445,11 +475,11 @@
 
 <a name=Snp_NavLanguages></a>
 <h1 class="title">Snp_NavLanguages</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!window.navigator.languages<br>
+		!!window.navigator.languages
 	</div></div>
-	以下の環境においてtrue.<br>
+	以下の環境においてtrue.
 	<ul>
 		<li>Chrome: 32以上</li>
 		<li>Firefox(Gecko): 32以上</li>
@@ -461,11 +491,11 @@
 
 <a name=Snp_NavMediaDevices></a>
 <h1 class="title">Snp_NavMediaDevices</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!window.navigator.mediaDevices<br>
+		!!window.navigator.mediaDevices
 	</div></div>
-	以下の環境においてtrue.<br>
+	以下の環境においてtrue.
 	<ul>
 		<li>Chrome: 51以上</li>
 		<li>Firefox(Gecko): 36以上</li>
@@ -477,11 +507,11 @@
 
 <a name=Snp_WinCaches></a>
 <h1 class="title">Snp_WinCaches</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!window.caches<br>
+		!!window.caches
 	</div></div>
-	以下の環境においてtrue.<br>
+	以下の環境においてtrue.
 	<ul>
 		<li>Chrome: 43以上</li>
 		<li>Firefox(Gecko): 39以上</li>
@@ -493,11 +523,11 @@
 
 <a name=Snp_CreateImageBitmap></a>
 <h1 class="title">Snp_CreateImageBitmap</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!window.createImageBitmap<br>
+		!!window.createImageBitmap
 	</div></div>
-	以下の環境においてtrue.<br>
+	以下の環境においてtrue.
 	<ul>
 		<li>Chrome: 50以上</li>
 		<li>Firefox(Gecko): 42以上</li>
@@ -509,11 +539,11 @@
 
 <a name=Snp_Onstorage></a>
 <h1 class="title">Snp_Onstorage</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		typeof window.onstorage!='undefined'<br>
+		typeof window.onstorage!='undefined'
 	</div></div>
-	以下の環境においてtrue.<br>
+	以下の環境においてtrue.
 	<ul>
 		<li>Firefox(Gecko): 45以上</li>
 	</ul>
@@ -524,16 +554,28 @@
 
 <a name=Snp_NavGetBattery></a>
 <h1 class="title">Snp_NavGetBattery</h1>
-	以下のJavascriptコードを実行した結果である.<br>
-	<div class=box><div class=MstyCode>
-		!!window.navigator.getBattery<br>
-	</div></div>
-	以下の環境においてtrue.<br>
+
+	以下のJavascriptコードを実行した結果です。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-javascript">!!window.navigator.getBattery
+</code></pre>
+	
+	<br>
+	<a class=MstyElemLink href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getBattery" target=_blank>MDN</a>
+	によれば、このコードはシステムのバッテリーに関する情報を提供するものです。
+	このように言われるとモバイル環境を想像しますが、PC版のブラウザでもこの値がtrueになるケースもあります。
+	またsafariではこれはサポートされていないことも特徴です。
+<br><br>
+	以下の環境においてtrueです。
 	<ul>
-		<li>Chrome: 39以上</li>
-		<li>Firefox(Gecko): ?</li>
-		<li>Opera: 25以上</li>
+		<li>Chrome: Version39以上</li>
+		<li>Firefox: Version43以上51以下（Version52以降では廃止され、falseとなります）</li>
+		<li>Opera: Version25以上</li>
+		<li>Edge: Version79以上</li>
 	</ul>
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_NavGetBattery end -->
@@ -541,12 +583,12 @@
 
 <a name=Snp_Presto></a>
 <h1 class="title">Snp_Presto</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果である.
 	<div class=box><div class=MstyCode>
-		!!window.opera<br>
+		!!window.opera
 	</div></div>
-	Operaの古いVersionではそのRendering EngineはPrestoと呼ばれていた.<br>
-	Opera12.16以前ではこれがtrueとなる.<br>
+	Operaの古いVersionではそのRendering EngineはPrestoと呼ばれていた.
+	Opera12.16以前ではこれがtrueとなる.
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_Presto end -->
@@ -554,82 +596,41 @@
 
 <a name=Snp_LtChrome14></a>
 <h1 class="title">Snp_LtChrome14</h1>
-	以下のJavascriptコードを実行した結果である.<br>
+	以下のJavascriptコードを実行した結果です。
+
 	<div class=box><div class=MstyCode>
-		!!window.chrome &amp;&amp; typeof window.chrome.webstore!='undefined'<br>
+		!!window.chrome &amp;&amp; typeof window.chrome.webstore!='undefined'
 	</div></div>
-	Chromeであるか否かを示す定石コードである(ただしVersion14以降が対象である).<br>
-	前半の<span class=MstyCodeIn>!!window.chrome</span>はChromium系か否かを判定する定石コードである.<br>
-	後半の<span class=MstyCodeIn>typeof window.chrome.webstore!='undefined'</span>は、OperaやEdgeの可能性を廃するために付加したものであろう.<br>
-	Chrome Ver14以上のみtrueである.<br>
+
+	かつてはChromeであるか否かを示す定石コードでした。
+	ただしChrome Version14以降からVersion70までが対象です。
+	Chrome Version71以降は window.chrome.webstore のサポートが廃止されたため、この値は全体としてfalseになります。
+
+	<div class=box>
+		前半の<span class=MstyCodeIn>!!window.chrome</span>はChromium系か否かを判定する。
+		後半の<span class=MstyCodeIn>typeof window.chrome.webstore!='undefined'</span>は、OperaやEdgeの可能性を廃するために付加したものであろう。
+	</div>
+	Chrome Ver14以上Ver70以下のみtrue
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_LtChrome14 end -->
 
 
-<a name=Snp_ChromiumInFutaba></a>
-<h1 class="title">Snp_ChromiumInFutaba</h1>
-	以下のJavascriptコードを実行した結果である.<br>
-	<div class=box><div class=MstyCode>
-		!!window.chrome &amp;&amp; 'WebkitAppearance' in document.documentElement.style<br>
-	</div></div>
-	このSnippetはふたばちゃんねるにおいて独自に設定されているものである.<br>
-	(少なくとも他のサイトでは、私はこのようなコードを見たことがない)<br>
-	実質 Chromium系であるか否かを示しているが、コードの後半が無意味である.<br>
-	<br>
-	以下の環境においてtrue.<br>
-	<ul>
-		<li>Chrome: 全Version</li>
-		<li>Opera: 14以上</li>
-	</ul>
-	<br>
-	<div class=box>
-		<u><b>解説</b></u><br>
-		<br>
-		まずBrowser解析をされている方にとってはおなじみの以下のコードを掲載しておこう.<br>
-		<div class=box><div class=MstyCode>
-			!window.chrome &amp;&amp; 'WebkitAppearance' in document.documentElement.style<br>
-		</div></div>
-		コード前半に<span class=MstyCodeIn>!window.chrome</span>と置くことで、<b>Chromium系以外である</b>ことを前提とした上でコード後半部によりWebkitが使われているVersionのみを検出するというものである.<br>
-		これは様々なサイトで広く見られる正しいコードであり、例えばSafariなどを検出できる.<br>
-		この記事でも<a class=MstyElemLink href=#Snp_Webkit>Snp_Webkit</a>という項目として挙げておいた.<br>
-		<br>
-		ところが、本項目のふたばちゃんねる独自のコードでは、前半部分が<span class=MstyCodeIn>!!window.chrome</span>となっている.<br>
-		これでは逆に<b>Chromium系である</b>ことを前提としてしまう.<br>
-		<br>
-		これはどうしたことか…？<br>
-		もしかするとChromium系かつWebkitが使われているVersionのみを検出しようと試みたのであろうか？<br>
-		<br>
-		しかしながら、Browser解析をされている方なら普通はご存知だと思うが、
-		<b>Chromium系では<span class=MstyCodeIn>'WebkitAppearance' in document.documentElement.style</span> でWebkit版であるか否かを判定することはできない</b>のである.<br>
-		(だからこそ、定石では先頭にまず<span class=MstyCodeIn>!window.chrome</span>という前提条件を置く)<br>
-		<br>
-		なぜならばChromium系の場合、<b>どのVersionでも</b>この'WebkitAppearance' というパターンを必ず含む.<br>
-		たとえ<b>Webkitが使われていないVersionでも</b>である.<br>
-		つまりこのコードの &amp;&amp; より後半は必ずtrueになるのであるから、明らかに無意味である.<br>
-	</div>
-		<br>
-	<div class=box>
-		<u><b>検証</b></u><br>
-		<br>
-		以下ではChromium系としてChromeまたは新しいVersionのOperaの例を挙げ、このことを検証してみよう.<br>
-		この'WebkitAppearance'というパターンを調べるコードがtrueとなるのは、Chromeの場合は全Version、Operaの場合はVer14以上のときである.<br>
-		ChromeはVer28以降Webkitは廃止されBlinkへと移行した.<br>
-		Operaの場合も同様にVer15以降はBlinkとなっている.<br>
-		つまりWebkitではないVersionでもこのコードはやはりtrueとなってしまうことがお分かりだろう.<br>
-	</div>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br><!-- Section Snp_ChromiumInFutaba end -->
-
-
 <a name=Snp_Touch></a>
 <h1 class="title">Snp_Touch</h1>
-	以下のJavascriptコードを実行した結果である.<br>
-	<div class=box><div class=MstyCode>
-		typeof document.ontouchstart != 'undefined'<br>
-	</div></div>
-	この環境のBrowserにおいてTouch Padが有効か否かを示す.<br>
+
+	以下のJavascriptコードを実行した結果です。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-javascript">typeof document.ontouchstart != 'undefined'
+</code></pre>
+	
+	<br>
+	この環境のブラウザにおいてTouch Padが有効か否かを示します。
+	従って、例えばWindowsやLinuxなどのPC環境のFirefoxではこれはfalseになりますが、
+	AndroidやiPhone環境のFirefoxではこれがtrueになります。
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_Touch end -->
@@ -637,13 +638,27 @@
 
 <a name=Snp_FacileMobile></a>
 <h1 class="title">Snp_FacileMobile</h1>
-	以下のJavascriptコードを実行した結果である.<br>
-	<div class=box><div class=MstyCode>
-		typeof window.orientation != 'undefined'<br>
-	</div></div>
-	Browserにおいてwindow.orientationが存在するか否かを示す.<br>
-	window.orientationとは端末画面が縦長(portrait)と横長(landscape)のどちらであるかに関する情報である.<br>
-	これはモバイル環境である否かの簡易判定に使うことができる.<br>
+
+	以下のJavascriptコードを実行した結果です。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-javascript">typeof window.orientation != 'undefined'
+</code></pre>
+	
+	<br>
+	ブラウザにおいてwindow.orientationが存在するか否かを示します。
+	window.orientationとは端末画面が縦長(portrait)と横長(landscape)のどちらであるかに関する情報であり、
+	これはモバイル環境である否かの簡易判定に使うことができます。
+	従って、例えばWindowsやLinuxなどのPC環境のFirefoxではこれはfalseになりますが、
+	AndroidやiPhone環境のFirefoxではこれがtrueになります。
+<br><br>
+	<div class=box>
+		<a class=MstyElemLink href="https://developer.mozilla.org/en-US/docs/Web/API/Element/touchstart_event" target=_blank>MDN</a>
+		の互換性の記載では、例えばPC環境のFirefoxでもtrueになるかのように読めるかもしれませんが、
+		実際はモバイル環境のFirefoxでのみtrueになることに注意しましょう。
+	</div>
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_FacileMobile end -->
@@ -651,21 +666,142 @@
 
 <a name=Snp_Webkit></a>
 <h1 class="title">Snp_Webkit</h1>
-	以下のJavascriptコードを実行した結果である.<br>
-	<div class=box><div class=MstyCode>
-		!window.chrome &amp;&amp; 'WebkitAppearance' in document.documentElement.style<br>
-	</div></div>
-	Webkit判定.<br>
-	これは<b>Chromium系以外の</b>Webkitが使われているBrowser、例えばSafariなどを検出する目的で一般によく使用されている定石的なコードである.<br>
+
+	以下のJavascriptコードを実行した結果です。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-javascript">!window.chrome &amp;&amp; 'WebkitAppearance' in document.documentElement.style
+</code></pre>
+	
 	<br>
+	これは<b>Chromium系以外の</b>Webkitが使われているブラウザでtrueとなります。
+	特にこの値とSnp_Geckoの値と組み合わせることでSafariを検出する目的で一般によく使用されている定石的なコードです。
+<br><br>
 	<div class=box>
-		<u><b>注意</b></u> <br>
+		前半の<span class=MstyCodeIn>!window.chrome</span>で、<b>Chromium系以外である</b>ことを前提とした上で、
+		後半によりWebkitが使われているVersionのみが検出されます。
+		これは様々なサイトで広く見られるコードで、例えばSafariなどを検出できます。
+		このSnippet自体はFirefoxでもtrueとなりますが、さらにSnp_Geckoの値を組み合わせることでSafariであることを推定できます。
+<br><br>
+		あるいはAndroid標準のブラウザでもこのコードがtrueとなる場合があります（この場合もSnp_Geckoの値は通常falseとなります）。
+<br><br>
+		<div class=box>
+			これは筆者の手元にある比較的古いAndroid機(Ver5.1.1)の標準ブラウザで確認しました。
+		</div>
 <br>
-		ふたばの<a class=MstyElemLink href=http://may.2chan.net/bin/base4ajax.js>/bin/base4ajax.js</a>内にこれとよく似た意味不明なテスト(上記のSnp_ChromiumInFutaba)が存在するが、その効果はこれとは全く異なる.<br>
+		しかもややこしいことに、このようなブラウザのUA文字列はChromeの書式とよく似ている場合があります。
+		例えば筆者の確認したAndroid機の標準ブラウザではUA文字列の後半は以下のようになっていました。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-dos">AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/55.0.2883.91 Mobile Safari/537.36
+</code></pre>
+	
+		<br>
+		ただし純粋なChromeのUA文字列では「Version/4.0」という部分はありませんから、この部分だけ通常のChromeとは違うということになります。
+		また、このSnippetがtrueになるということは、window.chrome の値はfalseとなっているはずですから、
+		SnippetコードのレベルでもChromium系とは見なされないことになります。
+<br><br>
+		<div class=box>
+			これは Google Chromeの古いバージョンに相当するものなのでしょうか？
+			UA文字列では「Chrome/55.0」となっており、普通に考えるとこれはChromeのVersion55を示唆します。
+			ChromeのVersion55といえば、既にレンダリングエンジンとしてBlinkを採用しており、
+			通常window.chromeの値はtrueとなることが期待されますが、このブラウザではそうはなりません。
+			その意味ではやはり（Chromeの亜種ではあるが）純粋なChromium系ではない特別なブラウザと見るべきなのでしょう。
+		</div>
 	</div>
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section Snp_Webkit end -->
+
+
+<a name=SnpAdd_ChromiumInFutaba></a>
+<h1 class="title">SnpAdd_ChromiumInFutaba</h1>
+
+	以下のJavascriptコードを実行した結果です。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-javascript">!!window.chrome &amp;&amp; 'WebkitAppearance' in document.documentElement.style
+</code></pre>
+	
+	<br>
+	このSnippetはふたばちゃんねるにおいて独自に設定されているものです
+	（少なくとも他のサイトでは、私はこのようなコードを見たことがありません）。
+	実質 Chromium系であるか否かを示しています（ただしコードの後半は無意味なものです）。
+<br><br>
+	以下の環境においてtrue.
+	<ul>
+		<li>Chrome: 全Version</li>
+		<li>Opera: 14以上</li>
+	</ul>
+<br>
+	<div class=box>
+		<u><b>解説</b></u>
+<br><br>
+		まず参考のため、ブラウザ解析においてよく登場する以下のコードを掲載しておきます
+		（上記のコードとよく似ていますが、一番最初の「!」の部分の個数が異なります）。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-javascript">!window.chrome &amp;&amp; 'WebkitAppearance' in document.documentElement.style
+</code></pre>
+	
+		<br>
+		このコードはこの記事でも<a class=MstyElemLink href=#Snp_Webkit>Snp_Webkit</a>という項目として取り挙げたものです。
+<br><br>
+		これに対し、本項目のSnpAdd_ChromiumInFutabaのコードでは、前半部分が<span class=MstyCodeIn>!!window.chrome</span>となっており、
+		Chromium系であることを前提とした上で後半のコードを評価します。
+<br><br>
+		もしかするとChromium系かつWebkitが使われているVersionのみを検出しようと試みたのかもしれませんが、
+		Chromium系では<span class=MstyCodeIn>'WebkitAppearance' in document.documentElement.style</span> でWebkit版であるか否かを判定することはできません
+		(だからこそ、定石のSnp_Webkitでは先頭にまず<span class=MstyCodeIn>!window.chrome</span>という前提条件を置きます)。
+<br><br>
+		Chromium系の場合、<b>どのVersionでも</b>この'WebkitAppearance' というパターンを必ず含みます。
+		この場合、<b>たとえWebkitが使われていないVersionでも</b>、このコードの後半は必ずtrueになってしまいます。
+		よって後半は無意味になるわけです。
+<br><br>
+		この後半のコードがtrueとなるのは、Chromeの場合は全Version、Operaの場合はVersion14以上のときです。
+		ChromeはVersion28以降Webkitは廃止されBlinkへと移行し、Operaの場合も同様にVersion15以降はBlinkとなっています。
+		念のため、Blinkへ移行したバージョンのChromeでこの値を確認してみると、
+		（Blinkであるため、もはやWebkitを使用していませんがそれにも関わらず）後半のコードはやはりtrueとなることが確認できます。
+	</div>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section SnpAdd_ChromiumInFutaba end -->
+
+
+<a name=SnpAdd_WindowStyles></a>
+<h1 class="title">SnpAdd_WindowStyles</h1>
+
+	以下のJavascriptコードを実行した結果です。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-javascript">!!window.styles
+</code></pre>
+	
+	<br>
+	このSnippetはふたばちゃんねるにおいて独自に設定されているものです。
+	（少なくとも他のサイトでは、私はこのようなコードを見たことがありません）。
+	そしてMDNなどのよく知られたどのドキュメントを参照しても、window object の中にstylesというメンバは存在しません。
+<br><br>
+	果たしてこのコードが true となるブラウザが世界に存在するのでしょうか？
+	これまで私が試したすべてのブラウザで、このコードがtrueとなるものは発見されませんでした。
+<br><br>
+	<div class=box>
+		ちなみにwindow objectの中のstatusというpropertyならば、Gecko 1.9.1以降ならば存在します。
+	</div>
+<br>
+	とりあえずこのコードは常にfalseとなると考えてよいでしょう
+	（もしかすると偽装を検出するため、敢えて常時falseになるコードを忍ばせたのかもしれません）。
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section SnpAdd_WindowStyles end -->
 
 
 
@@ -684,7 +820,7 @@
 			</div>
 		</div>
 		<div class="content">
-		  <time datetime="2016-1-1">2017/10/09</time>
+		  <time datetime="2016-1-1">2023/01/08</time>
 		</div>
 	</div>
 </div>

@@ -1,40 +1,64 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html><!-- master template moai -->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta http-equiv="Content-Script-Type" content="text/javascript">
-	<meta http-equiv="Content-Style-Type" content="text/css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="/msty.css" rel="stylesheet" type="text/css">
-	<link href="/bulma.css" rel="stylesheet" type="text/css">
+	<meta charset="utf-8">
+	<meta http-equiv="Content-type" content="text/html" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type"  content="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="/msty.css"  rel="stylesheet" type="text/css" />
+	<link href="/bulma.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
+	<link rel="stylesheet" href="/js/highlightjs/github-dark.css">
+	<!-- link rel="stylesheet" href="/js/highlightjs/atom-one-dark.css" -->
+	<script src="/js/highlightjs/cpp.js"></script>
+	<script src="/js/highlightjs/javascript.js"></script>
+	<script src="/js/highlightjs/dos.js"></script>
+	<script src="/js/highlightjs/makefile.js"></script>
+	<script src="/js/highlightjs/bash.js"></script>
+	<script src="/js/highlightjs/raraku.js"></script>
+	<script type="module" src="/js/highlightjs/highlight.js"></script>
+	<script type="module">
+		import HLJS from "/js/highlightjs/highlight.js";
+		HLJS.highlightAll();
+	</script>
+	<style>
+		code {
+		    font-family: "CourierNew", "Consolas", "Courier", monospace;
+			-moz-tab-size : 4;
+			tab-size      : 4;
+		}
+	</style>
+
 </head>
 <body>
 <div class="section">
 <div class="container">
 <div class="content">
-<a name=TopBar></a>
-<p><b><img src="/imgs/here_landmark.png"> Moai+Easter 上級マニュアル</b></p>
 
-<a class=MstyElemLink href="/">トップページ</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/index.html">初級マニュアル</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">上級マニュアル</a> &nbsp;
-<a class=MstyElemLink href="/announcement.html">アナウンスメント</a> &nbsp;
-<a class=MstyElemLink href="/FAQ.html">FAQ</a> &nbsp;
-<br> <br>
-<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> &nbsp;
-<br> <br>
-<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">C言語でCGIその1</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/moai_cgi_developers_pragmatic.html">C言語でCGIその2</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/mkfgen.html">mkfgenリファレンス</a> &nbsp;
-<br> <br>
+<a name=TopBar></a>
+<!-- p><b><img src="/imgs/here_landmark.png"> Moai+Easter 上級マニュアル</b></p -->
+<p style="height: 40px; border: 0px;"><img src="/imgs/here_landmark.png"> <b>Moai+Easter 上級マニュアル</b></p>
+<a class=MstyElemLink href="/">Moai</a> 
+<a class=MstyElemLink href="/moai2.0/index.html">Manual</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
+<a class=MstyElemLink href="/announcement.html">Annoucement</a> 
+<a class=MstyElemLink href="/FAQ.html">FAQ</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> 
+<a class=MstyElemLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> 
+<a class=MstyElemLink href="/moai2.0/raraku1.html">Raraku言語</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/moai_cgi_developers_rrk.html">RarakuでCGI入門</a> 
+<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">C言語でCGI</a> 
+<a class=MstyElemLink href="/moai2.0/mkfgen.html">mkfgenリファレンス</a> 
 
 <a name=AtFirst></a>
 <h1 class="title">はじめに</h1>
-<p>
 	この記事ではMoai CGI上で動くWebアプリケーションの実践的な開発方法について述べます.<br>
 	<br>
 	尚、これは Moai CGI 入門編の続きです.<br>
@@ -43,8 +67,8 @@
 	ここではライブラリを使ったMoai CGIを開発する方法について述べます.<br>
 	そして最終課題としてproxy_finderに該当するツールを作成してみます.<br>
 	難易度はやや高めです.<br>
-</p>
 <br>
+
 
 
 <a name=Index></a>
@@ -60,6 +84,7 @@
 	<li><b><a class=MstyElemLink href=#MoaiCGI_proxy_finder>ProxyFinderを作成してみる</a></b></li>
 	<li><b><a class=MstyElemLink href=#MoaiCGI_at_end>おわりに</a></b></li>
 </ul><br>
+
 
 
 <a name=MoaiCGI_pragmatic_introduction></a>
@@ -240,7 +265,7 @@
 	</div>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section MoaiCGI_pragmatic_introduction end -->
 
 
 <a name=MoaiCGI_evar2></a>
@@ -318,7 +343,7 @@
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section MoaiCGI_evar2 end -->
 
 
 <a name=MoaiCGI_query_string2></a>
@@ -427,7 +452,7 @@ libZnkとlibRanoを使っています.<br>
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section MoaiCGI_query_string2 end -->
 
 
 <a name=MoaiCGI_post2></a>
@@ -627,7 +652,7 @@ libZnkとlibRanoを使っています.<br>
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section MoaiCGI_post2 end -->
 
 
 <a name=MoaiCGI_hello_template></a>
@@ -733,7 +758,7 @@ libZnkとlibRanoを使っています.<br>
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section MoaiCGI_hello_template end -->
 
 
 <a name=MoaiCGI_progress></a>
@@ -851,7 +876,7 @@ Moai CGI で時間のかかる処理を行いたい場合、その途中経過�
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section MoaiCGI_progress end -->
 
 
 <a name=MoaiCGI_proxy_finder></a>
@@ -1102,7 +1127,7 @@ Moai CGIでProxyFinderに相当するものを作ってみましょう.<br>
 </article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section MoaiCGI_proxy_finder end -->
 
 
 <a name=MoaiCGI_at_end></a>
@@ -1115,7 +1140,8 @@ Moai CGIでProxyFinderに相当するものを作ってみましょう.<br>
 	我々開発チーム一同、そんな日が来ることを心待ちにしています.<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section MoaiCGI_at_end end -->
+
 
 
 <div class="card">
@@ -1139,6 +1165,7 @@ Moai CGIでProxyFinderに相当するものを作ってみましょう.<br>
 </div>
 
 
+
 <a name=Link></a>
 <h1 class="title"></h1>
 <hr>
@@ -1147,6 +1174,7 @@ Moai CGIでProxyFinderに相当するものを作ってみましょう.<br>
 	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moaiドキュメント(オンライン)</a></li>
 	<li><a class=MstyElemLink href=https://github.com/mr-moai-2016/znk_project>znk_project(github)</a></li>
 </ul><br>
+
 
 
 </div>

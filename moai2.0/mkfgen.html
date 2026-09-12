@@ -1,50 +1,75 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html><!-- master template moai -->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta http-equiv="Content-Script-Type" content="text/javascript">
-	<meta http-equiv="Content-Style-Type" content="text/css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="/msty.css" rel="stylesheet" type="text/css">
-	<link href="/bulma.css" rel="stylesheet" type="text/css">
+	<meta charset="utf-8">
+	<meta http-equiv="Content-type" content="text/html" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type"  content="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="/msty.css"  rel="stylesheet" type="text/css" />
+	<link href="/bulma.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
+	<link rel="stylesheet" href="/js/highlightjs/github-dark.css">
+	<!-- link rel="stylesheet" href="/js/highlightjs/atom-one-dark.css" -->
+	<script src="/js/highlightjs/cpp.js"></script>
+	<script src="/js/highlightjs/javascript.js"></script>
+	<script src="/js/highlightjs/dos.js"></script>
+	<script src="/js/highlightjs/makefile.js"></script>
+	<script src="/js/highlightjs/bash.js"></script>
+	<script src="/js/highlightjs/raraku.js"></script>
+	<script type="module" src="/js/highlightjs/highlight.js"></script>
+	<script type="module">
+		import HLJS from "/js/highlightjs/highlight.js";
+		HLJS.highlightAll();
+	</script>
+	<style>
+		code {
+		    font-family: "CourierNew", "Consolas", "Courier", monospace;
+			-moz-tab-size : 4;
+			tab-size      : 4;
+		}
+	</style>
+
 </head>
 <body>
 <div class="section">
 <div class="container">
 <div class="content">
-<a name=TopBar></a>
-<p><b><img src="/imgs/here_landmark.png"> Moai+Easter 上級マニュアル</b></p>
 
-<a class=MstyElemLink href="/">トップページ</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/index.html">初級マニュアル</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">上級マニュアル</a> &nbsp;
-<a class=MstyElemLink href="/announcement.html">アナウンスメント</a> &nbsp;
-<a class=MstyElemLink href="/FAQ.html">FAQ</a> &nbsp;
-<br> <br>
-<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> &nbsp;
-<br> <br>
-<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">C言語でCGIその1</a> &nbsp;
-<a class=MstyElemLink href="/moai2.0/moai_cgi_developers_pragmatic.html">C言語でCGIその2</a> &nbsp;
-<a class=MstyNowSelectedLink href="/moai2.0/mkfgen.html">mkfgenリファレンス</a> &nbsp;
-<br> <br>
+<a name=TopBar></a>
+<!-- p><b><img src="/imgs/here_landmark.png"> Moai+Easter Advanced Manual</b></p -->
+<p style="height: 40px; border: 0px;"><img src="/imgs/here_landmark.png"> <b>Moai+Easter Advanced Manual</b></p>
+<a class=MstyElemLink href="/">Moai</a> 
+<a class=MstyElemLink href="/moai2.0/index.html">Manual</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
+<a class=MstyElemLink href="/announcement.html">Annoucement</a> 
+<a class=MstyElemLink href="/FAQ.html">FAQ</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> 
+<a class=MstyElemLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> 
+<a class=MstyElemLink href="/moai2.0/raraku1.html">Raraku言語</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/moai_cgi_developers_rrk.html">RarakuでCGI入門</a> 
+<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">C言語でCGI</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/mkfgen.html">mkfgenリファレンス</a> 
 
 <a name=AtFirst></a>
 <h1 class="title">はじめに</h1>
-<p>
-	mkfgen は一つの設定ファイル mkfgen.myf から、さまざまなコンパイル環境向けの複数のMakefileを一括して自動生成するためのツールです.<br>
-	ここではその使い方とmkfgen.myfの記述方法についてmkfgenツールの作者が解説します.<br>
-	この記事はまた、現在のznk_projectのファイル+ディレクトリ構造全体がどのようになっているかを解説するものでもあります.<br>
-	<br>
-	出来るだけ平易な説明を心がけたつもりですが、それでもかなり専門的な内容であることに変わりはなく、<br>
-	おそらくこれは上級マニュアルの中でも最も難しい内容のものでしょう.<br>
-	マルチプラットフォームの静的ライブラリ、動的ライブラリ、そしてツールの開発に相当に慣れたプログラマの方を対象に<br>
-	この種のビルドシステムの一形態としてznk_projectが提供する抽象化モデルをご紹介します.<br>
-</p>
+
+	mkfgen は一つの設定ファイル mkfgen.myf から、さまざまなコンパイル環境向けの複数のMakefileを一括して自動生成するためのツールです。
+	そのためmkfgenではプラットフォーム独立な記述が基本的なコンセプトとなります。
+	ここではその使い方とmkfgen.myfの記述方法についてmkfgenツールの作者が解説します。
+<br><br>
+	この記事は、マルチプラットフォームの静的ライブラリ、動的ライブラリ、そしてツールの開発に相当に慣れたプログラマの方が対象です。
+	また、現在のznk_projectのファイル+ディレクトリ構造全体がどのようになっているかを解説するものでもあり、
+	この種のビルドシステムの一形態としてznk_projectが提供する抽象化モデルをご紹介します。
 <br>
+<br>
+
 
 
 <a name=Index></a>
@@ -56,1013 +81,4059 @@
 	<li><b><a class=MstyElemLink href=#include_paths_common>include_paths_commonセクション</a></b></li>
 	<li><b><a class=MstyElemLink href=#dependency_libs_common>dependency_libs_commonセクション</a></b></li>
 	<li><b><a class=MstyElemLink href=#runtime_additional>runtime_additionalセクション</a></b></li>
-	<li><b><a class=MstyElemLink href=#info_COMPILER>info_{COMPILER}セクション</a></b></li>
 	<li><b><a class=MstyElemLink href=#mkid_list>mkid_listセクション</a></b></li>
+	<li><b><a class=MstyElemLink href=#info_mkid>info_{mkid}セクション</a></b></li>
 	<li><b><a class=MstyElemLink href=#product_list>product_listセクション</a></b></li>
 	<li><b><a class=MstyElemLink href=#rc_list>rc_listセクション</a></b></li>
-	<li><b><a class=MstyElemLink href=#sublibs_list>sublibs_listセクション</a></b></li>
+	<li><b><a class=MstyElemLink href=#submkf_list>submkf_listセクション</a></b></li>
 	<li><b><a class=MstyElemLink href=#install_data_list>install_data_listセクション</a></b></li>
+	<li><b><a class=MstyElemLink href=#install_script>install_scriptセクション</a></b></li>
 	<li><b><a class=MstyElemLink href=#ignore_list>ignore_listセクション</a></b></li>
-	<li><b><a class=MstyElemLink href=#only_list>only_list_{COMPILER}セクション</a></b></li>
+	<li><b><a class=MstyElemLink href=#only_list_mkid>only_list_{mkid}セクション</a></b></li>
+	<li><b><a class=MstyElemLink href=#ignore_retrieve_mkid>ignore_{mkid}/retrieve_{mkid}セクション</a></b></li>
 	<li><b><a class=MstyElemLink href=#src_suffix_list>src_suffix_listセクション</a></b></li>
 </ul><br>
 
 
+
 <a name=ProjectModel></a>
 <h1 class="title">mkfgenが扱うプロジェクトモデル</h1>
+
+	<h3>mkfgenが生成するMakefileについて</h3>
 <br>
-<article class="message is-dark"><div class="message-header">ディレクトリモデル</div><div class="message-body">
-	あなたが開発を進めているツール my_tool では、hello.c と utils.c があるとものとします.<br>
-	hello.c 内には main関数があり、その他のCファイル( この例では utils.c しかありませんが )は、
-	hello.c から使うサブルーチンなどが格納された補助的なCファイル群とします.<br>
-	<br>
-	次に、以下のようなディレクトリ構造のモデルを考えましょう.<br>
-	そしてあなたの my_tool ディレクトリはこのモデルの配下に内包されていると考えます.<br>
+	mkfgenが生成するMakefileは、他の同様なツールが生成するMakefileと比べれば比較的シンプルです。
+	少なくともGNU AutomakeやCMakeが生成するようなMakefileと比べればはるかにシンプルです。
+<br><br>
+	我々はこう考えます。
+	生成されたMakefileはある程度人間が可読でなければなりません。
+	また、場合によってはそれを手動で直接修正することもある程度現実的に可能でなければなりません。
+	さもなくば、いざMakefile生成システムに不都合が生じたとき、
+	その使用者は大変な作業負荷を強いられることになります。
+<br><br>
+	いかなるビルドシステムであろうとも、世界中の全てのプロジェクトをカバーすることなど土台無理なのです。
+	勿論、エラーなくビルドが完了することも普通にありますが（理想的には本来そうなるべきですが）、
+	現実にはビルドしようとしている何かのプロジェクトのどこかにおいて、開発者の想定を超えた何らかのエラーは起こることはしばしばあります。
+	そして残念なことにビルド対象となるプロジェクトが複雑で巨大になるほど、往々にしてそのようなことが起こります。
+	起きたエラーは今度は自分で対応しなければなりません。そのようなときビルドを制御するファイル群
+	（例えばMakefileですが）が過度に複雑であったり、
+	コンパイルオプションが隠蔽された状態になっていたとしたら、まずそこをなんとかすることから始めなければなりません。
+<br><br>
+	mkfgenで生成されたMakefileは<b>gmake（GNU make）</b>と<b>nmake（VC付属のmake）</b>に対応します。
+	前者はMinGW、MSYS、Cygwin、Linux、即ちgccを使っている環境であればインストールされているものと考えてよいでしょう。
+	また後者はVCを使っている環境であればインストールされているはずです。
+<br><br>
+	生成されたMakefileは（コンパイラとその付属している基本的なツールがあることは前提として）
+	その他の外部のツールは基本的に使わずに実行できるものになっています
+	（使っていたとしてもシステムに確実に存在するコマンドのみです）。
+	例えば、Windows系のMakefileの場合、内部に一部WSH(jscript)を使っている箇所がありますが、
+	これはWindows98以降であればシステムに標準で存在します。
+	一方、perlやpythonは非常にメジャーではありますが、システムに確実に存在するといったものではなく必ず使用できるとは限りません。
+	従って、mkfgenが生成するMakefileではこの種のスクリプトは使用していません。
+<br><br>
+	<div class=box>
+		ただしMoaiシステムはRarakuコンパイラのビルドを行います。
+		そしてRarakuのビルドが確実に完了したタイミングでRarakuを使用する場合はあります。
+	</div>
 <br>
+	しかし上で述べたことは、確かにMoaiを単純に標準的なコンパイラでコンパイルするだけならその通りなのですが、
+	そのコンパイラ自体の種類やバージョン、あるいは少々特別なビルド（クロスコンパイル等）をする場合は話が変わってきます。
+	以下ではそれについて個別に見ていきましょう。
+<br><br>
+	<h3>Windowsの場合</h3>
+<br>
+	Windowsの場合、付属のbatファイルはWindows2000以降を前提とした文法と機能（インタプリタはcmd.exe）を使って記述しているため、
+	<b>ビルドに限ればWindows2000以降が必要</b>です。
+<br><br>
+	<div class=box>
+		Windows98以前に対応したbatファイル（インタプリタはcommand.com）を作成することも不可能ではありませんが、さすがにこれはちょっと色々と大変なことになります。
+		例えば環境変数の値として設定する文字列のサイズにすら制限がかかるかもしれません。
+		一方、PowerShellというものもありますが、あれは標準提供されているのはWindows7以降です。
+	</div>
+<br>
+	ただしコンパイルによって生成されるバイナリ自体は、mkfgen自体は特に制限を設けていません。
+	どのバージョンで動くバイナリが生成されるかは、使用するコンパイラの能力に依存します。
+<br><br>
+	MinGWを使った場合、Windows98でも動作するものを作ることができます
+	（Windows95でも動作するとは思いますが未テストです）。
+	一方、64bitバイナリを作るためにはMinGW64が必要となります（そもそも64bitバイナリがサポートされる初めてのWindowsはWindowsXPですから、
+	64bitの場合、生成されるバイナリも必然的にWindowsXP以降で動作するものとなります）。
+<br><br>
+	VCを使った場合、VCのバージョンによってどのWindowsで動作するバイナリが出来上がるかが変わります。
+	例えばVS2005(VC8)の場合、Windows98でも動作するバイナリを作成可能です（しかも環境を整えれば64bit Windowsで動作するバイナリまで作成可能です）。
+	一方、VS2008(VC9)/VS2010(VC10)の場合、Windows2000以降でしか動作しないバイナリが出来上がります
+	（残念ながらたとえコンパイルオプション（/SUBSYSTEM等）で明示的に指定したとしても、
+	VS2008/VS2010ではこれより前のWindows向けバイナリを作ることはできません）。
+	そのためVS2005は古いWindowsへの高い可搬性を目指すならば重要なバージョンといえます。
+<br><br>
+	<h3>Linux/Cygwin/MSYSの場合</h3>
+<br>
+	Linux/Cygwin/MSYSの場合、デフォルトでは gcc と gmake、そしてシェルスクリプト（bash）を使っています。
+	バージョンについては特に指定はありません。
+	そもそもLinuxの場合、古い環境を線引きしようにも色々ありすぎて線引きしようがないというのもあります。
+	どちらかと言えばカーネルのバージョンよりglibcのバージョンがネックになることの方が多いでしょう。
+	この問題に対処するため、Moai Ver2.3ではC標準ライブラリ glibc と musl を使ったビルドの両方を導入しています。
+	デフォルトは glibc を使ったビルドですが、muslを使ったビルドも選択可能ということです。
+<br><br>
+	<div class=box>
+		mkfgenが生成するMakefileにおいては、glibc を使う方を単にlinux、
+		muslを使う方をlinux_muslと表記します。
+		linux_muslの場合、環境変数ZNK_MUSL_DIRでmuslのインストール先のトップディレクトリのパスを指定しておかなければなりません。
+	</div>
+<br>
+	<h3>Androidの場合</h3>
+<br>
+	Androidについては、Android NDK(r14b)を使用してWindows（Windows2000以降）やLinux上でネイティブバイナリのクロスコンパイルが可能です。
+<br><br>
+	<div class=box>
+		mkfgenが生成するMakefileにおいては、windows上でクロスコンパイルを行う方を単にandroid、
+		linux上でクロスコンパイルを行う方をandroid_linuxと表記します。
+	</div>
+<br>
+	ただしAPKまで作成する場合（APKの作成においてはもはやMakefileは関係ありませんが）は Java（OpenJDK）を必要とします。
+	Linuxの場合、このOpenJDKは特に問題なく動作し、APKの作成も普通に可能です。
+	ところがWindowsの場合、現在ではWindows2000で動作するOpenJDKの入手が困難です。
+	そのため、Windows上でAPKを作成するためには WindowsXP 以降が必要と考えた方がよいでしょう。
+<br><br>
+	<h3>llvm_clangについて</h3>
+<br>
+	このセクションではコンパイラとして llvm_clang を使用する場合を考えます。
+	現在のmkfgenは、デフォルトでは llvm_clang を使用しませんが、
+	環境によってはこれをサポートします。
+<br><br>
+	<div class=box>
+		歴代のCコンパイラの先輩方（gcc、bcc、dmc、tcc、lcc、clなどなど）が何らかのプリフィックスをつけたり、
+		名前をあまり被らないであろう形に省略するなどして、いわゆる「clang（C LANGuage）」といったC言語関係の検索するときに
+		最もありがちな単語の使用を自重していた中、
+		よりによって一番後発くらいの新人コンパイラが図々しくも<b>「clang」というコマンド名を採用し、ある意味一番C言語を主張をしている</b>状況なわけですが
+		（これがまだ「llvmc」などといったコマンド名なら検索時などで快く区別できたわけですが）、
+		その他のコンパイラへのリスペクトと明確なる区別のため、この記事では「llvmのCコンパイラ」をすべて「llvm_clang」と表記するものとします。
+	</div>
+<br>
+	Windowsについては、llvm_clang コンパイラ自体の動作が基本的に WindowsXP 以降、
+	Ver3.8以降に至っては Windows7 以降を要求します。
+	それより前のWindowsではそもそもコヤツ、<b>起動すらできません</b>。
+	llvm_clangが出来た背景や経緯には賛同しますが、とりあえずMoaiでは（というよりmkfgenでは）当面の間、
+	<b>Windowsでのllvm_clangのサポートを見合わせます</b>。
+<br><br>
+	<div class=box>
+		そもそもコンパイラというものは極論すれば文字列とバイナリの変換をするだけのツールですから、
+		必要最低限の機能を提供するだけであればさほど変なWindows APIは必要としないように思えます
+		（コンパイル速度の向上のために新しいAPIが要求されることはあるかもしれませんが、
+		それは最低限の機能を提供することとはまた別の話です）。
+		普通のツールならともかく、そのようなバイナリを作成するための一番基本となるツールであるコンパイラが、
+		起動すらできないというのは困ったことです（これはllvm_clangに限らず最近のVCなどでもそうですが）。
+<br><br>
+		32bit版ならば、いくらレガシーなOSとはいえほとんどのAPIは十分互換性があろうWindows2000で（いくらか機能制限はあっても）起動くらいはできてもよかったろうと思います（実際それが可能でフリーなコンパイラは今でもいくつかあります）。
+		64bit版ならば、WindowsXP以降であるのは止むを得ません。
+	</div>
+<br>
+	Linuxについては、mkfgenでもllvm_clangをサポートします。
+<br><br>
+	<div class=box>
+		LinuxはWindowsと違いそもそもフリーですから、「まだ使えるからお金出して買い変える必要はない」といった類いの文句も通常出ることはないOSです。
+		よって（移行の手間を考えなければ）割と抵抗なく新しい環境へ移行しやすいOSと言えます。
+		そのためllvm_clangが要求する動作環境の水準はさほど窮屈とはならないでしょう。
+	</div>
+	<div class=box>
+		llvm_clangを使う場合、環境変数ZNK_LLVM_CLANG_DIRでllvmのインストール先のトップディレクトリのパスを指定しておかなければなりません。
+	</div>
+<br>
+	MacOSXについては、まあ昔からアレコレ変わりまくりですので互換性についてあまり真面目に考えないことにします
+	（動かなければ諦めましょう）。
+	MoaiではVer2.3よりi386版とx86_64版の二つが提供されます。
+	i386版については、darwin8（MacOSX v10.4）相当、
+	x86_64版については、darwin17（MacOSX v10.13）相当になります。
+<br><br>
+	<div class=box>
+		i386版については、実際にはOpenDarwin8.0.1上でビルド（darwin上のgccを使用）とテストしたものになります。
+		x86_64版については、実際には linux 上でクロスコンパイルを行ったもの、
+		あるいはPureDarwin17上でビルド（darwin上のllvm_clangを使用）と基本的な起動に関してテストしたものになります。
+<br><br>
+		mkfgenが生成するMakefileにおいてはどちらもdarwinと表記します。
+	</div>
+	<div class=box>
+		llvmが出来た経緯や初期リリースの動作環境などを調べてみると、
+		そもそもの出発がWindowsよりむしろMacOSXやLinuxの方に比重が置かれたツールであったことがわかります（参考URLを以下に載せておきます）。
+		そう考えると上で述べた特性もある程度合点がいきます。
+<br><br>
+		<a class=MstyElemLink href=https://en.wikipedia.org/wiki/LLVM target=_blank>https://en.wikipedia.org/wiki/LLVM</a><br>
+		<a class=MstyElemLink href=https://releases.llvm.org/download.html#1.0 target=_blank>https://releases.llvm.org/download.html#1.0</a>
+	</div>
+<br>
+	<h3>ディレクトリモデル</h3>
+<br>
+	この記事ではいわゆるUNIX系のディレクトリは勿論、Windowsのフォルダもすべてディレクトリと呼びます。
+<br><br>
+	あなたが開発を進めているツール my_project において、hello.c と utils.c があるとものとしましょう。
+	hello.c 内には main関数があり、その他のCファイル（この例では utils.c のみですが）は、
+	hello.c から使うサブルーチンなどが格納された補助的なCファイル群とします。
+<br><br>
+	次に、以下のようにディレクトリ構造をある程度抽象化したモデルを考えましょう。
+	そしてあなたの my_project ディレクトリはこのモデルの配下に内包されていると考えます。
+<br><br>
 	<ul>
-		<li><b>my_project ディレクトリ</b><br>
-		<br>
-		これはあなた専用のプログラム開発用ディレクトリであり、同時にすべてのものの最上層となるトップディレクトリです.<br>
-		即ちこの配下には、あなたが使うライブラリやツール群(極めて標準的なライブラリやコンパイラは除いて)一式が
-		すべてが格納されているものとします.<br>
-		Moaiではznk_projectというディレクトリに相当するものと考えていいでしょう.<br>
+		<li><b>universal development ディレクトリ</b>
+<br><br>
+		これはあなた専用のプログラム開発用ディレクトリであり、同時にすべてのものの最上層となるトップディレクトリです。
+		即ちこの配下には、あなたが使うライブラリやツール群（極めて標準的なライブラリやコンパイラは除いて）一式が
+		すべてが格納されているものとします。
+		通常、プログラミングを行う場合、各自がこのようなディレクトリを自然に導入すると思います。
+		my_project以外の他の（例えばgithubからダウンロードした他の）プロジェクトのソースなどもここに置くものとしましょう。
 		</li>
 <br>
-		<li><b>my_project/mkfsys ディレクトリ</b><br>
-		<br>
-		このディレクトリ内には mkfgen ツールの本体やそれに関係するその他のビルド支援系ファイルが存在します(詳しくは後述).<br>
+		<li><b>my_project ディレクトリ</b>
+<br><br>
+		あるプロジェクトを開発する場合のトップとなるディレクトリです。
+		Moaiの場合、znk_projectディレクトリがこれに相当します。
+		universal development ディレクトリの直下に置くものとしましょう。
 		</li>
 <br>
-		<li><b>my_project/src ディレクトリ</b><br>
-		<br>
-		このディレクトリにあなたのソースファイルがすべて格納されているものとします.<br>
-		つまりあなたがこれまで開発を行ってきた(あるいはこれからも行うであろう)ライブラリやツールのソースファイルです.<br>
-		<br>
-		mkfgenが生成するMakefileでは、ビルド時にout_dir/$(ABINAME)というサブディレクトリを<b>その場に</b>作成します.<br>
-		特にライブラリの場合、そのソースディレクトリ配下のout_dirにビルドされたライブラリの実体が格納されるわけです.<br>
-		即ちこのsrc ディレクトリは生成されたライブラリ群が格納される場をも兼ねています.<br>
-		znk_projectのすべてのツールとライブラリでは、後述するconfigセクションの my_libs_root において
-		src ディレクトリをこの意味で指定しています.<br>
-		<br>
-		このようにするメリットは、わざわざ生成したライブラリやヘッダ群を別のインストールディレクトリへ
-		ずらずらとコピーする処理をMakefile内で記述するの省略できるということです.<br>
-		その分、ビルドサイクルにおけるトータルな時間も短縮されます.<br>
-		<br>
-		しかし勿論、そのようなコピーを行うようにした方がよい場合もあります.<br>
-		例えば、mkfgenが提供するプロジェクトモデルの範疇の外にあるツールから、そのライブラリを利用したい場合があります.<br>
-		mkfgenが生成するMakefileでは、特に汎用性の高い静的ライブラリと動的ライブラリについては、
-		それぞれslibとdlibというディレクトリ配下へ、一応コピーする処理を行います.<br>
-		一方、インポートライブラリとヘッダについてはそのようなコピーを行いません.<br>
+		<li><b>my_profile ディレクトリ</b>
+<br><br>
+		このディレクトリでは、my_projectにおけるツールが共通して使うプロファイルデータが格納されているものとします。
+		Moaiで言えば moai_profileディレクトリがこれにあたります。
+		FirefoxなどにもProfileがありますが、イメージとしてはあれを意識したものです。
+		これはツールの種類やバージョンを超えて共通して参照される場合もあり得るものとします。
+		universal development ディレクトリの直下に置くものとしましょう。
 		</li>
 <br>
-		<li><b>my_project/my_tool-vX.Y-platform</b><br>
-		<br>
-		このディレクトリはあなたが開発を行ったツール(my_tool)のインストール先です.<br>
-		実行バイナリやランタイムライブラリ、必要な設定データなど一式が格納されているものとします.<br>
-		ここで my_tool や X, Y, platform の部分はツールやそのバージョン、プラットフォームなどによって変わる文字列です.<br>
+		<li><b>install_dir ディレクトリ</b>
+<br><br>
+		このディレクトリはmy_project等でビルドしたバイナリや付属するデータファイル等をインストール先です。
+		このインストールディレクトリをどこに作り置くかは自由ですが、universal development ディレクトリの直下に置くと見通しがよいでしょう。
 		</li>
 <br>
-		<li><b>my_project/my_profile</b><br>
-		<br>
-		このディレクトリでは、my_projectにおけるツールが共通して使うプロファイルデータが格納されているものとします.<br>
-		Moaiで言えば moai_profileディレクトリがこれにあたります.<br>
-		FirefoxなどにもProfileがありますが、イメージとしてはあれを意識したものです.<br>
-		これはツールの種類やバージョンを超えて共通して参照される場合もあり得るものとします.<br>
-		</li>
-<br>
-		<li><b>my_project/src/my_tool ディレクトリ</b><br>
-		<br>
-		このディレクトリはsrc配下にあり、あなたが開発を行っているツールmy_toolのソースディレクトリです. <br>
-		この中に上記のCファイルに加え、mkfgen.myf が存在するものとします. <br>
-		</li>
-	</ul>
-	複雑ですか？<br>
-	<br>
-	しかし競合するその他の同様のツールと比べればはるかに単純ともいえます.<br>
-	必要なツールはすべてmy_project/mkfsysディレクトリ一つに比較的小さなサイズで収まっており、
-	従ってこの辺りが必要にして十分な考えられ得る最小モデルではないでしょうか？<br>
-	<br>
-	mkfgenツールによって生成されるMakefileは、この例では windows用(vc、mingw、msys)、linux用(gcc)、cygwin用(gcc)、android用(ndk)の６つであり、
-	my_project/src/my_tool ディレクトリ内にそのすべてが瞬時に生成されることでしょう.<br>
-	(例えば、vc用の場合、Makefile_vc.mak といった名前のMakefileになります).<br>
-</div></article><br>
-<br>
-<article class="message is-dark"><div class="message-header">mkfgen.myfの例</div><div class="message-body">
-	まずは最も簡単な mkfgen.myf の例を示しましょう.<br>
-	<br>
-	<div class=box>
-		<div class=MstyCode style='background-color:#cccccc;padding:4px 8px'>
-			@def_quote [' ']<br>
-			<br>
-			@@V config<br>
-			my_libs_root = ['..']<br>
-			template_dir = ['../../mkfsys/template']<br>
-			install_dir = ['../../bin']<br>
-			@@.<br>
-			<br>
-			@@L include_paths_common<br>
-			@@.<br>
-			<br>
-			@@L dependency_libs_common<br>
-			@@.<br>
-			<br>
-			@@V info_vc<br>
-			@@.<br>
-			<br>
-			@@V info_mingw<br>
-			@@.<br>
-			<br>
-			@@V info_msys<br>
-			@@.<br>
-			<br>
-			@@V info_linux<br>
-			@@.<br>
-			<br>
-			@@V info_cygwin<br>
-			@@.<br>
-			<br>
-			@@L mkid_list<br>
-			vc<br>
-			mingw<br>
-			msys<br>
-			linux<br>
-			cygwin<br>
-			android<br>
-			@@.<br>
-			<br>
-			@@L product_list<br>
-			exec hello hello.c<br>
-			@@.<br>
-			<br>
-			@@L rc_list<br>
-			@@.<br>
-			<br>
-			@@L sublibs_list<br>
-			@@.<br>
-			<br>
-			@@L install_data_list<br>
-			@@.<br>
-			<br>
-			@@L ignore_list<br>
-			@@.<br>
-			<br>
-			@@L src_suffix_list<br>
-			c<br>
-			@@.<br>
+		<li><b>my_project/src ディレクトリ</b>
+<br><br>
+		このディレクトリではmy_project関係のソースファイルがすべて格納されているものとします。
+		つまりあなたがこれまで開発を行ってきた（あるいはこれからも行うであろう）ライブラリやツールのソースファイルです。
+<br><br>
+		mkfgenが生成するMakefileを実行した場合、通常 out_dir/$(ABINAME) というディレクトリがカレントディレクトリに作成されます。
+		特にライブラリの場合、ビルドされたライブラリの実体が一旦そのディレクトリに格納されることになりますが、
+		大抵の場合、他のソースコードはこのout_dir配下を直接参照することでこれらのライブラリを直接使用できます。
+<br><br>
+		しかし、生成されたライブラリそのものについては、特定の共通ディレクトリへコピー（つまりインストールですが）
+		を行うようにした方がよい場合もあります。
+		例えば、mkfgenが管轄するプロジェクトモデルの外から、そのライブラリを利用したい場合などです。
+<br><br>
+		そのため、共通ディレクトリとしてinstall_dir/slib/$(ABINAME) ディレクトリを配備し、
+		生成された静的ライブラリをその配下へインストールするものとします。
+<br><br>
+		<div class=box>
+			$(ABINAME) はコンパイラのタイプが識別子可能な文字列になっています。
 		</div>
-	</div>
+<br>
+		また、共通ディレクトリとしてinstall_dir/dlib/$(PLATFORM) ディレクトリや install_dir/dlib/$(ABINAME) ディレクトリを配備し、
+		生成された動的ライブラリ（インポートライブラリを含む）をその配下へインストールするものとします。
+<br><br>
+		<div class=box>
+			インポートライブラリについては、コンパイル環境によって動的ライブラリがそれを兼ねる場合とそうでない場合があります。
+			例えばLinux、Cygwin等では、動的ライブラリがインポートライブラリの役割も兼ねます。
+			そのため、これらの環境では$(PLATFORM)と$(ABINAME)の値が一致しています。
+<br><br>
+			一方、VC、MinGW、MSYSでは動的ライブラリ(拡張子はdll)とは別にインポートライブラリ（拡張子はimp.lib、dll.a）が存在します。
+			そのため、これらの環境では$(PLATFORM)と$(ABINAME)の値が異なっており、
+			インストール先に$(PLATFORM)ディレクトリと$(ABINAME)ディレクトリの両方が作成され、
+			それぞれに動的ライブラリとインポートライブラリがコピーされます。
+<br><br>
+			尚、これらをリンクして使う場合、インポートライブラリのフルパスを直接記述することも可能ですが、
+			通常は、dependency_libs_common等で多少簡潔に記述が可能です。
+			例えば、install_dlib_dirまでのパスを指定すれば、その直下にあるディレクトリ
+			（つまりdlib/$(ABINAME)かdlib/$(PLATFORM)ですが）がどちらとなるかはmkfgenが判定し、
+			install_dlib_dirの後ろへそれらを自動的に付加するような記法などがサポートされています。
+		</div>
+<br>
+		一方、ヘッダについてはそのようなコピーは（install_scriptセクション等で特に指定しない限り）行われません。
+		</li>
+<br>
+		<li><b>znk_project/mkfsys ディレクトリ</b>
+<br><br>
+		ここは抽象化ではなくznk_project限定の話にはなりますが、znk_project直下にはmkfsysディレクトリというものが存在します。
+		このディレクトリ内には mkfgen ツールの本体やそれに関係するその他のビルド支援系ファイルが存在します(詳しくは後述)。
+		</li>
+<br>
+	</ul>
+<br>
+	この辺りが必要最低限のモデルではないでしょうか？
+<br><br>
+	mkfgenツールによって生成されるMakefileは、現在、vc、mingw、msys、linux、cygwin、bsd、android、android_linux、darwinがあります。
+	mkfgenの実行により、カレントディレクトリ内にそのすべてが（プロジェクトに存在するファイル数が大量でなければ）瞬時に生成されることでしょう
+	（例えば、vc用の場合、Makefile_vc.mak といった名前のMakefileが生成されます）。
+<br><br>
+	<h3>mkfgen.myfの例</h3>
+<br>
+	まずは最も簡単な mkfgen.myf の例を示しましょう。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">@def_quote [' ']
+
+
+@@V config
+install_dir = ['../../bin']
+@@.
+
+@@L include_paths_common
+@@.
+
+@@L dependency_libs_common
+@@.
+
+
+@@L mkid_list
+vc
+mingw
+msys
+linux
+cygwin
+android
+@@.
+
+@@V info_vc
+@@.
+
+@@V info_mingw
+@@.
+
+@@V info_msys
+@@.
+
+@@V info_linux
+@@.
+
+@@V info_cygwin
+@@.
+
+@@V info_android
+@@.
+
+
+@@L product_list
+exec hello hello.c
+@@.
+
+@@L install_script
+@@.
+
+@@L ignore_list
+@@.
+
+@@L src_suffix_list
+c
+@@.
+</code></pre>
+	
 	<br>
-	長いですか？<br>
+	長いですか？
+<br><br>
+	しかし上記では６つのMakefile（Makefile_vc.mak、Makefile_mingw.mak、Makefile_msys.mak、Makefile_linux.mak、Makefile_cygwin.mak、Makefile_android.mak）を生成する指示をしていいます。
+	６つのMakefileを書く手間を考えれば、これ一つで済むのですからはるかに短いともいえます。
+	上の例ではほとんど空のセクションを列記しているだけであるため、見かけほど記載されている情報量は多くはありません。
+	また、上記の例では登場してないマイナーなセクションも存在します。
+	多くの場合、上記をコピペし、必要な情報だけを修正+追記するだけで大抵は事足りるでしょう。
+<br><br>
+	空のセクションは省略することもできます。
+	例えば上記の例は以下のように書くこともできます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">@def_quote [' ']
+
+
+@@V config
+install_dir = ['../../bin']
+@@.
+
+@@L mkid_list
+vc
+mingw
+msys
+linux
+cygwin
+android
+@@.
+
+@@L product_list
+exec hello hello.c
+@@.
+
+@@L src_suffix_list
+c
+@@.
+</code></pre>
+	
 	<br>
-	しかし６つのMakefileを書く手間を考えれば、これ一つで済むのですからはるかに短いともいえます.<br>
-	また、上の例ではほとんど空のセクションを列記しているだけであるため、見かけほど記載されている情報量は多くはありません.<br>
-	つまり実際には上記をコピペし、必要な情報だけを修正+追記するだけで大抵は事足りるでしょう.<br>
-	<br>
-	hello.cを除くその他のCファイル( この例では utils.c だけですが )の指定がどこにも見当たらないと思われるかもしれません.<br>
-	実は mkfgenツールは、それが実行されたディレクトリ配下を再帰的にスキャンし、拡張子からC/C++ファイルを自動的に認識するため、
-	mkfgen.myfにおいては基本的にCファイルの指定は不要なのです.<br>
-	<br>
-	一方、main関数を含むCファイルだけは明示的に指定する必要があります.<br>
-	これは product_listにexecキーワードに続けて、生成される実行バイナリ名( この例では hello )、
-	ソースコード名( この例ではhello.c )の順でスペース区切りで指定する形となります.<br>
-	<br>
-	この指定が必要な理由は、一つのプロジェクト内において複数の実行バイナリをビルドさせたい割とよくある需要に応じるためです.<br>
-	つまりmain関数を持つCファイルが複数あるようなケースです. <br>
+	上記は確かにさらに短いですが、空のセクションを敢えて書いておいた方が後でオプションなどの追記はしやすいでしょう。
+	明らかに追記が必要ないケースでは上記でも構いません。
+<br><br>
+	hello.cを除くその他のCファイルの指定がどこにも見当たらないと思われるかもしれません。
+	mkfgenでは、それが実行されたディレクトリ配下を再帰的にスキャンし、拡張子からC/C++ファイルを自動的に認識します。
+	そのため、mkfgen.myfにおいて基本的にCファイルの指定は不要となります。
+<br><br>
+	一方、main関数を含むCファイル（この例ではhello.c）だけは明示的に指定する必要があります。
+	これは product_list セクションにおいて、execキーワード、生成される実行バイナリ名( この例では hello )、
+	ソースコード名( この例ではhello.c )の順でスペース区切りで指定する形となります。
+<br><br>
+	この指定が必要な理由は、一つのプロジェクト内において複数の実行バイナリをビルドさせたい割とよくある需要に応じるためです。
+	つまりmain関数を持つCファイルが複数あるようなケースです。
 	Cファイルを完全スキャンすれば main関数が含まれるかどうかまで自動認識はできますが、
-	実のところそれは本当はビルド対象には含めて欲しくはないCファイルであるかもしれません.<br>
-	( 例えばlibpngに含まれる example.c は、main関数を含むものですが、実のところこれは擬似的な Cコードであり、
-	コンパイル対象に含めて欲しくないCファイルです ).<br>
-	このようなケースでも取捨選択してビルドさせるため、mkfgenツールではこの指定が必要な仕様になっています.<br>
-	<br>
+	それがビルド対象として無視して欲しいCファイルである可能性も想定できます
+	（例えばlibpngに含まれる example.c は、main関数を含むものですが、実のところこれは擬似的な Cコードであり、
+	コンパイル対象に含めるべきではないCファイルです）。
+	このようなケースでも取捨選択してビルドさせるため、mkfgenツールではこの指定が必要な仕様になっています。
+<br><br>
 	<div class=box>
-		今思えば、ignore_listの指定によってもこのような除外ができますので、mkfgenの将来のバージョンではこの仕様を変更するかもしれません.<br>
+		今思えば、ignore_listの指定によってもこのような除外ができますので、mkfgenの将来のバージョンではこの仕様を変更するかもしれません。
 	</div>
-</div></article><br>
-	<br>
-<article class="message is-dark"><div class="message-header">mkfgenの修正が必要なタイミング</div><div class="message-body">
-	mkfgenツールにおける Cファイルの再帰的自動認識機能はCファイルの多い大規模なプロジェクトで大きな効果を発揮します.<br>
+<br>
+	Ver2.3よりRarakuファイルの指定も可能になりました。
+	これについてもCファイルと同様に指定します。
+	Rarakuではmain関数は存在しませんが、単独のアプリの場合エントリーファイルを指定すればよいでしょう。
+	utilizeなライブラリとして作成する場合はどれか一つ代表となるファイルを指定します。
+	その他のrrksファイルはデフォルトではすべてそれの依存ファイルとみなされますが、その設定はproduct_listセクションにおいてカスタマイズできます。
+	これについてはproduct_listセクションで詳しく説明します。
+<br><br>
+	<h3>mkfgenの修正が必要なタイミング</h3>
+<br>
+	mkfgenツールにおける Cファイルの再帰的自動認識機能はCファイルが大量に存在するプロジェクトで大きな効果を発揮します。
 	下請けのCファイル群が増えた場合、mkfgenツールを実行するだけでMakefile内のCファイルの情報を自動的に更新できますし、
-	その際に mkfgen.myf 自体を我々が修正するなどの作業も一切発生しないからです.<br>
-	<br>
-	それでは逆に、どのような場合に我々がmkfgen.myfを直接修正しなければならないかと言えば、
-	例えば開発しているプロジェクトが使う依存ライブラリが新しく増えたような場合です.<br>
+	その際に mkfgen.myf 自体を我々が修正するなどの作業も一切発生しないからです。
+<br><br>
+	mkfgen.myfを直接修正しなければならないタイミングは、
+	例えば開発しているプロジェクトが使う依存ライブラリが新しく増えたような時です。
 	この場合、include_paths_commonやdependency_libs_commonに新しいライブラリに関するパス情報などを手動で追記した上、
-	mkfgenツールを実行してMakefileを更新しなければなりません.<br>
-	<br>
-	<div class=box>
-		Moai CGI上でわかりやすいUIを表示しつつ、その指定によってmkfgen.myfを自動生成し、
-		それをダウンロードできるようなツールを作ると便利かもしれません.<br>
-		Moaiの将来のバージョンではそのようなツールを提供するかもしれません.<br>
-	</div>
-</div></article><br>
+	mkfgenツールを実行してMakefileを更新しなければなりません。
+<br><br>
+	<h3>生成されたMakefileを直接修正する場合</h3>
+<br>
+	mkfgenはこのような状況が極力発生しないように作られてはいますが、
+	最初に述べました通り、いかなるMakefile生成ツールであれ、世の中にあるすべてのプロジェクト対応できる保証などあり得ません。
+	mkfgen.myfをどのように修正しても問題が解決しない場合や、
+	問題の解決方法を調査すること自体の方が時間が掛かると考えられる場合、
+	Makefileを直接修正する方が早いです。
+<br><br>
+	参考のため、具体的にどのようなMakefileが作成されるか、libressl配下にあるMakefile_cygwin.makを例として以下に
+	全体を載せておきましょう。
+<br><br>
+	<a name=AName_ProjectModel_0></a><script type="text/javascript">var st_ProjectModel_0_group_id_ary = [ "ProjectModel_0" ];</script>
+<a class=MstyDetailLink id=ProjectModel_0_btn onClick="if( MstyUI_selectTab( st_ProjectModel_0_group_id_ary, this.id ) ){location.href = '#AName_ProjectModel_0';}">mkfgenが生成するMakefile (420 lines)</a>
+<span id=ProjectModel_0 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-makefile">
+# Static generating variables by MkfsysBird
+MKFB_SRC_DIR=../../../src
+MKFB_MKFSYS_DIR=../../../../znk_project/mkfsys
+MKFB_MAKVER_PATH=../../Makefile_version.mak
+MKFB_INSTALL_DIR=$(MKFB_SRC_DIR)/../install_dir
+AT_SUGAR_DIR=$(MKFB_SRC_DIR)
+ECHO_CMD=echo
+INST_OS=cygwin
+
+
+# for gmake -C option (By default, environment variables in the parent Makefile are automatically exported ) 
+unexport ZNK_UNIVERSAL_DEV_DIR
+unexport ZNK_MKFSYS_DIR
+
+FYI   =[\033[33mFYI\033[0m]:
+TRY   =[\033[36mTRY\033[0m]:
+OK    =[\033[32mOK\033[0m]:
+NG    =[\033[35mNG\033[0m]:
+Error =[\033[31mError\033[0m]:
+Clr_Green =\033[32m
+Clr_Cyan  =\033[36m
+Clr_End   =\033[0m
+
+# The wildcard(of Makefile) returns a list of files that match the patterns.
+# However, here, the existence of a file is checked by comparing it with "".
+ifneq ("$(wildcard Makefile_version.mak)","") # if this exists
+  include          Makefile_version.mak
+else
+  ifneq ("$(wildcard $(MKFB_MAKVER_PATH))","") # if this exists
+    include          $(MKFB_MAKVER_PATH)
+  endif
+endif
+
+ifndef MV_UNIVERSAL_DEV_DIR_IS_ABS
+  # We determine whether MV_UNIVERSAL_DEV_DIR is an absolute path or not.
+  $(warning [FYI]: Auto detect MV_UNIVERSAL_DEV_DIR_IS_ABS (Use sed command.))
+  L_test_str=$(MV_UNIVERSAL_DEV_DIR)
+  L_is_abs=0
+
+  # DOS Prefix test.
+  L_is_matched=$(shell  echo '$(L_test_str)' | sed -n '/^[a-z|A-Z]:/p')
+  ifneq ("$(L_is_matched)","")
+    L_is_abs=1
+    # DOS Prefix =&gt; cygwin Prefix conversion
+    L_cyg_abs_path=$(shell  echo '$(L_test_str)' | sed -e 's/^\([a-z\|A-Z]\):/\/cygdrive\/\L\1/')
+    $(warning [FYI]: L_cyg_abs_path=[$(L_cyg_abs_path)])
+  endif
+
+  # UNIX Prefix test.
+  L_is_matched=$(shell echo '$(L_test_str)' | sed -n '/^\//p')
+  ifneq ("$(L_is_matched)","")
+    L_is_abs=1
+  endif
+
+  ifeq ($(L_is_abs), 1)
+    MV_UNIVERSAL_DEV_DIR_IS_ABS=yes
+  else
+    MV_UNIVERSAL_DEV_DIR_IS_ABS=no
+  endif
+endif
+
+# Basic environment variables
+ifndef ZNK_UNIVERSAL_DEV_DIR
+  ifeq ($(MV_UNIVERSAL_DEV_DIR_IS_ABS), yes)
+    ZNK_UNIVERSAL_DEV_DIR=$(subst \,/,$(MV_UNIVERSAL_DEV_DIR))
+  else
+    L_makver_parent_dir=$(subst Makefile_version.mak,,$(MKFB_MAKVER_PATH))
+    ZNK_UNIVERSAL_DEV_DIR=$(subst \,/,$(L_makver_parent_dir))$(subst \,/,$(MV_UNIVERSAL_DEV_DIR))
+  endif
+endif
+
+ifndef ZNK_MKFSYS_DIR
+  ifneq ("$(wildcard $(MKFB_MKFSYS_DIR))","") # if this exists
+    ZNK_MKFSYS_DIR=$(MKFB_MKFSYS_DIR)
+  else
+    ZNK_MKFSYS_DIR=$(ZNK_UNIVERSAL_DEV_DIR)/znk_project/mkfsys
+  endif
+endif
+
+ifndef ZNK_INSTALL_DIR
+  ZNK_INSTALL_DIR=$(MKFB_INSTALL_DIR)
+endif
+ZNK_INSTALL_DIR:=$(subst \,/,$(ZNK_INSTALL_DIR))
+
+# Arguments
+ifdef THIS_PROJ_DIR
+  PROJ_DIR=$(THIS_PROJ_DIR)
+else
+  PROJ_DIR=.
+endif
+ifdef THIS_INSTALL_DIR
+  INSTALL_DIR=$(THIS_INSTALL_DIR)
+else
+  INSTALL_DIR=out_dir/install_dir
+endif
+
+# Platform and Host-Platform
+ifndef HOST_OS
+  HOST_OS=$(INST_OS)
+endif
+
+# Cygwin gcc maybe cannot cross-compile 32-&gt;64bit, so we should be HOST_MACHINE same as INST_MACHINE.
+
+# # PROCESSOR_ARCHITEW6432 is a special environment variable that exists only within applications running on WOW64.
+# # For example, MSYS and cygwin-x86 on x64 are WOW64, so the value of PROCESSOR_ARCHITEW6432 will be AMD64.
+# # On the other hand, cygwin-x64 is not WOW64, so PROCESSOR_ARCHITEW6432 is not defined in the first place,
+# # and the PROCESSOR_ARCHITECTURE value is AMD64.
+# HOST_MACHINE=x64
+# ifneq ($(PROCESSOR_ARCHITECTURE), AMD64)
+# ifneq ($(PROCESSOR_ARCHITEW6432), AMD64)
+# HOST_MACHINE=x86
+# endif
+# endif
+
+# If you are on an older version of Make (pre-3.81) , 
+# you cannot combine else and ifeq on the same line.
+# darwin8 uses GNU make version 3.80
+ifndef HOST_MACHINE
+  UNAME_M=$(shell uname -m)
+  ifeq ($(UNAME_M), i386)
+    HOST_MACHINE=x86
+  endif
+  ifeq ($(UNAME_M), i686)
+    HOST_MACHINE=x86
+  endif
+  ifeq ($(UNAME_M), x86_64)
+    HOST_MACHINE=x64
+  endif
+  ifeq ($(UNAME_M), amd64)
+    HOST_MACHINE=x64
+  endif
+  ifeq ($(UNAME_M), aarch64)
+    HOST_MACHINE=arm64
+  endif
+  ifeq ($(UNAME_M), x86)
+    UNAME_A_GREP=$(shell uname -a | grep I386)
+    ifneq ("$(UNAME_A_GREP)", "")
+      # OpenDarwin(darwin8)
+      HOST_MACHINE=x86
+    endif
+    UNAME_A_GREP=$(shell uname -a | grep X86_64)
+    ifneq ("$(UNAME_A_GREP)", "")
+      # PureDarwin-17
+      HOST_MACHINE=x64
+    endif
+  endif
+  ifndef HOST_MACHINE
+    HOST_MACHINE=$(UNAME_M)
+  endif
+endif
+
+ifndef INST_MACHINE
+  INST_MACHINE=$(HOST_MACHINE)
+endif
+
+
+PLATFORM=$(INST_OS)-$(INST_MACHINE)
+HOST_PLATFORM=$(HOST_OS)-$(HOST_MACHINE)
+
+# Output directory
+ABINAME=$(INST_OS)$(DEBUG)-$(INST_MACHINE)
+S=.
+O=./out_dir/$(ABINAME)
+
+# Setting Tools path and flags
+CC    =gcc
+AR    =ar
+RANLIB=ranlib
+
+  DL_INTERP=
+  DL_LIBC  =
+  NOSTDLIB =
+  SRCT_OBJ =
+  LAST_INCL=
+  LIBC_FLAG_EXE =-lm -lpthread $(LDL) -lc
+  LIBC_FLAG_DLIB=-lm -lpthread $(LDL) -lc
+
+ifeq ($(INST_MACHINE), x64)
+  C_FLAG=-m64 $(NOSTDLIB)
+  EXEC_LINKER=$(CC) -m64 $(NOSTDLIB) $(SCRT_OBJ) 
+  DLIB_LINKER=$(CC) -m64 $(NOSTDLIB)
+endif
+ifeq ($(INST_MACHINE), x86)
+  C_FLAG=-m32 $(NOSTDLIB)
+  EXEC_LINKER=$(CC) -m32 $(NOSTDLIB) $(SCRT_OBJ) 
+  DLIB_LINKER=$(CC) -m32 $(NOSTDLIB)
+endif
+
+ifeq ($(DEBUG), d)
+  C_DEFI=-DLIBRESSL_INTERNAL -D__BEGIN_HIDDEN_DECLS= -D__END_HIDDEN_DECLS= \
+	-DOPENSSL_NO_HW_PADLOCK -DOPENSSL_NO_ASM
+  C_WARN=-Wall -Wstrict-aliasing=2
+  C_FLAG+= -g
+  DLIBS_DIR=dlib/$(ABINAME)
+else
+  C_DEFI=-DNDEBUG -DLIBRESSL_INTERNAL -D__BEGIN_HIDDEN_DECLS= -D__END_HIDDEN_DECLS= \
+	-DOPENSSL_NO_HW_PADLOCK -DOPENSSL_NO_ASM
+  C_WARN=-Wall -Wstrict-aliasing=2 -Wno-uninitialized
+  C_FLAG+= -O2 -fno-strict-aliasing
+  DLIBS_DIR=dlib/$(PLATFORM)
+endif
+ILIBS_DIR=dlib/$(ABINAME)
+SLIBS_DIR=slib/$(ABINAME)
+
+C_INCL = -I$S \
+	-I../include \
+	-I../include/compat \
+	-I../crypto/asn1 \
+	-I../crypto/bn \
+	-I../crypto/evp \
+	-I../crypto/modes \
+	-I../crypto  \
+	$(LAST_INCL)
+
+
+# For native compilation, use $(ZNK_MKFSYS_DIR)\bin\$(HOST_PLATFORM)\gslconv by default.
+# If this place is capable of generating gslconv by itself (e.g. libZnk),
+# then use the generated gslconv ($O\gslconv).
+GSLCONV_CMD=$(ZNK_MKFSYS_DIR)/bin/$(PLATFORM)/gslconv.exe
+
+# gslconv in cross-compilation.
+# In this case, the host version of gslconv has to be generated first in libZnk.
+ifneq ($(HOST_PLATFORM), $(PLATFORM))
+GSLCONV_CMD=$(ZNK_MKFSYS_DIR)/bin/$(HOST_PLATFORM)/gslconv
+endif
+
+CP=cp
+
+BASENAME0=tls
+DLIB_NAME0=cygtls-17.dll
+DLIB_FILE0=$O/$(DLIB_NAME0)
+ILIB_FILE0=$O/cygtls-17.dll
+SLIB_FILE0=$O/libtls.a
+OBJS0=\
+	$O/compat/ftruncate.o \
+	$O/compat/getuid.o \
+	$O/compat/pread.o \
+	$O/compat/pwrite.o \
+	$O/tls.o \
+	$O/tls_bio_cb.o \
+	$O/tls_client.o \
+	$O/tls_config.o \
+	$O/tls_conninfo.o \
+	$O/tls_keypair.o \
+	$O/tls_ocsp.o \
+	$O/tls_peer.o \
+	$O/tls_server.o \
+	$O/tls_util.o \
+	$O/tls_verify.o \
+	$O/dll_main.o \
+
+ALL_OBJS= \
+	$(OBJS0) \
+
+PRODUCT_DLIBS= \
+	__mkg_sentinel_target__ \
+	$(DLIB_FILE0) \
+
+PRODUCT_SLIBS= \
+	__mkg_sentinel_target__ \
+	$(SLIB_FILE0) \
+
+RUNTIME_FILES= \
+	__mkg_sentinel_target__ \
+
+
+
+
+CC_PRINTF = \
+	if true ; then \
+		printf "  $(Clr_Green)CC  $(Clr_End) : $(CC)\n"; \
+		printf "  $(Clr_Green)DEFI$(Clr_End) : $(C_DEFI)\n"; \
+		printf "  $(Clr_Green)INCL$(Clr_End) : $(C_INCL)\n"; \
+		printf "  $(Clr_Green)WARN$(Clr_End) : $(C_WARN)\n"; \
+		printf "  $(Clr_Green)FLAG$(Clr_End) : $(C_FLAG)\n"; \
+	fi \
+
+# Entry rule.
+.PHONY: all
+all: all_at_first $O/compat $O $(DLIB_FILE0) $(SLIB_FILE0)
+
+# Init.
+.PHONY: all_at_first
+all_at_first:
+	@printf "$(FYI) Current directory : `pwd`\n"
+	@printf "  S=[$S]\n"
+	@printf "$(FYI) Information C\n"
+	@$(CC_PRINTF)
+	@printf "===\n"
+	@printf "$(FYI) Press any key to begin. " ; read -n 1 -s -r ; echo ""
+
+# Mkdir rule.
+$O/compat:
+	@printf "$(FYI) mkdir $O/compat\n"
+	@mkdir -p $O/compat
+
+$O:
+	@printf "$(FYI) mkdir $O\n"
+	@mkdir -p $O
+
+
+# Product files rule.
+$(SLIB_FILE0): $(OBJS0)
+	@printf "$(FYI) static link phase\n"
+	@printf "$(FYI) clean old $@\n"
+	@if test -e $@ ; then rm -f $@; fi
+	@printf "$(TRY) $(AR) cru $@ $(Clr_Cyan)\$$(OBJS0)$(Clr_End)\n"
+	@               $(AR) cru $@ $(OBJS0)
+	@printf "$(TRY) $(RANLIB) $@\n"
+	@               $(RANLIB) $@
+	@printf "$(OK) static library : $(Clr_Green)$@$(Clr_End)\n"
+
+gsl.myf: $(SLIB_FILE0)
+	if test -e "$(GSLCONV_CMD)" ; then "$(GSLCONV_CMD)" -g gsl.myf $(SLIB_FILE0) $(INST_MACHINE) "17" ; fi
+
+gsl.def: gsl.myf
+	if test -e "$(GSLCONV_CMD)" ; then "$(GSLCONV_CMD)" -d gsl.myf gsl.def ; fi
+
+$(DLIB_FILE0): $(OBJS0) $(SLIB_FILE0)
+	@printf "$(FYI) dynamic link phase\n"
+	@printf "$(FYI) clean old $@\n"
+	@if test -e $@ ; then rm -f $@; fi
+	@printf "$(TRY) $(DLIB_LINKER) \n"
+	@printf "  -shared \n"
+	@printf "  -o $(DLIB_FILE0) \n"
+	@printf "  $(Clr_Cyan)\$$(OBJS0)$(Clr_End) \n"
+	@printf "  $(ZNK_INSTALL_DIR)/$(SLIBS_DIR)/libssl.a $(ZNK_INSTALL_DIR)/$(SLIBS_DIR)/libcrypto.a $(ZNK_INSTALL_DIR)/$(SLIBS_DIR)/librra_portable.a \n"
+	@printf "  $(LIBC_FLAG_DLIB) \n" 
+	@$(DLIB_LINKER) -shared \
+		-o $(DLIB_FILE0) \
+		$(OBJS0) \
+		$(ZNK_INSTALL_DIR)/$(SLIBS_DIR)/libssl.a $(ZNK_INSTALL_DIR)/$(SLIBS_DIR)/libcrypto.a $(ZNK_INSTALL_DIR)/$(SLIBS_DIR)/librra_portable.a \
+		$(LIBC_FLAG_DLIB) 
+	@printf "$(OK) dynamic library : $(Clr_Green)$@$(Clr_End)\n"
+
+
+##
+# GNU make only : pattern rule.
+#
+# We use not suffix rule but pattern rule for dealing flexibly with files in sub-directory.
+# In this case, there is very confusing specification, that is :
+# '\' to the left hand of ':' works as escape sequence, 
+# '\' to the right hand of ':' does not work as escape sequence. 
+# Hence, we have to duplicate '\' to the left hand of ':',
+# the other way, '\' to the right hand of ':' we have to put only single '\'.
+# Note that we have to duplicate '\' only before special charactor(% etc) in the left of ':'.
+#
+# For example 1 :
+#   $O\\mydir\\%.o: $S\%.c        .... NG
+#   $O\mydir\\%.o:  $S\%.c        .... OK
+# For example 2 :
+#   $O\\mydir\%.o:  $S\mydir\%.c  .... NG
+#   $O\mydir\\%.o:  $S\mydir\%.c  .... OK
+# In the case of example 2, we can write more simply :
+#   $O\\%.o: $S\%.c               .... OK
+#   (Because '%' is wildcard and it indicates partial path 'mydir\filename_base' recursively )
+#
+$O/%.o: $S/%.c
+	@printf "$(TRY) $(Clr_Green)CC DEFI INCL WARN FLAG$(Clr_End) -o $@ -c $&lt;\n"
+	@$(CC) $(C_DEFI) $(C_INCL) $(C_WARN) $(C_FLAG)               -o $@ -c $&lt; \
+		|| if true ; then \
+			printf "$(Error) This command line detail:\n"; $(CC_PRINTF); exit 1; \
+		fi
+
+
+# Rc rule.
+
+# Submkf rule.
+
+# Dummy rule.
+__mkg_sentinel_target__:
+
+# Install data rule.
+.PHONY: install_data
+install_data:
+
+# Install exec rule.
+.PHONY: install_exec
+install_exec:
+
+# Install runtime rule.
+
+# Install dlib rule.
+.PHONY: install_dlib
+install_dlib: $(DLIB_FILE0)
+	mkdir -p $(ZNK_INSTALL_DIR)/$(DLIBS_DIR) 
+	for tgt in $(DLIB_FILE0) ; do if test -e "$$tgt" ; then $(CP) "$$tgt" $(ZNK_INSTALL_DIR)/$(DLIBS_DIR)/ ; fi ; done
+
+# Install slib rule.
+.PHONY: install_slib
+install_slib: $(SLIB_FILE0)
+	mkdir -p $(ZNK_INSTALL_DIR)/$(SLIBS_DIR) 
+	for tgt in $(SLIB_FILE0) ; do if test -e "$$tgt" ; then $(CP) "$$tgt" $(ZNK_INSTALL_DIR)/$(SLIBS_DIR)/ ; fi ; done
+
+# Install rule.
+.PHONY: install
+install: all install_slib install_dlib install_data
+
+
+# Clean rule.
+.PHONY: clean
+clean:
+	rm -rf $O/ 
+
+.PHONY: clean_slib
+clean_slib:
+	find $O -name "*.a" -type f -delete
+
+# Src and Headers Dependency
+$O/tls.o: $S/tls_internal.h
+$O/tls_bio_cb.o: $S/tls_internal.h
+$O/tls_client.o: $S/tls_internal.h
+$O/tls_config.o: $S/tls_internal.h
+$O/tls_conninfo.o: $S/tls_internal.h
+$O/tls_keypair.o: $S/tls_internal.h
+$O/tls_ocsp.o: $S/tls_internal.h
+$O/tls_peer.o: $S/tls_internal.h
+$O/tls_server.o: $S/tls_internal.h
+$O/tls_util.o: $S/tls_internal.h
+$O/tls_verify.o: $S/tls_internal.h
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_ProjectModel_0_group_id_ary, 'ProjectModel_0_btn' );location.href = '#AName_ProjectModel_0';">Close</a></div>
+</span>
+<br><br>
+	mkfgen.myfと比べるとやはり長く複雑な内容となりますが、
+	逆に言えばもはやこれ以上隠蔽されている部分はありません。
+	この程度ではあればまだ人間が目で追えるレベルではないでしょうか？
+	いくつか事前に用意している環境変数群等（これらはパスをある程度自動認識させるためのものです）については若干複雑ですが、
+	それ以外についてはbuild/install/cleanの最低限の機能だけを提供することで、シンプル化を図っています。
+	GNU makefileの文法、gccのコンパイルオプション、リンカオプションなどを素直に追っていけば
+	やがて問題を解決する糸口は見えるでしょう。
+<br><br>
+	GNU Automake や CMake などと比べるとやはり生成されたMakefile自体はシンプルであることがわかります。
+	例えばGNU Automakeが生成するMakefileでは、変数の数がmkfgenが生成するよりもはるかに多いです。
+	…と言われても、普通、GNU Automakeが生成するMakefileの中身など見るようなことも（私のようなタイプの人間を除けば）ないと思いますので、
+	参考のため、GNU Automake の場合、最終的にどのようなMakefileが作成されるか、
+	先ほどと同じくlibressl（cygwin）でconfigureを実行した結果生成されるMakefileを例として以下に
+	全体を載せておきましょう。
+<br><br>
+	<a name=AName_ProjectModel_1></a><script type="text/javascript">var st_ProjectModel_1_group_id_ary = [ "ProjectModel_1" ];</script>
+<a class=MstyDetailLink id=ProjectModel_1_btn onClick="if( MstyUI_selectTab( st_ProjectModel_1_group_id_ary, this.id ) ){location.href = '#AName_ProjectModel_1';}">GNU Automakeが生成するMakefile (632 lines)</a>
+<span id=ProjectModel_1 class=MstyUnvisible><div class=box>
+
+
+<pre class=hljs><code class="language-makefile">
+# Makefile.in generated by automake 1.15.1 from Makefile.am.
+# apps/Makefile.  Generated from Makefile.in by configure.
+
+# Copyright (C) 1994-2017 Free Software Foundation, Inc.
+
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+
+
+am__is_gnu_make = { \
+  if test -z '$(MAKELEVEL)'; then \
+    false; \
+  elif test -n '$(MAKE_HOST)'; then \
+    true; \
+  elif test -n '$(MAKE_VERSION)' &amp;&amp; test -n '$(CURDIR)'; then \
+    true; \
+  else \
+    false; \
+  fi; \
+}
+am__make_running_with_option = \
+  case $${target_option-} in \
+      ?) ;; \
+      *) echo "am__make_running_with_option: internal error: invalid" \
+              "target option '$${target_option-}' specified" &gt;&amp;2; \
+         exit 1;; \
+  esac; \
+  has_opt=no; \
+  sane_makeflags=$$MAKEFLAGS; \
+  if $(am__is_gnu_make); then \
+    sane_makeflags=$$MFLAGS; \
+  else \
+    case $$MAKEFLAGS in \
+      *\\[\ \	]*) \
+        bs=\\; \
+        sane_makeflags=`printf '%s\n' "$$MAKEFLAGS" \
+          | sed "s/$$bs$$bs[$$bs $$bs	]*//g"`;; \
+    esac; \
+  fi; \
+  skip_next=no; \
+  strip_trailopt () \
+  { \
+    flg=`printf '%s\n' "$$flg" | sed "s/$$1.*$$//"`; \
+  }; \
+  for flg in $$sane_makeflags; do \
+    test $$skip_next = yes &amp;&amp; { skip_next=no; continue; }; \
+    case $$flg in \
+      *=*|--*) continue;; \
+        -*I) strip_trailopt 'I'; skip_next=yes;; \
+      -*I?*) strip_trailopt 'I';; \
+        -*O) strip_trailopt 'O'; skip_next=yes;; \
+      -*O?*) strip_trailopt 'O';; \
+        -*l) strip_trailopt 'l'; skip_next=yes;; \
+      -*l?*) strip_trailopt 'l';; \
+      -[dEDm]) skip_next=yes;; \
+      -[JT]) skip_next=yes;; \
+    esac; \
+    case $$flg in \
+      *$$target_option*) has_opt=yes; break;; \
+    esac; \
+  done; \
+  test $$has_opt = yes
+am__make_dryrun = (target_option=n; $(am__make_running_with_option))
+am__make_keepgoing = (target_option=k; $(am__make_running_with_option))
+pkgdatadir = $(datadir)/libressl
+pkgincludedir = $(includedir)/libressl
+pkglibdir = $(libdir)/libressl
+pkglibexecdir = $(libexecdir)/libressl
+am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" &amp;&amp; cd
+install_sh_DATA = $(install_sh) -c -m 644
+install_sh_PROGRAM = $(install_sh) -c
+install_sh_SCRIPT = $(install_sh) -c
+INSTALL_HEADER = $(INSTALL_DATA)
+transform = $(program_transform_name)
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+build_triplet = i686-pc-cygwin
+host_triplet = i686-pc-cygwin
+subdir = apps
+ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
+am__aclocal_m4_deps = $(top_srcdir)/m4/check-hardening-options.m4 \
+	$(top_srcdir)/m4/check-libc.m4 \
+	$(top_srcdir)/m4/check-os-options.m4 \
+	$(top_srcdir)/m4/disable-compiler-warnings.m4 \
+	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
+	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
+	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/configure.ac
+am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
+	$(ACLOCAL_M4)
+DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
+mkinstalldirs = $(install_sh) -d
+CONFIG_CLEAN_FILES =
+CONFIG_CLEAN_VPATH_FILES =
+AM_V_P = $(am__v_P_$(V))
+am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
+am__v_P_0 = false
+am__v_P_1 = :
+AM_V_GEN = $(am__v_GEN_$(V))
+am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
+am__v_GEN_0 = @echo "  GEN     " $@;
+am__v_GEN_1 = 
+AM_V_at = $(am__v_at_$(V))
+am__v_at_ = $(am__v_at_$(AM_DEFAULT_VERBOSITY))
+am__v_at_0 = @
+am__v_at_1 = 
+SOURCES =
+DIST_SOURCES =
+RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
+	ctags-recursive dvi-recursive html-recursive info-recursive \
+	install-data-recursive install-dvi-recursive \
+	install-exec-recursive install-html-recursive \
+	install-info-recursive install-pdf-recursive \
+	install-ps-recursive install-recursive installcheck-recursive \
+	installdirs-recursive pdf-recursive ps-recursive \
+	tags-recursive uninstall-recursive
+am__can_run_installinfo = \
+  case $$AM_UPDATE_INFO_DIR in \
+    n|no|NO) false;; \
+    *) (install-info --version) &gt;/dev/null 2&gt;&amp;1;; \
+  esac
+RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
+  distclean-recursive maintainer-clean-recursive
+am__recursive_targets = \
+  $(RECURSIVE_TARGETS) \
+  $(RECURSIVE_CLEAN_TARGETS) \
+  $(am__extra_recursive_targets)
+AM_RECURSIVE_TARGETS = $(am__recursive_targets:-recursive=) TAGS CTAGS \
+	distdir
+am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
+# Read a list of newline-separated strings from the standard input,
+# and print each of them once, without duplicates.  Input order is
+# *not* preserved.
+am__uniquify_input = $(AWK) '\
+  BEGIN { nonempty = 0; } \
+  { items[$$0] = 1; nonempty = 1; } \
+  END { if (nonempty) { for (i in items) print i; }; } \
+'
+# Make sure the list of sources is unique.  This is necessary because,
+# e.g., the same source file might be shared among _SOURCES variables
+# for different programs/libraries.
+am__define_uniq_tagged_files = \
+  list='$(am__tagged_files)'; \
+  unique=`for i in $$list; do \
+    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+  done | $(am__uniquify_input)`
+ETAGS = etags
+CTAGS = ctags
+DIST_SUBDIRS = $(SUBDIRS)
+am__DIST_COMMON = $(srcdir)/Makefile.in \
+	$(top_srcdir)/Makefile.am.common
+DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+am__relativize = \
+  dir0=`pwd`; \
+  sed_first='s,^\([^/]*\)/.*$$,\1,'; \
+  sed_rest='s,^[^/]*/*,,'; \
+  sed_last='s,^.*/\([^/]*\)$$,\1,'; \
+  sed_butlast='s,/*[^/]*$$,,'; \
+  while test -n "$$dir1"; do \
+    first=`echo "$$dir1" | sed -e "$$sed_first"`; \
+    if test "$$first" != "."; then \
+      if test "$$first" = ".."; then \
+        dir2=`echo "$$dir0" | sed -e "$$sed_last"`/"$$dir2"; \
+        dir0=`echo "$$dir0" | sed -e "$$sed_butlast"`; \
+      else \
+        first2=`echo "$$dir2" | sed -e "$$sed_first"`; \
+        if test "$$first2" = "$$first"; then \
+          dir2=`echo "$$dir2" | sed -e "$$sed_rest"`; \
+        else \
+          dir2="../$$dir2"; \
+        fi; \
+        dir0="$$dir0"/"$$first"; \
+      fi; \
+    fi; \
+    dir1=`echo "$$dir1" | sed -e "$$sed_rest"`; \
+  done; \
+  reldir="$$dir2"
+ACLOCAL = ${SHELL} /cygdrive/e/share_e/trunk_id1/zenkaku/znk_project/src/libressl/missing aclocal-1.15
+AMTAR = $${TAR-tar}
+AM_DEFAULT_VERBOSITY = 0
+AR = ar
+AUTOCONF = ${SHELL} /cygdrive/e/share_e/trunk_id1/zenkaku/znk_project/src/libressl/missing autoconf
+AUTOHEADER = ${SHELL} /cygdrive/e/share_e/trunk_id1/zenkaku/znk_project/src/libressl/missing autoheader
+AUTOMAKE = ${SHELL} /cygdrive/e/share_e/trunk_id1/zenkaku/znk_project/src/libressl/missing automake-1.15
+AWK = gawk
+CC = gcc
+CCAS = gcc
+CCASDEPMODE = depmode=gcc3
+CCASFLAGS = -g -O2 -Wall -std=gnu99 -fno-strict-aliasing  -fno-strict-overflow -D_FORTIFY_SOURCE=2 -fstack-protector-strong 
+CCDEPMODE = depmode=gcc3
+CFLAGS = -g -O2 -Wall -std=gnu99 -fno-strict-aliasing  -fno-strict-overflow -D_FORTIFY_SOURCE=2 -fstack-protector-strong   -Wno-pointer-sign
+CPP = gcc -E
+CPPFLAGS =  -D_GNU_SOURCE
+CYGPATH_W = cygpath -w
+DEFS = -DPACKAGE_NAME=\"libressl\" -DPACKAGE_TARNAME=\"libressl\" -DPACKAGE_VERSION=\"2.7.3\" -DPACKAGE_STRING=\"libressl\ 2.7.3\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"libressl\" -DVERSION=\"2.7.3\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_DLFCN_H=1 -DLT_OBJDIR=\".libs/\" -DHAVE_SYMLINK=1 -DHAVE_ERR_H=1 -DHAVE_ASPRINTF=1 -DHAVE_MEMMEM=1 -DHAVE_REALLOCARRAY=1 -DHAVE_STRLCAT=1 -DHAVE_STRLCPY=1 -DHAVE_STRNDUP=1 -DHAVE_STRNLEN=1 -DHAVE_STRSEP=1 -DHAVE_TIMEGM=1 -DHAVE_ACCEPT4=1 -DHAVE_PIPE2=1 -DHAVE_POLL=1 -DHAVE_SOCKETPAIR=1 -DHAVE_ARC4RANDOM=1 -DHAVE_ARC4RANDOM_BUF=1 -DHAVE_ARC4RANDOM_UNIFORM=1 -DHAVE_TIMINGSAFE_BCMP=1 -DHAVE_TIMINGSAFE_MEMCMP=1 -DHAVE_CLOCK_GETTIME=1 -DHAVE_VA_COPY=1 -DHAVE___VA_COPY=1 -DHAS_GNU_WARNING_LONG=1 -DSIZEOF_TIME_T=4 -DSMALL_TIME_T=1
+DEPDIR = .deps
+DLLTOOL = dlltool
+DSYMUTIL = 
+DUMPBIN = 
+ECHO_C = 
+ECHO_N = -n
+ECHO_T = 
+EGREP = /usr/bin/grep -E
+EXEEXT = .exe
+FGREP = /usr/bin/grep -F
+GREP = /usr/bin/grep
+INSTALL = /usr/bin/install -c
+INSTALL_DATA = ${INSTALL} -m 644
+INSTALL_PROGRAM = ${INSTALL}
+INSTALL_SCRIPT = ${INSTALL}
+INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
+LD = /usr/i686-pc-cygwin/bin/ld.exe
+LDFLAGS =   
+LIBCRYPTO_VERSION = 43:1:0
+LIBOBJS = 
+LIBS = 
+LIBSSL_VERSION = 45:1:0
+LIBTLS_VERSION = 17:1:0
+LIBTOOL = $(SHELL) $(top_builddir)/libtool
+LIPO = 
+LN_S = ln -s
+LTLIBOBJS = 
+MAKEINFO = ${SHELL} /cygdrive/e/share_e/trunk_id1/zenkaku/znk_project/src/libressl/missing makeinfo
+MANIFEST_TOOL = :
+MKDIR_P = /usr/bin/mkdir -p
+NM = /usr/bin/nm -B
+NMEDIT = 
+OBJDUMP = objdump
+OBJEXT = o
+OPENSSLDIR = 
+OTOOL = 
+OTOOL64 = 
+PACKAGE = libressl
+PACKAGE_BUGREPORT = 
+PACKAGE_NAME = libressl
+PACKAGE_STRING = libressl 2.7.3
+PACKAGE_TARNAME = libressl
+PACKAGE_URL = 
+PACKAGE_VERSION = 2.7.3
+PATH_SEPARATOR = :
+PLATFORM_LDADD = 
+PROG_LDADD = 
+RANLIB = ranlib
+SED = /usr/bin/sed
+SET_MAKE = 
+SHELL = /bin/sh
+STRIP = strip
+VERSION = 2.7.3
+abs_builddir = /cygdrive/e/share_e/trunk_id1/zenkaku/znk_project/src/libressl/apps
+abs_srcdir = /cygdrive/e/share_e/trunk_id1/zenkaku/znk_project/src/libressl/apps
+abs_top_builddir = /cygdrive/e/share_e/trunk_id1/zenkaku/znk_project/src/libressl
+abs_top_srcdir = /cygdrive/e/share_e/trunk_id1/zenkaku/znk_project/src/libressl
+ac_ct_AR = ar
+ac_ct_CC = gcc
+ac_ct_DUMPBIN = 
+am__include = include
+am__leading_dot = .
+am__quote = 
+am__tar = $${TAR-tar} chof - "$$tardir"
+am__untar = $${TAR-tar} xf -
+bindir = ${exec_prefix}/bin
+build = i686-pc-cygwin
+build_alias = 
+build_cpu = i686
+build_os = cygwin
+build_vendor = pc
+builddir = .
+datadir = ${datarootdir}
+datarootdir = ${prefix}/share
+docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
+dvidir = ${docdir}
+exec_prefix = ${prefix}
+host = i686-pc-cygwin
+host_alias = 
+host_cpu = i686
+host_os = cygwin
+host_vendor = pc
+htmldir = ${docdir}
+includedir = ${prefix}/include
+infodir = ${datarootdir}/info
+install_sh = ${SHELL} /cygdrive/e/share_e/trunk_id1/zenkaku/znk_project/src/libressl/install-sh
+libdir = ${exec_prefix}/lib
+libexecdir = ${exec_prefix}/libexec
+localedir = ${datarootdir}/locale
+localstatedir = ${prefix}/var
+mandir = ${datarootdir}/man
+mkdir_p = $(MKDIR_P)
+oldincludedir = /usr/include
+pdfdir = ${docdir}
+prefix = /usr/local
+program_transform_name = s,x,x,
+psdir = ${docdir}
+sbindir = ${exec_prefix}/sbin
+sharedstatedir = ${prefix}/com
+srcdir = .
+sysconfdir = ${prefix}/etc
+target_alias = 
+top_build_prefix = ../
+top_builddir = ..
+top_srcdir = ..
+AM_CFLAGS = 
+AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/include/compat \
+	-DLIBRESSL_INTERNAL -D__BEGIN_HIDDEN_DECLS= \
+	-D__END_HIDDEN_DECLS=
+SUBDIRS = ocspcheck openssl nc
+EXTRA_DIST = CMakeLists.txt
+all: all-recursive
+
+.SUFFIXES:
+$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(top_srcdir)/Makefile.am.common $(am__configure_deps)
+	@for dep in $?; do \
+	  case '$(am__configure_deps)' in \
+	    *$$dep*) \
+	      ( cd $(top_builddir) &amp;&amp; $(MAKE) $(AM_MAKEFLAGS) am--refresh ) \
+	        &amp;&amp; { if test -f $@; then exit 0; else break; fi; }; \
+	      exit 1;; \
+	  esac; \
+	done; \
+	echo ' cd $(top_srcdir) &amp;&amp; $(AUTOMAKE) --foreign apps/Makefile'; \
+	$(am__cd) $(top_srcdir) &amp;&amp; \
+	  $(AUTOMAKE) --foreign apps/Makefile
+Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
+	@case '$?' in \
+	  *config.status*) \
+	    cd $(top_builddir) &amp;&amp; $(MAKE) $(AM_MAKEFLAGS) am--refresh;; \
+	  *) \
+	    echo ' cd $(top_builddir) &amp;&amp; $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)'; \
+	    cd $(top_builddir) &amp;&amp; $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe);; \
+	esac;
+$(top_srcdir)/Makefile.am.common $(am__empty):
+
+$(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
+	cd $(top_builddir) &amp;&amp; $(MAKE) $(AM_MAKEFLAGS) am--refresh
+
+$(top_srcdir)/configure:  $(am__configure_deps)
+	cd $(top_builddir) &amp;&amp; $(MAKE) $(AM_MAKEFLAGS) am--refresh
+$(ACLOCAL_M4):  $(am__aclocal_m4_deps)
+	cd $(top_builddir) &amp;&amp; $(MAKE) $(AM_MAKEFLAGS) am--refresh
+$(am__aclocal_m4_deps):
+
+mostlyclean-libtool:
+	-rm -f *.lo
+
+clean-libtool:
+	-rm -rf .libs _libs
+
+# This directory's subdirectories are mostly independent; you can cd
+# into them and run 'make' without going through this Makefile.
+# To change the values of 'make' variables: instead of editing Makefiles,
+# (1) if the variable is set in 'config.status', edit 'config.status'
+#     (which will cause the Makefiles to be regenerated when you run 'make');
+# (2) otherwise, pass the desired values on the 'make' command line.
+$(am__recursive_targets):
+	@fail=; \
+	if $(am__make_keepgoing); then \
+	  failcom='fail=yes'; \
+	else \
+	  failcom='exit 1'; \
+	fi; \
+	dot_seen=no; \
+	target=`echo $@ | sed s/-recursive//`; \
+	case "$@" in \
+	  distclean-* | maintainer-clean-*) list='$(DIST_SUBDIRS)' ;; \
+	  *) list='$(SUBDIRS)' ;; \
+	esac; \
+	for subdir in $$list; do \
+	  echo "Making $$target in $$subdir"; \
+	  if test "$$subdir" = "."; then \
+	    dot_seen=yes; \
+	    local_target="$$target-am"; \
+	  else \
+	    local_target="$$target"; \
+	  fi; \
+	  ($(am__cd) $$subdir &amp;&amp; $(MAKE) $(AM_MAKEFLAGS) $$local_target) \
+	  || eval $$failcom; \
+	done; \
+	if test "$$dot_seen" = "no"; then \
+	  $(MAKE) $(AM_MAKEFLAGS) "$$target-am" || exit 1; \
+	fi; test -z "$$fail"
+
+ID: $(am__tagged_files)
+	$(am__define_uniq_tagged_files); mkid -fID $$unique
+tags: tags-recursive
+TAGS: tags
+
+tags-am: $(TAGS_DEPENDENCIES) $(am__tagged_files)
+	set x; \
+	here=`pwd`; \
+	if ($(ETAGS) --etags-include --version) &gt;/dev/null 2&gt;&amp;1; then \
+	  include_option=--etags-include; \
+	  empty_fix=.; \
+	else \
+	  include_option=--include; \
+	  empty_fix=; \
+	fi; \
+	list='$(SUBDIRS)'; for subdir in $$list; do \
+	  if test "$$subdir" = .; then :; else \
+	    test ! -f $$subdir/TAGS || \
+	      set "$$@" "$$include_option=$$here/$$subdir/TAGS"; \
+	  fi; \
+	done; \
+	$(am__define_uniq_tagged_files); \
+	shift; \
+	if test -z "$(ETAGS_ARGS)$$*$$unique"; then :; else \
+	  test -n "$$unique" || unique=$$empty_fix; \
+	  if test $$# -gt 0; then \
+	    $(ETAGS) $(ETAGSFLAGS) $(AM_ETAGSFLAGS) $(ETAGS_ARGS) \
+	      "$$@" $$unique; \
+	  else \
+	    $(ETAGS) $(ETAGSFLAGS) $(AM_ETAGSFLAGS) $(ETAGS_ARGS) \
+	      $$unique; \
+	  fi; \
+	fi
+ctags: ctags-recursive
+
+CTAGS: ctags
+ctags-am: $(TAGS_DEPENDENCIES) $(am__tagged_files)
+	$(am__define_uniq_tagged_files); \
+	test -z "$(CTAGS_ARGS)$$unique" \
+	  || $(CTAGS) $(CTAGSFLAGS) $(AM_CTAGSFLAGS) $(CTAGS_ARGS) \
+	     $$unique
+
+GTAGS:
+	here=`$(am__cd) $(top_builddir) &amp;&amp; pwd` \
+	  &amp;&amp; $(am__cd) $(top_srcdir) \
+	  &amp;&amp; gtags -i $(GTAGS_ARGS) "$$here"
+cscopelist: cscopelist-recursive
+
+cscopelist-am: $(am__tagged_files)
+	list='$(am__tagged_files)'; \
+	case "$(srcdir)" in \
+	  [\\/]* | ?:[\\/]*) sdir="$(srcdir)" ;; \
+	  *) sdir=$(subdir)/$(srcdir) ;; \
+	esac; \
+	for i in $$list; do \
+	  if test -f "$$i"; then \
+	    echo "$(subdir)/$$i"; \
+	  else \
+	    echo "$$sdir/$$i"; \
+	  fi; \
+	done &gt;&gt; $(top_builddir)/cscope.files
+
+distclean-tags:
+	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
+
+distdir: $(DISTFILES)
+	@srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*]/\\\\&amp;/g'`; \
+	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's/[].[^$$\\*]/\\\\&amp;/g'`; \
+	list='$(DISTFILES)'; \
+	  dist_files=`for file in $$list; do echo $$file; done | \
+	  sed -e "s|^$$srcdirstrip/||;t" \
+	      -e "s|^$$topsrcdirstrip/|$(top_builddir)/|;t"`; \
+	case $$dist_files in \
+	  */*) $(MKDIR_P) `echo "$$dist_files" | \
+			   sed '/\//!d;s|^|$(distdir)/|;s,/[^/]*$$,,' | \
+			   sort -u` ;; \
+	esac; \
+	for file in $$dist_files; do \
+	  if test -f $$file || test -d $$file; then d=.; else d=$(srcdir); fi; \
+	  if test -d $$d/$$file; then \
+	    dir=`echo "/$$file" | sed -e 's,/[^/]*$$,,'`; \
+	    if test -d "$(distdir)/$$file"; then \
+	      find "$(distdir)/$$file" -type d ! -perm -700 -exec chmod u+rwx {} \;; \
+	    fi; \
+	    if test -d $(srcdir)/$$file &amp;&amp; test $$d != $(srcdir); then \
+	      cp -fpR $(srcdir)/$$file "$(distdir)$$dir" || exit 1; \
+	      find "$(distdir)/$$file" -type d ! -perm -700 -exec chmod u+rwx {} \;; \
+	    fi; \
+	    cp -fpR $$d/$$file "$(distdir)$$dir" || exit 1; \
+	  else \
+	    test -f "$(distdir)/$$file" \
+	    || cp -p $$d/$$file "$(distdir)/$$file" \
+	    || exit 1; \
+	  fi; \
+	done
+	@list='$(DIST_SUBDIRS)'; for subdir in $$list; do \
+	  if test "$$subdir" = .; then :; else \
+	    $(am__make_dryrun) \
+	      || test -d "$(distdir)/$$subdir" \
+	      || $(MKDIR_P) "$(distdir)/$$subdir" \
+	      || exit 1; \
+	    dir1=$$subdir; dir2="$(distdir)/$$subdir"; \
+	    $(am__relativize); \
+	    new_distdir=$$reldir; \
+	    dir1=$$subdir; dir2="$(top_distdir)"; \
+	    $(am__relativize); \
+	    new_top_distdir=$$reldir; \
+	    echo " (cd $$subdir &amp;&amp; $(MAKE) $(AM_MAKEFLAGS) top_distdir="$$new_top_distdir" distdir="$$new_distdir" \\"; \
+	    echo "     am__remove_distdir=: am__skip_length_check=: am__skip_mode_fix=: distdir)"; \
+	    ($(am__cd) $$subdir &amp;&amp; \
+	      $(MAKE) $(AM_MAKEFLAGS) \
+	        top_distdir="$$new_top_distdir" \
+	        distdir="$$new_distdir" \
+		am__remove_distdir=: \
+		am__skip_length_check=: \
+		am__skip_mode_fix=: \
+	        distdir) \
+	      || exit 1; \
+	  fi; \
+	done
+check-am: all-am
+check: check-recursive
+all-am: Makefile
+installdirs: installdirs-recursive
+installdirs-am:
+install: install-recursive
+install-exec: install-exec-recursive
+install-data: install-data-recursive
+uninstall: uninstall-recursive
+
+install-am: all-am
+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+
+installcheck: installcheck-recursive
+install-strip:
+	if test -z '$(STRIP)'; then \
+	  $(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
+	    install_sh_PROGRAM="$(INSTALL_STRIP_PROGRAM)" INSTALL_STRIP_FLAG=-s \
+	      install; \
+	else \
+	  $(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
+	    install_sh_PROGRAM="$(INSTALL_STRIP_PROGRAM)" INSTALL_STRIP_FLAG=-s \
+	    "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'" install; \
+	fi
+mostlyclean-generic:
+
+clean-generic:
+
+distclean-generic:
+	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
+	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+
+maintainer-clean-generic:
+	@echo "This command is intended for maintainers to use"
+	@echo "it deletes files that may require special tools to rebuild."
+clean: clean-recursive
+
+clean-am: clean-generic clean-libtool mostlyclean-am
+
+distclean: distclean-recursive
+	-rm -f Makefile
+distclean-am: clean-am distclean-generic distclean-tags
+
+dvi: dvi-recursive
+
+dvi-am:
+
+html: html-recursive
+
+html-am:
+
+info: info-recursive
+
+info-am:
+
+install-data-am:
+
+install-dvi: install-dvi-recursive
+
+install-dvi-am:
+
+install-exec-am:
+
+install-html: install-html-recursive
+
+install-html-am:
+
+install-info: install-info-recursive
+
+install-info-am:
+
+install-man:
+
+install-pdf: install-pdf-recursive
+
+install-pdf-am:
+
+install-ps: install-ps-recursive
+
+install-ps-am:
+
+installcheck-am:
+
+maintainer-clean: maintainer-clean-recursive
+	-rm -f Makefile
+maintainer-clean-am: distclean-am maintainer-clean-generic
+
+mostlyclean: mostlyclean-recursive
+
+mostlyclean-am: mostlyclean-generic mostlyclean-libtool
+
+pdf: pdf-recursive
+
+pdf-am:
+
+ps: ps-recursive
+
+ps-am:
+
+uninstall-am:
+
+.MAKE: $(am__recursive_targets) install-am install-strip
+
+.PHONY: $(am__recursive_targets) CTAGS GTAGS TAGS all all-am check \
+	check-am clean clean-generic clean-libtool cscopelist-am ctags \
+	ctags-am distclean distclean-generic distclean-libtool \
+	distclean-tags distdir dvi dvi-am html html-am info info-am \
+	install install-am install-data install-data-am install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-info install-info-am install-man \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-strip installcheck installcheck-am installdirs \
+	installdirs-am maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-generic mostlyclean-libtool pdf pdf-am \
+	ps ps-am tags tags-am uninstall uninstall-am
+
+.PRECIOUS: Makefile
+
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:
+</code></pre><!-- depress auto br -->
+<a class=MstyDetailLink onClick="MstyUI_selectTab( st_ProjectModel_1_group_id_ary, 'ProjectModel_1_btn' );location.href = '#AName_ProjectModel_1';">Close</a></div>
+</span>
+<br><br>
+	非常に長いですが、これでも比較的短いものをチョイスしたつもりです。
+	さすがによほどの変態でない限り、これを直接修正する気にはなれないでしょう。
+	要はほとんどの場合使用しないような余計な機能まで詰め込みすぎなのです。
+	また、sedコマンドもピンポイントに使うならばともかく、ここまで使いまくられるとさすがに暗号に見えます。
+	さらによく見れば何か絶対パス（configure実行時点で認識された絶対パスということでしょう）などが埋め込まれています。
+	相対パスならばともかく絶対パスにしてしまうと、これを他のPCへコピーした場合、おそらくこのMakefileのその部分は正常に動作しないでしょう
+	（他のPCにコピーしただけのことで configure を掛けなおす必要があるわけです）。
+<br><br>
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section ProjectModel end -->
 
 
 <a name=config></a>
 <h1 class="title">configセクション<span class=MstyAuthor> (Section Type: @@V 変数リスト)</span></h1>
-	<article class="message is-dark"><br>
-<div class="message-header">
-mkfgenの全般的な設定</div><div class="message-body">
-	このセクションでは基本的なパスの指定など、この mkfgen.myf全体に関わる設定を行います.<br>
-	ディレクトリ区切り文字(以降これをDSPと呼びます)は、Windowsにおいても / を使用して構いません.<br>
+
+	<h3>mkfgenの全般的な設定</h3>
+<br>
+	このセクションでは基本的なパスの指定など、この mkfgen.myf全体に関わる設定を行います。
+	ディレクトリ区切り文字(以降これをDSPと呼びます)は、Windowsにおいても / を使用して構いません。
 	<ul>
-		<li><b>my_libs_root</b>(String型)<br>
-		すべてのライブラリのルートとなるディレクトリを指定します.<br>
-		(znk_projectではsrcディレクトリがこれに該当します)<br>
-		</li>
-		<br>
-		<li><b>template_dir</b>(String型)<br>
-		templateファイルが格納されているディレクトリを指定します.<br>
-		</li>
-		<br>
-		<li><b>lib_dlver</b>(String型)<br>
-		DLib(Dynamic Link Library)のファイル名に付するバージョン番号文字列を指定します.<br>
-		</li>
-		<br>
-		<li><b>install_dir</b>(String型)<br>
-		デフォルトのinstall先ディレクトリを指定します.<br>
-		</li>
-		<br>
-		<li><b>install_data_dir</b>(String型)<br>
-		データファイルのinstall先ディレクトリを指定します.<br>
-		この指定を省略した場合、替わりにinstall_dirの値が使われます.<br>
-		</li>
-		<br>
-		<li><b>install_exec_dir</b>(String型)<br>
-		Exec(実行バイナリ)のinstall先ディレクトリを指定します.<br>
-		この指定を省略した場合、替わりにinstall_dirの値が使われます.<br>
-		</li>
-		<br>
-		<li><b>install_dlib_dir</b>(String型)<br>
-		DLib(Dynamic Link Library)のinstall先ディレクトリを指定します.<br>
-		この指定を省略した場合、替わりにinstall_dirの値が使われます.<br>
-		</li>
-		<br>
-		<li><b>install_slib_dir</b>(String型)<br>
-		SLib(Static Link Library)のinstall先ディレクトリを指定します.<br>
-		この指定を省略した場合、替わりにinstall_dirの値が使われます.<br>
-		</li>
-		<br>
-		<li><b>special_exe_sfx</b>(String型)<br>
+		<li><b>my_libs_root</b>(String型)</li>
+<br>
+		Ver2.3よりこの項目は廃止されました。
+<br><br>
+		従来、この項目は実質的に以下に述べるat_sugar_dirと同じ意図で使用されてきましたが、
+		my_libs_rootでは名前があまりに漠然としすぎている（よってその機能を連想しにくい）と考えられるため廃止としました。
+<br><br>
+		<li><b>at_sugar_dir</b>(String型)</li>
+<br>
+		Ver2.3以降で指定可能です。
+<br><br>
+		mkfgenではインクルードパスやライブラリパスの指定において「@記法」というものを使用することができます。
+		これについてはそれらのセクションで詳しく述べますが、at_sugar_dirではこの記法の基点となるディレクトリを明示的に指定することができます。
+		ただし通常、これを明示的に指定しなくても現在のプロジェクトのsrcディレクトリが検出された場合は、自動的にそのパスがこの値になります。
+<br><br>
+		尚、#[src_dir]#という記述を埋め込むこともできます。
+		この記述は、mkfgen.myf のあるディレクトリから上へ辿り、最も近いsrcディレクトリのパスが存在する場合、
+		そのパスとして展開されます（srcが存在しない場合は、単に src という文字列になります）。
+<br><br>
+		<div class=box>
+			<u><b>例</b></u>
+				
+	
+<pre class=hljs><code class="language-myf">at_sugar_dir = ['$(ZNK_UNIVERSAL_DEV_DIR/another_project/src']
+</code></pre>
+	
+			<br>
+			上記では「@記法」の基点ディレクトリを「$(ZNK_UNIVERSAL_DEV_DIR)/another_project/src」へ変更しています。
+		</div>
+<br>
+		<li><b>template_dir</b>(String型)</li>
+<br>
+		templateファイルが格納されているディレクトリを指定します。
+		ただし現在のバージョンでは通常これを明示的に指定する必要はなく、
+		指定を省略した場合はmkfsysディレクトリ直下にあるtemplateディレクトリがデフォルトで参照されます。
+<br><br>
+		明示的に指定する場合、#[mkfsys_dir]#という記述を埋め込むことができ、
+		この記述は現在 mkfgen.myf のあるディレクトリから上へ辿り、最も近いmkfsysディレクトリへのパスとして展開されます
+		(mkfsysが存在しない場合は、単に mkfsys という文字列になります)。
+<br><br>
+		<div class=box>
+			<u><b>例</b></u>
+				
+	
+<pre class=hljs><code class="language-myf">template_dir = ['#[mkfsys_dir]#/template']
+</code></pre>
+	
+			<br>
+			例えば znk_project/src/libXXX/mkfgen.myf というファイルがあるとして、
+			このファイル内で上記のように記述した場合、これを上に辿りながらmkfsysディレクトリを探しますと、
+			#[mkfsys_dir]# は ../../../mkfsys と展開されることになります。
+			尚、この指定は結局デフォルトで参照されるディレクトリと同じです。
+		</div>
+<br>
+		<li><b>lib_dlver</b>(String型)</li>
+<br>
+		DLib(Dynamic Link Library)のファイル名に付するバージョン番号文字列を指定します。
+<br><br>
+		<li><b>install_dir</b>(String型)</li>
+<br>
+		デフォルトのinstall先ディレクトリを指定します。
+<br><br>
+		<li><b>install_data_dir</b>(String型)</li>
+<br>
+		データファイルのinstall先ディレクトリを指定します。
+		この指定を省略した場合、替わりにinstall_dirの値をベースに自動的にinstall先ディレクトリが決定されます。
+<br><br>
+		<li><b>install_exec_dir</b>(String型)</li>
+<br>
+		Exec(実行バイナリ)のinstall先ディレクトリを指定します。
+		この指定を省略した場合、替わりにinstall_dirの値をベースに自動的にinstall先ディレクトリが決定されます。
+<br><br>
+		<li><b>install_runtime_dir</b>(String型)</li>
+<br>
+		Ver2.3以降で指定可能です。
+<br><br>
+		Runtime File(実行時に動的に参照するライブラリやその他のファイル群)のinstall先ディレクトリを指定します。
+		この指定を省略した場合、替わりにinstall_exec_dirの値が使われます(install_exec_dirが指定されていない場合はinstall_dirとなります)。
+<br><br>
+		<li><b>install_dlib_dir</b>(String型)</li>
+<br>
+		DLib(Dynamic Link Library)のinstall先ディレクトリを指定します。
+		この指定を省略した場合、替わりにinstall_dirの値をベースに自動的にinstall先ディレクトリが決定されます。
+<br><br>
+		<li><b>install_ilib_dir</b>(String型)</li>
+<br>
+		インポートライブラリのinstall先ディレクトリを指定します。
+		この指定を省略した場合、替わりにinstall_dirの値をベースに自動的にinstall先ディレクトリが決定されます。
+<br><br>
+		<li><b>install_slib_dir</b>(String型)</li>
+<br>
+		SLib(Static Link Library)のinstall先ディレクトリを指定します。
+		この指定を省略した場合、替わりにinstall_dirの値をベースに自動的にinstall先ディレクトリが決定されます。
+<br><br>
+		<li><b>special_exe_sfx</b>(String型)</li>
+<br>
 		生成物(product)が実行バイナリの場合で、かつその拡張子を特別に変更したい場合
-		その拡張子を指定します.<br>
-		例えば拡張子をcgiにしたい場合などの用途が考えられます.<br>
-		</li>
-		<br>
-		<li><b>special_lib_pfx</b>(String型)<br>
-		生成物(product)がライブラリの場合で、かつそのlibプレフィックスを特別に変更したい場合
-		そのプレフィックスを指定します.<br>
-		例えばlibプレフィックスを付けないようにしたい場合は、これに明示的に空値を指定します.<br>
-		あるいはlibプレフィックスを必ず付けるようにしたい場合は、これに明示的にlibを指定します.<br>
-		</li>
-		<br>
-		<li><b>resfile_additional</b>(String型)<br>
-		resource file(拡張子res)としてこれを特別に追加します.<br>
-		</li>
-		<br>
-		<li><b>runtime_install</b>(bool型)<br>
-		これをtrueに設定すると、このproductが依存するランタイムライブラリもいっしょにインストールされます.<br>
-		falseに設定すると、このランタイムライブラリがインストールされません.<br>
-		デフォルトではtrueであり、runtime_installを特に指定しない場合もtrueとみなされます.<br>
-		</li>
-		<br>
-		<li><b>include_makefile_version</b>(bool型)<br>
-		これをtrueに設定すると、Makefile_version.makをincludeする処理が行われるようになります.<br>
-		Makefile_version.makでは DL_VER や REL_VER の値が定義されます.<br>
-		DL_VERはDLibに付加するバージョン番号であり、デフォルトではlibZnkのものが参照されます.<br>
-		REL_VERはツールに付加するバージョン番号であり、デフォルトではmoaiのものが参照されます.<br>
-		</li>
+		その拡張子を指定します。
+		例えば拡張子をcgiにしたい場合などの用途が考えられます。
+<br><br>
+		<li><b>special_lib_pfx</b>(String型)</li>
 <br>
-		<li><b>is_android_ndk_build_support</b>(bool型)<br>
-		このbool値は mkid_list 内に android の指定を含む場合のみ意味を持ちます.<br>
-		ここでは mkid_list 内に android が指定されているものとします.<br>
+		生成物(product)がライブラリの場合で、かつそのlibプレフィックスを特別に変更したい場合そのプレフィックスを指定します。
+		例えばlibプレフィックスを付けないようにしたい場合は、これに明示的に空値を指定します。
+		あるいはlibプレフィックスを必ず付けるようにしたい場合は、これに明示的にlibを指定します。
+<br><br>
+		<li><b>resfile_additional</b>(String型)</li>
 <br>
-		mkfgenシステムでの android版バイナリのビルドは、Makefile_android.makを使って
-		( mkidがandroid のもの以外と同様の様式によって) makeコマンドを実行することで行うことができます.<br>
-		しかしながら、Android Developerの公式ドキュメントでは ndk_build スクリプトの実行によってビルドする方法が示されています.<br>
-		mkfgenシステムでも、この ndk_build によるビルドは可能ですが、ただしその場合
-		その実行に必要な特別なMakefile、すなわち Application.mk と Android.mk を生成する必要があります.<br>
+		resource file(拡張子res)としてこれを特別に追加します。
+<br><br>
+		<li><b>runtime_install</b>(bool型)</li>
 <br>
-		このbool値を true に設定すると、mkf_androidフォルダを生成して、その配下にこの Application.mk と Android.mk を生成します.<br>
-		このときカレントディレクトリを mkf_android へ移動し、Android NDK が提供する ndk_build スクリプトを実行しますと.
-		この Application.mk と Android.mk に記述されたルールに従ってビルドが行われるといった形になります.<br>
-		この値を false に設定すると、mkf_androidフォルダは生成されず、Makefile_android.mak のみが生成されます.<br>
-		( Makefile_android.mak は、この値の真偽に関わらず生成されます ).<br>
+		これをtrueに設定すると、このproductが依存するランタイムライブラリも必要に応じていっしょにインストールされます。
+		falseに設定すると、このランタイムライブラリが一切インストールされません。
+		デフォルトではtrueであり、runtime_installを特に指定しない場合もtrueとみなされます。
+<br><br>
+		<a name=AName_config_0></a><script type="text/javascript">var st_config_0_group_id_ary = [ "config_0" ];</script>
+<a class=MstyDetailLink id=config_0_btn onClick="if( MstyUI_selectTab( st_config_0_group_id_ary, this.id ) ){location.href = '#AName_config_0';}">補足</a>
+<span id=config_0 class=MstyUnvisible>
+		<div class=box>
+			厳密には true の場合であっても必ずインストールされるわけではなく、以下の場合に限られます。
+<br><br>
+			1. 実行バイナリを作成するMakefileである場合。
+<br><br>
+			2. install_runtime_dir (Ver2.3以降で指定可能)が明示的に指定されている場合。
+<br><br>
+			dlibには大きく2種類あります. いわゆるライブラリとしてのものとpluginやraraku拡張などモジュールとしてのものです。
+			前者のインストール先は、デフォルトでは src/dlib ディレクトリであるため、ランタイムライブラリのインストールは不要ですが、
+			後者は必要になる場合があります(たとえばlibRanoを使用したモジュールならばそれもいっしょにインストールする必要が生じます). 
+			上記のルールより、デフォルトではdlibを作成するMakefileではランタイムライブラリはインストールされませんから、
+			後者の状況ではinstall_runtime_dirを明示的に指定してランタイムライブラリを確実にインストールするよう促す必要があります。
+<br><br>
+			<a class=MstyDetailLink onClick="MstyUI_selectTab( st_config_0_group_id_ary, 'config_0_btn' );location.href = '#AName_config_0';">Close</a>
+		</div>
+		</span>
+<br><br>
+		<li><b>include_makefile_version</b>(bool型)</li>
 <br>
-		</li>
-		<br>
-		<li><b>makefile_version_landmark</b>(String型)<br>
-		ソースディレクトリ内にMakefile_version.makがまだ存在していない場合、
-		その内容をどうするかに関してこの値がヒントとなります.<br>
-		mkfgenはそのソースディレクトリから親ディレクトリへと順に辿り、この値と同じ名前のディレクトリがあれば
-		その中にMakefile_version.makがあるかを調べます.<br>
-		そしてもしそこにMakefile_version.makが存在するならば、
-		それをincludeするような新しいMakefile_version.makをソースディレクトリ内に生成します.<br>
-		</li>
-		<br>
-		<li><b>gslconv</b>(String型)<br>
-		我々が提唱するディレクトリモデルでは、Makefileの他にも gsl.myf という特別なファイルを導入しています.<br>
-		このファイルは、DLib(Windowsの場合はDLL : Dynamic Link Library)のソースディレクトリの中でのみ生成されます.<br>
-		gsl.myf はそのDLibにおいてExportされるべきグローバルシンボル(要はグローバル関数)のリストを列挙したものです.<br>
-		<br>
-		ソースコードでグローバル関数が追加/削除されると同時に、このgsl.myfも修正しなければなりませんが、
-		我々プログラマがそれを毎回手動でやっていては大変ですので、通常はそれをツールによって自動更新させます.<br>
-		<br>
-		gslconv(Global Simbol List CONVerter)はそのためのツールであり、mkfgenとセットで私が開発したものですが、
-		mkfgenが生成するDLib用のMakefileではこのツールが必須となります<br>
-		(ちなみに gslconv 自体のソースコードはlibZnkに含まれており、libZnkとこのツールは同時にビルドされます).<br>
-		<br>
-		前置きが長くなりましたが、ここではgslconvの実行バイナリのパスを指定します.<br>
-		<a class=MstyElemLink id=config_1_detail_btn onClick="MstyUI_detailBtn('config_1_detail_tgt', 'config_1_detail_btn', 'gslconvについての補足', '閉じる');">gslconvについての補足</a><br><div id=config_1_detail_tgt class=MstyUnvisible><div class=box><u><b>gslconvについての補足</b></u><br><br>
-			gslconvツールは予め生成しておいたSLib(Static Library)を分析して、それに含まれるグローバルシンボルを自動的に抽出し、
-			gsl.myfを生成/更新するためのものとなります.<br>
-			ただしSLibはCOFF形式である必要があります(OMF形式には対応しておりません)<br>
-			<br>
-			この gsl.myf の使い道をもう少し詳しくお話しましょう.<br>
-			例えばこの gsl.myf ファイルから各コンパイラ用の def ファイルへの変換は、SLibを直接分析する処理と比べればはるかに容易いのです.<br>
-			def ファイルとはDLLを作る際にコンパイラ(厳密にはリンカ)に直接指定できる形式のシンボル定義ファイルです.<br>
-			ただしコンパイラによって defファイルの記法が微妙に異なることがあるのです.<br>
-			gsl.myfとはdefファイルをコンパイラに依存しない形で抽象化したようなものです.<br>
-		</div><br></div>
-			<br>
-		<a class=MstyElemLink id=config_2_detail_btn onClick="MstyUI_detailBtn('config_2_detail_tgt', 'config_2_detail_btn', 'gslconvを開発した経緯', '閉じる');">gslconvを開発した経緯</a><br><div id=config_2_detail_tgt class=MstyUnvisible><div class=box><u><b>gslconvを開発した経緯</b></u><br><br>
-			ところで、GNU binutils に nm コマンドというものがあります.<br>
-			実のところ、このコマンドでもgslconvと同じようにSLibからグローバルシンボルを抽出できます.<br>
-			実際、mkfgenツールを開発するにあたって初期のプロトタイプでは nm を使っていました.<br>
-			しかし nm コマンドでは次の問題があるため、結局不採用としました.<br>
+		Ver2.3よりこの項目は廃止されました。
+<br><br>
+		<li><b>makefile_version_landmark</b>(String型)</li>
+<br>
+		Ver2.3以降で指定可能です。
+<br><br>
+		znk_projectディレクトリ配下で開発を行う限りにおいては、makefile_version_landmarkの指定は、通常は不要です。
+		mkfgenは、カレントディレクトリ（mkfgen.myfが存在するディレクトリ）から出発し、
+		親ディレクトリを順に辿りながらMakefile_version.makファイルを検索します。
+		Makefile_version.makは（詳しくは後述しますが）プロジェクトディレクトリで共通に使用するパスやバージョンの情報が記述されています。
+		Makefile_version.makを探索する処理は、通常何の制限もなくルートディレクトリに到達するまで行われますが、
+		makefile_version_landmarkを指定した場合、指定したディレクトリ直下のMakefile_version.makに候補を絞ることができます。
+		例えば、makefile_version_landmarkの値が"src"の場合、単なる"Makefile_version.mak"ではなく"src/Makefile_version.mak"というパターンで検索されます。
+		このとき途中で他のMakefile_version.makが存在したとしても、それがsrcディレクトリ直下のものでなければそれはスルーされます。
+<br><br>
+		<li><b>is_android_ndk_build_support</b>(bool型)</li>
+<br>
+		このbool値は mkid_list 内に android または android_linux の指定を含む場合のみ意味を持ちます。
+<br><br>
+		mkfgenシステムでの android版バイナリのビルドは、通常、Makefile_android.mak または Makefile_android_linux.mak を使って
+		gmake コマンドを実行することで行うことができます。
+		一方、もう一つの方法として（というよりこちらがAndroid Developerの公式の方法ですが）、ndk_build スクリプトの実行によってビルドする方法があります。
+		ただしその場合、（Android Developerの公式ドキュメントにも書かれている通り）それ専用の特別なMakefile、すなわち Application.mk と Android.mk を自分で作る必要があります。
+<br><br>
+		このbool値を true に設定すると、mkfgenはカレントディレクトリにmkf_androidフォルダを生成し、
+		さらにその配下にこの Application.mk と Android.mk を自動的に生成します。
+		これらを使った実際のビルドは、まずmkf_android へ移動し、Android NDK が提供する ndk_build スクリプトを実行することで行います。
+<br><br>
+		尚、この値が false の場合（あるいはそもそもこの指定を省略した場合）でも、
+		（mkid_list 内に android または android_linuxの指定があるならば）
+		Makefile_android.mak または Makefile_android_linux.mak は生成されます。
+		Moaiでは特別な理由がない限りは、ndk_buildスクリプトよりも Makefile_android.mak または Makefile_android_linux.mak を用いたビルドを推奨します。
+<br><br>
+		<li><b>is_plugin_lib</b>(bool型)</li>
+<br>
+		Ver2.3以降で指定可能です。
+<br><br>
+		このbool値を明示的にtrueとした場合、生成されるDLibの名前にプレフィックスもバージョン番号もどちらも付加しません。
+		例えばライブラリ名(lib_name)が「my」であれば、生成されるDLibの名前はWindowsであれば「my.dll」、
+		Linuxであれば「my.so」、Darwinであれば「my.dylib」となります（ただしCygwinの場合のみ「cyg」プレフィックスが付き「cygmy.dll」となります）。
+		また初めて生成されるgsl.myfにおいては、configセクションのdlib_filenameも同様の値に設定されます。
+<br><br>
+		is_plugin_libの指定はlib_dlverの指定と競合します。
+		仮に両方指定した場合はlib_dlverの指定の方が優先され、is_plugin_libの指定は無視されます。
+<br><br>
+		<a name=AName_config_1></a><script type="text/javascript">var st_config_1_group_id_ary = [ "config_1" ];</script>
+<a class=MstyDetailLink id=config_1_btn onClick="if( MstyUI_selectTab( st_config_1_group_id_ary, this.id ) ){location.href = '#AName_config_1';}">参考</a>
+<span id=config_1 class=MstyUnvisible>
+		<div class=box>
+			is_plugin_libの指定は、もう少し正確に言えば後述するinfo_{mkid}セクションのtemplate_lib_file_specialにおいて
+			次のように指定したのと同じ効果であるとも言えます。
 			<ul>
-				<li>64bit版ライブラリのシンボルを得るためには64bit版 nm を使わなければならない.<br>
-				つまり32bit版と64bit版の両方の nm がシステムにおいて使えるようにインストールされていなければならず、
-				しかもMakefile内ではどちらの版を使うかを適切に切り分けなければならない.<br>
-				</li>
-				<br>
-				<li>WindowsのVC環境では標準で用意されていない.<br>
-				(dumpbin.exeで可能では？と思われるかもしれませんが、これは静的ライブラリには使えません).<br>
-				MinGWやCygwinなどをインストールすると使うことができるが、
-				VCを使っているのに nm コマンドのためだけにMinGWをインストールするという理不尽な状況が生じる.<br>
-				</li>
-				<br>
-				<li>標準で用意されていないなら開発プロジェクトに常時同梱しておけばよいと思われるかもしれないが、
-				nm コマンド(binutils)のライセンスはGPLである.<br>
-				知らない方のために一言で言うと、このライセンスはとても<b>不自由</b>かつ<b>伝染</b>するので、
-				このような同梱がし辛い.<br>
-				</li>
+				<li>info_cygwinのtemplate_lib_file_specialにおいて ['cyg$[lib_name]$.$[lib_sfx]$']と指定</li>
+				<li>info_cygwin以外のtemplate_lib_file_specialにおいて['$[lib_name]$.$[lib_sfx]$']と指定</li>
 			</ul>
-			このような要請から、上記の問題すべてを解決する代替のツールとして、今回gslconvを開発するに至ったわけです.<br>
-			gslconvであれば、32bit/64bitライブラリ双方をこれ一つで認識します.<br>
-			またライセンスは mkfgen と同じく<a class=MstyElemLink href=http://www.kmonos.net/nysl target=_blank>NYSL</a>であり、使用や同梱するにあたっての制限は何もありません.<br>
-		</div><br></div>
-		</li>
+			ただしis_plugin_libをtrueとし、かつinfo_{mkid}セクションのtemplate_lib_file_specialにおいても
+			ユーザがこの値を明示的に指定した場合は、明示的に指定したtemplate_lib_file_specialの値の方が優先されます。
+<br><br>
+			<a class=MstyDetailLink onClick="MstyUI_selectTab( st_config_1_group_id_ary, 'config_1_btn' );location.href = '#AName_config_1';">Close</a>
+		</div>
+		</span>
+<br><br>
+		<li><b>use_map_file</b>(bool型)</li>
+<br>
+		Ver2.3以降で指定可能です。
+<br><br>
+		この指定はgccを使ってdlibファイルを作る場合にのみ意味を持ちます（ただしDarwinのgccではmapファイルはサポートされません）。
+		このbool値を明示的にtrueとした場合、（dlibファイル生成時の）リンカのオプションとしてgsl.mapファイルを指定することができます。
+		gccではgsl.mapファイルを記述することによって、エクスポートするグローバルシンボル（グローバル関数）を明示的に指定できます。
+		gsl.mapファイルの中身は例えば以下のようになります。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-myf">{
+	global:
+		*;
+	local:
+		private_*;
+		pri_*;
+		RrkP_*;
+};
+</code></pre>
+	
+		<br>
+		<li><b>makefile_task_target_prefix</b>(String型)</li>
+<br>
+		Ver2.3以降で指定可能です。
+<br><br>
+		Makefileには<b>タスクターゲット</b>と呼ばれるものがあります。
+<br><br>
+		<div class=box>
+			まずこのタスクターゲットとは何なのかを説明しましょう。
+<br><br>
+			例えば、all、install、cleanなどはタスクターゲットです。
+			このときall、install、cleanという名前のファイルが実際に存在するわけではありませんが、
+			これらを依存リストとして他のターゲットの右側に指定したり、makeコマンドの引数として指定することが可能です。
+<br><br>
+			all、install、clean以外の名前のタスクターゲットもMakefile内で自由に定義可能です。
+			mkfgenでも独自のタスクターゲットをMakefile内に幾つか定義しています。
+			例えば、mkfgenは通常 install_data、install_exec、all_at_first といった独自のタスクターゲットを定義します。
+		</div>
+<br>
+		しかし仮にタスクターゲットと同じ名前のファイルがカレントディレクトリ内に実際に存在した場合、そのファイルの最終更新時間が参照されてしまい、
+		タスクターゲットのトリガーが正常に働かなくなります。
+		gmakeでは、ターゲット名に対して「.PHONY」を指定することで、それがタスクターゲットであることを明示化できますが、
+		一方でnmakeではそのような記法は存在しません。
+<br><br>
+		ファイル名とタスクターゲット名が衝突するのは基本的には避けるべきことです。
+		この衝突回避を補助する機能として、mkfgenでは makefile_task_target_prefix が用意されています。
+		これを使用した場合、mkfgenがMakefile内に独自に定義するほとんどのタスクターゲットについて、
+		その名前に接頭辞をつけることができます。
+		例えば、makefile_task_target_prefix = ['task_'] と指定した場合、
+		install_data、install_exec、all_at_first はそれぞれ、
+		task_install_data、task_install_exec、task_all_at_first といった名前に変更されます。
+		これにより、万一それらと同じ名前のファイルが実際に存在した場合、その衝突を避けることができます。
+<br><br>
+		<div class=box>
+			とはいえ、そのような衝突自体、滅多に起きることではないので、
+			実際にはmakefile_task_target_prefixを使う機会はほぼないでしょう。
+			これは万一のときの保険の機能です。
+<br><br>
+			また、makefile_task_target_prefix を使っても、install、clean だけは例外的に接頭辞は付けられません。
+			installやcleanはmakeコマンドで慣用的に用いられる引数とも関係が深く、
+			名前を変更可能とした場合かえって混乱をもたらす恐れがあるためです。
+<br><br>
+			makeでは、（nmakeであれgmakeであれ）Makefile内で最初に定義されたターゲットがデフォルトターゲット
+			（コマンドラインで明示的にターゲット指定しなかった場合に実行されるターゲット）になります。
+			この名前としては慣用的に all が使われることが多いですが、この名前を変えるのは問題ありません
+			（位置が一番初めでさえあればよいです）。
+		</div>
+<br>
+		<li><b>gslconv</b>(String型)</li>
+<br>
+			これはgslconvと呼ばれるツールのパスを明示的に指定するためのものです。
+			通常、ユーザはこの指定を行う必要はありません（この値は自動的に判定されます）。
+<br><br>
+			<div class=box>
+				この値は、現時点では主にlibZnkのためだけに存在します
+				（gslconvそれ自体をビルドしなければならないlibZnkだけは、これの位置に関して特別な配慮をしなければならない事情があります）。
+				この値には、.exe拡張子をつけてはいけません（mkfgen はWindows用のMakefileの場合、この値の最後に .exe 拡張子を自動的に付加するためです）。
+			</div>
+<br>
+			<a name=AName_config_2></a><script type="text/javascript">var st_config_2_group_id_ary = [ "config_2" ];</script>
+<a class=MstyDetailLink id=config_2_btn onClick="if( MstyUI_selectTab( st_config_2_group_id_ary, this.id ) ){location.href = '#AName_config_2';}">参考: gslconvとは何か？</a>
+<span id=config_2 class=MstyUnvisible>
+			<div class=box>
+				我々が提唱するディレクトリモデルでは、Makefileの他にも gsl.myf という特別なファイルを導入しています。
+				このファイルは、DLib(Windowsの場合はDLL : Dynamic Link Library)のソースディレクトリの中でのみ生成されます。
+<br><br>
+				gsl.myf はそのDLibにおいてExportされるべきグローバルシンボル（要はグローバル関数）のリストを列挙したものです。
+				ソースコードでグローバル関数が追加/削除されると同時に、このgsl.myfも修正しなければなりませんが、
+				我々プログラマがそれを毎回手動でやっていては大変ですので、通常はそれをツールによって自動更新させます。
+<br><br>
+				gslconv(Global Simbol List CONVerter)はそのためのツールであり、mkfgenとセットで私が開発したものですが、
+				mkfgenが生成するDLib用のMakefileではこのツールが必須となります
+				（gslconv 自体のソースコードはlibZnkに含まれており、libZnkとこのツールは最もエッセンシャルなものとして同時にビルドされます）。
+<br><br>
+				gslconvツールは予め生成しておいたSLib(Static Library)を分析し、それに含まれるグローバルシンボルを自動的に抽出し、
+				gsl.myfを生成/更新します。ただしSLibはCOFF形式である必要があります（OMF形式には対応しておりません）。
+<br><br>
+				<a name=AName_config_3></a><script type="text/javascript">var st_config_3_group_id_ary = [ "config_3" ];</script>
+<a class=MstyDetailLink id=config_3_btn onClick="if( MstyUI_selectTab( st_config_3_group_id_ary, this.id ) ){location.href = '#AName_config_3';}">補足: defファイルとgsl.myfについて</a>
+<span id=config_3 class=MstyUnvisible>
+				<div class=box>
+					def ファイルとはDLLを作る際にコンパイラ(厳密にはリンカ)に直接指定できる形式のシンボル定義ファイルです
+					（よくわからなければとにかくDLLを作る際に必要になるファイルと考えてもらって構いません）。
+					ただし def ファイルの書式はコンパイラによって微妙に異なることがあります。
+					これが厄介なところです。
+<br><br>
+					gsl.myfとはdefファイルをコンパイラに依存しない形で抽象化したようなものです。
+					別にgsl.myfを介在させなくとも、SLibを直接分析すれば各コンパイラ用の def ファイルへ変換することは理論的にはできます。
+					しかし実際には主に実装上の都合でgsl.myfを用意している形になります
+<br><br>
+					<div class=box>
+						gsl.myfはテキストファイルですのでユーザが直接編集することもできます。
+						実際、gsl.myf内にはignore_symbolsセクションなどユーザが直接編集することを想定したセクションも存在します。
+					</div>
+<br>
+					<div class=box>
+						もしもgsl.myfを介さず直接的な変換処理を行うとした場合、変換元と変換先の双方でプラットフォーム依存な部分を含み、
+						様々な組み合わせ等の可能性まで考えるとその実装は大変煩雑となります（多分処理時間も余計にかかると思います）。
+						これに対して、変換元あるいは変換先のいずれかがgsl.myfファイルを介した変換であれば、
+						様々な組み合わせ等の可能性まで考えたとしても、（中間に抽象化層を挟みますから）その実装ははるかに容易くなります。
+					</div>
+<br>
+					<a class=MstyDetailLink onClick="MstyUI_selectTab( st_config_3_group_id_ary, 'config_3_btn' );location.href = '#AName_config_3';">Close</a>
+				</div>
+				</span>
+<br><br>
+				<a name=AName_config_4></a><script type="text/javascript">var st_config_4_group_id_ary = [ "config_4" ];</script>
+<a class=MstyDetailLink id=config_4_btn onClick="if( MstyUI_selectTab( st_config_4_group_id_ary, this.id ) ){location.href = '#AName_config_4';}">参考: gslconvを開発した経緯</a>
+<span id=config_4 class=MstyUnvisible>
+				<div class=box>
+					GNU binutils に nm コマンドというものがあります。
+					このコマンドでもgslconvと同じようにSLibからグローバルシンボルを抽出できます。
+					実際、mkfgenツールを開発するにあたって初期のプロトタイプでは nm を使っていました。
+					しかし nm コマンドでは次の問題があるため、結局不採用としました。
+					<ul>
+						<li>64bit版ライブラリのシンボルを得るためには64bit版 nm を使わなければならない。
+						つまり32bit版と64bit版の両方の nm がシステムにおいて使えるようにインストールされていなければならず、
+						しかもMakefile内ではどちらの版を使うかを適切に切り分けなければならない。
+						</li>
+<br>
+						<li>WindowsのVC環境では標準で用意されていない。
+						(dumpbin.exeで可能では？と思われるかもしれませんが、これは静的ライブラリには使えません)。
+						MinGWやCygwinなどをインストールすると使うことができるが、
+						VCを使っているのに nm コマンドのためだけにMinGWをインストールするという理不尽な状況が生じる。
+						</li>
+<br>
+						<li>標準で用意されていないなら開発プロジェクトに常時同梱しておけばよいと思われるかもしれないが、
+						nm コマンド(binutils)のライセンスはGPLである。
+						知らない方のために一言で言うと、このライセンスは（過去の一時代には最も自由であったが）現在となってはとても<b>不自由</b>かつ<b>伝染</b>するので、
+						このような同梱がし辛い。
+						</li>
+					</ul>
+					このような要請から、上記の問題すべてを解決する代替のツールとして、今回gslconvを開発するに至ったわけです。
+					gslconvであれば、32bit/64bitライブラリ双方をこれ一つで認識します。
+					またライセンスは mkfgen と同じく<a class=MstyElemLink href=http://www.kmonos.net/nysl target=_blank>NYSL</a>であり、使用や同梱するにあたっての制限は何もありません。
+<br><br>
+					<a class=MstyDetailLink onClick="MstyUI_selectTab( st_config_4_group_id_ary, 'config_4_btn' );location.href = '#AName_config_4';">Close</a>
+				</div>
+				</span>
+<br><br>
+				<a class=MstyDetailLink onClick="MstyUI_selectTab( st_config_2_group_id_ary, 'config_2_btn' );location.href = '#AName_config_2';">Close</a>
+			</div>
+			</span>
 	</ul>
-	</div></article><br>
+<br>
+	<h3>Makefile_version.makについて</h3>
+<br>
+	Makefile_version.makでは DL_VER や REL_VER の値が定義されます。
+	DL_VERはDLibに付加するバージョン番号であり、REL_VERはツールに付加するバージョン番号です。
+	その他、すべてのプロジェクトの基点となるトップディレクトリのパスや、
+	そこからznk_projectの相対的な位置を示すパスなどを指定できます。
+	これによりznk_projectの外部にある他のプロジェクトとznk_projectとのパスレベルでの連絡が可能となります。
+<br><br>
+	Ver2.3以降のznk_projectでは、デフォルトではsrcディレクトリにこのファイルが一つ存在します。
+	make実行時、カレントディレクトリ内にMakefile_version.makが存在しない場合は、
+	親ディレクトリへと順に辿ってMakefile_version.makを探索します。
+	そしてMakefile_version.makが存在するならば、それをincludeするようなディレクティブをMakefile内に生成します。
+<br><br>
+	この処理は、通常何の制限もなく（ルートディレクトリに到達するまで）自動的に行われます。
+	しかしこれにある程度制限を掛けたい場合は、makefile_version_landmark を指定します。
+	makefile_version_landmarkが指定されると、mkfgenはカレントディレクトリから親ディレクトリへと順に辿り、
+	この値と同じ名前のディレクトリがあれば、その直下にMakefile_version.makが存在するかを調べます。
+	そしてMakefile_version.makが存在するならば、それをincludeするようなディレクティブをMakefile内に生成します。
+<br><br>
+	ちなみに存在しない場合は、DL_VER や REL_VER の値は空に定義されます。
+	少し複雑な仕様ですが、Makefile_version.mak は nmakeとgmake共用としている仕様上やむを得ない側面があります。
+<br><br>
+	<div class=box>
+		Ver2.2以前までのMakefile_version.mak内にincludeディレクティブを書いてチェーンさせる方法は色々と問題があり、廃止としました。
+	</div>
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section config end -->
 
 
 <a name=include_paths_common></a>
 <h1 class="title">include_paths_commonセクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
-	<article class="message is-dark"><br>
-<div class="message-header">
-インクルードパスの設定</div><div class="message-body">
-		ここではヘッダをインクルードするためのパス群を一行につき一つずつ指定します.<br>
-		この指定では、シンタクスシュガーとして以下のような<b>@記法</b>を使うことができます.<br>
-		<div class=box><div class=MstyCode>@{X}</div></div>
-		<br>
-		これはコンパイルオプション上では INCLUDE_FLAG として次のように展開されます.<br>
-		<div class=box><div class=MstyCode>-I$(MY_LIBS_ROOT)/X</div></div>
-		<br>
-		ここで $(MY_LIBS_ROOT) は configセクションのmy_libs_rootにおいて指定したパスに展開されます.<br>
-		<br>
-		この@記法では都合の悪い場合は、これを使わずに直接記述することもできます.<br>
-		例えば以下のようになります.<br>
-		<div class=box><div class=MstyCode>../include</div></div>
-		<br>
-		この場合、INCLUDE_FLAG としては次のように展開されます.<br>
-		<div class=box><div class=MstyCode>-I../include</div></div>
-	</div></article><br>
+
+	<h3>インクルードパスの設定</h3>
+<br>
+	ここではヘッダをインクルードするためのパス群を一行につき一つずつ指定します。
+	この指定では、シンタクスシュガーとして以下のような<b>@記法</b>を使うことができます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">@{X}
+</code></pre>
+	
+	<br>
+	これはコンパイルオプション上では INCLUDE_FLAG として次のように展開されます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">-I$(AT_SUGAR_DIR)/X
+</code></pre>
+	
+	<br>
+	ここで $(AT_SUGAR_DIR) は configセクションのat_sugar_dirにおいて指定したパスに展開されます。
+	ただしconfigセクションのat_sugar_dirの指定を省略した場合、自動的に決定されたデフォルト値に展開されます。
+	このデフォルト値は通常、最も身寄りなsrcディレクトリです。
+<br><br>
+	この@記法では都合の悪い場合は、これを使わずに直接記述することもできます。
+	例えば以下のようになります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">../include
+</code></pre>
+	
+	<br>
+	この場合、INCLUDE_FLAG としては次のように展開されます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">-I../include
+</code></pre>
+	
+	<br>
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section include_paths_common end -->
 
 
 <a name=dependency_libs_common></a>
 <h1 class="title">dependency_libs_commonセクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
-	<article class="message is-dark"><br>
-<div class="message-header">
-依存ライブラリの設定</div><div class="message-body">
-		ここでは依存ライブラリのリストを一行につき一つずつ指定します.<br>
-		この指定では、シンタクスシュガーとして以下のような<b>@記法</b>を使うことができます.<br>
-		<div class=box><div class=MstyCode>rlib: @{X} Y $(DL_VER)</div></div>
-		<br>
-		この記法により my_libs_rootからの相対位置 X にある libY-$(DL_VER) というライブラリを指定することができます.<br>
-		ここで$(DL_VER)はライブラリのバージョン番号を示す文字列に展開されます.<br>
-	<br>
-		リンクする際には、これはコンパイラ環境に応じて次のように展開されます.<br>
-		<div class=box>
-			VC:<br>
-			<div class=box><div class=MstyCode>$(MY_LIBS_ROOT)/X/out_dir/$(ABINAME)/Y-$(DL_VER).imp.lib</div></div>
-			MinGW:<br>
-			<div class=box><div class=MstyCode>$(MY_LIBS_ROOT)/X/out_dir/$(ABINAME)/libY-$(DL_VER).dll.a</div></div>
-			Linux(gcc):<br>
-			<div class=box><div class=MstyCode>$(MY_LIBS_ROOT)/X/out_dir/$(ABINAME)/libY-$(DL_VER).so</div></div>
-			Cygwin(gcc):<br>
-			<div class=box><div class=MstyCode>$(MY_LIBS_ROOT)/X/out_dir/$(ABINAME)/cygY-$(DL_VER).dll</div></div>
-		</div>
+
+	<h3>依存ライブラリの設定</h3>
 <br>
-		また、実行バイナリを構築する場合にはさらに動的リンクライブラリをランタイムライブラリとして、
-		インストール時にこれをインストール先にコピーします.<br>
-		このインストール先は、コンパイラ環境に応じて次のように展開されます.<br>
-		<div class=box>
-			Windows:<br>
-			<div class=box><div class=MstyCode>$(MY_LIBS_ROOT)/$(DLIBS_DIR)/Y-$(DL_VER).dll</div></div>
-			Linux:<br>
-			<div class=box><div class=MstyCode>$(MY_LIBS_ROOT)/$(DLIBS_DIR)/libY-$(DL_VER).so</div></div>
-			Cygwin:<br>
-			<div class=box><div class=MstyCode>$(MY_LIBS_ROOT)/$(DLIBS_DIR)/cygY-$(DL_VER).so</div></div>
-		</div>
-		<br>
-		いかがでしょうか？<br>
-		この<b>@記法</b>１行だけでこれほどまでに多様な指定を自動生成することができます.<br>
-		(さらに必要ならば各Makefile毎に用意されたtemplateファイルを編集することにより、
-		この生成のされ方を変更することもできます)<br>
-	</div></article><br>
-	<article class="message is-dark"><br>
-<div class="message-header">
-使用例</div><div class="message-body">
-		では実際の使用例も見てみましょう.<br>
+	ここでは依存ライブラリのリストを一行につき一つずつ指定します。
+	この指定では、シンタクスシュガーとして以下のような<b>@記法</b>を使うことができます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">rlib: @{X} Y $(DL_VER)
+</code></pre>
+	
 	<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>
-				rlib: @{libZnk}  Znk  $(DL_VER)<br>
-			</div></div>
-			<br>
-			<u><b>説明</b></u><br>
-			libRanoのmkfgen.myf より抜粋したものです.<br>
-			この例では my_libs_root/libZnk という動的ライブラリを指定したことになります.<br>
-			(libRanoはlibZnkに依存するということです)<br>
-		</div>
+	この記法により $(AT_SUGAR_DIR)からの相対位置 X にある libY-$(DL_VER) というライブラリを指定することができます。
+	ここで$(DL_VER)はライブラリのバージョン番号を示す文字列に展開されます。
+<br><br>
+	インポートライブラリをリンクする際には、これはコンパイラ環境に応じて次のように展開されます。
+	<div class=box>
+		VC:
+		<div class=box><div class=MstyCode>$(AT_SUGAR_DIR)/X/out_dir/$(ABINAME)/Y-$(DL_VER).imp.lib</div></div>
+		MinGW:
+		<div class=box><div class=MstyCode>$(AT_SUGAR_DIR)/X/out_dir/$(ABINAME)/libY-$(DL_VER).dll.a</div></div>
+		Linux(gcc):
+		<div class=box><div class=MstyCode>$(AT_SUGAR_DIR)/X/out_dir/$(ABINAME)/libY-$(DL_VER).so</div></div>
+		Cygwin(gcc):
+		<div class=box><div class=MstyCode>$(AT_SUGAR_DIR)/X/out_dir/$(ABINAME)/cygY-$(DL_VER).dll</div></div>
+		Darwin:
+		<div class=box><div class=MstyCode>$(AT_SUGAR_DIR)/X/out_dir/$(ABINAME)/libY-$(DL_VER).dylib</div></div>
+	</div>
+<br>
+	また、実行バイナリを構築する場合にはさらに動的リンクライブラリをランタイムライブラリとして、
+	インストール時にこれをインストール先にコピーします。
+	このインストール先は、コンパイラ環境に応じて次のように展開されます。
+	<div class=box>
+		Windows:
+		<div class=box><div class=MstyCode>$(AT_SUGAR_DIR)/$(DLIBS_DIR)/Y-$(DL_VER).dll</div></div>
+		Linux:
+		<div class=box><div class=MstyCode>$(AT_SUGAR_DIR)/$(DLIBS_DIR)/libY-$(DL_VER).so</div></div>
+		Cygwin:
+		<div class=box><div class=MstyCode>$(AT_SUGAR_DIR)/$(DLIBS_DIR)/cygY-$(DL_VER).so</div></div>
+		Darwin:
+		<div class=box><div class=MstyCode>$(AT_SUGAR_DIR)/$(DLIBS_DIR)/libY-$(DL_VER).dylib</div></div>
+	</div>
+<br>
+	いかがでしょうか？
+	この<b>@記法</b>１行だけで多様なコンパイル環境に向けた記述を自動生成することができます。
+	さらに必要なら、この生成を調整する指定も幾つか用意されています。
+<br><br>
+	静的ライブラリをリンクしたい場合は、行の最初を「slib:」とします。
+	インポートライブラリをリンクしたい場合は、行の最初は「dlib:」または「rlib:」とします。
+<br><br>
+	<div class=box>
+		「dlib:」と「rlib:」の違いについて説明しましょう。
+		「dlib:」を指定した場合は、リンクした動的ライブラリのインストールまでは行われません
+		（例えばWindows標準に存在するuser32.dllのようなものに対するインポートライブラリの場合、通常dllまでインストールする必要はないわけです）。
+		一方、「rlib:」を指定した場合は、リンクした動的ライブラリのインストールも行われます
+		（例えば開発したツール固有のランタイムライブラリの場合、通常そのライブラリもいっしょにインストールする必要があります）。
+	</div>
+<br>
+	<h3>使用例</h3>
+<br>
+	では実際の使用例も見てみましょう。
+<br><br>
+	<div class=box>
+		<u><b>例</b></u>
+			
+	
+<pre class=hljs><code class="language-myf">rlib: @{libZnk}  Znk  $(DL_VER)
+</code></pre>
+	
 		<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>
-				rlib: @{libZnk}  Znk  $(DL_VER)<br>
-				rlib: @{libRano} Rano $(DL_VER)<br>
-			</div></div>
-			<br>
-			<u><b>説明</b></u><br>
-			moaiのmkfgen.myf より抜粋したものです.<br>
-			この例では my_libs_root/libZnk および my_libs_root/libRano の二つの動的ライブラリを指定したことになります.<br>
-			(moaiはlibRanoとlibZnkに依存するということです)<br>
-		</div>
+		この例では $(AT_SUGAR_DIR) 配下の libZnk（動的ライブラリのインポートライブラリ）を指定したことになります。
+		「rlib:」を指定していますので、インストール時には動的ライブラリ
+		（WindowsならばZnk.dll、LinuxならばlibZnk.so、CygwinならばcygZnk.dll、MacOSX(Darwin)ならばlibZnk.dylib）
+		もいっしょにインストールされます。
+	</div>
+<br>
+	<div class=box>
+		<u><b>例</b></u>
+			
+	
+<pre class=hljs><code class="language-myf">rlib: @{libZnk}  Znk  $(DL_VER)
+rlib: @{libRano} Rano $(DL_VER)
+</code></pre>
+	
 		<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>slib: @{libZnk}  Znk  $(DL_VER)</div></div>
-			<br>
-			<u><b>説明</b></u><br>
-			auto_triggerのmkfgen.myf より抜粋したものです.<br>
-			今回は最初が rlib: ではなく slib: となっています.<br>
-			rlib: は動的なランタイムライブラリであることを示すのに対し、slibは静的ライブラリであることを示します.<br>
-			この例では my_libs_root/libZnk という静的ライブラリを指定したことになります.<br>
-			(auto_triggerはlibZnkを静的にリンクするということです)<br>
-		</div>
+		この例では $(AT_SUGAR_DIR) 配下の libZnk および libRano（いずれも動的ライブラリのインポートライブラリ）を指定したことになります。
+	</div>
+<br>
+	<div class=box>
+		<u><b>例</b></u>
+			
+	
+<pre class=hljs><code class="language-myf">slib: @{libZnk}  Znk  $(DL_VER)
+</code></pre>
+	
 		<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>slib: $(MY_LIBS_ROOT)/$(SLIBS_DIR) crypto $(DL_VER)</div></div>
-			<br>
-			<u><b>説明</b></u><br>
-			@記法を使わない例も挙げておきます.<br>
-			この例では $(MY_LIBS_ROOT)/$(SLIBS_DIR)/libcrypto という静的ライブラリを指定したことになります.<br>
-		</div>
-	</div></article><br>
+		この例では、最初が rlib: ではなく slib: となっています。
+		rlib: は動的なランタイムライブラリであることを示すのに対し、slibは静的ライブラリであることを示します。
+		この例では $(AT_SUGAR_DIR) 配下の libZnk（静的ライブラリ）を指定したことになります
+		（この場合、libZnkが静的にリンクされるということです）。
+	</div>
+<br>
+	<div class=box>
+		<u><b>例</b></u>
+			
+	
+<pre class=hljs><code class="language-myf">slib: $(AT_SUGAR_DIR)/$(SLIBS_DIR) crypto $(DL_VER)
+</code></pre>
+	
+		<br>
+		@記法を使わない例も挙げておきます。
+		この例では $(AT_SUGAR_DIR)/$(SLIBS_DIR)/libcrypto.lib（VC等）、
+		$(AT_SUGAR_DIR)/$(SLIBS_DIR)/libcrypto.a（gcc等）などという静的ライブラリを指定したことになります。
+	</div>
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section dependency_libs_common end -->
 
 
 <a name=runtime_additional></a>
 <h1 class="title">runtime_additionalセクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
-	<article class="message is-dark"><br>
-<div class="message-header">
-ビルド済みライブラリを追加する</div><div class="message-body">
-		ここでは、動的にロードしたい依存ライブラリのリストをdependency_libs_commonと同様の形式で追加指定します.<br>
-		dependency_libs_commonと違い、ここに指定されたものはこのMakefileでのコンパイルおよびリンクでの直接の対象とはなりません.<br>
-		(つまり仮にここに指定したものが存在しなくとも、とりあえずそれらの処理に直接支障は及ばないないということです).<br>
-		<br>
-		ここに指定されたものはMakefileでのinstallにおいてのみ意味を持ちます.<br>
-		つまりこれらは単にインストールディレクトリへのコピーだけが行われるということです.<br>
-		また仮にこれらが存在しない場合はエラーとはならず単に無視されます.<br>
-		<br>
-		例えば、既にビルド済みのサードパーティ製の動的ライブラリなどをここに指定するとよいでしょう.<br>
-		これらを実行時(ランタイム)に動的にロードしたいケース等に対応できます.<br>
-		(この実行時動的ロードを行うためには、WindowsならばLoadLibrary関数、Linuxならばdlopen関数を使います.)<br>
-		<br>
-		その他、孫受け的な動的ライブラリもここで指定します.<br>
-		これはこのMakefileがビルドするソースコードからは直接は必要ない(ヘッダのincludeやインポートライブラリのリンクの必要がない)が、
-		下請けの動的ライブラリからはそれが必要となる、つまり「下請けの下請け」の動的ライブラリを意味します.<br>
-		動的ロードの依存性をすべて解決するには、これらも最終的なインストールディレクトリ内に存在する必要があるわけです.<br>
-	</div></article><br>
-	<article class="message is-dark"><br>
-<div class="message-header">
-記法</div><div class="message-body">
-		<div class=box><div class=MstyCode>rlib: @{X} Y V</div></div>
-		この記法において、libY-V というライブラリを指定することができます.<br>
-		(Ver2.1より Linux系でもsoファイル名にこのVが付加される仕様に変更されました.)<br>
-		runtime_additionalセクションでは、Xの部分はダミー指定となり特に効果を持ちません.<br>
-		<br>
-		インストールにおけるこのランタイムライブラリのコピー元は、コンパイラ環境に応じて次のように展開されます.<br>
-		<div class=box>
-			Windows:<br>
-			<div class=box><div class=MstyCode>$(MY_LIBS_ROOT)/$(DLIBS_DIR)/Y-V.dll</div></div>
-			Linux:<br>
-			<div class=box><div class=MstyCode>$(MY_LIBS_ROOT)/$(DLIBS_DIR)/libY-V.so</div></div>
-			Cygwin:<br>
-			<div class=box><div class=MstyCode>$(MY_LIBS_ROOT)/$(DLIBS_DIR)/cygY-V.so</div></div>
-		</div>
-	</div></article><br>
-	<article class="message is-dark"><br>
-<div class="message-header">
-使用例</div><div class="message-body">
-		では実際の使用例も見てみましょう.<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>rlib: @{libressl/tls} tls 17</div></div>
-			<br>
-			<u><b>説明</b></u><br>
-			moaiのmkfgen.myf より抜粋したものです.<br>
-			この例では libressl/tlsはダミー指定です.<br>
-			<br>
-			Windowsでは $(MY_LIBS_ROOT)/$(DLIBS_DIR)/tls-17.dllを指定したことになります.<br>
-			(Moaiの実際の例では、さらにlibtls-17.dllとなるようinfo_vc、info_mingw、info_msysセクション等で、
-			特殊な指定が加えられています).<br>
-			Linuxでは $(MY_LIBS_ROOT)/$(DLIBS_DIR)/libtls-17.soとなります.<br>
-		</div>
-	</div></article><br>
+
+	<h3>ビルド済みライブラリを追加する</h3>
+<br>
+	ここでは、実行時に動的にロードしたい依存ライブラリのリストをdependency_libs_commonと同様の形式で追加指定します。
+<br><br>
+	<div class=box>
+		通常、このような実行時の動的ロードを行うためには、WindowsならばLoadLibrary関数、Linuxならばdlopen関数が
+		呼び出し元のソースコードにおいて使われます。
+		ただしこれを抽象化したラッパー関数として、libZnk（Znk_dload.h）ではZnkDLoad_open関数が提供されており、
+		znk_projectに存在するほとんどのソースコードではこのZnkDLoad_open関数を用いています。
+	</div>
+<br>
+	dependency_libs_commonと違い、ここに指定されたものはこのMakefileでのコンパイルおよびリンクでの直接の対象とはなりません
+	（仮にここに指定したものが存在しなくとも、とりあえずコンパイルとリンクの処理に支障は及ばないということです）。
+	また各行は（コメントアウトする場合などを除き）必ず「rlib:」で始めなければなりません
+	（runtime_additionalの場合、dependency_libs_commonと違い、「slib:」や「dlib:」で始めることはできません）。
+<br><br>
+	ここに指定されたものはMakefileでのinstallにおいてのみ意味を持ちます
+	（ここでの指定によって、単にインストールディレクトリへのコピーだけが行われるということです）。
+	また仮にここで指定されたファイルが存在しない場合、単に無視されます（エラーとはなりません）。
+<br><br>
+	例えば、既にビルド済みのサードパーティ製の動的ライブラリなどをここに指定するとよいでしょう。
+	これらを実行時(ランタイム)に動的にロードしたいケース等に対応できます。
+<br><br>
+	その他、孫受け的な動的ライブラリもここで指定します。
+	ここで「孫受け的」とは、ビルドするにあたっては直接は必要ない（ヘッダのincludeやインポートライブラリのリンク等の必要がない）が、
+	下請けの動的ライブラリからはそれが必要となるということです。
+	つまりは「下請けの下請け」の動的ライブラリを意味します。
+	動的ロードの依存性をすべて解決するには、これらも最終的なインストールディレクトリ内に存在する必要があるわけです。
+<br><br>
+	<h3>記法</h3>
+<br>
+		
+	
+<pre class=hljs><code class="language-myf">@@L runtime_additional
+rlib: @{X} Y V
+@@.
+</code></pre>
+	
+	<br>
+	この記述によって、生成されるMakefile内で「libY-V」という名前のランタイムライブラリが指定されることになります。
+<br><br>
+	<div class=box>
+		Ver2.1より Linux系でもsoファイル名にこのVが付加される仕様に変更されました。
+		またVer2.3より Darwin系のdylibもサポートされましたが、これについても同様の規則で命名されます。
+	</div>
+<br>
+	runtime_additionalセクションでは、@記法におけるXの部分はダミー指定となり特に効果を持ちません。
+	@記法を用いた場合、インストールにおけるこのランタイムライブラリのコピー元のパスは、コンパイラ環境に応じて次のように生成されます。
+<br><br>
+	<div class=box>
+		Windows:
+		<div class=box><div class=MstyCode>$(AT_SUGAR_DIR)/$(DLIBS_DIR)/Y-V.dll</div></div>
+		Linux:
+		<div class=box><div class=MstyCode>$(AT_SUGAR_DIR)/$(DLIBS_DIR)/libY-V.so</div></div>
+		Cygwin:
+		<div class=box><div class=MstyCode>$(AT_SUGAR_DIR)/$(DLIBS_DIR)/cygY-V.so</div></div>
+		Darwin:
+		<div class=box><div class=MstyCode>$(AT_SUGAR_DIR)/$(DLIBS_DIR)/libY-V.dylib</div></div>
+	</div>
+<br>
+	@記法を使わない指定もでき、その場合はdependency_libs_commonと同様に展開されます。
+<br><br>
+	<h3>使用例</h3>
+<br>
+	では実際の使用例も見てみましょう.
+<br><br>
+	<u><b>例</b></u>
+		
+	
+<pre class=hljs><code class="language-myf">@@L runtime_additional
+rlib: @{libressl/tls} tls 17
+@@.
+</code></pre>
+	
+	<br>
+	moaiのmkfgen.myf より抜粋したものです。
+<br><br>
+	この例では 「@{libressl/tls}」はダミー指定です。
+<br><br>
+	Windowsでは $(AT_SUGAR_DIR)/$(DLIBS_DIR)/tls-17.dllを指定したことになります
+	（Moaiの実際の例では、さらにlibtls-17.dllとなるようinfo_vc、info_mingw、info_msysセクション等で、
+	特殊な指定が加えられています）。
+<br><br>
+	Linuxでは $(AT_SUGAR_DIR)/$(DLIBS_DIR)/libtls-17.so、
+	Cygwinでは $(AT_SUGAR_DIR)/$(DLIBS_DIR)/cygtls-17.dll、
+	Darwinでは $(AT_SUGAR_DIR)/$(DLIBS_DIR)/libtls-17.dylib
+	となります。
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
-
-
-<a name=info_COMPILER></a>
-<h1 class="title">info_{COMPILER}セクション<span class=MstyAuthor> (Section Type: @@V 変数リスト)</span></h1>
-	{COMPILER}にはmkid_listで列挙したコンパイル環境を示すidを指定します.<br>
-	このセクションにはコンパイル環境ごとにそれぞれ以下を指定できます.<br>
-	<br>
-	<article class="message is-dark"><br>
-<div class="message-header">
-コンパイラに関する指定</div><div class="message-body">
-	<ul>
-		<li><b>compiler_option_special(String型)</b><br>
-		このコンパイラ環境において特別に指定するコンパイラオプションを指定.<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>['/wd4127 /wd4996 /wd4267']</div></div>
-			<u><b>説明</b></u><br>
-			libZnkのmkfgen.myf内info_vc より抜粋したものです.<br>
-			この例では、VCにおいて警告を抑制するオプションを指定しています.<br>
-		</div>
-		<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>
-				['-D_POSIX -D_WIN32_WINNT=0x0500 \&#x0009;-DWIN32_LEAN_AND_MEAN \&#x0009;-D_REENTRANT']<br>
-			</div></div>
-			<u><b>説明</b></u><br>
-			-Dはdefineすべきマクロ変数をコンパイラに指定するためのオプションです.<br>
-			この例では、４つの変数を定義しています.<br>
-			また、Makefileでは途中で改行する場合は改行の直前に \ でエスケープする必要があります.<br>
-		</div>
-		</li>
-	</ul>
-	</div></article><br>
-	<article class="message is-dark"><br>
-<div class="message-header">
-リンカに関する指定</div><div class="message-body">
-	<ul>
-		<li><b>linker_option_special(String型)</b><br>
-		このコンパイラ環境において特別に指定するリンカオプションを指定.<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>['/SUBSYSTEM:console']</div></div>
-			<u><b>説明</b></u><br>
-			この例では、VCにおいてLINKコマンドオプションである/SUBSYSTEM(コンソールウィンドウが付くか否か等)を指定しています.<br>
-			(もっとも現在のVCでは、/SUBSYSTEMを明示的に指定しなくても、ソースコードでmainかWinMainのどちらが使われているかによって、
-			適切なものが自動的に設定されるようです)<br>
-		</div>
-<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>['-Wl,-dn,-lstdc++']</div></div>
-			<u><b>説明</b></u><br>
-			この例では、gccにおいてC++のコンパイルに関するリンカオプションを指定しています.<br>
-		</div>
-		</li>
-		<br>
-		<li><b>linking_libs_special(String型)</b><br>
-		このコンパイラ環境において特別にリンクするライブラリのリストを指定.<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>['ws2_32']</div></div>
-			<u><b>説明</b></u><br>
-			libZnkのmkfgen.myf内info_vc より抜粋したものです.<br>
-			この例では、VCにおいて ws2_32.lib ライブラリのリンクを指定しています.<br>
-		</div>
-		<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>['pthread dl stdc++']</div></div>
-			<u><b>説明</b></u><br>
-			moaiのmkfgen.myf内info_linux より抜粋したものです.<br>
-			この例では、linux(gcc)において -lpthread -ldl -lstdc++ に該当する指定を行っています.<br>
-		</div>
-		</li>
-		<br>
-		<li><b>dependency_libs_special(String型)</b><br>
-		ほとんどの場合、この指定を使う替わりに linker_option_special や linking_libs_special を使うべきです.<br>
-		ここで指定した文字列はリンカのオプション指定としては最後方に置かれます.<br>
-		そのため、オプションの指定順が重要な環境で特殊な指定を行う場合のみ、この指定が必要となることがあります.<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>['../my_static_libs/util.a']</div></div>
-			<u><b>説明</b></u><br>
-			この例では、linux(gcc)におけるイレギュラーな静的ライブラリをパスで直接指定を行っています.<br>
-		</div>
-		</li>
-	</ul>
-	</div></article><br>
-	<article class="message is-dark"><br>
-<div class="message-header">
-ライブラリの命名規則を修正する指定</div><div class="message-body">
-	<ul>
-		<li><b>template_lib_file_special(String型)</b><br>
-		このコンパイラ環境において生成されるライブラリ名の構造を特別に指定.<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>['cyg$[lib_name]$.$[lib_sfx]$']</div></div>
-			<u><b>説明</b></u><br>
-			plugin_5ch のmkfgen.myf内 info_cygwinより抜粋したものです.<br>
-			この例では、生成される動的リンクライブラリをplugin用に強制的に名前変更しています.<br>
-		</div>
-		</li>
-		<br>
-		<li><b>slib_pfx_special(String型)</b><br>
-		このコンパイラ環境で用いられる slib_pfx の値を特別に上書き指定する.<br>
-		<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>['crypto:lib ssl:lib']</div></div>
-			<u><b>説明</b></u><br>
-			この例では、lib_nameがcryptoの場合はそれに付け加えるslib_pfxをlibに強制的に置き換えます.<br>
-			また、lib_nameがsslの場合も同様にslib_pfxをlibに置き換えます.<br>
-<br>
-			例えばVCの場合、デフォルトではslib_pfxは空となっています.<br>
-			このままでは crypto.lib などといったファイル名になってしまいますが、<br>
-			これを特別に libcrypto.lib に変更するなどといったことが出来ます.<br>
-		</div>
-		</li>
-		<br>
-		<li><b>rlib_pfx_special(String型)</b><br>
-		このコンパイラ環境で用いられる ilib_pfx と dlib_pfx の値を特別に上書き指定する.<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>['crypto:lib ssl:lib']</div></div>
-			<u><b>説明</b></u><br>
-			この例では、lib_nameがcryptoの場合はそれに付け加えるilib_pfxとdlib_pfxをlibに強制的に置き換えます.<br>
-			また、lib_nameがsslの場合も同様にilib_pfxとdlib_pfxをlibに置き換えます.<br>
-<br>
-			例えばVCの場合、デフォルトではilib_pfxやdlib_pfxは空となっています.<br>
-			このままでは crypto-17.dll などといったファイル名になってしまいますが、<br>
-			これを特別に libcrypto-17.dll に変更するなどといったことが出来ます.<br>
-		</div>
-		</li>
-	</ul>
-	</div></article><br>
-	<article class="message is-dark"><br>
-<div class="message-header">
-その他の指定</div><div class="message-body">
-	<ul>
-		<li><b>shell(String型)</b><br>
-		このコンパイラ環境におけるMakefileで使用するシェルのタイプ.<br>
-		dos または sh を指定.<br>
-		</li>
-	</ul>
-	</div></article><br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section runtime_additional end -->
 
 
 <a name=mkid_list></a>
 <h1 class="title">mkid_listセクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
-	<article class="message is-dark"><br>
-<div class="message-header">
-サポートするコンパイラ環境の指定</div><div class="message-body">
-		このセクションにはMakefileを生成したいコンパイル環境を示すidを列挙します.<br>
-		( 現在サポートするidは vc mingw msys cygwin linux android です ).<br>
-		mkfgen ではこのセクションで列挙されたidについてのみ、Makefileが作成されます.<br>
-		(逆に言えばここで列挙されなかったidについては作成されません)<br>
-		例えば、linux専用のツールの場合などでは vc mingw などWindows系専用のMakefileを生成しても明らかにムダです.<br>
-		そのような場合にここで linux のみを指定しておけば余計なMakefileを生成せずに済みます.<br>
-	</div></article><br>
+
+	<h3>どのコンパイラ環境のMakefileを出力するかを指定</h3>
+<br>
+	このセクションにはMakefileを生成したいコンパイル環境を示す <b>id(mkid)</b> を列挙します。
+	現在以下のidがサポートされています。
+<br><br>
+	<table>
+		<tr><th>id(mkid)</th><th>生成されるMakefile名</th><th>対応makeコマンド</th><th>説明</th></tr>
+	<tr class="MstyItemOdd"><td>vc</td>           <td>Makefile_vc.mak</td>           <td>nmake(VC付属nmake)</td>
+		<td>dos上のVC(コマンドライン)</td></tr>
+	<tr class="MstyItemEvn"><td>mingw</td>        <td>Makefile_mingw.mak</td>        <td>gmake(mingw32-make)</td>
+		<td>dos上のMinGW</td></tr>
+	<tr class="MstyItemEvn"><td>msys</td>         <td>Makefile_msys.mak</td>         <td>gmake(msys付属make)</td>
+		<td>msys上のMinGW</td></tr>
+	<tr class="MstyItemEvn"><td>linux</td>        <td>Makefile_linux.mak</td>        <td>gmake(linux標準make)</td>
+		<td>linux用(glibc/musl対応)</td></tr>
+	<tr class="MstyItemEvn"><td>cygwin</td>       <td>Makefile_cygwin.mak</td>       <td>gmake(cygwin標準make)</td>
+		<td>cygwin用</td></tr>
+	<tr class="MstyItemOdd"><td>bsd</td>          <td>Makefile_bsd.mak</td>          <td>bmake(BSD標準make)</td>
+		<td>bsd用(FreeBSD/NetBSD/DragonFly)</td></tr>
+	<tr class="MstyItemEvn"><td>android</td>      <td>Makefile_android.mak</td>      <td>gmake(android ndk付属make)</td>
+		<td>android ndkを使用したクロスコンパイル(dos上)</td></tr>
+	<tr class="MstyItemEvn"><td>android_linux</td><td>Makefile_android_linux.mak</td><td>gmake(android ndk付属make)</td>
+		<td>android ndkを使用したクロスコンパイル(linux上)</td></tr>
+	<tr class="MstyItemEvn"><td>darwin</td>       <td>Makefile_darwin.mak</td>       <td>gmake(darwin/linux付属make)</td>
+		<td>darwin付属gcc/llvm_clangを使用、あるいはlinux上でクロスコンパイル</td></tr>
+	</table>
+<br><br>
+	mkfgen は、mkid_listセクションで列挙されたidについてのみ、Makefileを作成します。
+	例えばlinux専用ツールの場合、（vc mingw msys など）Windows系のMakefileを生成しても（クロスコンパイルなどをする場合を除けば）無意味ですが、
+	そのような場合はここで linux のみを指定しておけば余計なMakefileを生成せずに済むということです。
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section mkid_list end -->
+
+
+<a name=info_mkid></a>
+<h1 class="title">info_{mkid}セクション<span class=MstyAuthor> (Section Type: @@V 変数リスト)</span></h1>
+
+	<h3>概要</h3>
 <br>
+	{mkid}にはmkid_listで列挙したコンパイル環境を示す<b>id(mkid)</b>を指定します。
+<br><br>
+	<div class=box>
+		id(mkid) についての詳細は mkid_listセクションを参照してください。
+	</div>
+<br>
+	このセクションにはコンパイル環境ごとにそれぞれ以下を指定できます。
+<br><br>
+	<h3>コンパイラに関する指定</h3>
+<br>
+	<ul>
+		<li><b>compiler_option_special(String型)</b>
+<br><br>
+		このコンパイラ環境において特別に指定するコンパイラオプションを指定します。
+<br><br>
+		<div class=box>
+			<u><b>例</b></u>
+				
+	
+<pre class=hljs><code class="language-myf">@@V info_vc
+compiler_option_special = ['/wd4127 /wd4996 /wd4267']
+@@.
+</code></pre>
+	
+			<br>
+			libZnkのmkfgen.myf内info_vc より抜粋したものを一部修正したものです。
+			この例では、VCにおいて余計な警告を抑制するオプションを指定しています。
+		</div>
+		<div class=box>
+			<u><b>例</b></u>
+			<!--
+				
+	
+<pre class=hljs><code class="language-myf">compiler_option_special = ['-D_POSIX -D_WIN32_WINNT=0x0500 \&amp;#x0009;-DWIN32_LEAN_AND_MEAN \&amp;#x0009;-D_REENTRANT']
+</code></pre>
+	
+			<br>
+			-Dはdefineすべきマクロ変数をコンパイラに指定するためのオプションです。
+			この例では、４つの変数を定義しています。
+			また、Makefileでは途中で改行する場合は改行の直前に \ でエスケープする必要があります.
+			-->
+				
+	
+<pre class=hljs><code class="language-myf">@@V info_mingw
+compiler_option_special = ['-D_POSIX -D_WIN32_WINNT=0x0500 -DWIN32_LEAN_AND_MEAN -D_REENTRANT']
+@@.
+</code></pre>
+	
+			<br>
+			-Dはdefineすべきマクロ変数をコンパイラに指定するためのオプションです。
+			この例では、４つの変数 _POSIX、_WIN32_WINNT、WIN32_LEAN_AND_MEAN、_REENTRANT を定義しています。
+		</div>
+		</li>
+<br>
+		<li><b>compiler_option_subdir</b>(String型)</li>
+<br>
+		Ver2.3以降で指定可能です。
+<br><br>
+		このコンパイラ環境において特別に指定するコンパイラオプションを指定するという意味では compiler_option_special と同じですが、
+		この指定をした場合、特定のサブディレクトリXのコンパイルに対して、（その時にのみ）さらなるコンパイルオプションYが追加されます
+		（compiler_option_special の指定を上書きするのではなく、その指定を残しつつさらに追加されるということです）。
+		指定方式は「X{ Y }」という形式の繰り返しです（ X と { の間にはスペースを挟むことも可能です。
+		また逆に言えばX自体はスペースを含むような名前であってはいけません（「Program Files」といったような名前のディレクトリは指定不可です））。
+		尚、Yの内容に「{」や「}」を含むような場合、替わりに「X( Y )」や「X[ Y ]」という形式を使うこともできます。
+<br><br>
+		<div class=box>
+			<u><b>例</b></u>
+				
+	
+<pre class=hljs><code class="language-myf">@@V info_vc
+compiler_option_special = ['-DZ_PREFIX']
+compiler_option_subdir = ['zlib{ /wd4131 /wd4244 } minizip{ /wd4131 }']
+@@.
+</code></pre>
+	
+			<br>
+			上記の例は、libZnkのmkfgen.myf内 info_vc にある既述を少し簡単にしたものです。
+<br><br>
+			ディレクトリlibZnk内には、サブディレクトリとしてzlibとminizipが存在します。
+			上記の例では、サブディレクトリzlibに対しては固有のコンパイルオプション「/wd4131 /wd4244」を、
+			サブディレクトリminizipに対しては固有のコンパイルオプション「/wd4131」を、
+			それぞれ指定しています。
+<br><br>
+			結局この例ではトータルの指定として、
+			ディレクトリlibZnk（カレントディレクトリ）では -DZ_PREFIX （compiler_option_specialの値のまま）が、
+			サブディレクトリzlibでは -DZ_PREFIX /wd4131 /wd4244 が、
+			サブディレクトリminizipでは -DZ_PREFIX /wd4131 が指定されることになります。
+<br><br>
+			尚、「minizip{}」のように中身を空にして指定した場合、結局何も追加されないため、
+			最初からその指定をしていないのと同じです。
+		</div>
+	</ul>
+<br>
+	<h3>リンカに関する指定</h3>
+	<ul>
+		<li><b>linker_option_special(String型)</b>
+<br><br>
+		このコンパイラ環境において特別に指定するリンカオプションを指定します。
+<br><br>
+		<div class=box>
+			<u><b>例</b></u>
+				
+	
+<pre class=hljs><code class="language-myf">@@V info_vc
+linker_option_special = ['/SUBSYSTEM:console']
+@@.
+</code></pre>
+	
+			<br>
+			この例では、VCのリンカ（つまりLINKコマンドですが）において、リンカオプション「/SUBSYSTEM」（コンソールウィンドウが付くか否か等の情報）を指定しています。
+<br><br>
+			<div class=box>
+				もっとも現在のVCでは、/SUBSYSTEMを明示的に指定しなくても、ソースコードでmainかWinMainのどちらが使われているかによって、
+				適切なものが自動的に設定されるようです。ただし生成されるexe/dllファイルのいわゆるSUBSYSTEMバージョンを明示的に指定する場合は、
+				このオプションの使用が必要となります。
+			</div>
+		</div>
+		<div class=box>
+			<u><b>例</b></u>
+				
+	
+<pre class=hljs><code class="language-myf">@@V info_linux
+linker_option_special = ['-Wl,-dn,-lstdc++']
+@@.
+</code></pre>
+	
+			<br>
+			この例では、gccにおいてC++のコンパイルに関するリンカオプションを指定しています。
+		</div>
+		</li>
+<br>
+		<li><b>linking_libs_special(String型)</b>
+<br><br>
+		このコンパイラ環境において特別にリンクするライブラリのリストを指定します。
+<br><br>
+		<div class=box>
+			<u><b>例</b></u>
+				
+	
+<pre class=hljs><code class="language-myf">@@V info_vc
+linking_libs_special = ['ws2_32']
+@@.
+@@V info_mingw
+linking_libs_special = ['ws2_32']
+@@.
+</code></pre>
+	
+			<br>
+			libZnkのmkfgen.myf内info_vc、info_mingwより抜粋したものです。
+<br><br>
+			この例では、info_vc、info_mingwのどちらも最終的に ws2_32.lib ライブラリをリンクするようなMakefileが生成されます。
+			ただし、Makefile_vc.mak においては、ws2_32.lib ライブラリのファイル名を直接指定する形の書式が生成されるのに対し、
+			Makefile_mingw.makにおいては、「-lws3_32」に該当する形の書式が生成されます。
+		</div>
+		<div class=box>
+			<u><b>例</b></u>
+				
+	
+<pre class=hljs><code class="language-myf">@@V info_linux
+linking_libs_special = ['pthread dl stdc++']
+@@.
+</code></pre>
+	
+			<br>
+			moaiのmkfgen.myf内 info_linux（gcc環境）より抜粋したものです。
+<br><br>
+			この例では、Makefile_linux.makにおいて、「-lpthread -ldl -lstdc++」に該当する形の書式が生成されます。
+		</div>
+		</li>
+<br>
+		<li><b>dependency_libs_special(String型)</b>
+<br><br>
+		ほとんどの場合、この指定を使う替わりに linker_option_special や linking_libs_special を使う方が簡単です。
+		ここで指定した文字列はリンカのオプション指定としては最後方に置かれます。
+		そのため、オプションの指定順が重要な環境で特殊な指定を行う場合のみ、この指定が必要となることがあります。
+<br><br>
+		<div class=box>
+			<u><b>例</b></u>
+				
+	
+<pre class=hljs><code class="language-myf">@@V info_linux
+dependency_libs_special = ['../my_static_libs/util.a']
+@@.
+</code></pre>
+	
+			<br>
+			この例では、linux(gcc)におけるイレギュラーな静的ライブラリをパスで直接指定を行っています.
+		</div>
+		<div class=box>
+			<u><b>例</b></u>
+				
+	
+<pre class=hljs><code class="language-myf">@@V info_mingw
+compiler_option_special = ['-std=gnu++11']
+dependency_libs_special = ['-Wl,-Bstatic,-lstdc++,-Bdynamic,-lws2_32']
+@@.
+</code></pre>
+	
+			<br>
+			この例では、MinGWにおいて、C++ライブラリを静的リンクし、
+			ws2_32.libライブラリを動的リンク（この場合インポートライブラリとしてリンク）するための指定を行っています。
+		</div>
+		</li>
+<br>
+		<li><b>variable_special(String型)</b>
+<br><br>
+		Ver2.3以降で指定可能です。
+<br><br>
+		このコンパイラ環境固有の変数をMakefile内に埋め込むことができます。
+		単なる変数代入式の埋め込みなので、改行を挟めば複数の変数を埋め込むことも可能です。
+		それどころかMakefileに埋め込む文字列を直接自由に指定できるわけで、その意味では最後の手段、
+		mkfgenの自動生成では対応できない処理をもう自前で書くという究極的な指定といえます。
+<br><br>
+		product_listでこの指定が必要となることがあります（詳しくはproduct_listのセクションをご覧ください）。
+		例えばVCのリンカオプション「/SUBSYSTEM:WINDOWS」を linker_option_special や dependency_libs_special に直接書くと
+		すべてのproduct_listでその指定が共通になり、各product毎に Subsystem を変更したい場合に対応できません。
+		これに対処するには一旦以下のように MY_SUBSYS_WIN とでも名前をつけた変数でリンカオプションをラップしておくとよいでしょう。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-myf">@@V info_vc
+variable_special = ['MY_SUBSYS_WIN=/SUBSYSTEM:WINDOWS']
+@@.
+
+@@V info_mingw
+variable_special = ['MY_SUBSYS_WIN=-mwindows']
+@@.
+
+@@V info_linux
+variable_special = ['MY_SUBSYS_WIN=']
+@@.
+
+@@V product_list
+exec main1 main1.c @ @link_dep
+exec main2 main2.c @ @link_dep $(MY_SUBSYS_WIN)
+exec main3 main3.c @ @link_dep
+@@.
+</code></pre>
+	
+		<br>
+		product_listではラップされた「$(MY_SUBSYS_WIN)」を（SubsystemをWindowsにしたいものだけ適宜）指定するようにします。
+		上記の例ではmain2だけSubsystemをWindowsに（つまりそれがWindows向けのバイナリとしてビルドされる場合はコマンドプロンプトのWindowを非表示に）しています。
+		</li>
+	</ul>
+<br>
+	<h3>ライブラリの命名規則を修正する指定</h3>
+<br>
+	<ul>
+		<li><b>template_lib_file_special(String型)</b>
+<br><br>
+		このコンパイラ環境において生成されるライブラリ名の構造を特別に指定します。
+<br><br>
+		<div class=box>
+			<u><b>例</b></u>
+				
+	
+<pre class=hljs><code class="language-myf">@@V info_vc
+template_lib_file_special = ['$[lib_pfx]$$[lib_name]$_vc$[lib_ver_sfx]$.$[lib_sfx]$']
+@@.
+</code></pre>
+	
+			<br>
+			この例では、生成されるライブラリファイル名の構築方法を強制的に変更しています（「_vc」という文字列を新たに挿入しています）。
+<br><br>
+			デフォルトではコンパイラ環境に応じて、接頭辞libやcygをつけたりつけなかったり、特定の拡張子をつけたりと挙動が決まっていますが、
+			template_lib_file_special はその挙動を完全に上書きします。
+		</div>
+		</li>
+<br>
+		<li><b>slib_pfx_special(String型)</b>
+<br><br>
+		このコンパイラ環境で用いられる slib_pfx の値を特別に上書き指定します。
+<br><br>
+		<div class=box>
+			<u><b>例</b></u>
+				
+	
+<pre class=hljs><code class="language-myf">@@V info_vc
+slib_pfx_special = ['crypto:lib ssl:lib']
+@@.
+</code></pre>
+	
+			<br>
+			libressl/ssl のmkfgen.myf内 info_vcより抜粋したものです。
+<br><br>
+			この例では、ライブラリ名（lib_name）がcryptoの場合はそれに付け加える接頭辞（slib_pfx）を強制的に「lib」とします。
+			また、lib_nameがsslの場合も同様にslib_pfxを「lib」とします。
+<br><br>
+			例えばVCの場合、デフォルトではslib_pfxは空となっています。
+			このままでは crypto.lib などといったファイル名になってしまいますが、
+			これを特別に libcrypto.lib に変更するなどといったことが出来ます。
+		</div>
+		</li>
+<br>
+		<li><b>rlib_pfx_special(String型)</b>
+<br><br>
+		このコンパイラ環境で用いられる ilib_pfx と dlib_pfx の値を特別に上書き指定します。
+<br><br>
+		<div class=box>
+			<u><b>例</b></u>
+				
+	
+<pre class=hljs><code class="language-myf">@@V info_vc
+rlib_pfx_special = ['crypto:lib ssl:lib']
+@@.
+</code></pre>
+	
+			<br>
+			libressl/ssl のmkfgen.myf内 info_vcより抜粋したものです。
+<br><br>
+			この例では、ライブラリ名（lib_name）がcryptoの場合はそれに付け加える接頭辞（ilib_pfxとdlib_pfx）を強制的に「lib」とします。
+			また、lib_nameがsslの場合も同様にilib_pfxとdlib_pfxを「lib」とします。
+<br><br>
+			例えばVCの場合、デフォルトではilib_pfxやdlib_pfxは空となっています。
+			このままでは crypto-17.dll などといったファイル名になってしまいますが、
+			これを特別に libcrypto-17.dll に変更するなどといったことが出来ます。
+		</div>
+		</li>
+	</ul>
+<h3>デフォルトの設定の確認方法</h3>
+	<br>
+	コンパイラごとのデフォルトの設定はmkfgenのインストールディレクトリ内のtemplateディレクトリ内のtemplate_*.myfファイルに記述されています。
+	例えばtemplate/template_vc.myf内を見ることで、Makefile_vc.makにおいて使用するshellは「dos」、makeコマンドは「nmake」であることなどがわかります。
+	またtemplate/template_linux.myf内を見ることで、Makefile_linux.makにおいて使用するshellは「sh」、makeコマンドは「gmake」であることなどがわかります。
+<br><br>
+	これらのファイル内の記述は、よほど各コンパイラやMakefile、mkfgenのことに通じていない限り、通常は変更しない方がよいでしょう。
+	下手に変更するとmkfgenが生成するMakefileの整合性が壊れる可能性もあります。
+<!--
+	<h3>その他の指定</h3>
+<br>
+	<ul>
+		<li><b>shell(String型)</b>
+<br><br>
+		このコンパイラ環境におけるMakefileで使用するシェルのタイプを指定します。
+		値は dos または sh となります。
+<br><br>
+		</li>
+	</ul>
+-->
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section info_mkid end -->
 
 
 <a name=product_list></a>
 <h1 class="title">product_listセクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
-	<article class="message is-dark"><br>
-<div class="message-header">
-最終生成ファイルの指定</div><div class="message-body">
-		このセクションにはこのmkfgenによって生成するプロダクトとその種類を列挙します.<br>
-		複数指定可能であり、以下のような記法になります.<br>
-		<div class=box><div class=MstyCode>product_type product_name product_mainsrc</div></div>
-		product_type の指定は生成したいファイルの種類によって変わります.<br>
-		後述の指定例を参照してください.<br>
+
+	<h3>最終生成ファイルの指定</h3>
 <br>
-		product_name の指定では拡張子を指定してはいけません.<br>
-		コンパイル環境に応じて適切な拡張子が自動的に付加されます.<br>
+	このセクションにはこのmkfgenによって生成するプロダクトとその種類を列挙します。
+	これらはスペース文字区切りで複数指定可能であり、以下のような記法になります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">product_type product_name product_mainsrc [options]
+</code></pre>
+	
+	<br>
+	product_listの各行においてスペースで区切られたそれぞれの文字列をトークンと呼びます。
+	各行において次の3つのトークンは必須であり必ず記述する必要があります。
+<br><br>
+	第1番目のトークンproduct_type の指定は生成したいファイルの種類によって<b>exec</b>、<b>dlib</b>、<b>rlib</b>、<b>slib</b>のいずれかのキーワードになります。
+<br><br>
+	第2番目のトークンproduct_name の指定ではビルドした結果生成されるファイル名を指定します。
+	ただし、<b>拡張子を付けずに指定</b>します。
+	mkfgenはコンパイル環境に応じて適切な拡張子を自動的に付加します。
+<br><br>
+	第3番目のトークンproduct_mainsrc の指定ではproduct_nameのソースファイルに該当するファイルのパスを指定してください。
+	こちらは<b>拡張子まですべて記述する</b>必要があります。
+<br><br>
+	第4番目以降のトークンはオプションです（これはVer2.3以降で指定可能であり、Ver2.2以前では単に無視されます）。
+	複雑なプロジェクトの場合、この行におけるプロダクトに固有な処理を必要に応じて記述することができます。
+	この部分の記法の詳細については後述します。
+<br><br>
+	<h3>基本的な指定</h3>
 <br>
-		product_mainsrc の指定ではファイルのパスを指定してください.<br>
-		こちらは拡張子まですべて記述する必要があります.<br>
-	</div></article><br>
-	<article class="message is-dark"><br>
-<div class="message-header">
-指定例</div><div class="message-body">
-		実行ファイルを生成したい場合、product_type として exec を指定します.<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>exec player main.cpp</div></div>
-			<u><b>説明</b></u><br>
-			playerという実行ファイルを作ります(例えばWindowsではplayer.exeなど適切な拡張子が自動的に付加されます).<br>
-			また3番目の指定では、そのmain関数の存在するソースファイルはmain.cppであることを指定しています.<br>
-		</div>
-		<br>
-		動的ライブラリを生成したい場合、product_type として dlib を指定します.<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>dlib Znk dll_main.c</div></div>
-			<u><b>説明</b></u><br>
-			Znkというdlibファイルを作ります(例えばVCではZnk-2.2.dllなど適切なバージョン番号と拡張子が自動的に付加されます).<br>
-			また3番目の指定では、WindowsのDLLの場合DllMain関数の存在するソースファイルを指定します.<br>
-			Linuxのsoファイルの場合はこの項目は意味を持ちませんが、Windowsと指定の互換性を持たせるため、
-			やはりDllMain関数の存在するソースファイルを指定するとよいでしょう.<br>
-		</div>
-		<br>
-		静的ライブラリを生成したい場合、product_type として slib を指定します.<br>
-		<div class=box>
-			<u><b>例</b></u><br>
-			<div class=box><div class=MstyCode>slib zlib zutil.c</div></div>
-			<u><b>説明</b></u><br>
-			zlibというslibファイルを作ります(例えばVCではzlib.libなど適切な拡張子が自動的に付加されます).<br>
-			また3番目の指定では、その代表となるソースファイルを何でもよいので一つ指定します.<br>
-		</div>
-	</div></article><br>
+	ネイティブバイナリとして実行ファイルを生成したい場合、product_type として exec を指定します。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">exec player main.cpp
+</code></pre>
+	
+	<br>
+	上記の２番目の指定では、playerという実行ファイルを作ることを指定しています(このとき例えばWindowsではplayer.exeなど適切な拡張子が自動的に付加されます)。
+	また3番目の指定では、そのmain関数の存在するソースファイルはmain.cppであることを指定しています。
+<br><br>
+	動的ライブラリおよび静的ライブラリを生成したい場合、product_type として dlib を指定します。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">dlib Znk dll_main.c
+</code></pre>
+	
+	<br>
+	上記ではZnkというdlibファイルを作ります（例えばVCではZnk-2.2.dllなど適切なバージョン番号と拡張子が自動的に付加されます）。
+	また3番目の指定では、Windowsのdllの場合DllMain関数の存在するソースファイルを指定します。
+	LinuxのsoやDarwinのdylibの場合はこの項目は実質的には意味を持ちませんが、Windowsと指定の互換性を持たせるため、
+	DllMain関数の存在するソースファイルを指定するとよいでしょう。
+<br><br>
+	<div class=box>
+		product_type として dlib を指定した場合、
+		通常、インストール時には静的ライブラリ、動的ライブラリ、インポートライブラリの3つがすべてインストールされます。
+<br><br>
+		ここで動的ライブラリとインポートライブラリだけをインストールしたい場合、product_type として dlib を指定した上で
+		さらにオプション(options)部において、@dlib_onlyを指定します。
+<br><br>
+		また動的ライブラリだけ（インポートライブラリは含まない）をインストールしたい場合、product_type として rlib を指定します。
+	</div>
+<br>
+	静的ライブラリだけを生成してインストールしたい場合、product_type として slib を指定します。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">slib zlib zutil.c
+</code></pre>
+	
+	<br>
+	上記では、zlib をベースネームとした slibファイル を作ります。
+	このとき例えばVCでは zlib.lib など適切な拡張子が自動的に付加されたファイル名となります。
+	また3番目の指定では、その代表となるソースファイルを何でもよいので一つ指定します。
+<br><br>
+	Raraku実行ファイル(rrkx)を生成したい場合、product_type として exec を指定します。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">exec 5ch my_dir/5ch.rrks
+</code></pre>
+	
+	<br>
+	上記は my_dir/5ch.rrks をソースファイルとして、rarakuコンパイラによりRaraku実行ファイル 5ch.rrkx を作ることを指示したものとなります。
+	5ch.rrks の拡張子から、これが（C言語ではなく）Raraku言語であると判断されます。
+<br><br>
+	<div class=box>
+		ただしrarakuコンパイラを呼び出すためには、
+		src_suffix_listセクションにおいて「rrks rrko rrkx raraku」を指定しておく必要があります。
+		これについては「src_suffix_listセクション」の項目で詳しく述べます。
+	</div>
+<br>
+	Raraku実行ファイルはプラットフォーム独立であるためOS環境によらず、その拡張子も常にrrkxです。
+	Rarakuコンパイラは rrkx ファイルを out_dir/raraku 配下に生成します。
+	ただし今回の例のように product_name で指定したファイルがサブディレクトリ my_dir を含む場合、
+	rrkx ファイルが生成されるディレクトリは、out_dir/raraku にさらにそのサブディレクトリを加えた out_dir/raraku/my_dir になります。
+<br><br>
+	<h3>オプション(options)部の指定方法</h3>
+<br>
+	トークンが4つ以上の場合、次のような記法に従ったオプション部の指定がなされているものとみなされます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">optcnf @key1 value1 @key2 value2 @key3 value3 ...
+</code></pre>
+	
+	<br>
+	若干複雑な構造ですので、まずざっくりと全体像を概説します。
+	optcnfは第4番目のトークンに該当し、オプション部を指定する場合はまずこれを記述する必要があります。
+	第5番目のトークン以降は、キーワード(key)と値(val)のペアの繰り返しとなります。
+	キーワード(key)は通常は「@」から始まり（具体的には「@inst_dir」、「@link_dep」などとなり）、
+	その直後のトークンにそのキーワード(key)に相当する値(val)を記述します。
+	ただし値(val)の指定は省略することもでき、その場合はそれぞれのキーワード(key)に設定されたデフォルト値がその値となります。
+<br><br>
+	では次にoptcnfの詳細を説明します。
+	optcnfは最低1文字、最大でも2文字からなる文字列であり、ほとんどの場合「@」または「@^」等になります。
+	（optcnfに3文字以上指定した場合、Ver2.3では3文字目以降を無視します）。
+<br><br>
+	optcnfの1文字目の文字をkey_beginerと呼びます。
+	key_beginerは、キーワード(key)の先頭につくべき文字を指定しますが、この値は特に理由がなければ「@」でよいです。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">exec cb cb.rrks @ @inst_dir my_pkg @link_dep extens/kau/kau
+</code></pre>
+	
+	<br>
+	この例では、optcnfが「@」ですからkey_beginerは「@」に指定したことになります。
+	従って「@inst_dir」がキーワード(key)、「my_pkg」がその値(val)になります。
+	また後続するペアも同様に「@link_dep」がキーワード(key)、「extens/kau/kau」がその値(val)です。
+<br><br>
+	値(val)で指定する文字列自体の先頭に「@」が存在する場合、key_beginerとして「@」を使用することができません。
+	このような特殊な場合にのみ「@」以外の値を指定することもできます
+	（そのようなことはあまりないとは思いますが、例えばDarwinのgccにおいて、mkfgenがデフォルトで付与するオプションに続き追加的に"@loader_path"を指定する場合など、
+	値として@が先頭に来るような文字列を指定する状況はいくらか想定されます）。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">exec myapp myapp.c $ $link_dep @loader_path
+</code></pre>
+	
+	<br>
+	この例では、optcnfが「$」ですからkey_beginerは「$」に指定したことになります。
+	従って「$link_dep」がキーワード(key)、「@loader_path」がその値(val)になります。
+<br><br>
+	ただしkey_beginerに指定可能な文字は、記号を示すASCII文字のみ（アルファベットや数字は不可）です。
+	それ以外のものが指定されている場合は mkfgen はエラーメッセージを表示します
+	（この場合、意図した通りのMakefileが生成されない可能性があります）。
+<br><br>
+	optcnfの2文字目の文字をalter_spaceと呼びます。
+	これは半角スペースを含む値(value)を指定したい場合に、半角スペースの代替として指定する文字です。
+	トークンはまず大きく半角スペースで区切られるため、値内部に半角スペースを直接指定してしまうと、その値は複数のトークンに分離されてしまいます。
+	参考のためこの様子を以下に示します（以下は意図した通りの動作となりません）。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">exec main main.rrks @ @link_dep -i cb
+</code></pre>
+	
+	<br>
+	この例の本来の意図は、キーワード「@link_dep」の値として「-i cb」を指定することでしたが、
+	このように記述すると「-i」と「cb」の間にある半角スペースによってこれらが別のトークンとして分離されてしまい、
+	結果的に「@link_dep」の値として「-i」が指定されたことになって失敗します。
+	さらには次に来るべきキーワードが「cb」と解釈されますが、これは「@」で始まっていないため
+	不正(Invalid)なキーワードとみなされてしまいます。
+<br><br>
+	これに対応するため、optcnfの2文字目にalter_spaceを明示的に指定し、以降の値の内部で半角スペースを含むものについては、
+	その部分の半角スペースの替わりにalter_spaceを記述します（alter_spaceの部分は最終的には半角スペースに置換されます）。
+	通常、特に不都合がなければalter_spaceとして「^」などを採用すればよいでしょう。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">exec main main.rrks @^ @link_dep -i^cb
+</code></pre>
+	
+	<br>
+	この例では、キーワード「@link_dep」の値として「-i cb」を指定しようとしています。
+	ただしトークンの分離を防ぐため、mkfgen.myf上では「-i^cb」と記述しています。
+	optcnfが「@^」ですから、alter_spaceを「^」に指定したことになり、
+	値(val)に含まれる「^」は最終的に半角スペースに置換されますから、結果的にこの値は「-i cb」となります。
+<br><br>
+	ただしalter_spaceに指定可能な文字は、アルファベットや数字以外の記号を示すASCII文字のみであり、それ以外のものが指定されている場合は
+	mkfgenはエラーメッセージを表示します（この場合、意図した通りのMakefileが生成されない可能性があります）。
+<br><br>
+	では次にキーワードの詳細を説明します。
+	現時点でmkfgenでサポートされているキーワードは以下のものになります。
+	<ul>
+		<li>inst_dir</li>
+			インストール先にさらに追加のディレクトリを作ってその配下へコピーしたい場合にこれを指定します。
+			例えば以下の通りです。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-bash">exec main main.rrks @ @inst_dir rrk_pkg/bbs
+</code></pre>
+	
+			<br>
+			この例では、キーワード「@inst_dir」の値として「rrk_pkg/bbs」を指定しています。
+			この場合、make install実行時にインストール先（install_dir）配下にrrk_pkg/bbsディレクトリが自動的に生成され、
+			この生成ファイル（main.rrkx）に関しては特別にそのディレクトリへとコピーされます。
+<br><br>
+		<li>inst_slib_dir</li>
+			dlibにおいてinst_dirを使った場合、デフォルトでは動的ライブラリと静的ライブラリの両方のインストール先にその効果が及びます。
+			静的ライブラリのインストール先だけ個別に指定したい場合、inst_slib_dirを使います。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-bash">dlib MyLib MyLib.c @ @inst_dir bin @inst_slib_dir lib
+</code></pre>
+	
+			<br>
+			この例では、キーワード「@inst_dir」の値として「bin」を指定しています。
+			また、キーワード「@inst_slib_dir」の値として「lib」を指定しています。
+			この場合、make install実行時にインストール先配下にbinディレクトリとlibディレクトリが自動的に生成され、
+			動的ライブラリに関してはbinへ、静的ライブラリに関してはlibへとコピーされます（いわゆるUnix系のレイアウトでのインストールです）。
+<br><br>
+		<li>with_runtime</li>
+			execにおいてinst_dirを使った場合、デフォルトではランタイムライブラリはinstall_runtime_dir等所定のインストール先にしかインストールされません（ディスクサイズを無駄にしないためです）。
+			ランタイムライブラリをさらにinst_dir内へも個別にインストールしたい場合、with_runtimeを使います。
+			ただしこの指定は現在、拡張子がcとcppのexecのみ有効です。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-bash">exec sample1 sample1_src/test.c @ @inst_dir sample1_dst @with_runtime
+exec sample2 sample2_src/test.c @ @inst_dir sample2_dst @with_runtime
+</code></pre>
+	
+			<br>
+			１行目ではキーワード「@inst_dir」の値として「sample1_dst」を指定しており、
+			生成されたバイナリsample1は当然sample1_dstへインストールされますが、
+			今回キーワード「@with_runtime」も指定しているため、ランタイムライブラリもsample1_dstへインストールされます。
+			２行目も同様にsample2とランタイムライブラリがsample2_dstへインストールされます。
+<br><br>
+			例えばsample1とsample2がともにランタイムライブラリとしてlibZnkを使っているものとし、
+			デフォルトではlibZnkがsample1_dstやsample2_dstの一つ親のディレクトリにインストールされるものとしましょう。
+			このとき、sample1_dst/sample1 や sample2_dst/sample2 と同じディレクトリにlibZnkがないことによって
+			（OSや環境変数の設定にもよりますが）これらを起動するのに多少の手間が生じるかもしれません。
+			特にWindowsの場合、同じディレクトリ内にdllがあれば特になにもせずそれをロードすることが可能であるため、
+			少々ディスクサイズを無駄にしてでも利便性を優先したい場合はこの指定が便利になる場合があります
+			（例えば手っ取り早く複数のサンプルプログラムの動作を確認したい場合などです）。
+<br><br>
+		<li>dlib_only</li>
+			デフォルトではdlibを指定すると、動的ライブラリ（インポートライブラリを含む）と静的ライブラリの両方がインストールされますが、
+			dlib_onlyを指定することで動的ライブラリ（インポートライブラリを含む）だけをインストールすることができます。
+<br><br>
+			<div class=box>
+				既に述べたことの繰り返しになりますが、
+				動的ライブラリだけ（インポートライブラリを除く）をインストールしたい場合は、
+				dlibではなくrlibを指定してください。
+				またその場合はdlib_onlyの指定は不要です。
+			</div>
+<br>
+		<li>link_dep</li>
+			execやdlibタイプのプロダクトは、最終的にリンカの実行においてこれが生成されます。
+			リンカでは、依存ライブラリのリストを通常はinfoセクション等により指定します。
+			しかし、稀にある特定のプロダクトにおいて、他のプロダクトとは異なる特別な依存ライブラリを指定したい場合があります。
+			link_depにより、このようなプロダクト単位での追加的なリスト指定が可能になります。
+			例えば以下の通りです。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-bash">exec cb  cb.rrks
+exec est est.rrks
+exec main main.rrks @^ @link_dep -i^cb
+exec draw draw.rrks @^ @link_dep -i^est
+</code></pre>
+	
+			<br>
+			この例では、main.rrkxを作る場合においてのみ、リンカのオプションとして「-i cb」が追加されます。
+			また、draw.rrkxを作る場合においてのみ、リンカのオプションとして「-i est」が追加されます。
+			cb.rrkxやest.rrkxを作る場合においては何も追加されません（デフォルトの依存ライブラリの指定のままです）。
+<br><br>
+		<li>ignore</li>
+			mkfgenはデフォルトではカレントディレクトリ配下にある全てのsrcファイルを言語の種類を考慮しつつスキャンし、
+			これを基にこのプロダクトを生成する上で必要となる全ての依存オブジェクトをOBJSへリストします。
+			このときignore_listセクションの指定によって、不要な依存オブジェクトをこれらのリストから明示的に除外することもできますが、
+			この指定はすべてのプロダクトに共通して有効で一括したものとなります。
+<br><br>
+			これに対してキーワードignoreの指定では、このプロダクトにおいてのみ有効な指定となります。
+			ignoreでは以下に示す「.」またはSWC文字列を指定し、これにマッチしたファイルについてOBJSリストから除外します。
+			ただし一番先頭に「!」を指定することでこのパターンの意味する条件を反転させることができます。
+			<ul>
+				<li>「.」を指定した場合</li>
+					カレントディレクトリにある全てのsrcファイルにマッチします。
+				<li>「!.」を指定した場合</li>
+					カレントディレクトリ以外にある全てのsrcファイルにマッチします。
+				<li>SWCを指定した場合</li>
+					SWCはワイルドカードを最大一つ含むような文字列です。
+					例えば「ABCD」、「*」、「*ABCD」、「ABCD*」、「AB*CD」などが該当します。
+					「mydir/*」と指定することでmydirディレクトリ配下にある全てのsrcファイルにマッチします。
+				<li>先頭に「!」をつけたSWCの場合</li>
+					SWCの条件の反転になります。
+					例えば「!mydir/*」と指定することでmydirディレクトリ配下以外のsrcファイルにマッチします。
+			</ul>
+			ただし例外として第3番目のトークンであるproduct_mainsrc で指定されたファイルについては、
+			いかなる場合もOBJSリストに追加されます。
+			以下に例を示します。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-bash">dlib cb dll_main.c
+exec custom_boy main.c @ @ignore cb/*
+</code></pre>
+	
+			<br>
+			この例では、動的ライブラリcbを作る場合は全てのC言語ファイルに依存し、それらをすべてコンパイル/リンクしてこれを生成します。
+			一方、実行バイナリcustom_boyについてはcbディレクトリ内のCファイルを除外した形でコンパイル/リンクしてこれを生成します。
+<br><br>
+		<li>retrieve</li>
+			この指定はignoreキーワードと調度真逆の働きをします。
+			ignoreで指定したのと全く同様に「.」またはSWC文字列を指定しますが、
+			retrieveではこれにマッチしたファイルを（ignoreの指定に関わらず）OBJSリストへ強制的に追加します。
+			この指定は通常ignoreと併用して使うことを想定しており、このときこちら(retrieve)の指定が優先されます。
+			一旦ignoreキーワードでワイルドカードにより全てのsrcファイルを除外しておき、
+			retrieveキーワードで必要なものを拾ってOBJSリストへ追加するというのが典型的な使い方となります。
+			ただし例外として第3番目のトークンであるproduct_mainsrc で指定されたファイルについては、
+			いかなる場合もOBJSリストに追加されます。
+			以下に例を示します。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-bash">dlib cb dll_main.c     @ @ignore * @retrieve cb/*
+exec custom_boy main.c @ @ignore * @retrieve main/*
+</code></pre>
+	
+			<br>
+			この例では、動的ライブラリcbを作る場合はcbディレクトリ配下のファイルとdll_main.cのみに依存し、これらをコンパイル/リンクしてこれを生成します。
+			一方、実行バイナリcustom_boyについてはmainディレクトリ配下のファイルとmain.cのみに依存し、これらをコンパイル/リンクしてこれを生成します。
+			一旦ignoreに「*」を指定してすべての依存を消去した状態でretrieveで必要な「cb/*」と「main/*」をそれぞれ指定しています。
+<br><br>
+		<li>isolate</li>
+			あるディレクトリだけを孤立してビルドしたい場合、「exec X Y/main.c @ @ignore * @retrieve Y/*」という形の指定がよく行われますが、
+			これは単に「exec X Y/main.c @ @isolate」と書くこともできます。
+			このときディレクトリYについては「@isolate」で自動的に認識されます。
+			以下に例を示します。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-bash">exec test1 test1_dir/main.c        @ @isolate
+exec test2 test2_dir/samp01/main.c @ @isolate
+</code></pre>
+	
+			<br>
+			第1行目は、「exec test1 test1_dir/main.c @ @ignore * @retrieve test1_dir/*」と指定したのと同じ効果になります（test1_dir内のファイルのみが使われてtest1がビルドされます）。
+			第2行目は、「exec test2 test2_dir/samp01/main.c @ @ignore * @retrieve test2_dir/samp01/*」と指定したのと同じ効果になります（test2_dir/samp01内のファイルのみが使われてtest2がビルドされます）。
+			この記法を使うと「test1_dir」や「test2_dir/samp01」の指定を@retrieveにおいて冗長に記述する必要がなく、大抵の場合便利な指定となります。
+<br><br>
+		<li>sys_cmd</li>
+			このプロダクトがリンカにより生成された直後に、何か別の外部プログラムを呼び出したい場合、このキーワードでそのプログラムのコマンドを指定することができます。
+			ただし、マルチプラットフォームに対応したMakefileを生成するような場合、
+			この指定によってUNIXシェルやDOS固有のコマンドを直に実行させるべきではありません。
+			これらの多くはプラットフォーム依存のコマンド（UNIXシェルにのみ存在したりDOSにのみ存在するようなコマンド）であったり、
+			同じ名前のコマンドであっても書式が異なる場合があるからです。
+			下手をするとlinux用のMakefile内にDOS用のコマンドが含まれてしまい、このMakefileをlinux上で実行できなくなってしまうなどといった状況が発生し得るわけです。
+<br><br>
+			この指定では例えばrarakuコマンドなどプラットフォーム独立なスクリプトを使うべきです。
+			以下に例を示します。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-bash">dlib cb dll_main.c     @  @ignore * @retrieve cb/*
+exec custom_boy main.c @^ @ignore * @sys_cmd $(RRK_MASTER_CMD)^script/test.rrks
+</code></pre>
+	
+			<br>
+			この例では、実行バイナリcustom_boyの生成が終わったタイミングで「$(RRK_MASTER_CMD) script/test.rrks」が実行されます。
+			mkfgen.myfではraraku用の設定をすることで「$(RRK_MASTER_CMD)」が使用可能になりますが、これによりこのスクリプトを実行させることができます。
+	</ul>
+<br>
+	<div class=box>
+		上記のキーワードは一行につき最大一つまで指定できます
+		（仮に二つ以上指定した場合、最後に指定したものがそれより前の指定を上書きします）。
+	</div>
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section product_list end -->
 
 
 <a name=rc_list></a>
 <h1 class="title">rc_listセクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
-	<article class="message is-dark"><br>
-<div class="message-header">
-Windowsリソースファイルの指定</div><div class="message-body">
-		このセクションではこのmkfgenによって扱うrcファイル(Windowsのリソースファイル)の名前を明示的に列挙できます.<br>
-		しかしこれが空でもmkfgenは自動的にrcファイルを認識して、この情報を生成されるMakefileに補充します.<br>
-		万一この自動認識がうまくいかないケースが発生した場合はこのセクションで明示的に指定してください.<br>
-	<br>
-		特にproduct_list においてexec指定された実行ファイル名とrc名が一致する場合、これらは自動的に関連付けられます.<br>
-		例えば product_list において exec player main.cpp と指定された場合、rcファイルの名前が player.rc の場合は
-		特に何も指定せずとも player.rc は playerに自動的にリンクされるということです.<br>
-	</div></article><br>
+
+	<h3>Windowsリソースファイルの指定</h3>
+<br>
+	Windowsではrcファイル(リソースファイル)と呼ばれるものが存在します。
+<br><br>
+	このセクションではmkfgenによって扱うrcファイルの名前を明示的に列挙できます。
+	しかしこれが空でもmkfgenは自動的にrcファイルを認識して、この情報を生成されるMakefileに補充します。
+	万一この自動認識がうまくいかないケースが発生した場合はこのセクションで明示的に指定してください。
+<br><br>
+	特にproduct_list においてexec指定された実行ファイル名とrc名が一致する場合、これらは自動的に関連付けられます。
+	例えば product_list において exec player main.cpp と指定された場合、rcファイルの名前が player.rc の場合は
+	特に何も指定せずとも player.rc は playerに自動的にリンクされるということです。
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section rc_list end -->
+
+
+<a name=submkf_list></a>
+<h1 class="title">submkf_listセクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
+
+	<h3>カレントディレクトリのMakefileから子ディレクトリのMakefileを自動的に実行する</h3>
 <br>
-
-
-<a name=sublibs_list></a>
-<h1 class="title">sublibs_listセクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
-	<article class="message is-dark"><br>
-<div class="message-header">
-サブディレクトリのサブライブラリ</div><div class="message-body">
-		このセクションはサブディレクトリにサブライブラリがある場合にのみ使用します.<br>
-		(このサブライブラリとは、例えばlibZnkが内包するzlibのようなものです).<br>
+	このセクションは子ディレクトリにMakefileがあり、それをカレントディレクトリのMakefileから自動的に実行したい場合に使用します。
+	このセクションを指定しなくても、子ディレクトリのMakefileは手動で実行可能ですが、
+	その実行が面倒な場合に指定するということです。
+<br><br>
+	セクション内では子ディレクトリの相対パスを列挙します。
+	ただし、「.」や「..」を含む相対パスや、絶対パスを指定することはできません。
+	またディレクトリ区切り文字(DSP)はWindowsの場合であっても「/」を使用可能です。
+<br><br>
+	<div class=box>
+		<u><b>例</b></u>
+<br><br>
+			
+	
+<pre class=hljs><code class="language-myf">@@L submkf_list
+rrk_pkg/std
+my_test
+@@.
+</code></pre>
+	
 		<br>
-		サブディレクトリおよびサブライブラリの名前を指定することでそれらのビルドとリンクをすることができます.<br>
-		以下の記法になります.<br>
-		<br>
-		<div class=box><div class=MstyCode>submkf_dir sublib_name</div></div>
-	<br>
-		左側はサブディレクトリの名前です.<br>
-		右側はサブディレクトリ内に生成されるサブライブラリの名前です.<br>
-		<br>
-		<a class=MstyElemLink id=sublibs_list_detail_btn onClick="MstyUI_detailBtn('sublibs_list_detail_tgt', 'sublibs_list_detail_btn', '参考', '閉じる');">参考</a><br><div id=sublibs_list_detail_tgt class=MstyUnvisible><div class=box><u><b>参考</b></u><br><br>
-			親となるMakefileからサブディレクトリのMakefileへ実行の制御を移すとき、
-			この実行のトリガーとなるtarget名を親となるMakefile内で指定しておかなければなりません.<br>
-			mkfgenでは、このtarget名を submkf_{X} という形式でMakefile内に作り出すルールとなっています.<br>
-			このXに相当する部分としてsubmkf_dirが使われます.<br>
-		</div><br></div>
-	</div></article><br>
+		上記はrarakuのmkfgen.myfより抜粋したものを少し修正したものです。
+		子ディレクトリrrk_pkg/std、my_test内にもそれぞれ独自のMakefileが存在するものとします。
+		このとき、カレントディレクトリにおけるMakefileを実行すれば、rrk_pkg/std、my_test内のMakefileも自動的に実行されます
+		（そのような挙動をするMakefileをmkfgenがカレントディレクトリ内に生成します）。
+<br><br>
+		またmakeコマンドに引数を指定した場合、その引数は子ディレクトリのMakefileにも継承された形で実行されます。
+		例えばカレントディレクトリにおいて、「make -f Makefile_linux.mak clean」を実行した場合、
+		各々の子ディレクトリにおいても、「make -f Makefile_linux.mak clean」を実行します。
+	</div>
+<br>
+	<div class=box>
+		<font color=red>Ver2.2以前にあった sublibs_list セクションは、Ver2.3では廃止となりました。</font>
+<br><br>
+		この sublibs_list セクションは、サブディレクトリにサブライブラリをビルドするMakefileがあり、
+		かつサブディレクトリおよびサブライブラリの名前を指定することでそれらのビルドとリンクを同時に行えるというものでしたが、
+		以下の理由でこれは廃止となりました。
+<br><br>
+		<ul>
+			<li>sublibs_listでは、「ライブラリにライブラリを登録する」ようなリンクを行っていたが、
+				MinGW64などこのようなリンクが機能しないコンパイラが普通に存在する</li>
+			<li>sublibs_listでは、nmakeにおいてはカレントディレクトリ直下のサブディレクトリのみで有効であった（2階層以上のサブディレクトリに対しては不可であった）</li>
+			<li>sublibs_listでは、サブディレクトリ内に生成されるオブジェクトまで参照するため、出力されるMakefile内を必要以上に煩雑にする</li>
+		</ul>
+<br>
+		カレントディレクトリのMakefileから子ディレクトリのMakefileを自動的に実行したい場合は、替わりにsubmkf_listを使用してください。
+		ただしsubmkf_listでは子ディレクトリ内でサブライブラリを作り、それを所定の場所にインストールすることはできますが、
+		（sublibs_listのように）それをカレントディレクトリ内において自動的にリンクするまでの処理は行われません。
+		このリンクは、必要であればカレントディレクトリのMakefileにおいて、通常のリンカオプションにより指定する形で行ってください。
+	</div>
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section submkf_list end -->
 
 
 <a name=install_data_list></a>
 <h1 class="title">install_data_listセクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
-	<article class="message is-dark"><br>
-<div class="message-header">
-インストール時にコピーするファイル群</div><div class="message-body">
-		単にコピーしてインストールするデータファイル群を指定できます.<br>
-		次のようにインストール元としてワイルドカードを指定することもできます.<br>
-		<div class=box><div class=MstyCode>template/*.mak</div></div>
-		<br>
-		このときインストール先として、install_dir配下にtemplateディレクトリが自動的に生成され、
-		拡張子がmakの全ファイルがそこへコピーインストールされます.<br>
+
+	<h3>インストール時にコピーするファイル群</h3>
+<br>
+	<font color=red>このセクションはVer2.3より非推奨となりました。替わりにinstall_scriptを使うことが推奨されます。</font>
+<br><br>
+	インストール時、単にファイルをコピーするだけで済むデータファイル群を指定できます。
+	次のようにインストール元としてワイルドカードを指定することもできます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">@@L install_data_list
+template/*.mak
+@@.
+</code></pre>
+	
+	<br>
+	このときインストール先として、install_dir配下にtemplateディレクトリが自動的に生成され、
+	拡張子がmakの全ファイルがそこへコピーインストールされます。
+<br><br>
+	<div class=box>
+		インストール元の指定では<b>ディレクトリ</b>に対してワイルドカードを使用してはいけません。
+		上記の例では template の部分でワイルドカードは使用できません。
+		ワイルドカードが使用できるのはファイルに対してのみとなります。
+		ワイルドカードの使用は上記のように拡張子を指定する単純な用途にしておくことを強くお勧めします。
+		特にWindows(DOS)環境において、複雑な指定は問題が生じることがあります
+		（これがVer2.3よりこのセクションを非推奨とする理由です）。
+	</div>
+<br>
+	以下のようにスペース区切りでインストール先のディレクトリを明示的に与えることもできます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">@@L install_data_list
+template/*.mak share
+@@.
+</code></pre>
+	
+	<br>
+	このときinstall_dir配下に(templateディレクトリではなく)shareディレクトリが自動的に生成され、
+	拡張子がmakであるような全てのファイルがそこへコピーされます。
+<br><br>
+	<div class=box>
+		インストール先の指定ではワイルドカードを使用してはいけません。
+	</div>
+<br>
+	<a name=AName_install_data_list_0></a><script type="text/javascript">var st_install_data_list_0_group_id_ary = [ "install_data_list_0" ];</script>
+<a class=MstyDetailLink id=install_data_list_0_btn onClick="if( MstyUI_selectTab( st_install_data_list_0_group_id_ary, this.id ) ){location.href = '#AName_install_data_list_0';}">参考: DOSにおける3文字拡張子とワイルドカードの問題について</a>
+<span id=install_data_list_0 class=MstyUnvisible>
+	<div class=box>
+		LinuxなどのShellと比べると信じられないことですが、DOSでは例えば *.xls は 拡張子 xls だけでなく xlsx や xlsxx という
+		拡張子にもマッチします。この現象は拡張子が3文字の場合のみに起きます。
+		さらには *.xls ではなく *xls と指定しても同様のことが起きます。
+<br><br>
+		一方拡張子が3文字以外の場合ではこの現象は起きません。
+		例えば *.rb の場合は *.rbx や *.rbxx にマッチするようなことは起きません。
+<br><br>
 		<div class=box>
-			インストール元の指定では<b>ディレクトリ</b>に対してワイルドカードを使用してはいけません.<br>
-			上記の例では template の部分でワイルドカードは使用できません.<br>
-			ワイルドカードが使用できるのはファイルに対してのみとなります.<br>
-			ワイルドカードの使用は上記のように拡張子を指定する単純な用途にしておくことを強くお勧めします.<br>
-			特にWindows(DOS)環境において、複雑な指定は問題が生じることがあります.<br>
+			<u><b>例</b></u>
+<br><br>
+			test_xl test_xls test_xlsx test_xlsxx<br>
+			test.xl test.xls test.xlsx test.xlsxx<br>
+			というファイルがあるとする。
+<br><br>
+			dir /b にワイルドカードを指定すると展開結果は以下のようになる。
+<br><br>
+				
+	
+<pre class=hljs><code class="language-dos">dir /b test_* : test_xl test_xls test_xlsx test_xlsxx
+dir /b *_xl   : test_xl
+dir /b *_xls  : test_xls
+dir /b *_xlsx : test_xlsx
+dir /b *_xl*  : test_xl test_xls test_xlsx test_xlsxx
+dir /b *_xls* : test_xls test_xlsx test_xlsxx
+
+dir /b test.* : test.xl test.xls test.xlsx test.xlsxx
+dir /b *.xl   : test.xl
+dir /b *.xls  : test.xls test.xlsx test.xlsxx (problem1!)
+dir /b *.xlsx : test.xlsx
+dir /b *.xl*  : test.xl test.xls test.xlsx test.xlsxx
+dir /b *.xls* : test.xls test.xlsx test.xlsxx
+
+dir /b *xl    : test_xl test.xl
+dir /b *xls   : test_xls test.xls test.xlsx test.xlsxx (problem2!)
+</code></pre>
+	
 		</div>
-		<br>
-		以下のようにスペース区切りでインストール先のディレクトリを明示的に与えることもできます.<br>
-		<div class=box><div class=MstyCode>template/*.mak share</div></div>
-		<br>
-		このときinstall_dir配下に(templateディレクトリではなく)shareディレクトリが自動的に生成され、
-		拡張子がmakの全ファイルがそこへコピーインストールされます.<br>
-		<div class=box>
-			インストール先の指定ではワイルドカードを使用してはいけません.<br>
-		</div>
-	<br>
-		<a class=MstyElemLink id=install_data_list_detail_btn onClick="MstyUI_detailBtn('install_data_list_detail_tgt', 'install_data_list_detail_btn', 'DOSにおける3文字拡張子とワイルドカードの問題について', '閉じる');">DOSにおける3文字拡張子とワイルドカードの問題について</a><br><div id=install_data_list_detail_tgt class=MstyUnvisible><div class=box><u><b>DOSにおける3文字拡張子とワイルドカードの問題について</b></u><br><br>
-				LinuxなどのShellと比べると信じられないことですが、
-				DOSでは例えば *.xls は 拡張子 xls だけでなく xlsx や xlsxx という拡張子にもマッチします.<br>
-				この現象は拡張子が3文字の場合のみに起きます. 一方拡張子が3文字以外の場合ではこの現象は起きません.<br>
-				例えば *.rb の場合は *.rbx や *.rbxx にマッチするようなことは起きません.<br>
-				さらには *.xls ではなく *xls と指定しても同様のことが起きます.<br>
-				 <br>
-				<div class=box>
-					<u><b>例</b></u><br>
-				 	test_xl test_xls test_xlsx test_xlsxx<br>
-				 	test.xl test.xls test.xlsx test.xlsxx<br>
-					というファイルがあるとする.<br>
-	<br>
-					dir /b にワイルドカードを指定すると展開結果は以下のようになる.<br>
-				<div class=box><div class=MstyCode>
-				dir /b test_* : test_xl test_xls test_xlsx test_xlsxx<br>
-				dir /b *_xl   : test_xl<br>
-				dir /b *_xls  : test_xls<br>
-				dir /b *_xlsx : test_xlsx<br>
-				dir /b *_xl*  : test_xl test_xls test_xlsx test_xlsxx<br>
-				dir /b *_xls* : test_xls test_xlsx test_xlsxx<br>
-				<br>
-				dir /b test.* : test.xl test.xls test.xlsx test.xlsxx<br>
-				dir /b *.xl   : test.xl<br>
-				dir /b *.xls  : test.xls test.xlsx test.xlsxx (problem1!)<br>
-				dir /b *.xlsx : test.xlsx<br>
-				dir /b *.xl*  : test.xl test.xls test.xlsx test.xlsxx<br>
-				dir /b *.xls* : test.xls test.xlsx test.xlsxx<br>
-				<br>
-				dir /b *xl    : test_xl test.xl<br>
-				dir /b *xls   : test_xls test.xls test.xlsx test.xlsxx (problem2!)<br>
-			</div></div>
-				</div>
-				 <br>
-				このように3文字の拡張子に絡む場合のみ奇妙な動作を起こします.<br>
-				(8-3短縮ファイル名時代の名残のようです).<br>
-	<br>
-				 mkfgen では、一応この問題を救済してあります.<br>
-				 この問題が起こり得るケースにおいて生成されるMakefileは
-				 for /f in と dir /b と findstrを駆使したDOSのコードを生成するようにしています.<br>
-			</div><br></div>
-	</div></article><br>
+<br>
+		このように3文字の拡張子に絡む場合のみ奇妙な動作を起こします
+		(8-3短縮ファイル名時代の名残のようです)。
+<br><br>
+		 mkfgen では、一応この問題を救済してあります。
+		 この問題が起こり得るケースにおいて生成されるMakefileは、
+		 for /f in と dir /b と findstrを駆使したDOSのコードを生成するようにしています。
+<br><br>
+		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_install_data_list_0_group_id_ary, 'install_data_list_0_btn' );location.href = '#AName_install_data_list_0';">Close</a>
+	</div>
+	</span>
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section install_data_list end -->
+
+
+<a name=install_script></a>
+<h1 class="title">install_scriptセクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
+
+	<h3>インストールスクリプトの概要</h3>
 <br>
+	このセクションはVer2.3より、導入されました。
+<br><br>
+	インストールを（非常に原始的なものではありますが）スクリプトを用いて行うことができるというものになります。
+	また従来までのinstall_data_listと似た簡潔な書式もサポートします。
+	現在次のようなコマンドがサポートされています。
+<br><br>
+	<table>
+	<tr><th>コマンド</th><th>引数</th><th>機能</th></tr>
+	<tr class="MstyItemEvn"><td>install                   </td><td>src_dir dst_dir filters</td><td>filtersにマッチするファイルをコピー</td></tr>
+	<tr class="MstyItemEvn"><td>install_q                 </td><td>src_dir dst_dir filters</td><td>filtersにマッチするファイルをコピー(quiteモード)</td></tr>
+	<tr class="MstyItemEvn"><td>install_v                 </td><td>src_dir dst_dir filters</td><td>filtersにマッチするファイルをコピー(verboseモード)</td></tr>
+	<tr class="MstyItemEvn"><td>auto(:src_dir&amp;dst_dir)</td><td>filters                </td><td>filtersにマッチするファイルをコピー</td></tr>
+	<tr class="MstyItemEvn"><td>copy                      </td><td>src_file dst_path      </td><td>src_fileをdst_pathへコピー</td></tr>
+	<tr class="MstyItemEvn"><td>copy_q                    </td><td>src_file dst_path      </td><td>src_fileをdst_pathへコピー(quiteモード)</td></tr>
+	<tr class="MstyItemEvn"><td>copy_v                    </td><td>src_file dst_path      </td><td>src_fileをdst_pathへコピー(verboseモード)</td></tr>
+	</table>
+<br><br>
+	これらはinstall_scriptセクションに行単位で記述します。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">@@L install_script
+auto ./config*.myf ./hosts.myf ./target.myf
+auto ./moai_without_*.bat ./moai_for_*.sh
+auto ./vtag ./cert.pem
+auto:default/filters *.myf
+auto:templates *.html *.rrkh
+install my_proj/src $(ZNK_INSTALL_DIR)/install_test "*.dll" "*.so"
+@@.
+</code></pre>
+	
+	<br>
+	<h3>installコマンド(フィルターがファイル名だけのケース)</h3>
+<br>
+	installコマンドは少なくとも3つ以上の引数をとります。
+	最初の引数はインストール元のディレクトリのパスです（絶対パス/相対パスのいずれでも構いません）。
+	2番目の引数はインストール先のディレクトリのパスです（絶対パス/相対パスのいずれでも構いません）。
+	3番目以降の引数はフィルターであり、大抵の場合ワイルドカードとともに指定します（これは相対パスでなければなりません）。
+	例えば拡張子がsoのファイルをインストールして欲しいなら"*.so"のように指定します。
+<br><br>
+	<div class=box>
+		ただし絶対パスでの指定はOS依存な部分を含んでしまいます。
+		プラットフォーム独立な指定を行うというのがmkfgenのそもそものコンセプトですが、
+		絶対パスをそのまま指定するとそのコンセプトを殺してしまいます。
+		そのため大抵の場合、パスの中でOS依存な部分を環境変数で覆い隠す形で指定するのが望ましいです。
+		上の例で $(ZNK_INSTALL_DIR) などの環境変数を含むのもそのためです。
+<br><br>
+		尚、ほぼ同様の理由でディレクトリの区切り記号も「/」を使うのが望ましいです
+		（install_scriptにおいてはWindowsで「/」を使っても全く問題ありません）。
+		Windowsの「\」記号でも一応認識はしますがこちらの使用は推奨しません。
+		「\」の使用が望ましくない状況はいくつか想定できます。
+		例えばShift JISで「表」という漢字を含んだパス名があった場合、この「表」は文字コードとして「\」を含むため、
+		この位置でディレクトリ区切り記号として誤認識される恐れがあります（因みに「/」ではこの種の問題が存在しません）。
+	</div>
+<br>
+	フィルターを複数指定することも可能ですが、その場合それぞれをダブルクォートで囲って指定します。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">install my_proj/src $(ZNK_INSTALL_DIR)/install_test "*.dll" "*.so"
+</code></pre>
+	
+	<br>
+	上記の例ではmy_proj/srcディレクトリ配下にある拡張子がdllとsoのファイルをすべて$(ZNK_INSTALL_DIR)/install_test配下へ
+	そのディレクトリの構造は維持しながらコピーします。
+<br><br>
+	フィルターにおいて使用できるワイルドカードは一つにつき最大一つまでです。
+	例えば以下のように一つのフィルターの中に二つのワイルドカードを指定することはできません。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">install my_proj/src $(ZNK_INSTALL_DIR)/install_test "abc*def*.dll" "*.so"
+</code></pre>
+	
+	<br>
+	上記の "abc*def*.dll" ではワイルドカードが2つ使われているため、これは意図した通りに機能はしません。
+<br><br>
+	一方、フィルターにおいてワイルドカードを一つも使わなかった場合、厳密にその文字列と一致するファイル名のファイルのみがコピーされます。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">install my_proj/src $(ZNK_INSTALL_DIR)/install_test "raraku"
+</code></pre>
+	
+	<br>
+	上記の例ではファイル名がrarakuとなっているファイルのみがコピーされます。
+	この時、もしもrarakuというファイルが複数存在する場合、それらはすべてコピーされることに注意してください。
+<br><br>
+	<div class=box>
+		逆に一つも存在しない場合は単に何もしません。
+		これはエラーともみなされないため、エラーメッセージ等も表示されません。
+	</div>
+<br>
+	例えばmy_proj/src配下のディレクトリ構造が以下のようであったとしましょう。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">my_proj/src/raraku
+my_proj/src/test/raraku
+my_proj/src/tmp/raraku
+</code></pre>
+	
+	<br>
+	この場合、上記の3つのrarakuファイルはすべてコピーされ、しかもその構造は維持しますのでそれぞれ以下のような配置でコピーされます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">$(ZNK_INSTALL_DIR)/install_test/raraku
+$(ZNK_INSTALL_DIR)/install_test/test/raraku
+$(ZNK_INSTALL_DIR)/install_test/tmp/raraku
+</code></pre>
+	
+	<br>
+	上記はmy_proj/src配下のサブディレクトリの構造が$(ZNK_INSTALL_DIR)/install_test配下へそのままコピーされたような結果となっています。
+<br><br>
+	これは例えばワイルドカードを指定した場合でも同様の挙動となります。
+	今度は以下のようなコマンドを考えます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">install my_proj/src $(ZNK_INSTALL_DIR)/install_test "*.js"
+</code></pre>
+	
+	<br>
+	そしてmy_proj/src配下のディレクトリ構造が以下のようであったとしましょう。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">my_proj/src/config.js
+my_proj/src/test/secret.js
+my_proj/src/tmp/config_cgi.js
+</code></pre>
+	
+	<br>
+	この場合、上記の3つのjsファイルはすべてコピーされ、しかもその構造は維持しますのでそれぞれ以下のような配置でコピーされます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">$(ZNK_INSTALL_DIR)/install_test/config.js
+$(ZNK_INSTALL_DIR)/install_test/test/secret.js
+$(ZNK_INSTALL_DIR)/install_test/tmp/config_cgi.js
+</code></pre>
+	
+	<br>
+	このように"*.js"と指定するだけでその配下を再帰的に探索し、マッチするファイルをすべてコピーするわけです。
+	この仕様は多くの場合便利ではあるのですが、場合によってはコピーして欲しくないファイルまでコピーされる場合があります。
+	例えば上記でsecret.jsだけをコピーしたくないとします。
+	この場合、フィルターの条件を厳しくして例えば以下のようにすれば"secret.js"は除外されることになります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">install  my_proj/src $(ZNK_INSTALL_DIR)/install_test "config*.js"
+</code></pre>
+	
+	<br>
+	<h3>installコマンド(フィルターにディレクトリが含まれるケース)</h3>
+<br>
+	フィルターの頭に"./"を付けることで、再帰的な探索を抑制することができます。
+<br><br>
+	前項で取上げた例をもう一度考えましょう。
+	my_proj/src配下のディレクトリ構造が以下のようであるものとし、secret.jsだけをコピー対象から除外したいとします。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">my_proj/src/config.js
+my_proj/src/test/secret.js
+my_proj/src/tmp/config_cgi.js
+</code></pre>
+	
+	<br>
+	secret.jsは（インストール元の）testディレクトリにあるわけですから、そのディレクトリを避ける形で記述してもよいわけです。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">install my_proj/src     $(ZNK_INSTALL_DIR)/install_test     "./*.js"
+install my_proj/src/tmp $(ZNK_INSTALL_DIR)/install_test/tmp "./*"
+</code></pre>
+	
+	<br>
+	上記の例ではフィルターの最初に"./"という文字列が付加されています。
+	この場合、再帰的な探索はされずそのインストール元ディレクトリの直下だけが探索対象となります。
+	例えば上記の例の1行目ではmy_proj/src直下の「拡張子がjsのファイル」のみがコピーされますし、
+	2行目ではmy_proj/src/tmp直下の全てのファイルがコピーされます。
+	フィルターで "*" としておりますので、特に篩に掛けられることなくすべてのファイルがコピーされますが、
+	このときコピーされるのはあくまでmy_proj/src直下のファイルのみであり、それより深いディレクトリにあるものはコピーされないことがここでのポイントです。
+	また2行目ではインストール元のみならずインストール先のディレクトリでもtmpを付加しておかなければならないことに注意しましょう。
+<br><br>
+	フィルターの先頭が"./"で始まる場合、その後ろはディレクトリではなく必ずファイルでなければなりません。
+	例えば以下をご覧下さい。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">install my_proj/src $(ZNK_INSTALL_DIR)/install_test "./tmp/*.js"
+</code></pre>
+	
+	<br>
+	上記のように指定してもmy_proj/src/tmpディレクトリ直下の"*.js"ファイルのみがコピーされるという挙動とはなりません
+	（この場合、「tmp/*.js」自体を<b>ファイル名</b>とみなしてマッチングを行うため、結果的にマッチしません）。
+	my_proj/src/tmpディレクトリ直下の"*.js"ファイルだけをコピーしたいならば、
+	インストール元とインストール先のディレクトリで明示的にその指定をし、フィルターの方は単なるファイル名としておかなければなりません。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">install my_proj/src/tmp  $(ZNK_INSTALL_DIR)/install_test/tmp  "./*.js"
+</code></pre>
+	
+	<br>
+	一方、フィルターの先頭が"./"で始まらない場合、その後ろにディレクトリが含まれていても構いません。
+	ただしその場合でも最後はファイルである必要があります。
+	例えば以下をご覧下さい。
+	my_proj/src配下のディレクトリ構造が以下のようであるものとします。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">my_proj/src/raraku
+my_proj/src/test/raraku
+my_proj/src/test/tmp/raraku
+my_proj/src/tmp/raraku
+my_proj/src/lib/raraku
+my_proj/src/lib/tmp/raraku
+</code></pre>
+	
+	<br>
+	含まれているファイル名が全部rarakuというかなり変な例ですが、ここで以下のコマンドを実行したとします。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">install my_proj/src  $(ZNK_INSTALL_DIR)/install_test "tmp/raraku"
+</code></pre>
+	
+	<br>
+	このとき、最後が「tmp/raraku」で終わるようなパターンのパス名のみがマッチし、
+	それに該当するファイルrarakuが（その構造を維持しつつ）コピーされます。
+	つまり上記の例では、「my_proj/src/test/tmp/raraku」「my_proj/src/tmp/raraku」「my_proj/src/lib/tmp/raraku」がこれにマッチし、
+	これらが最終的に以下のようにコピーされます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">$(ZNK_INSTALL_DIR)/install_test/test/tmp/raraku
+$(ZNK_INSTALL_DIR)/install_test/tmp/raraku
+$(ZNK_INSTALL_DIR)/install_test/lib/tmp/raraku
+</code></pre>
+	
+	<br>
+	ただ、この指定方法は先頭に"./"を付ける方法より挙動がわかりにくいため、あまり使う機会はないかもしれません。
+<br><br>
+	<h3>install_q, install_vコマンド</h3>
+<br>
+	コピー時のファイル表示を一切抑制したい（quiteモードにしたい）場合、installコマンドの替わりに install_q コマンドを使いましょう。
+	逆に内部での処理についてもっと詳細に表示して欲しい（verboseモードにしたい）場合、install_v コマンドを使いましょう。
+	これらの後ろに与える引数は install コマンドと全く同じです。
+	またエラー発生時では(特殊なシステムコマンドなどを使っていない限り）通常その時点でmakeの実行は中断されます（make_worldでの実行の場合、何かキーを押すと同じMakefileについてmakeをリトライします）。
+<br><br>
+	<h3>autoコマンド</h3>
+<br>
+	installコマンドはインストール元とインストール先のディレクトリを完全に指定するため、指定が長くなりがちになります。
+	しかしほとんどの場合、インストール元はカレントディレクトリ、
+	インストール先はconfigセクションで指定したinstall_dirやinstall_data_dirであるわけです。
+	autoコマンドではこれを簡潔に記述できます。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">auto *.js
+</code></pre>
+	
+	<br>
+	上記の例で「*.js」の部分はフィルターです。
+	autoコマンドではダブルクォートで囲う必要はありません。
+	この例ではカレントディレクトリ配下にある拡張子がjsのすべてのファイルをconfigセクションで指定したinstall_dir配下へ再帰的にコピーします
+	（ただしinstall_data_dirが指定されている場合、install_data_dir配下へコピーします）。
+<br><br>
+	<div class=box>
+		これはinstallコマンドで書けば、以下のような処理と同じです
+		（以下で$(INSTALL_DIR)はMakefile中での変数を示しており、その値はinstall_dirで指定したものとなります）。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-bash">install . $(INSTALL_DIR) "*.js"
+</code></pre>
+	
+		<br>
+		分かりにくいですが、キーワードinstallの直後に「.」（カレントディレクトリを意味する）があることにも注意してください。
+	</div>
+<br>
+	autoコマンドではさらにインストール元（ただしカレントディレクトリに限る）とインストール先に共通して存在するサブディレクトリがある場合に、
+	その記述を一回で済ませることができます。
+	これは「auto:サブディレクトリのパス」という書式となります（「:」の前後にスペースなどを入れてはいけません）。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">auto:tmp *.js
+</code></pre>
+	
+	<br>
+	上記の例ではカレントディレクトリのtmpサブディレクトリ配下にあるすべての「*.js」ファイルを
+	install_dir(またはinstall_data_dir)直下のtmpディレクトリ配下へ再帰的にコピーします。
+	このときinstall_dir(またはinstall_data_dir)直下にtmpディレクトリが存在しない場合は自動的に作成されます。
+<br><br>
+	<div class=box>
+		これはinstallコマンドで書けば、以下のような処理と同じです
+<br><br>
+			
+	
+<pre class=hljs><code class="language-bash">install tmp $(INSTALL_DIR)/tmp "*.js"
+</code></pre>
+	
+	</div>
+<br>
+	インストール元がカレントディレクトリではない場合もあるかもしれません。
+	その場合、インストール元のディレクトリを明示的に指定します。
+	また場合はインストール先のサブディレクトリも明示的に指定しなければなりません。
+	これはインストール元の指定に続けて「&amp;」を記述し、その直後にインストール先のサブディレクトリを指定する形になり、
+	全体として「auto:インストール元のサブディレクトリ&amp;インストール先のサブディレクトリ」という書式となります（「&amp;」の前後にスペースなどを入れてはいけません）。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">auto:src/documents&amp;public *.html *.js
+</code></pre>
+	
+	<br>
+	上記の例ではカレントディレクトリのsrc/documentsサブディレクトリ配下にあるすべての「*.html」と「*.js」ファイルを
+	install_dir(またはinstall_data_dir)直下のpublicディレクトリ配下へ再帰的にコピーします。
+	このときinstall_dir(またはinstall_data_dir)直下にpublicディレクトリが存在しない場合は自動的に作成されます。
+<br><br>
+	<div class=box>
+		これはinstallコマンドで書けば、以下のような処理と同じです
+<br><br>
+			
+	
+<pre class=hljs><code class="language-bash">install src/documents $(INSTALL_DIR)/public "*.html" "*.js"
+</code></pre>
+	
+	</div>
+<br>
+	インストール先のサブディレクトリの指定の後ろにさらに「&amp;」を続けることで、インストール元とインストール先の共通サブディレクトリを指定することもできます。
+	このとき全体として「auto:インストール元のサブディレクトリ&amp;インストール先のサブディレクトリ&amp;共通サブディレクトリ」という書式となります（「&amp;」の前後にスペースなどを入れてはいけません）。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">auto:src/documents&amp;public&amp;subdir *.html *.js
+</code></pre>
+	
+	<br>
+	上記の例は、ディレクトリ src/documents/subdir 配下にあるすべての「*.html」と「*.js」ファイルを
+	install_dir(またはinstall_data_dir)直下の public/subdir ディレクトリ配下へ再帰的にコピーします。
+	このときinstall_dir(またはinstall_data_dir)直下に public/subdir ディレクトリが存在しない場合は自動的に作成されます。
+<br><br>
+	<div class=box>
+		これはinstallコマンドで書けば、以下のような処理と同じです
+<br><br>
+			
+	
+<pre class=hljs><code class="language-bash">install src/documents/subdir $(INSTALL_DIR)/public/subdir "*.html" "*.js"
+</code></pre>
+	
+	</div>
+<br>
+	「&amp;」を二つ伴った記述では、「インストール先のサブディレクトリ」が空である場合、それを省略して書くこともできます。
+	このとき全体として「auto:インストール元のサブディレクトリ&amp;&amp;共通サブディレクトリ」という書式となります。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">auto:src/documents&amp;&amp;subdir *.html *.js
+</code></pre>
+	
+	<br>
+	上記の例は、ディレクトリ src/documents/subdir 配下にあるすべての「*.html」と「*.js」ファイルを
+	install_dir(またはinstall_data_dir)直下の subdir ディレクトリ配下へ再帰的にコピーします。
+	このときinstall_dir(またはinstall_data_dir)直下に subdir ディレクトリが存在しない場合は自動的に作成されます。
+<br><br>
+	<div class=box>
+		これはinstallコマンドで書けば、以下のような処理と同じです
+<br><br>
+			
+	
+<pre class=hljs><code class="language-bash">install src/documents/subdir $(INSTALL_DIR)/subdir "*.html" "*.js"
+</code></pre>
+	
+	</div>
+<br>
+	autoコマンドのフィルターの意味はinstallコマンドと全く同じになります。
+	例えばフィルターに指定できるワイルドカードの数は一つのフィルターにつき最大一つまでです。
+	フィルターの先頭を"./"で始めた場合、再帰的な探索をせず、インストール元ディレクトリ直下のファイルのみが探索され、マッチしたものがコピーされます。
+	"./"で始めずかつディレクトリを含むようなフィルター指定の挙動もinstallコマンドと同様です。
+<br><br>
+	このようにautoコマンドは非常に簡潔に書けるため、ほとんどの場合installコマンドよりもこちらを使う方が便利です。
+	ただしこの簡潔さの代償として、autoコマンドではファイル名やディレクトリ名に半角スペースを含むものを指定不可である弱点があります
+	（これはダブルクォートなどで囲ってもダメです）。
+	一方、installコマンドではこのようなファイル名やディレクトリ名でもダブルクォートで囲えば対応可能です。
+<br><br>
+	<div class=box>
+		もっともそのような変なファイル名やディレクトリ名は（特にプログラミングで使われるような）通常のプロジェクトでは
+		滅多に使われるものでもないと思いますので、大抵の用途ではこの仕様でも特に問題ないでしょう
+		（どうしても必要ならinstallコマンドで代用もできます）。
+<br><br>
+		例えばWindowsなどでは「C:/Program Files」などといったディレクトリが平然と存在します。
+		このようなディレクトリへのインストールは個人的にはあまり賛同できませんが、
+		installコマンドでの指定では以下のようにダブルクォートでこれを囲めば一応問題ありません
+		（ただし勿論、C:/Program Files内へのパーミッション（書き込み）が許可された状態である必要はあります）。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-bash">install src "C:/Program Files/MyTestApp" "./config.myf"
+</code></pre>
+	
+		<br>
+		一方、autoコマンドでの指定では（半角スペースはNGですので）この「C:/Program Files」は指定できないことになります。
+		しかしconfigセクションのinstall_dirにそのような半角スペースを含むファイル名を指定するのは（推奨はしませんが）問題ありません。
+		例えばinstall_dirに「"C:/Program Files/MyTestApp"」と指定（全体を囲うこのダブルクォートは必要になります）し、
+		このディレクトリをベースにautoコマンドを使うことは可能と思われます（が、くどいようですが推奨はしません）。
+	</div>
+<br>
+	<h3>copy, copy_q, copy_v コマンド</h3>
+<br>
+	copyコマンドは2つの引数をとります。
+	最初の引数はインストール元のファイルのパスです（絶対パス/相対パスのいずれでも構いません）。
+	2番目の引数はインストール先のパスです（絶対パス/相対パスのいずれでも構いません）。
+<br><br>
+	2番目の引数の最後に「/」を付けた場合、それはインストール先のディレクトリを意味し、
+	最初の引数で指定されたファイルをそのディレクトリ直下へコピーします。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">copy my_proj/my_file $(ZNK_INSTALL_DIR)/install_test/
+</code></pre>
+	
+	<br>
+	上記の例ではmy_proj直下のmy_fileというファイルを$(ZNK_INSTALL_DIR)/install_test直下へコピーします。
+	このときinstall_testは<b>ディレクトリ</b>とみなされることがポイントです。
+	最終的にできあがるファイルは「$(ZNK_INSTALL_DIR)/install_test/my_file」となります。
+<br><br>
+	一方、最後に「/」を付けなかった場合、それはインストール先のファイルを意味し、
+	最初の引数で指定されたファイルをそのファイルへコピーします。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">copy my_proj/my_file $(ZNK_INSTALL_DIR)/install_test
+</code></pre>
+	
+	<br>
+	上記の例ではmy_proj直下のmy_fileというファイルを$(ZNK_INSTALL_DIR)/install_testというファイルとしてコピーします。
+	このときinstall_testは<b>ファイル</b>とみなされることがポイントです。
+	最終的にできあがるファイルは「$(ZNK_INSTALL_DIR)/install_test」となります。
+<br><br>
+	いずれの場合もインストール先のファイルが既に存在する場合はそれは上書きされます。
+<br><br>
+	ただしcopyコマンドでは現状ワイルドカードを指定することはできません。
+	例えば以下はエラーとなります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-bash">copy my_proj/src/* $(ZNK_INSTALL_DIR)/install_test/
+</code></pre>
+	
+	<br>
+	コピー時のファイル表示を一切抑制したい（quiteモードにしたい）場合、copyコマンドの替わりに copy_q コマンドを使いましょう。
+	逆に内部での処理についてもっと詳細に表示して欲しい（verboseモードにしたい）場合、copy_v コマンドを使いましょう。
+	これらの後ろに与える引数は copy コマンドと全く同じです。
+	ただしquiteモードであってもエラー発生時には通常と同じエラーメッセージが表示されます。
+	またエラー発生時では(特殊なシステムコマンドなどを使っていない限り）通常その時点でmakeの実行は中断されます（make_worldでの実行の場合、何かキーを押すと同じMakefileについてmakeをリトライします）。
+<br><br>
+	<a name=AName_install_script_0></a><script type="text/javascript">var st_install_script_0_group_id_ary = [ "install_script_0" ];</script>
+<a class=MstyDetailLink id=install_script_0_btn onClick="if( MstyUI_selectTab( st_install_script_0_group_id_ary, this.id ) ){location.href = '#AName_install_script_0';}">参考: install_scriptが呼び出すコマンドの実体</a>
+<span id=install_script_0 class=MstyUnvisible>
+	<div class=box>
+		このスクリプトは実際には内部で gslconv が呼び出されて実行されます。
+		スクリプトの各行は（autoなど特殊なものを除いては）、gslconv -extra より後ろの引数に相当します。
+<br><br>
+		DOSにはxcopyコマンド、UNIXにはcpコマンドがデフォルトで付属しますから、単にファイルのコピーならばこれで間に合いますが、
+		ディレクトリ配下の再帰的なコピーについて、xcopyコマンドはちょっと厄介な問題が存在します(UNIXのcpコマンドは全く問題ありません)。
+		xcopyコマンドでは、ディレクトリ配下の再帰的なコピーは /E オプションを付けて行いますが、
+		このオプションを付けてしまうと、万一インストール元がファイルであった場合、かなり邪悪な挙動をします。
+		これを避けるため、xcopy /E ではインストール元がファイルなのかディレクトリなのかを常に気に掛けながら使用しなければなりません。
+		これが煩わしいため、我々はMakefile内で xcopy /E を使うことを極力避けてきました。
+<br><br>
+		とはいえディレクトリ配下の再帰的なコピーというものは、最も基本的な機能の一つです。
+		そこで Ver2.3 より、gslconvにこの機能を肩代わりさせることにしました。
+		全く新しい名前のコマンドを導入してもよかったのですが、
+		znk_projectにおける gslconvは、ユーザが特に何もしなくても確実に存在することが保証されるコマンドの一つであり、
+		またどのみち、mkfgenが生成するすべてのMakefileで確実に使われる必須コマンドでありますので、これを機能拡張した方が望ましいと考えました。
+<br><br>
+		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_install_script_0_group_id_ary, 'install_script_0_btn' );location.href = '#AName_install_script_0';">Close</a>
+	</div>
+	</span>
+<br><br>
+	<a name=AName_install_script_1></a><script type="text/javascript">var st_install_script_1_group_id_ary = [ "install_script_1" ];</script>
+<a class=MstyDetailLink id=install_script_1_btn onClick="if( MstyUI_selectTab( st_install_script_1_group_id_ary, this.id ) ){location.href = '#AName_install_script_1';}">参考: copyコマンドが用意されている意味</a>
+<span id=install_script_1 class=MstyUnvisible>
+	<div class=box>
+		ここまでの説明ですと別にcopyコマンドを使わなくてもinstallコマンドかautoコマンドがあれば十分であるように思えます。
+		実際、install_scriptセクションにおいてユーザが手動で直接指定する分にはその通りです。
+		強いて言えばinstallコマンドは若干複雑ですし、autoコマンドはあまりに簡潔過ぎるため、ちょうどその中間的な複雑さで
+		かつシステムに標準的に備わっているコピー用のコマンドと同じ語順で指定できる書式が可能というのがcopyコマンドの位置づけになるかと思います。
+<br><br>
+		copyコマンドはinstall_scriptセクションでの使用ではなくむしろその実体であるgslconvを単独で呼び出す場合を想定して用意されたものです。
+		既存のシェルスクリプトやバッチファイルと協調して処理する場合、
+		システムに標準的に備わっているコピー用のコマンドの代用として使用するケースも想定でき、
+		それを意図したものになります。
+		例えば以下のように環境変数でその実体をラップできるわけです。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-makefile">CP=cp
+CP=xcopy
+CP=gslconv -extra copy
+</code></pre>
+	
+		<br>
+		このようにして特にCPの実体が何かを意識せずに以降のMakefileの処理を記述したい場合があります。
+<br><br>
+		ただUNIX(GNU)のcpコマンドにあまり不満はないため、ぶっちゃげこれを用意した目的はWindowsのxcopyの代用です。
+		例えばxcopyではコピー時のメッセージを完全に消すことはできませんし、逆に「共有違反」エラー発生時では、
+		どのファイルについてのエラーかといった情報が表示されません。
+		後者に配慮するとかなり冗長なメッセージ表示をデフォルトにせざるを得なくなり、
+		一つ一つは細かいですが大量にファイルをコピーする場合はやはりその差は大きくなり、
+		コンパイルやリンクの情報がコピーメッセージによりスクロールしてはるか上へ流れてしまいます。
+		その辺りを改善するために用意されたものになります。
+<br><br>
+		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_install_script_1_group_id_ary, 'install_script_1_btn' );location.href = '#AName_install_script_1';">Close</a>
+	</div>
+	</span>
+<br><br>
+	<h3>mkdir, mkdir_q, mkdir_v コマンド</h3>
+<br>
+	DOSやshに存在するいわゆるmkdirコマンドと同様に使えます。
+	1つの引数をとることころもmkdirコマンドと同じです。
+	installコマンドやcopyコマンドでもディレクトリは作成されるのですが、
+	これらのコマンドは、「指定したパターンのファイルが中身として存在しないディレクトリ」の作成はスキップされます。
+	よってインストール先に空のディレクトリを作っておきたい場合はmkdirコマンドが必要になります。
+<br><br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section install_script end -->
 
 
 <a name=ignore_list></a>
 <h1 class="title">ignore_listセクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
-	<article class="message is-dark"><br>
-<div class="message-header">
-mkfgenに無視して欲しいディレクトリやファイル群</div><div class="message-body">
-		自動認識において無視するディレクトリまたはファイルを指定します.<br>
-		例えば名前が example.c というファイル、および ignores ディレクトリとobsoleteディレクトリ内に含まれるソースファイルを無視したい場合は、
-		次のように指定します.<br>
-		<div class=box><div class=MstyCode>
-			example.c<br>
-			ignores<br>
-			obsolete<br>
-		</div></div>
+
+	<h3>mkfgenに無視して欲しいディレクトリやファイル群の指定</h3>
+<br>
+	自動認識において無視して欲しいディレクトリまたはファイルを指定します。
+<br><br>
+	例えば名前が example.c というファイル、および ignores ディレクトリとobsoleteディレクトリ内に含まれるソースファイルを無視したい場合は、
+	次のように指定します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">@@L ignore_list
+example.c
+ignores
+obsolete
+@@.
+</code></pre>
+	
 	<br>
-		これにより、たとえignoresディレクトリやobsoleteディレクトリ内に拡張子が c のファイルがあったとしても、
-		それはコンパイル対象として無視されます.<br>
-	</div></article><br>
+	これにより、たとえignoresディレクトリやobsoleteディレクトリ内に拡張子が c のファイルがあったとしても、
+	それはコンパイル対象として無視されます。
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section ignore_list end -->
+
+
+<a name=only_list_mkid></a>
+<h1 class="title">only_list_{mkid}セクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
+
+	<h3>環境依存ファイルの指定</h3>
 <br>
+	特定のコンパイラにおいてのみ使用するソースファイルまたはディレクトリを指定します。
+<br><br>
+	例えば名前が example_win.c と thread_win.c というソースファイルについてはvcとmingwにおいてのみ、
+	名前が example_unix.c と thread_pthread.c というソースファイルについてはlinuxとcygwinにおいてのみとして
+	それぞれ使用したい場合は次のように指定します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">@@L only_list_vc
+example_win.c
+thread_win.c
+@@.
 
+@@L only_list_mingw
+example_win.c
+thread_win.c
+@@.
 
-<a name=only_list></a>
-<h1 class="title">only_list_{COMPILER}セクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
-	<article class="message is-dark"><br>
-<div class="message-header">
-環境依存ファイルの指定</div><div class="message-body">
-		特定のコンパイラにおいてのみ使用するソースファイルまたはディレクトリを指定します.<br>
+@@L only_list_linux
+example_unix.c
+thread_pthread.c
+@@.
+
+@@L only_list_cygwin
+example_unix.c
+thread_pthread.c
+@@.
+</code></pre>
+	
 	<br>
-		例えば名前が example_win.c と thread_win.c というソースファイルについてはvcとmingwにおいてのみ、
-		名前が example_unix.c と thread_pthread.c というソースファイルについてはlinuxとcygwinにおいてのみとして
-		それぞれ使用したい場合は次のように指定します.<br>
-		<div class=box><div class=MstyCode>
-			@@L only_list_vc<br>
-			example_win.c<br>
-			thread_win.c<br>
-			@@.<br>
-			<br>
-			@@L only_list_mingw<br>
-			example_win.c<br>
-			thread_win.c<br>
-			@@.<br>
-			<br>
-			@@L only_list_linux<br>
-			example_unix.c<br>
-			thread_pthread.c<br>
-			@@.<br>
-			<br>
-			@@L only_list_cygwin<br>
-			example_unix.c<br>
-			thread_pthread.c<br>
-			@@.<br>
-		</div></div>
-	</div></article><br>
-	<article class="message is-dark"><br>
-<div class="message-header">
-環境依存ディレクトリの指定</div><div class="message-body">
-		ディレクトリの指定の例も示しましょう.<br>
-		例えば名前が audio/dsound ディレクトリについてはvcとmingwにおいてのみ、
-		audio/alsa ディレクトリについては linuxとcygwinにおいてのみ、
-		audio/android ディレクトリについては androidにおいてのみとして
-		それぞれ使用(すなわち配下のソースファイルをコンパイル対象に含めるという意味ですが)したい場合は次のように指定します.<br>
-		<div class=box><div class=MstyCode>
-			@@L only_list_vc<br>
-			audio/dsound<br>
-			@@.<br>
-			<br>
-			@@L only_list_mingw<br>
-			audio/dsound<br>
-			@@.<br>
-			<br>
-			@@L only_list_linux<br>
-			audio/alsa<br>
-			@@.<br>
-			<br>
-			@@L only_list_cygwin<br>
-			audio/alsa<br>
-			@@.<br>
+	<h3>環境依存ディレクトリの指定</h3>
+<br>
+	ディレクトリの指定の例も示しましょう。
+	例えば名前が audio/dsound ディレクトリについてはvcとmingwにおいてのみ、
+	audio/alsa ディレクトリについては linuxとcygwinにおいてのみ、
+	audio/android ディレクトリについては androidにおいてのみとして
+	それぞれ使用(すなわち配下のソースファイルをコンパイル対象に含めるという意味ですが)したい場合は次のように指定します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">@@L only_list_vc
+audio/dsound
+@@.
+
+@@L only_list_mingw
+audio/dsound
+@@.
+
+@@L only_list_linux
+audio/alsa
+@@.
+
+@@L only_list_cygwin
+audio/alsa
+@@.
+
+@@L only_list_android
+audio/android
+@@.
+</code></pre>
+	
 	<br>
-			@@L only_list_android<br>
-			audio/android<br>
-			@@.<br>
-		</div></div>
-		このようにプラットフォーム依存のファイルやディレクトリの指定などでこのセクションを使いますが、
-		特に指定するファイルやディレクトリがない場合はこのセクションは省略することが可能です.<br>
-		またファイルとディレクトリを混在させて指定してもかまいません.<br>
-		mkfgenは only_list で指定されたパスがファイルであるのか、あるいはディレクトリであるのかを自動認識します.<br>
-	</div></article><br>
-	<!--<br>
-	<div class=MstyComment>
-		<u><b>参考</b></u><br>
-		<br>
-		ignore_list と only_list の双方から指定されたファイルやディレクトリは<br>
-		ignore_listの指定が優先されます.<br>
-		すなわち only_list での指定は無視されてコンパイル対象に含まれません.<br>
+	このようにプラットフォーム依存のファイルやディレクトリの指定などでこのセクションを使いますが、
+	特に指定するファイルやディレクトリがない場合はこのセクションは省略することが可能です。
+	またファイルとディレクトリを混在させて指定してもかまいません。
+	mkfgenは only_list で指定されたパスがファイルであるのか、あるいはディレクトリであるのかを自動認識します。
+<br><br>
+	<div class=box>
+		ignore_list と only_list の双方から指定されたファイルやディレクトリは
+		ignore_listの指定が優先されます。
+		すなわち only_list での指定は無視されてコンパイル対象に含まれません。
 	</div>
-	--><br>
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section only_list_mkid end -->
+
+
+<a name=ignore_retrieve_mkid></a>
+<h1 class="title">ignore_{mkid}/retrieve_{mkid}セクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
+
+	<h3>mkid毎に無視して欲しいディレクトリやファイル群の指定</h3>
 <br>
+	ignore_{mkid}とretrieve_{mkid}セクションはVer2.3より、導入されました。
+<br><br>
+	無視して欲しいディレクトリやファイル群の指定については、
+	ほとんどの場合 ignore_list の指定で十分と思われますが、
+	複雑なプロジェクトの場合、mkid 毎に無視して欲しいディレクトリまたはファイルを指定する必要があるかもしれません。
+	ignore_{mkid} セクションではそれを直接指定します。
+<br><br>
+	そのような指定は only_list でも可能ではあります。
+	しかし例えばあるファイル my_unix.c を vc でのビルドのみ無視し、linux、cygwin、android、darwin では無視しない場合、
+	以下のように only_list_linux、only_list_cygwin、only_list_android、only_list_darwin すべてにおいて my_unix.c を明示的に指定する必要があります。
+	つまりこの場合、4回分も冗長な記述となります。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">@@L only_list_linux
+my_unix.c
+@@.
+@@L only_list_cygwin
+my_unix.c
+@@.
+@@L only_list_android
+my_unix.c
+@@.
+@@L only_list_darwin
+my_unix.c
+@@.
+</code></pre>
+	
+	<br>
+	一方で ignore_{mkid} での指定であれば、以下のように ignore_vc セクションに my_unix.c を指定するだけで済みます。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">@@L ignore_vc
+my_unix.c
+@@.
+</code></pre>
+	
+	<br>
+	ignore_{mkid} セクションではワイルドカード(SWC形式）を指定することもできます。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">@@L ignore_vc
+platform_*.c
+@@.
+@@L ignore_mingw
+platform_*.c
+@@.
+@@L ignore_linux
+platform_*.c
+@@.
+@@L ignore_cygwin
+platform_*.c
+@@.
+@@L ignore_android
+platform_*.c
+@@.
+@@L ignore_darwin
+platform_*.c
+@@.
+</code></pre>
+	
+	<br>
+	これは次に述べるretrieve_{mkid}セクションと組み合わせると便利な場合があります。
+<br><br>
+	<h3>mkid毎に追加して欲しいディレクトリやファイル群の指定</h3>
+<br>
+	ignore_{mkid}とは逆に、mkid毎にディレクトリやファイル群を追加したい場合、
+	retrieve_{mkid} セクションでそれを指定します。
+	例えば以下の通りです。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">@@L ignore_vc
+platform_*.c
+@@.
+@@L ignore_mingw
+platform_*.c
+@@.
+@@L ignore_linux
+platform_*.c
+@@.
+@@L ignore_cygwin
+platform_*.c
+@@.
+@@L ignore_android
+platform_*.c
+@@.
+@@L ignore_darwin
+platform_*.c
+@@.
+
+@@L retrieve_vc
+platform_win.c
+@@.
+@@L retrieve_mingw
+platform_win.c
+@@.
+@@L retrieve_linux
+platform_linux.c
+@@.
+@@L retrieve_cygwin
+platform_linux.c
+@@.
+@@L retrieve_android
+platform_linux.c
+@@.
+@@L retrieve_darwin
+platform_bsd.c
+@@.
+</code></pre>
+	
+	<br>
+	一見すると only_list_{mkid} の指定とと大差はありません
+	（むしろignore_{mkid}を指定しなくてよい分、only_list_{mkid}の方がすっきりしているともいえます）。
+	しかし only_list_{mkid} の場合、どこかのmkidで一箇所、ファイル X を指定してしまうと、
+	その他の mkid では X が自動的に使われなくなります。
+	この挙動は場合によっては煩わしいことがあるかもしれません。
+<br><br>
+	たとえば vc で試験的に ファイル X.c の使用/不使用を切り替えたいとしましょう
+	（不都合がなければ最終的にX.cを使用するものとし、不都合があれば最終的にX.cを使用しないものとします）。
+	そのような場合、retrieve_{mkid}を用いた指定では、単にretrieve_vc 内に
+	X.c を記述するかしないかで切り替えることができます。
+	シンプルに指定したmkidに足し算的な処理をするだけであり、非常に直感的です。
+<br><br>
+	しかし only_list_{mkid} での指定では、その切り替えがやや分かりにくいものとなります。
+	mkfgenの場合、特に何も指定しなければデフォルトで X.c を使用するように設定されます。
+	従ってこれを（only_list_{mkid}だけを用いて） vc だけで使われないようにするためには、
+	既に述べた通り、vc 以外のすべての only_list_{mkid} において、
+	逆に X.c を明示的に書き加えなければなりません。
+	これは指定したmkid以外のすべてのmkidにおいて、自動的に引き算的な処理が行われることに起因しますが、
+	このような場合、この挙動はやや直感に反します。
+<br><br>
+	さらに言えば、最終的に vc にも X.c を追加することが確定した場合、そのままでも機能はするものの、
+	mkfgen.myf内において極力無駄な記述を残したくないならば、
+	今度はすべてのonly_list_{mkid}からX.cを削除しなければならなくなります。
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section ignore_retrieve_mkid end -->
 
 
 <a name=src_suffix_list></a>
 <h1 class="title">src_suffix_listセクション<span class=MstyAuthor> (Section Type: @@L ラインリスト)</span></h1>
-	srcファイルとして使われる拡張子を列挙しておきます.<br>
-	例えば、c と cpp が混在している環境なら次のように指定します.<br>
+
+	<h3>mkfgenで使われる拡張子の定義</h3>
+<br>
+	src_suffix_listではsrcファイルとして使われる拡張子を指定します。
+	例えば、c と cpp が混在している環境なら次のように指定します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">c
+cpp
+</code></pre>
+	
 	<br>
-	<div class=box><div class=MstyCode>
-		c<br>
-		cpp<br>
-	</div></div>
+	Rarakuまで混在している環境なら次のように指定します。
+<br><br>
+		
+	
+<pre class=hljs><code class="language-myf">c
+cpp
+rrks rrko rrkx raraku
+</code></pre>
+	
+	<br>
+	rrksはRaraku言語のソースファイルの拡張子です。
+	rrksの場合だけ後ろに3つも色々と指定されていますが、その理由が気になる方は次の項目をお読みください。
+<br><br>
+	<h3>src_sfx, obj_sfx, exe_sfx, lang_modifierの指定</h3>
+<br>
+	現状のmkfgenにおいては、ユーザは基本的に前項で述べたC/C++/Rarakuでの指定方法を知っておけば十分です。
+	この項目ではrrksの行で指定されている後ろの3つが気になる方のためにその意味を説明します。
+<br><br>
+	src_suffix_listでは実は厳密には1行につき4つの指定を行います。
+	これは src_sfx, obj_sfx, exe_sfx, lang_modifierの4つとなります。
+	上記の例でのrrksの行では、この4つの指定を行っているということです。
+	すなわち、src_sfxがrrks、obj_sfxがrrko、exe_sfxがrrkx、lang_modifierがrarakuとなります。
+<br><br>
+	src_sfxはその言語のソースファイルにあたる拡張子です。
+	Rarakuではこれは必ずrrksとなります。
+	C/C++ではこれはcやcppです。
+<br><br>
+	obj_sfxはその言語のオブジェクトファイルにあたる拡張子です。
+	Rarakuではこれは必ずrrksとなります。
+	C/C++ではこれはoやobjです。
+<br><br>
+	exe_sfxはその言語のオブジェクトファイルにあたる拡張子です。
+	Rarakuではこれは必ずrrkxとなります。
+	C/C++ではこれは空（UNIXなどでは通常、実行バイナリに拡張子はつきません）やexeです。
+<br><br>
+	lang_modifierはその言語の種類を表す文字列でmkfgenのセクション名などに使われることがあります。
+	Rarakuではこれは必ずrarakuとなります。
+	C/C++ではこれは空となります。
+<br><br>
+	Rarakuとは異なり、C/C++の行（上記ではcとcpp）では1つしか指定を行っておりませんが、それはこれらに関しては特別に後ろ3つを省略可能だからです。
+	後ろ3つはコンパイラやプラットフォームの種類に応じて適切なものが自動的に設定されます。
+	「省略可能」と書きましたが、実際にはC/C++の場合むしろこれを指定すべきではありません。
+	後ろ3つの指定はコンパイラに依存するものとなるため、通常はこの自動設定に任せるべきです。
+	例えばobj_sfxを明示的にoと指定してしまうと、VCでは（オブジェクトファイルの拡張子がobjですので）そちらで使えなくなってしまいます。
+	よってC/C++の場合は敢えて後ろ3つを指定せず、自動的に判定させます。
+<br><br>
+	ここまでまとめますと、src_sfx, obj_sfx, exe_sfx, lang_modifierの指定では、ある程度未知の拡張子に対して
+	mkfgenを対応させるものとなります。
+	とはいえ、現状認識できるのはC/C++とRarakuのみです
+	（将来のバージョンではこの種類はもっと増えるかもしれませんが、そのための枠組みが現状では用意されているということです）。
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br>
+<br><!-- Section src_suffix_list end -->
+
 
 
 <div class="card">
@@ -1080,10 +4151,11 @@ mkfgenに無視して欲しいディレクトリやファイル群</div><div cla
 			</div>
 		</div>
 		<div class="content">
-		  <time datetime="2016-1-1">2020/12/06</time>
+		  <time datetime="2016-1-1">2022/12/11</time>
 		</div>
 	</div>
 </div>
+
 
 
 <a name=Link></a>
@@ -1094,6 +4166,7 @@ mkfgenに無視して欲しいディレクトリやファイル群</div><div cla
 	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moaiドキュメント(オンライン)</a></li>
 	<li><a class=MstyElemLink href=https://github.com/mr-moai-2016/znk_project>znk_project(github)</a></li>
 </ul><br>
+
 
 
 </div>

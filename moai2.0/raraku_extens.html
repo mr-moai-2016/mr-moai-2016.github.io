@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html><!-- master template moai -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-type" content="text/html" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type"  content="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="/msty.css"  rel="stylesheet" type="text/css" />
+	<link href="/bulma.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
+	<link rel="stylesheet" href="/js/highlightjs/github-dark.css">
+	<!-- link rel="stylesheet" href="/js/highlightjs/atom-one-dark.css" -->
+	<script src="/js/highlightjs/cpp.js"></script>
+	<script src="/js/highlightjs/javascript.js"></script>
+	<script src="/js/highlightjs/dos.js"></script>
+	<script src="/js/highlightjs/makefile.js"></script>
+	<script src="/js/highlightjs/bash.js"></script>
+	<script src="/js/highlightjs/raraku.js"></script>
+	<script type="module" src="/js/highlightjs/highlight.js"></script>
+	<script type="module">
+		import HLJS from "/js/highlightjs/highlight.js";
+		HLJS.highlightAll();
+	</script>
+	<style>
+		code {
+		    font-family: "CourierNew", "Consolas", "Courier", monospace;
+			-moz-tab-size : 4;
+			tab-size      : 4;
+		}
+	</style>
+
+</head>
+<body>
+<div class="section">
+<div class="container">
+<div class="content">
+
+<a name=TopBar></a>
+<!-- p><b><img src="/imgs/here_landmark.png"> Moai+Easter Advanced Manual</b></p -->
+<p style="height: 40px; border: 0px;"><img src="/imgs/here_landmark.png"> <b>Moai+Easter Advanced Manual</b></p>
+<a class=MstyElemLink href="/">Moai</a> 
+<a class=MstyElemLink href="/moai2.0/index.html">Manual</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
+<a class=MstyElemLink href="/announcement.html">Annoucement</a> 
+<a class=MstyElemLink href="/FAQ.html">FAQ</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/index_expert.html">ご案内</a> 
+<a class=MstyElemLink href="/moai2.0/moai_reference.html">Moaiエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/customboy_reference.html">CustomBoyエンジン</a> 
+<a class=MstyElemLink href="/moai2.0/how_to_compile.html">HowToコンパイル</a> 
+<a class=MstyElemLink href="/moai2.0/moai_cgi_developers.html">Moai CGI Developers</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/raraku1.html">Raraku言語</a> 
+<br>
+<a class=MstyElemLink href="/moai2.0/raraku1.html">Raraku言語マニュアル（前編）</a> 
+<a class=MstyElemLink href="/moai2.0/raraku2.html">Raraku言語マニュアル（後編）</a> 
+<a class=MstyElemLink href="/moai2.0/raraku_extens.html">Raraku Advanced document</a> 
+
+<a name=AtFirst></a>
+<h1 class="title">はじめに</h1>
+
+	This article summarizes the specifications for the Raraku virtual machine.
+<br>
+<br>
+
+
+
+<a name=Index></a>
+<h1 class="title">目次</h1>
+<br>
+<ul>
+	<li><b><a class=MstyElemLink href=#format_RRKX>Specifications of RRKX format</a></b></li>
+	<li><b><a class=MstyElemLink href=#Raraku_activate>Raraku Activate from C-Language</a></b></li>
+	<li><b><a class=MstyElemLink href=#Raraku_extens>Extens of Raraku</a></b></li>
+</ul><br>
+
+
+
+<a name=format_RRKX></a>
+<h1 class="title">Specifications of RRKX format</h1>
+
+	<h3>Begining</h3>
+<br>
+	The first 4 bytes of an RRKX file are "RRKX". The next 4 bytes are the version number,
+	with the first 2 bytes being the major version and the last 2 bytes being the minor version.
+	In the RRKX format, numbers are always <b>big-endian</b>. The latest version of RRKX at this stage is 1.0,
+	so this 4 byte would be 0x00 0x01 0x00 0x00.
+<br><br>
+	<h3>Header Section</h3>
+<br>
+	The next section is the header section. This section is mandatory.
+	The header section begins with HDRB and ends with HDRE.
+<br><br>
+	The first section in the header is the UST (USeType) section.
+	This declares a list of keywords (4 bytes each) indicating the type used in the header.
+	This section starts with USTB (4 bytes), followed by 4 bytes indicating the number of elements in this list.
+	This section ends with "USTE" (4 bytes).
+	For example, in the case of "<b>USTB</b>LLLXDLLX_ECHOUNKN<b>USTE</b>", the four keywords "LLXD", "LLX_", "ECHO", and "UNKN" are declared in this section.
+	These lists are in case future versions of Raraku add new keywords to the headers.
+	That is, if an older version of Raraku reads the RRKX format of a newer version of Raraku, these are to be recognizable as legitimate keywords
+	(In this way, it can be expected that older versions will have some reasonable error handling and alternative processing).
+<br><br>
+	The next section in the header is optional and is a sequence of one of the following keys.
+	<ol>
+		<li>"LLXD" Section:</li>
+		This section starts with "LLXD" (4 bytes), followed by 4 bytes indicating the size of string value.
+		This size is <b>the size of the C string including the null character</b>. For example, if the value is the string
+		"hello" (which has a strlen value of 5), the size is 6.
+		This is followed by the actual string, but since RRKX is <b>basically specified in 4-byte alignment</b>,
+		the following string is also aligned with this and any fraction less than a multiple of 4 is filled with 0x00.
+		For example, in the case of "hello", three 0x00 actually follows after the "hello" because it needs to fit into 8 bytes.
+<br><br>
+		This value is the path to the libraries that RRKX automatically imports upon loading.
+		This path is specified <b>without extension</b>. At this time, the native DLib (Dynamic link Library) associated
+		with this library is also loaded. For example, if the path to this library is "extens/kau/kau",
+		the appropriate extension is automatically appended to it and "extens/kau/kau.rrkx"
+		and the corresponding native DLibs "extens/kau/kau.dll" (for Windows) or extens/kau/kau.so" (for Linux systems) are loaded.
+<br><br>
+		<li>"LLX_" Section:</li>
+		This section starts with "LLX_" (4 bytes), followed by 4 bytes indicating the size of string value.
+		The method of specifying the size and string that follows is the same as for LLDX.
+		The meaning of the value specified in this key is almost the same as in LLDX.
+		The only difference is that native DLibs are not loaded.
+		In other words, for libraries consisting only of RRKX files, this key is used to specify their paths.
+<br><br>
+		<li>"ECHO" Section:</li>
+		This section starts with "ECHO" (4 bytes), followed by 4 bytes indicating the size of string value.
+		The method of specifying the size and string that follows is the same as for LLDX.
+		This keyword outputs the string specified as the value as an error/report message in RarakuVM.
+		It can be used for debugging purposes by developers involved in generating RRKX.
+<br><br>
+		<li>"ALTB"-"ALTE"(ALTernative) Section:</li>
+		This section starts with "ALTB" (4 bytes), followed by 4 bytes indicating the number of this list.
+		The elements of this list must always begin with the keyword (4 bytes) followed by the size of the element.
+		The keyword for each element may be an unknown keyword that will be introduced in a future version of Raraku.
+		In this case, however, the keywords must always be those specified in the USTB-USTE list.
+<br><br>
+		The RarakuVM first reads the elements in this list in order from the beginning, skipping any unsupported keywords
+		(hence the size specification is mandatory for each element).
+		Then, if it reads a supporting element, it executes that element and skips the rest. 
+		If there is no supported element, nothing is executed.
+		For example, the sequence would be as follows.
+<br><br>
+		<div class=box>
+			ALTB + 3(num)
+				+ VER3 + 6(size) + "hello" 0x00 0x00 0x00
+				+ VER2 + 5(size) + "rrkx" + 0x00 0x00 0x00 0x00
+				+ LLX_ + 15(size) + "extens/kau/kau" 0x00
+			+ ALTE
+		</div>
+<br>
+		This example specifies an ALTB-ALTE list with three elements.
+		Each element is aligned in the following order: a keyword indicating its type, the size of its entity, and its entity.
+		The last entity is aligned with the 4-byte alignment as in LLXD, and the extra bytes are filled with 0x00.
+		In this example, VER3 is first checked to see if it is supported, and if so, it is executed.
+		If not, it checks if VER2 is supported, and if so, it executes it.
+		If not, the last LLX_ is executed.
+		In other words, it is executed selectively, like an if-else statement.
+	</ol>
+<br>
+	<h3>EMDS Section</h3>
+<br>
+	The next section is the EMDS section. This section is mandatory.
+	This section starts with "EMDS" (4 bytes), followed by 4 bytes indicating the number of this list.
+	The elements of this list must always begin with the size of the element entity, and followed by its entity.
+	The entity of this element is currently a name to identify each RrkExe.
+	RrkExe is a single unit containing the execution instructions for the Raraku virtual machine,
+	originally derived from a single rrks source code or rrkh header file.
+<br><br>
+	<h3>SECB-SECE Sections</h3>
+<br>
+	The next section is a sequence of SECB-SECE Sections.
+	These section start with "SECB" (4-byte), followed by "KIND", "PKGN", "FILE", "IMPT", "EXPT", "ISGM", "CNST", "ENUM" and "TYPE.
+	These section end with "SECE" (4-byte).
+<br>
+<br><br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section format_RRKX end -->
+
+
+<a name=Raraku_activate></a>
+<h1 class="title">Raraku Activate from C-Language</h1>
+
+	<h3>Introduction</h3>
+<br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section Raraku_activate end -->
+
+
+<a name=Raraku_extens></a>
+<h1 class="title">Extens of Raraku</h1>
+
+	<h3>Introduction</h3>
+<br>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section Raraku_extens end -->
+
+
+
+<div class="card">
+	<u><b>This article was written by:</b></u><br>
+	<div class="card-content">
+		<div class="media">
+			<div class="media-left">
+				<figure class="image is-48x48">
+				<img src="/imgs/moai.png" alt="none image">
+				</figure>
+			</div>
+			<div class="media-content">
+				<p class="title is-4">Mr.Moai</p>
+				<p class="subtitle is-6">@znk project</p>
+			</div>
+		</div>
+		<div class="content">
+		  <time datetime="2016-1-1">2022/12/19</time>
+		</div>
+	</div>
+</div>
+
+
+
+<a name=Link></a>
+<h1 class="title"></h1>
+<hr>
+<ul>
+	<li><a class=MstyElemLink href=#TopBar>Top of this page</a></li>
+	<li><a class=MstyElemLink href=https://mr-moai-2016.github.io>Moai document(online)</a></li>
+	<li><a class=MstyElemLink href=https://github.com/mr-moai-2016/znk_project>znk_project(github)</a></li>
+</ul><br>
+
+
+
+</div>
+</div>
+</div>
+</body>
+</html>

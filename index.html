@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html><!-- master template moai -->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8">
+	<meta http-equiv="Content-type" content="text/html" />
 	<meta http-equiv="Content-Script-Type" content="text/javascript" />
 	<meta http-equiv="Content-Style-Type"  content="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link href="/msty.css"  rel="stylesheet" type="text/css" />
 	<link href="/bulma.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
+	<link rel="stylesheet" href="/js/highlightjs/github-dark.css">
+	<!-- link rel="stylesheet" href="/js/highlightjs/atom-one-dark.css" -->
+	<script src="/js/highlightjs/cpp.js"></script>
+	<script src="/js/highlightjs/javascript.js"></script>
+	<script src="/js/highlightjs/dos.js"></script>
+	<script src="/js/highlightjs/makefile.js"></script>
+	<script src="/js/highlightjs/bash.js"></script>
+	<script src="/js/highlightjs/raraku.js"></script>
+	<script type="module" src="/js/highlightjs/highlight.js"></script>
+	<script type="module">
+		import HLJS from "/js/highlightjs/highlight.js";
+		HLJS.highlightAll();
+	</script>
+	<style>
+		code {
+		    font-family: "CourierNew", "Consolas", "Courier", monospace;
+			-moz-tab-size : 4;
+			tab-size      : 4;
+		}
+	</style>
 
 </head>
 <body>
@@ -16,7 +38,8 @@
 <div class="content">
 
 <a name=TopBar></a>
-<p><b><img src="/imgs/here_landmark.png"> インフォメーション</b></p>
+<!-- p><b><img src="/imgs/here_landmark.png"> インフォメーション</b></p -->
+<p style="height: 40px; border: 0px;"><img src="/imgs/here_landmark.png"> <b>インフォメーション</b></p>
 <a class=MstyNowSelectedLink href="/">Moai</a> 
 <a class=MstyElemLink href="/moai2.0/index.html">Manual</a> 
 <a class=MstyElemLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
@@ -25,10 +48,8 @@
 
 <a name=AtFirst></a>
 <h1 class="title">はじめに</h1>
-<p>
 我々「全日本ネットワーク研究所(通称ZNK)」では、現在 Moaiと呼ばれるシステムを開発して皆様に提供しております.<br>
 このシステムはすべてオープンソースであり、Windows、Linux、そしてAndroid向けに開発されたものです.<br>
-</p>
 <br>
 
 
@@ -53,75 +74,62 @@
 		2026/09/12: ふたばちゃんねるにおいてHTTPSで通信した場合にeasterがクラッシュする不具合について<br>
 	</div>
 	<div class="message-body">
-		ふたばちゃんねるにおいてHTTPSで通信した場合にeasterがクラッシュする不具合が発生しています
+		ふたばちゃんねるにおいてHTTPSで通信した場合にeasterがクラッシュする不具合が発生しています<br>
 		（HTTPSではなくHTTPでアクセスした場合は問題ありません）。<br>
-		これはMoaiディレクトリ内のHTTPSの処理を行うためのライブラリ（libressl）において、
+		これはMoaiディレクトリ内のHTTPSの処理を行うためのライブラリ（libressl）において、<br>
 		HTTPS証明書の有効期間（Expire）の処理で誤判定が発生していることに起因します。<br>
-		<br>
-		Moaiアップグレードに対応するには時間が掛かりそうなため、さしあたっては、以下の手順でファイルを差し替えてください。
-		<br>
+<br>
+		Moaiアップグレードに対応するには時間が掛かりそうなため、さしあたっては、以下の手順でファイルを差し替えてください。<br>
+<br>
 		<ul>
 			<li>Moai Windows 32bit版の場合</li>
-			<br>
+<br>
 			libresslの実体ファイルはlibtls-17.dllであり、今回これが問題となっています。<br>
 			修正済みのlibtls-17.dllを用意しましたのでこれをお使いください。<br>
-			<br>
+<br>
 			まず一旦Moaiを終了します。<br>
 			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_rep/releases/download/v1.0.0/libressl-modified-win32.zip">libressl-modified-win32.zip</a>をダウンロードし、これを解凍します。<br>
-			解凍すると中にlibtls-17.dllという名前のファイルがありますので、
+			解凍すると中にlibtls-17.dllという名前のファイルがありますので、<br>
 			お使いのMoaiフォルダ（moai-v2.2-win32）内の同名のファイルをこれで上書きしてください。<br>
 			最後にMoaiをもう一度起動し、ふたばちゃんねるにおいてHTTPSによる通信が可能であることを確認してください。<br>
-			<br>
+<br>
 			<li>Moai Windows 64bit版の場合</li>
-			<br>
+<br>
 			libresslの実体ファイルはlibtls-17.dllであり、今回これが問題となっています。<br>
 			修正済みのlibtls-17.dllを用意しましたのでこれをお使いください。<br>
-			<br>
+<br>
 			まず一旦Moaiを終了します。<br>
 			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_rep/releases/download/v1.0.0/libressl-modified-win64.zip">libressl-modified-win64.zip</a>をダウンロードし、これを解凍します。<br>
-			解凍すると中にlibtls-17.dllという名前のファイルがありますので、
+			解凍すると中にlibtls-17.dllという名前のファイルがありますので、<br>
 			お使いのMoaiフォルダ（moai-v2.2-win64）内の同名のファイルをこれで上書きしてください。<br>
 			最後にMoaiをもう一度起動し、ふたばちゃんねるにおいてHTTPSによる通信が可能であることを確認してください。<br>
-			<br>
+<br>
+			<li>Moai Android版の場合</li>
+<br>
+			libresslの実体ファイルはlibtls-17.soであり、今回これが問題となっています。<br>
+			ただしAndroid版の場合、このファイルだけをピンポイントで変えるのは現状難しいです。<br>
+			新しいapk(Ver2.3)を用意しましたので、これで全体を丸ごと上書きインストールしてください。<br>
+<br>
+			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_project/releases/download/v2.3/moai-v2.3-android.apk">moai-v2.3-android.apk</a>をダウンロードし、これを直接タップしてインストールします。<br>
+			最後にMoaiを起動し、ふたばちゃんねるにおいてHTTPSによる通信が可能であることを確認してください。<br>
 		</ul>
-		<br>
-		Linux版、Android版におけるlibresslの修正ファイルについては準備中ですのでもうしばらくお待ち下さい。<br>
-		<br>
-		尚、ソースコードからビルドしてお使いの方は、znk_project/libresslを一旦完全cleanし、
-		znk_project/libressl/cryptoのMakefile内でコンパイルオプション-DSIZEOF_TIME_T=8を指定した上で、
-		libtls-17.dll（Linux版の場合はlibtls-17.so）全体を再ビルドしてください。
-		その上でMoai全体をインストールし直すことで、ひとまず問題は解消すると思います。
+<br>
+		Linux版におけるlibresslの修正ファイルについては準備中ですのでもうしばらくお待ち下さい。<br>
+<br>
+		尚、ソースコードからビルドしてお使いの方は、znk_project/libresslを一旦完全cleanし、<br>
+		znk_project/libressl/cryptoのMakefile内でコンパイルオプション-DSIZEOF_TIME_T=8を指定した上で、<br>
+		libtls-17.dll（Linux版/Android版の場合はlibtls-17.so）全体を再ビルドしてください。<br>
+		その上でMoai全体をインストールし直すことで、ひとまず問題は解消すると思います。<br>
+<br>
 	</div>
 </article>
 <br>
 <article class="message is-dark">
 	<div class="message-header">
-		2020/03/01: Moai Ver2.2.3 リリース(Android APK版のみ).<br>
+		2020/03/01: Moai Ver2.2.3 リリース<br>
 	</div>
 	<div class="message-body">
-		マイナーバージョンアップとなります.<br>
-		またこのリリースは Moai Android APK版だけの更新となりますので<br>
-		Moai PC版を使われる方は関係ありません.<br>
-<br>
-		<div class=MstyComment>
-			<img src=/imgs/moai_for_android.png><br>
-		</div>
-		<br>
-		<ul>
-			<li>Moai PC 版を使われる方<br>
-			<br>
-			バージョン2.2.2が最新版となりますのでそちらをご覧ください.<br>
-			</li>
-<br>
-			<li>Moai Android 版を使われる方<br>
-<br>
-			<a class=MstyElemLink target=_blank href=https://github.com/mr-moai-2016/znk_project/releases/download/v2.2.3/moai-v2.2.3-android.apk>moai-v2.2.3-android.apk</a>をダウンロードしてインストールを行ってください.<br>
-			詳しくは<a class=MstyElemLink target=_blank href=/moai2.0/install_android.html>Android版のインストール方法</a>をご参照ください.<br>
-<br>
-			Android版に関しては、現時点では Moai アップグレードをサポートしていません.<br>
-			</li>
-		</ul>
-		このバージョンで追加された新機能については<a class=MstyElemLink href="/announcement.html#WhatIsChanging_latest">こちら</a>にまとめてあります.<br>
+		Ver2.2系列での最終バージョンとなります.<br>
 	</div>
 </article>
 <br>
@@ -150,7 +158,7 @@
 <br>
 			<li>Moai Android 版を使われる方<br>
 <br>
-			バージョン2.2.3が最新版となりますのでそちらをご覧ください.<br>
+			バージョン2.3が最新版となりますのでそちらをご覧ください.<br>
 			Android版に関しては、現時点では Moai アップグレードをサポートしていません.<br>
 			</li>
 		</ul>
@@ -185,8 +193,8 @@
 			<li>Linux(64bit)版<br>
 			<a class=MstyElemLink target=_blank href=https://github.com/mr-moai-2016/znk_project/releases/download/v2.2/moai-v2.2-linux64.zip>moai-v2.2-linux64.zip</a><br>
 			</li>
-			<li>Android(Ver4.1 Jelly Bean以降)版<br>
-			<a class=MstyElemLink target=_blank href=https://github.com/mr-moai-2016/znk_project/releases/download/v2.2/moai-v2.2-android.apk>moai-v2.2-android.apk</a><br>
+			<li>Android(Ver4.1 Jelly Bean以降)版（これについてはVer2.3をお使いください）<br>
+			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_project/releases/download/v2.3/moai-v2.3-android.apk">moai-v2.3-android.apk</a><br>
 			</li>
 		</ul>
 <br>
@@ -197,15 +205,6 @@
 		その他の環境のダウンロードについては
 		<a class=MstyElemLink target=_blank href=https://github.com/mr-moai-2016/znk_project/releases/v2.2>こちら</a>の Assets 欄をご覧下さい.<br>
 		このバージョンで追加された新機能については<a class=MstyElemLink href="/announcement.html#WhatIsChanging_latest">こちら</a>にまとめてあります.<br>
-	</div>
-</article>
-<br>
-<article class="message is-dark">
-	<div class="message-header">
-		2019/06/21: レスポンシブWebデザインへ対応開始.<br>
-	</div>
-	<div class="message-body">
-		PCとスマホ双方での見やすさを考慮し、サイト全体をレスポンシブWebデザインに段階的に対応していく予定です.<br>
 	</div>
 </article>
 <br>

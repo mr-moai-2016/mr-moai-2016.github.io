@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html><!-- master template moai -->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8">
+	<meta http-equiv="Content-type" content="text/html" />
 	<meta http-equiv="Content-Script-Type" content="text/javascript" />
 	<meta http-equiv="Content-Style-Type"  content="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link href="/msty.css"  rel="stylesheet" type="text/css" />
 	<link href="/bulma.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
+	<link rel="stylesheet" href="/js/highlightjs/github-dark.css">
+	<!-- link rel="stylesheet" href="/js/highlightjs/atom-one-dark.css" -->
+	<script src="/js/highlightjs/cpp.js"></script>
+	<script src="/js/highlightjs/javascript.js"></script>
+	<script src="/js/highlightjs/dos.js"></script>
+	<script src="/js/highlightjs/makefile.js"></script>
+	<script src="/js/highlightjs/bash.js"></script>
+	<script src="/js/highlightjs/raraku.js"></script>
+	<script type="module" src="/js/highlightjs/highlight.js"></script>
+	<script type="module">
+		import HLJS from "/js/highlightjs/highlight.js";
+		HLJS.highlightAll();
+	</script>
+	<style>
+		code {
+		    font-family: "CourierNew", "Consolas", "Courier", monospace;
+			-moz-tab-size : 4;
+			tab-size      : 4;
+		}
+	</style>
 
 </head>
 <body>
@@ -16,7 +38,8 @@
 <div class="content">
 
 <a name=TopBar></a>
-<p><b><img src="/imgs/here_landmark.png"> Moai+Easter ユーザーマニュアル</b></p>
+<!-- p><b><img src="/imgs/here_landmark.png"> Moai+Easter ユーザーマニュアル</b></p -->
+<p style="height: 40px; border: 0px;"><img src="/imgs/here_landmark.png"> <b>Moai+Easter ユーザーマニュアル</b></p>
 <a class=MstyElemLink href="/">Moai</a> 
 <a class=MstyNowSelectedLink href="/moai2.0/index.html">Manual</a> 
 <a class=MstyElemLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
@@ -34,10 +57,8 @@
 
 <a name=AtFirst></a>
 <h1 class="title">はじめに</h1>
-<p>
 EasterはVirtualUSERS等によって構築された仮想ブラウザ環境を利用してネット掲示板などを閲覧したりレス等を投稿できるツールです.<br>
 これを「仮想ブラウジング」と呼びますが、ここではこれについて解説します.<br>
-</p>
 <br>
 
 
@@ -47,11 +68,11 @@ EasterはVirtualUSERS等によって構築された仮想ブラウザ環境を�
 <br>
 <ul>
 	<li><b><a class=MstyElemLink href=#FirstEaster>初めてのEaster</a></b></li>
-	<li><b><a class=MstyElemLink href=#EasterLinkManager>仮想ブラウジング画面について</a></b></li>
-	<li><b><a class=MstyElemLink href=#EasterURL>Easter URL</a></b></li>
-	<li><b><a class=MstyElemLink href=#EasterURL_Mechanism>仮想環境が継続的に維持される仕組み</a></b></li>
+	<li><b><a class=MstyElemLink href=#EasterVirtualBrowsing>仮想ブラウジング</a></b></li>
 	<li><b><a class=MstyElemLink href=#EasterBBSOperation>Easter BBS Operation</a></b></li>
 	<li><b><a class=MstyElemLink href=#EasterHyperPost>Easter HyperPost</a></b></li>
+	<li><b><a class=MstyElemLink href=#EasterLinkList>リンクリスト</a></b></li>
+	<li><b><a class=MstyElemLink href=#EasterLinkEdit>リンク編集</a></b></li>
 	<li><b><a class=MstyElemLink href=#CooperateOthersViewers>その他の専ブラとの連携動作について</a></b></li>
 </ul><br>
 
@@ -60,245 +81,140 @@ EasterはVirtualUSERS等によって構築された仮想ブラウザ環境を�
 <a name=FirstEaster></a>
 <h1 class="title">初めてのEaster</h1>
 <article class="message is-dark"><br>
-	<div class="message-header">
-		仮想ブラウジング(閲覧)を行うまでの手順<br>
-	</div>
-	<div class="message-body">
-		<ol>
-			<li>moaiを起動します.<br>
-			( たとえばWindowsならmoai.exeを実行します ).<br>
-			</li>
-			<br>
-			<li>ブラウザから http://127.0.0.1:8124 を開きます.<br>
-	<br>
-			<div class=box>
-				環境によっては 127.0.0.1 の替わりに localhost を指定してもよい場合もあります.<br>
-			</div>
-			</li>
-<br>
-			<li>お使いのブラウザに以下のような「Welcome to Moai+Easter World」のページが表示されると思います.<br>
-<br>
-			<div class=MstyImgBox>
-				<img src=/imgs/moai_top_page.png /><br>
-			</div>
-			</li>
+<div class="message-header">
+仮想ブラウジング(閲覧)を行うまでの手順</div><div class="message-body">
+	<ol>
+		<li>moaiを起動します.<br>
+		( たとえばWindowsならmoai.exeを実行します ).<br>
+		</li>
 		<br>
-			<li>この画面において<a class=MstyElemLink href="http://127.0.0.1:8124/easter" target=_blank>Easter</a>をクリックします.<br>
-			以下のような「仮想ブラウジング」の画面が表示されると思います.<br>
-			<br>
-			<div class=MstyImgBox>
-				<img src=/imgs/easter_link_manager1.png /><br>
-			</div>
-			</li>
-			<br>
-			<li>各リンクの先頭にある「Open」をクリックすると、そのリンク先のサイトを仮想ブラウジングします.<br>
-			</li>
-		</ol>
-	</div>
-</article><br>
+		<li>ブラウザから http://127.0.0.1:8124 を開きます.<br>
+<br>
+		<div class=box>
+			環境によっては 127.0.0.1 の替わりに localhost を指定してもよい場合もあります.<br>
+		</div>
+		</li>
+<br>
+		<li>お使いのブラウザに以下のようなページが表示されると思います.<br>
+<br>
+		<div class=MstyImgBox>
+			<img src=/imgs/moai_top_page.png /><br>
+		</div>
+		</li>
 	<br>
-<article class="message is-dark"><br>
-	<div class="message-header">
-		Moaiを初めて起動する場合の注意<br>
-	</div>
-	<div class="message-body">
-		もし今回が新しくMoaiをダウンロードした直後、初めてのMoai起動ならば、まず<a class=MstyElemLink href=/moai2.0/virtual_users.html>VirtualUSERS</a>より、仮想環境をあなた用に変更しておいた方がよいでしょう.<br>
-	</div>
-</article><br>
+		<li>この画面において<a class=MstyCGILink href="http://127.0.0.1:8124/easter" target=_blank>Easter</a>をクリックします.<br>
+		以下のような「仮想ブラウジング」の画面が表示されると思います.<br>
+		<br>
+		<div class=MstyImgBox>
+			<img src=/imgs/easter_link_manager1.png /><br>
+		</div>
+		</li>
+		<br>
+		<li>この図の「表示設定」と書かれてあるボタンより下に列挙されているのがリンクのリストです.<br>
+			ピンク色のリンクを開くと、そのリンク先のサイトを仮想ブラウジングします.<br>
+			それ以外のリンクの場合は普通にブラウジングします.<br>
+		</li>
+	</ol>
+<br>
+</div></article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section FirstEaster end -->
 
 
-<a name=EasterLinkManager></a>
-<h1 class="title">仮想ブラウジング画面について</h1>
+<a name=EasterVirtualBrowsing></a>
+<h1 class="title">仮想ブラウジング</h1>
 <article class="message is-dark"><br>
-	<div class="message-header">
-		仮想環境のスタート<br>
-	</div>
-	<div class="message-body">
-		ここには仮想ブラウジングを開始するためのいくつかのリンクがリストされています.<br>
-		このリストはユーザが自由に登録追加、削除できますし、その内容を修正することができます.<br>
-		いわゆるブックマークのような使い方も可能です.<br>
-	<br>
-		<div class=box>
-			これらの登録情報の実体は、moai_profileディレクトリ配下にある link_list.myf ファイルに保存されます.<br>
-			Moai/Easterでは、設定情報等を保存するのに外部サーバマシンやデータベース、レジストリなどは使用していません.<br>
-		</div>
-	</div>
-</article><br>
-		<br>
-<article class="message is-dark"><br>
-	<div class="message-header">
-		仮想ブラウジングのサポート対象となるサイト<br>
-	</div>
-	<div class="message-body">
-		仮想ブラウジングがサポートしているサイトは、現時点では５ちゃんねるとふたばちゃんねるのみとなります.<br>
-		これらのサイトのURLを登録すれば、そのリンク先を開くことで仮想状態が機能します.<br>
+<div class="message-header">
+仮想ブラウジング画面について</div><div class="message-body">
+	ここには仮想ブラウジングを開始するためのいくつかのリンクがリストされています.<br>
+	このリストはユーザが自由に登録追加、削除できますし、その内容を修正することができます.<br>
+	いわゆるブックマークのような使い方も可能です.<br>
 <br>
-		一方、サポート対象以外のサイトのURLであっても一応登録できます.<br>
-		この場合、登録したリンクには <img src=/imgs/others_16.png> のようなマークがつきますが、<br>
-		「Open」ボタンで開かれる先は通常のURLとなります.<br>
-		つまりEasterを介さず直接閲覧することになりますので仮想状態も機能しません.<br>
-		単なるブックマークとしての機能となります.<br>
+	<div class=box>
+		新しくMoaiをダウンロードした直後、初めてのMoai起動ならば、まず<a class=MstyCGILink href=/moai2.0/virtual_users.html>VirtualUSERS</a>より、仮想環境をあなた用に変更しておいた方がよいでしょう.<br>
 	</div>
-</article><br>
-	<br>
+<br>
+	<div class=box>
+		これらの登録情報の実体は、moai_profileディレクトリ配下にある link_list.myf ファイルに保存されます.<br>
+		Moai/Easterでは、設定情報等を保存するのに外部サーバマシンやデータベース、レジストリなどは使用していません.<br>
+	</div>
+</div></article><br>
 <article class="message is-dark"><br>
-	<div class="message-header">
-		リンクの新規登録<br>
-	</div>
-	<div class="message-body">
-		以下の手順となります.<br>
-		<ol>
-			<li>「リンクの新規登録」ボタンを押し、「Linkの新規登録」と表示された入力フィールドを表示させます.</li>
-			<br>
-			<li>「URL」入力フィールド欄に登録したいサイトのURLをそのままコピペします.<br>
-			(これは通常のURL、あるいはEasterで開いたときのURL(Easter URL)でもどちらでもかまいません).</li>
-			<br>
-			<li>必要であれば「説明」入力フィールド欄に登録したURLについての説明を入力します.<br>
-			これが登録後「仮想環境のスタート」に表示される文字列となります.<br>
-			(ここに何も入力しなかった場合はURLが表示されます).</li>
-			<br>
-			<li>「上記で登録」ボタンを押します.<br>
-			これにより上の「仮想環境のスタート」に今入力したものが一つ追加されます.</li>
-		</ol>
-	</div>
-</article><br>
+<div class="message-header">
+仮想ブラウジングのサポート対象となるサイト</div><div class="message-body">
+	仮想ブラウジングがサポートしているサイトは、現時点では５ちゃんねるとふたばちゃんねるのみとなります.<br>
+	これらのサイトのURLを登録したとき、そのURLはEaster URLというものに自動的に変換され、そのリンクを開くことで仮想状態が機能します.<br>
+<br>
+	一方、サポート対象以外のサイトのURLであっても一応登録できます.<br>
+	この場合、登録したリンクには <img src=/imgs/others_16.png> のようなマークがつきますが、開かれる先は通常のURLとなります.<br>
+	つまりEasterを介さず直接閲覧することになりますので仮想状態も機能しません.<br>
+	単なるブックマークとしての機能となります.<br>
+<br>
+	<a class=MstyDetailLink id="EasterURL_detail_btn" onClick="MstyUI_detailBtn(&quot;EasterURL_detail_tgt&quot;, &quot;EasterURL_detail_btn&quot;, &quot;コラム：Easter URL&quot;, &quot;閉じる&quot; ); ">コラム：Easter URL</a><br><div id=EasterURL_detail_tgt class=MstyUnvisible><div class=box><u><b>コラム：Easter URL</b></u><br><br>
+		EasterではEaster URLというものを使って仮想ブラウジングを実現しています.<br>
+		通常のURLと何が違うのでしょうか？<br>
+		以下の例でEaster URLの構造を簡単に説明しましょう.<br>
 		<br>
-<article class="message is-dark"><br>
-	<div class="message-header">
-		リンクの編集<br>
-	</div>
-	<div class="message-body">
-		既に登録したリンクの内容を修正することができます.<br>
-		以下の手順となります.<br>
-		<ol>
-			<li>仮想ブラウジング画面における「仮想環境のスタート」に列挙されているリンクのうち、修正したいものに一つチェックを入れます.<br>
-			(もし複数チェックを入れた場合は、一番上のものが選択されたとみなされます).</li>
-			<br>
-			<li>「選択したリンクを編集」ボタンを押します.<br>
-			選択したリンクの現在の内容が入力フィールドに表示されますのでこれを新しい内容に書き換えます.</li>
-			<br>
-			<li>「上記で登録」ボタンを押します.<br>
-			これにより上の「仮想環境のスタート」に修正が反映されます.</li>
-		</ol>
-	</div>
-</article><br>
+		<div class=box><div class=MstyCode>
+			http://192.168.0.1:8125/easter?est_view=may.2chan.net/b/futaba.php?mode=cat&amp;sort=1<br>
+		</div></div>
 	<br>
-<article class="message is-dark"><br>
-	<div class="message-header">
-		リンクの並び替え：チェックしたリンクを一番上へ<br>
-	</div>
-	<div class="message-body">
-		以下の手順になります.<br>
-		<ol>
-			<li>「仮想環境のスタート」に列挙されているリンクのうち、好きなものをいくつかチェックします.<br>
+		<ul>
+			<li><b>192.168.0.1:8125</b><br>
+			あなたのマシンで今起動しているMoaiへの接続を意味します. ここでのIPとポート番号はMoaiがセキュリティーの観点から厳格に規定したものが使われます.<br>
+			(これを XhrDMZ と呼びます. XhrDMZ では通常、IPは127.0.0.1またはLAN上でのものが採用されます. またポート番号はこの場合に限り8124ではなく8125になります.)<br>
 			</li>
-<br>
-			<li>「チェックしたリンクを一番上へ」ボタンを押すと、「仮想環境のスタート」でチェックを入れた項目のみが一番上へ移動します.<br>
+			<br>
+			<li><b>easter</b><br>
+			EasterをMoai CGIとして起動することをMoaiエンジンに指示します.<br>
 			</li>
-		</ol>
-		このボタンを繰り返し駆使するだけでも一応任意の並び替えはできます.<br>
-		しかし、さらに以下に述べる「カテゴリ毎に集める」を組み合わせて使うとさらに並び替えは楽になります.<br>
-	</div>
-</article><br>
-	<br>
-<article class="message is-dark"><br>
-	<div class="message-header">
-		リンクの並び替え：カテゴリ毎に集める<br>
-	</div>
-	<div class="message-body">
-		リンクにはサイト毎にカテゴリが設定されています.<br>
-		これはURLのホスト名よりEasterが自動判断します.<br>
-		例えば *.2chan.net ならカテゴリは「ふたばちゃんねる」であるといった具合です.<br>
-		現在Easterが用意しているサイト毎のカテゴリは「ふたばちゃんねる」、「５ちゃんねる」、「その他」の３つがあります.<br>
-	<br>
-		「カテゴリ毎に集める」ボタンを使うとリンクを簡単にカテゴリ毎に揃えることができます.<br>
-		たとえば「５ちゃんねる」のカテゴリに属するリンクをすべて一番上方へと移動して揃えたいとしましょう.<br>
-<br>
-		以下の手順になります.<br>
-		<ol>
-			<li>「仮想環境のスタート」に列挙されているリンクのうち、カテゴリが「５ちゃんねる」であるものに一つチェックを入れます.<br>
-			(５ちゃんねるのリンクのうち、一番上にある一つを選ぶと良いでしょう).</li>
 			<br>
-			<li>「選択したリンクを一番上へ」ボタンを押します.<br>
-			これにより、今チェックを入れたリンクが一番上方へと移動します.</li>
-			<br>
-			<li>「カテゴリを集める」ボタンを押します.<br>
-			これにより、残りの全ての５ちゃんねるのリンクが一括して一番上方へと集められます.</li>
-		</ol>
-		これは説明するより実際に色々並び替えを試してもらった方が状況を掴みやすいかもしれません.<br>
-	</div>
-</article><br>
-	<br>
-<article class="message is-dark"><br>
-	<div class="message-header">
-		リンクの削除<br>
-	</div>
-	<div class="message-body">
-		不要なリンクの削除は以下の手順となります.<br>
-		<ol>
-			<li>「仮想環境のスタート」に列挙されているリンクのうち、削除したいものにチェックを入れます.</li>
-			<br>
-			<li>「選択したリンクを削除」ボタンを押します.<br>
-			これにより上の「仮想環境のスタート」にチェックを入れたもののみが削除されます.</li>
-		</ol>
-	</div>
-</article><br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br><!-- Section EasterLinkManager end -->
-
-
-<a name=EasterURL></a>
-<h1 class="title">Easter URL</h1>
-	以下の例でEaster URLの構造を簡単に説明しましょう.<br>
-	<br>
-	<div class=box><div class=MstyCode>
-		http://192.168.0.1:8125/easter?est_view=may.2chan.net/b/futaba.php?mode=cat&amp;sort=1<br>
-	</div></div>
-<br>
-	<ul>
-		<li><b>192.168.0.1:8125</b><br>
-		あなたのマシンで今起動しているMoaiへの接続を意味します. ここでのIPとポート番号はMoaiがセキュリティーの観点から厳格に規定したものが使われます.<br>
-		(これを XhrDMZ と呼びます. XhrDMZ では通常、IPは127.0.0.1またはLAN上でのものが採用されます. またポート番号はこの場合に限り8124ではなく8125になります.)<br>
-		</li>
+			<li><b>est_view=</b><br>
+			これに続けて目的のサイトのURLを与えます. Easterが現在サポートしているサイトのURLならば、基本的にはどのページのものでも構いません.<br>
+			(現在サポートされているサイトは５ちゃんねるとふたばちゃんねるのみです)<br>
+			</li>
+		</ul>
+	</div><br></div>
+	<a class=MstyDetailLink id="EasterURL_Mechanism_detail_btn" onClick="MstyUI_detailBtn(&quot;EasterURL_Mechanism_detail_tgt&quot;, &quot;EasterURL_Mechanism_detail_btn&quot;, &quot;コラム：仮想環境が継続的に維持される仕組み&quot;, &quot;閉じる&quot; ); ">コラム：仮想環境が継続的に維持される仕組み</a><br><div id=EasterURL_Mechanism_detail_tgt class=MstyUnvisible><div class=box><u><b>コラム：仮想環境が継続的に維持される仕組み</b></u><br><br>
+		EasterはデフォルトでいくつかのサイトへのEaster URLが登録されていますが、ここに登録するリンクはサイトのトップ等にある<b>目次に相当するページ</b>だけで十分です.<br>
+		(これらは掲示板などでは「板一覧メニュー」や「カタログ」と呼ばれることもあります)<br>
 		<br>
-		<li><b>easter</b><br>
-		EasterをMoai CGIとして起動することをMoaiエンジンに指示します.<br>
-		</li>
+		しかし目次に相当するページはスレッド本体や書き込みをする画面とは違います.<br>
+		これではレスを投稿するタイミングにおいて、仮想環境が機能しないのでは？と思われる方もおられるかもしれません.<br>
 		<br>
-		<li><b>est_view=</b><br>
-		これに続けて目的のサイトのURLを与えます. Easterが現在サポートしているサイトのURLならば、基本的にはどのページのものでも構いません.<br>
-		(現在サポートされているサイトは５ちゃんねるとふたばちゃんねるのみです)<br>
-		</li>
-	</ul>
+		大丈夫です. <br>
+		目次からさらに先のリンクへと移動した場合でもEaster URLがうまく継続するようになっています.<br>
+		Easter URLさえ維持されていれば仮想状態もまた維持するのです.<br>
+		<br>
+		何が起きているのか詳しく説明しましょう.<br>
+		通常、Easterで閲覧したページ内に子となるページへのリンクが含まれていた場合、そのリンク先もEasterを介する閲覧となるようにEaster URLへの変換が自動的に行われます. <br>
+		さらにその子を閲覧したタイミングで、同様の変換がその孫へのリンクに対しても行われ、この連鎖によりEasterによる仮想状態を子孫へ継続させる仕組みとなっています.<br>
+		<br>
+		一方、Easterが認識できないサイトへのリンク(喩えるなら家族や親戚以外へのリンク)が含まれていた場合、このリンクに対してはEaster URLへ変換は行われず、従ってその先はEasterを介さず直接閲覧する形になります.<br>
+	</div><br></div>
+</div></article><br>
+<article class="message is-dark"><br>
+<div class="message-header">
+On-the-sport ヘルプ</div><div class="message-body">
+	Ver2.3より、Easterの全ての機能に「On-the-sport ヘルプ」が導入されました.<br>
+	<script type="text/javascript">var st_AboutOnTheSportMore_group_id_ary = [ "AboutOnTheSportMore" ];</script>
+<a class=MstyDetailLink id=AboutOnTheSportMore_btn onClick="if( MstyUI_selectTab( st_AboutOnTheSportMore_group_id_ary, this.id ) ){location.href = '#AName_AboutOnTheSportMore';}">More</a>
+<span id=AboutOnTheSportMore class=MstyUnvisible><br>
+	<div class=box>
+		実はVer.2.2以前にも似たような仕組みを所々に導入していましたが、レイアウトの確保や整備が大変であったこともありその対応は完全ではありませんでした.<br>
+		Ver2.3よりMoai/Easterのコアシステムに我々が「Raraku BIRD」と呼ぶフレームワークが導入され、この辺りの開発環境が飛躍的に良好なものとなりました.<br>
+		これによりようやく完全なOn-the-spotヘルプシステムが実現した形となります.<br>
+	</div>
+	</span><br>
+	「On-the-sport ヘルプ」は折り畳み式のヘルプであり、「ヘルプ」ボタンを押すとその場にヘルプの内容が即時展開表示され、もう一度押すと閉じるというものです.<br>
+	(すぐ上に「More」というボタンがありますが、仕組みはこれと同じです).<br>
+	このヘルプシステムの完備により、このユーザーマニュアルでヘルプに相当する説明を行う必要性はなくなりました.<br>
+	このマニュアルでは替わりに「ヘルプ」では紹介しきれなかった注意事項や発展的説明、実際の例を挙げたツール活用方法などを紹介します.<br>
+</div></article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br><!-- Section EasterURL end -->
-
-
-<a name=EasterURL_Mechanism></a>
-<h1 class="title">仮想環境が継続的に維持される仕組み</h1>
-	EasterはデフォルトでいくつかのサイトへのEaster URLが登録されていますが、ここに登録するリンクはサイトのトップ等にある<b>目次に相当するページ</b>だけで十分です.<br>
-	(これらは掲示板などでは「板一覧メニュー」や「カタログ」と呼ばれることもあります)<br>
-	<br>
-	しかし目次に相当するページはスレッド本体や書き込みをする画面とは違います.<br>
-	これではレスを投稿するタイミングにおいて、仮想環境が機能しないのでは？と思われる方もおられるかもしれません.<br>
-	<br>
-	大丈夫です. <br>
-	目次からさらに先のリンクへと移動した場合でもEaster URLがうまく継続するようになっています.<br>
-	Easter URLさえ維持されていれば仮想状態もまた維持するのです.<br>
-	<br>
-	何が起きているのか詳しく説明しましょう.<br>
-	通常、Easterで閲覧したページ内に子となるページへのリンクが含まれていた場合、そのリンク先もEasterを介する閲覧となるようにEaster URLへの変換が自動的に行われます. <br>
-	さらにその子を閲覧したタイミングで、同様の変換がその孫へのリンクに対しても行われ、この連鎖によりEasterによる仮想状態を子孫へ継続させる仕組みとなっています.<br>
-	<br>
-	一方、Easterが認識できないサイトへのリンク(喩えるなら家族や親戚以外へのリンク)が含まれていた場合、このリンクに対してはEaster URLへ変換は行われず、従ってその先はEasterを介さず直接閲覧する形になります.<br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br><!-- Section EasterURL_Mechanism end -->
+<br><!-- Section EasterVirtualBrowsing end -->
 
 
 <a name=EasterBBSOperation></a>
@@ -517,9 +433,7 @@ EasterはVirtualUSERS等によって構築された仮想ブラウザ環境を�
 <br>
 		これで準備は完了です.<br>
 <br>
-		<div class=box><div class=MstyBlock>
-			<b><u>なぜImageMagickのconvertが別途必要なのか？</u></b><br>
-<br>
+		<a class=MstyDetailLink id="Easter_WhyImageMagick_detail_btn" onClick="MstyUI_detailBtn(&quot;Easter_WhyImageMagick_detail_tgt&quot;, &quot;Easter_WhyImageMagick_detail_btn&quot;, &quot;なぜImageMagickのconvertが別途必要なのか？&quot;, &quot;閉じる&quot; ); ">なぜImageMagickのconvertが別途必要なのか？</a><br><div id=Easter_WhyImageMagick_detail_tgt class=MstyUnvisible><div class=box><u><b>なぜImageMagickのconvertが別途必要なのか？</b></u><br><br>
 			この機能が行っている内部処理を少し説明致しましょう.<br>
 <br>
 			現在のクリップボードの内容を取得し、それをBMP画像形式で保存するまではEasterが行います.<br>
@@ -538,8 +452,8 @@ EasterはVirtualUSERS等によって構築された仮想ブラウザ環境を�
 			16MBくらいケチケチすんな！という意見の方もおられましょう.<br>
 			しかしMoaiシステム全体の合計サイズですら現在(zip展開された初期状態で)およそ15MBですので、たかがオプション的な機能の変換にちょろっと使用するだけのこのコマンド一個で<br>
 			システム全体のサイズがイキナリ倍になるのは<s>あまりにダサい</s>考え物です.<br>
-			まあそんなワケで、今回は「お試し頂きたい方は別途ダウンロードして下さい」という形にしました.<br>
-		</div></div>
+			そんなワケで、今回は「お試し頂きたい方は別途ダウンロードして下さい」という形にしました.<br>
+		</div><br></div>
 	</div>
 </article><br>
 		<br>
@@ -578,6 +492,290 @@ EasterはVirtualUSERS等によって構築された仮想ブラウザ環境を�
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section EasterHyperPost end -->
+
+
+<a name=EasterLinkList></a>
+<h1 class="title">リンクリスト</h1>
+<article class="message is-dark"><br>
+<div class="message-header">
+表示設定の活用例</div><div class="message-body">
+	リンクリストではセットされたタグに応じて、どのリンクを表示させ、どのリンクを隠すかを変更できます.<br>
+	これは特に登録リンクの数が膨大になってきたときに威力を発揮します.<br>
+	「表示設定」を押すとそのためのパネルが表示されますが、以下はその活用例を踏まえたチュートリアルとなります.<br>
+<br>
+	<div class=MstyImgBox>
+		表示設定パネル<br>
+		<img src="/imgs/easter_linklist_begin.png" width=100%><br>
+	</div>
+	<br>
+	上部に「futaba or 5ch or default」とあります.<br>
+	「or」記号でこれらを結ぶことで、これらのタグのいずれかを含むリンクを抽出して表示するといった意味になります.<br>
+	しかしこのままではどのリンクにどのようなタグが指定されているのか一目で分かりづらいです.<br>
+	「タグ表示ON/OFF」ボタンを押すと下の図のような表示になり、状況が掴みやすくなります.<br>
+<br>
+	<div class=MstyImgBox>
+		リンクに付与されたタグ表示をON<br>
+		<img src="/imgs/easter_linklist_tag_visible.png" width=100%><br>
+	</div>
+	<br>
+	例えば「ふたばちゃんねる may」にはfutabaタグとdefaultタグの両方が指定されていることがわかります.<br>
+<br>
+	それでは次に「and」ボタンを押し、この「or」を「and」に変えてみます.<br>
+	上部は「futaba and 5ch and default」という表示に変わりますが、何が起きるでしょうか？<br>
+<br>
+	<div class=MstyImgBox>
+		「futaba and 5ch and default」の表示結果<br>
+		<img src="/imgs/easter_linklist_nothing.png" width=100%><br>
+	</div>
+<br>
+	何も表示されなくなりました.<br>
+	futaba、5ch、defaultの３つのタグすべてを持つリンクは、登録したものの中に存在しないためです.<br>
+	これら３つすべて含むという条件はいささか制限が強すぎたのでした.<br>
+<br>
+	では条件から5chだけ減らし「futaba and default」ならばどうでしょうか？<br>
+	futabaタグとdefaultタグの両方を持つリンクとして、「ふたばちゃんねる may」があります.<br>
+	これだけが抽出表示されるはずです.<br>
+<br>
+	条件を修正するにはまず「タグリスト」へ移動します.<br>
+	次に「タグをクリア」を押し「Checked Tags」の値を空にします.<br>
+	ここまでの様子を下の図に示します.<br>
+<br>
+	<div class=MstyImgBox>
+		タグリスト<br>
+		<img src="/imgs/easter_taglist_clear.png" width=100%><br>
+	</div>
+<br>
+	少し下へ行き、Tag Groupとある部分から「サイト」グループを選びます(このタグのグループはタグマネージャよりあらかじめ自分で作ることができます).<br>
+	サイトに関するタグが表示されますので、futabaとdefaultにチェックを入れます.<br>
+<br>
+	<div class=MstyImgBox>
+		futabaとdefaultにチェックを入れる<br>
+		<img src="/imgs/easter_taglist_check.png" width=100%><br>
+	</div>
+<br>
+	「Checked Tags」の値も連動して「futaba default」となるはずです.<br>
+	ここまで設定したら再び「リンクリスト」へ戻ります.<br>
+	「表示設定」のパネルで「Checked Tagsでセット」ボタンを押します.<br>
+	これだけでもうまくいくかもしれませんが、最後に「and」ボタンも押しておきます.<br>
+	これで「futaba and default」という条件に変わるはずです.<br>
+<br>
+	<div class=MstyImgBox>
+		futabaとdefaultの両方を含むものの表示結果<br>
+		<img src="/imgs/easter_linklist_and.png" width=100%><br>
+	</div>
+<br>
+	上の図のように「ふたばちゃんねる may」のみが表示され、意図通りの抽出が成功したことがわかります.<br>
+<br>
+	では意図通りの抽出が成功しなかった場合どうしましょうか？<br>
+	再びタグリストへ移動し新しい条件を１から構築し直すのが正攻法ですが、リンクの総数が多くないなら「not」を使う方法が簡単です.<br>
+	「表示設定」のパネルで「not」ボタンを押します.<br>
+<br>
+	<div class=MstyImgBox>
+		not futaba and defaultの表示結果<br>
+		<img src="/imgs/easter_linklist_not.png" width=100%><br>
+	</div>
+<br>
+	上の図のように今度は「ふたばちゃんねる may」<b>以外の</b>すべてが表示されます.<br>
+<br>
+	タグの部分が空白になっているリンクがありますが、これはタグが何も設定されていないことを示しています.<br>
+	このようなリンクを抽出するには「empty」を押します.<br>
+	ただし、今は「not」もONにしている状態であるため「empty」を押すとその効果は反転し、タグが何も設定されていないものが非表示になります.<br>
+	「not」を解除するにはもう一度「not」ボタンを押します.<br>
+	これで「empty or futaba and default」という条件に変わるはずです.<br>
+<br>
+	<div class=MstyImgBox>
+		empty or futaba and defaultの表示結果<br>
+		<img src="/imgs/easter_linklist_empty.png" width=100%><br>
+	</div>
+<br>
+	ここまで色々と弄くってきましたが、「表示設定」のパネルで「reset」ボタンを押すことで一番初めの表示に戻すことができます.<br>
+	また紹介していない機能もありますが、「表示設定」に関するチュートリアルはここまでとします.<br>
+	「これをデフォルトにする」ボタンを押さない限りは「reset」ボタンやブラウザのリロードで元通りの表示に戻せますので気軽に色々お試しください.<br>
+	気に入った条件が見つかれば「これをデフォルトにする」ボタンを押してその状態をデフォルトとして保存することもできます.<br>
+</div></article><br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section EasterLinkList end -->
+
+
+<a name=EasterLinkEdit></a>
+<h1 class="title">リンク編集</h1>
+<article class="message is-dark"><br>
+<div class="message-header">
+リンクの新規登録/修正</div><div class="message-body">
+	「リンク編集」のパートでは、新しいリンクを登録したり、既に登録したリンクの内容を修正することができます.<br>
+	基本的な操作については「リンクの新規登録/修正」ボタンすぐ横の「ヘルプ」からも参照することができます.<br>
+<br>
+	「リンクリスト」で、どのリンクにも<b>チェックしない</b>状態で「リンクの新規登録/修正」ボタンを押します.<br>
+	すると以下のようなパネルが表示されます.<br>
+<br>
+	<div class=MstyImgBox>
+		「リンクの新規登録/修正」パネル<br>
+		<img src="/imgs/easter_linkedit_register.png" width=100%><br>
+	</div>
+<br>
+	ここでは実際にリンクを新規登録してみます.<br>
+	「URL」欄に「https://mevius.5ch.net/gamedev/ 」、「説明」欄に「５ちゃんねる ゲーム製作技術板」を直接入力します.	<br>
+<br>
+	「タグ」欄のセット方法は少し複雑です(不整合防止のため、現バージョンのeasterでは直接入力はできません).<br>
+	タグとして「5ch」と「ゲーム製作」をセットしたいとします.<br>
+	これらのタグはあらかじめタグリストに存在するものでなければなりません.<br>
+	(なければあらかじめタグマネージャで作成しておく必要があります).<br>
+<br>
+	「リンクの新規登録/修正」パネルを開いたままにして、タグリストへ移動しタグを選択します.<br>
+	この例では「5ch」タグは「サイト」グループに、「ゲーム製作」タグは「分野」グループに分類されていますので、
+	それぞれTag Groupを切り替えつつチェックを入れます.<br>
+	これに連動して「Checked Tags」にスペース区切りでこれら二つのタグがセットされます.<br>
+	ここまでの様子を下の図に示します.<br>
+<br>
+	<div class=MstyImgBox>
+		タグリストで「5ch」と「ゲーム製作」にチェック<br>
+		<img src="/imgs/easter_linkedit_tag_check.png" width=100%><br>
+	</div>
+<br>
+	再び「リンク編集」へ戻ります.<br>
+	「リンクの新規登録/修正」パネルの「タグを追加」ボタンを押します.<br>
+	これにより「Checked Tags」の内容が「タグ」へセットされます.<br>
+	これですべての入力が終わり、準備は整いました.<br>
+	ここまでの様子を下の図に示します.<br>
+<br>
+	<div class=MstyImgBox>
+		タグリストで「5ch」と「ゲーム製作」にチェック<br>
+		<img src="/imgs/easter_linkedit_all_set.png" width=100%><br>
+	</div>
+<br>
+	最後に「登録」ボタンを押すと実際にリンクの新規登録が行われます.<br>
+	これで完了です.<br>
+<br>
+	「説明」と「タグ」については後からでも追加/修正/削除などできますし面倒であれば空のままでもかまいません.<br>
+	「URL」も後で修正できますが、これについては新規追加時に必ず指定しなければならない項目となります.<br>
+<br>
+	では次に今登録した「５ちゃんねる ゲーム製作技術板」の内容を修正してみます.<br>
+	「リンクリスト」で「５ちゃんねる ゲーム製作技術板」のリンクにチェックを入れます.<br>
+<br>
+	<div class=MstyImgBox>
+		「５ちゃんねる ゲーム製作技術板」にチェック<br>
+		<img src="/imgs/easter_linkedit_modify_check.png" width=100%><br>
+	</div>
+<br>
+	この状態で「リンクの新規登録/修正」パネルを開くと以下のようになります.<br>
+	(既に「リンクの新規登録/修正」パネルが開いている場合は一度閉じてもう一度表示させます).<br>
+<br>
+	<div class=MstyImgBox>
+		「リンクの新規登録/修正」パネル(修正モード)<br>
+		<img src="/imgs/easter_linkedit_modify_panel.png" width=100%><br>
+	</div>
+<br>
+	先ほどの新規登録の時とそっくりなパネルが表示されますが、一箇所違うのは上部が「ID:新規登録」ではなく「ID:link_...」となっていることです.<br>
+	このIDは、今選択したリンク(５ちゃんねる ゲーム製作技術板）に割り当てられた一意な番号です.<br>
+	このパネルはこのリンクに対する修正を行います.<br>
+	各項目の入力方法については新規登録の時と同様です.<br>
+	修正が終ったら、「登録」ボタンを押すことで内容を確定させます.<br>
+<br>
+	「リンクの新規登録/修正」に関するチュートリアルはここまでとします.<br>
+	「リンク編集」では他にも「リンク削除」、「リンクを一番上へ」、「タグ毎に集める」ボタンや「一括タグ付け処理」パネルがあります.<br>
+	これらについては「リンクの新規登録/修正」をマスターされた方なら「ヘルプ」をご覧頂くだけでも使い方はイメージできると思います.<br>
+	これらのチュートリアルは割愛しますが、「一括タグ付け処理」については少々複雑ですので事項で詳しく説明します.<br>
+</div></article><br>
+<article class="message is-dark"><br>
+<div class="message-header">
+一括タグ付け処理</div><div class="message-body">
+	「一括タグ付け処理」パネルでは、リンクリストにおいて選択された複数のリンクに対し、一括してタグの修正を行うことができます.<br><br>
+<br>
+	<div class=MstyImgBox>
+		「一括タグ付け処理」パネル<br>
+		<img src="/imgs/easter_linkedit_tag_bat_open.png" width=100%><br>
+	</div>
+<br>
+	ここでは、ふたばちゃんねるのすべてのリンクと５ちゃんねるのすべてのリンク、そして「DeepL」、「ヨビノリ」のリンクにdefaultタグを追加してみます.<br>
+	まずは「ふたばちゃんねる may」から「DeepL」の間の項目はすべてチェックする必要があります.<br>
+	これらを一つずつ手動でチェックしていっても勿論良いのですが、チェックする項目が多い場合「始点と終点で一括選択」を使用すると便利です.<br>
+	ここでは始点である「ふたばちゃんねる may」と終点である「DeepL」だけをチェックします.<br>
+	その後に「始点と終点で一括選択」ボタンを押します.<br>
+	この様子を下の図に示します.<br>
+<br>
+	<div class=MstyImgBox>
+		始点と終点のみをチェック<br>
+		<img src="/imgs/easter_linkedit_tag_bat_check1.png" width=100%><br>
+	</div>
+<br>
+	<div class=MstyImgBox>
+		「始点と終点で一括選択」を押した結果<br>
+		<img src="/imgs/easter_linkedit_tag_bat_check2.png" width=100%><br>
+	</div>
+<br>
+	残りは、「ヨビノリ」と「５ちゃんねる ゲーム製作技術板」です.<br>
+	これらは手動で直接チェックします.<br>
+	ここまでの状態を下の図に示します.<br>
+<br>
+	<div class=MstyImgBox>
+		必要なものをすべてチェックした状態<br>
+		<img src="/imgs/easter_linkedit_tag_bat_check3.png" width=100%><br>
+	</div>
+<br>
+	次に、「Checked Tags」にdefaultタグをセットします.<br>
+	これは「リンクの新規登録/修正」パネルのときに行った方法と同様です.<br>
+	すなわち一旦「タグリスト」へ移動し、defaultタグをチェックします.<br>
+	これが終ったら再び「一括タグ付け処理」パネルへ戻ります.<br>
+	これで準備は整いました.<br>
+	ここまでの様子を下の図に示します.<br>
+<br>
+	<div class=MstyImgBox>
+		Checked Tagsにdefaultタグをセット<br>
+		<img src="/imgs/easter_linkedit_tag_bat_all_set.png" width=100%><br>
+	</div>
+<br>
+	最後に「タグを一括追加」ボタンを押します.<br>
+	これで選択されたすべてのリンクにdefaultタグが追加されます.<br>
+	<div class=box>
+		誤って「タグを一括上書き」ボタンを押さないよう注意してください.<br>
+		「タグを一括上書き」では、選択したすべてのリンクに元々付加されていたタグはすべて除去され、defaultタグだけにしてしまいます.<br>
+	</div>
+<br>
+	どのように変化したかをわかりやすくするため、「タグを一括追加」ボタンを押す前と押した後のタグ表示の様子を以下に並べてみます.<br>
+<br>
+	<div class=MstyImgBox>
+		before<br>
+		<img src="/imgs/easter_linkedit_tag_bat_before.png" width=100%><br>
+	</div>
+	<div class=MstyImgBox>
+		after<br>
+		<img src="/imgs/easter_linkedit_tag_bat_after.png" width=100%><br>
+	</div>
+<br>
+	チェックがついたすべてのリンクについてdefaultタグが追加されているのがわかります.<br>
+	「ふたばちゃんねる may」と「５ちゃんねる 板一覧」には元々defaultタグが付加されていました.<br>
+	このような場合は二重にdefaultタグが付加されるようなことはなく単に無視されます.<br>
+<br>
+	では次に「https://thisanimedoesnotexist.ai/」と「ヨビノリ」に「AI」タグを追加してみます.<br>
+	ただし「AI」タグはまだタグリストには存在しません.<br>
+	本来はタグマネージャより「AI」タグを登録してからリンクへのタグ付けを行うのが正攻法ですが、ここではその登録をも裏で同時に行います.<br>
+<br>
+	まず「https://thisanimedoesnotexist.ai/」と「ヨビノリ」をチェックします.<br>
+	次に「新規タグを同時に追加」にある「タグ文字列の指定」に「AI」と直接入力します.<br>
+	また今回、この新しいタグ「AI」を「分野」グループに所属させようと思いますので、右にあるプルダウンメニューより「分野」を選択します.<br>
+	他に追加するタグはないので「Checked Tags」には今回は何もセットしません.<br>
+	この様子を下の図に示します.<br>
+<br>
+	<div class=MstyImgBox>
+		<img src="/imgs/easter_linkedit_tag_bat_with_new_tag.png" width=100%><br>
+	</div>
+<br>
+	最後に「タグを一括追加」ボタンを押します.<br>
+	これで選択されたすべてのリンクにタグAIが追加されました.<br>
+	また同時にタグリストにも新しいタグAIが登録されました.<br>
+	確認のため「リンクリスト」の「表示設定」からタグが「AI」のものだけを抽出してみます.<br>
+<br>
+	<div class=MstyImgBox>
+		<img src="/imgs/easter_linkedit_tag_bat_result.png" width=100%><br>
+	</div>
+<br>
+	上の図のようになり、無事「AI」タグが追加されていることがわかります.<br>
+	「一括タグ付け処理」に関するチュートリアルはここまでとします.<br>
+</div></article><br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section EasterLinkEdit end -->
 
 
 <a name=CooperateOthersViewers></a>
@@ -725,7 +923,7 @@ EasterはVirtualUSERS等によって構築された仮想ブラウザ環境を�
 			</div>
 		</div>
 		<div class="content">
-		  <time datetime="2016-1-1">2019/07/26</time>
+		  <time datetime="2016-1-1">2021/02/03</time>
 		</div>
 	</div>
 </div>

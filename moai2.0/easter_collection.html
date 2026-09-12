@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html><!-- master template moai -->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8">
+	<meta http-equiv="Content-type" content="text/html" />
 	<meta http-equiv="Content-Script-Type" content="text/javascript" />
 	<meta http-equiv="Content-Style-Type"  content="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link href="/msty.css"  rel="stylesheet" type="text/css" />
 	<link href="/bulma.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
+	<link rel="stylesheet" href="/js/highlightjs/github-dark.css">
+	<!-- link rel="stylesheet" href="/js/highlightjs/atom-one-dark.css" -->
+	<script src="/js/highlightjs/cpp.js"></script>
+	<script src="/js/highlightjs/javascript.js"></script>
+	<script src="/js/highlightjs/dos.js"></script>
+	<script src="/js/highlightjs/makefile.js"></script>
+	<script src="/js/highlightjs/bash.js"></script>
+	<script src="/js/highlightjs/raraku.js"></script>
+	<script type="module" src="/js/highlightjs/highlight.js"></script>
+	<script type="module">
+		import HLJS from "/js/highlightjs/highlight.js";
+		HLJS.highlightAll();
+	</script>
+	<style>
+		code {
+		    font-family: "CourierNew", "Consolas", "Courier", monospace;
+			-moz-tab-size : 4;
+			tab-size      : 4;
+		}
+	</style>
 
 </head>
 <body>
@@ -16,7 +38,8 @@
 <div class="content">
 
 <a name=TopBar></a>
-<p><b><img src="/imgs/here_landmark.png"> Moai+Easter ユーザーマニュアル</b></p>
+<!-- p><b><img src="/imgs/here_landmark.png"> Moai+Easter ユーザーマニュアル</b></p -->
+<p style="height: 40px; border: 0px;"><img src="/imgs/here_landmark.png"> <b>Moai+Easter ユーザーマニュアル</b></p>
 <a class=MstyElemLink href="/">Moai</a> 
 <a class=MstyNowSelectedLink href="/moai2.0/index.html">Manual</a> 
 <a class=MstyElemLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
@@ -34,7 +57,6 @@
 
 <a name=AtFirst></a>
 <h1 class="title">はじめに</h1>
-<p>
 	Easterのコレクション機能は掲示板で閲覧した画像や動画の保存やその整理を支援します.<br>
 	Easterでは普通にブラウザの機能で画像を保存することもできるのですが、ここではEasterの画像管理システムへ画像を保存する方法についてご紹介します.<br>
 	<br>
@@ -42,7 +64,6 @@
 	Easterコレクション機能が提供するタグ付け機能やその検索機能を用いて、保存された大量の画像の中からあなたの求める画像を瞬時に抽出することもできます.<br>
 	また既に保存されている画像かどうかの重複チェックなどを、画像閲覧時に自動的かつ瞬時に行うことができます.<br>
 	<br>
-</p>
 <br>
 
 

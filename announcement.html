@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html><!-- master template moai -->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8">
+	<meta http-equiv="Content-type" content="text/html" />
 	<meta http-equiv="Content-Script-Type" content="text/javascript" />
 	<meta http-equiv="Content-Style-Type"  content="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link href="/msty.css"  rel="stylesheet" type="text/css" />
 	<link href="/bulma.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="/js/msty_ui.js"></script>
+
+	<link rel="stylesheet" href="/js/highlightjs/github-dark.css">
+	<!-- link rel="stylesheet" href="/js/highlightjs/atom-one-dark.css" -->
+	<script src="/js/highlightjs/cpp.js"></script>
+	<script src="/js/highlightjs/javascript.js"></script>
+	<script src="/js/highlightjs/dos.js"></script>
+	<script src="/js/highlightjs/makefile.js"></script>
+	<script src="/js/highlightjs/bash.js"></script>
+	<script src="/js/highlightjs/raraku.js"></script>
+	<script type="module" src="/js/highlightjs/highlight.js"></script>
+	<script type="module">
+		import HLJS from "/js/highlightjs/highlight.js";
+		HLJS.highlightAll();
+	</script>
+	<style>
+		code {
+		    font-family: "CourierNew", "Consolas", "Courier", monospace;
+			-moz-tab-size : 4;
+			tab-size      : 4;
+		}
+	</style>
 
 </head>
 <body>
@@ -16,7 +38,8 @@
 <div class="content">
 
 <a name=TopBar></a>
-<p><b><img src="/imgs/here_landmark.png"> Moai+Easter アナウンスメント</b></p>
+<!-- p><b><img src="/imgs/here_landmark.png"> Moai+Easter アナウンスメント</b></p -->
+<p style="height: 40px; border: 0px;"><img src="/imgs/here_landmark.png"> <b>Moai+Easter アナウンスメント</b></p>
 <a class=MstyElemLink href="/">Moai</a> 
 <a class=MstyElemLink href="/moai2.0/index.html">Manual</a> 
 <a class=MstyElemLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
@@ -25,7 +48,6 @@
 
 <a name=AtFirst></a>
 <h1 class="title">はじめに</h1>
-<p>
 	このアナウンスメントでは我々Moai開発チームより皆様へ、主に以下に関する情報をお知らせします.<br>
 	<div class="content"><ul type="1" >
 		<li>Moaiの次期バージョンの開発状況.</li>
@@ -36,7 +58,6 @@
 	現在のMoaiの最新バージョンは2.2 です.<br>
 	(Moai Ver2.2は2019年11月22日にリリースされました).<br>
 	尚、Ver1.0系列(Ver1.1.8以前)の配布およびサポートは既に終了しております.<br>
-</p>
 <br>
 
 
@@ -72,10 +93,10 @@
 		<li>複数のRarakuのコードを一つのライブラリや実行ファイル(rrkx)へリンクできる.</li>
 		<li>Raraku rrkxファイルは Raraku VM というスタック型仮想マシン上で動作する.</li>
 		<li>Web上からRarakuの開発が行えるUIを提供(Raraku Studio).</li>
-		<li>Raraku BIRDという仕組みを用いてHTML内にRaraku言語を埋め込み実行させることで、高度に柔軟なドキュメントを自動生成したり(Rongorongo)、<br>
-			CGIにおいて動的な処理ができる(Dynamic Raraku BIRD).<br>
+		<li>RarakuBIRDという仕組みを用いてHTML内にRaraku言語を埋め込み実行させることで、高度に柔軟なドキュメントを自動生成したり(Rongorongo)、<br>
+			CGIにおいて動的な処理ができる(Dynamic RarakuBIRD).<br>
 		</li>
-		<li>Moai CGIとして使う場合、Raraku BIRDを用いるか、rrkxファイルをCGIとして実行する形となる.</li>
+		<li>Moai CGIとして使う場合、RarakuBIRDを用いるか、rrkxファイルをCGIとして実行する形となる.</li>
 		<li>C言語等で書かれた動的ライブラリ(DLLやSOファイル)によって機能を拡張できる(Raraku Extens).<br>
 			これにより、RanoCGI(Moaiで使っているCGIのライブラリ)やSDL、OpenGL、Windows APIなどの関数をRaraku上から実行させることもできる.<br>
 		</li>
@@ -83,7 +104,10 @@
 	この言語はこれ自体で単独のアプリなどの開発と実行をも行うことができますが、
 	Moaiシステムの観点からはMoai CGIの開発などをこれを用いて行えるようにすることが当面の主な狙いとなります.<br>
 	また、MoaiのBBS用pluginやフィルタ処理はVer2.3ではRarakuによって記述され直されています. <br>
-	ユーザはCコンパイラをわざわざインストールしなくてもRaraku Studioとテキストエディタさえあればこれらの開発や修正を行うこともできます.<br>
+<br>
+	Easterシステムの観点からはC言語ベースでのプログラミングからの（ある程度の）自立を目指します。<br>
+	ユーザはCコンパイラをわざわざインストールしなくてもRaraku Studioとテキストエディタさえあれば<br>
+	BBS用の挙動を記述するプログラミングを行うこともできます.<br>
 </div></article>
 <br><br>
 	<br>
@@ -222,7 +246,7 @@ Ver2.2</div><div class="message-body">
 
 <a name=license></a>
 <h1 class="title">ライセンス</h1>
-	Moai本体およびそれに付随するシステムのうち、我々Moai開発チームが開発したものに関しては、そのライセンスはすべて<a class=MstyElemLink href=http://www.kmonos.net/nysl target=_blank>NYSL</a>(煮るなり焼くなり好きにしろ)とします.<br>
+	Moai本体およびそれに付随するシステムのうち、我々Moai開発チームが開発したものに関しては、そのライセンスはすべて<b><a class=MstyElemLink href=http://www.kmonos.net/nysl target=_blank>NYSL</a>(煮るなり焼くなり好きにしろ)</b>とします.<br>
 	厳密に言えば、このシステムに含まれるzlib、libresslについてはそれぞれが規定したライセンスに従うものとなりますが、これらのライセンスもNYSLと基本的に競合せず、その主張に大差はないとは思います.<br>
 <br>
 	尚、このシステム内のすべてのソースコードにおいては、そのライセンスがGPLおよびLGPLであるようなものは一切含まれておりません.<br>
