@@ -135,17 +135,20 @@
 		<ul>
 			<li>Windows系（MinGW,VC)の場合</li>
 <br>
-			znk_project/libressl/cryptoのMakefile_vc.makあるいはMakefile_mingw.mak内でコンパイルオプション-DSIZEOF_TIME_T=8を指定した上で、<br>
+			znk_project/libressl/cryptoのMakefile_vc.makあるいはMakefile_mingw.mak内で<br>
+			コンパイルオプション -DSIZEOF_TIME_T=8 を指定した上で、<br>
 			libtls-17.dll全体を再ビルドしてください。その上でMoai全体をインストールし直します。<br>
 <br>
 			<li>Linux系（gcc)の場合</li>
 <br>
-			znk_project/libressl/cryptoのMakefile内でコンパイルオプション-DSIZEOF_TIME_T=8を指定した上で、<br>
+			znk_project/libressl/cryptoのMakefile_liunx.mak内で<br>
+			コンパイルオプション -DSIZEOF_TIME_T=8 -D_FILE_OFFSET_BITS=64 -D_TIME_BITS=64 を指定した上で、<br>
 			libtls-17.so全体を再ビルドしてください。その上でMoai全体をインストールし直します。<br>
 <br>
 			<li>Androidの場合</li>
 <br>
-			znk_project/libressl/cryptoのMakefile_android.mak内でコンパイルオプション-DSIZEOF_TIME_T=8を指定した上で、<br>
+			znk_project/libressl/cryptoのMakefile_android.mak内で<br>
+			コンパイルオプション -DSIZEOF_TIME_T=8 を指定した上で、<br>
 			libtls-17.so全体を再ビルドしてください。その上でMoai全体をインストールし直します。<br>
 			ただしこの環境でのビルドは非常に難しいため、上記のバイナリ修正版を適用した方が確実かと思います。<br>
 		</ul>
