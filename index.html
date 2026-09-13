@@ -74,53 +74,81 @@
 		2026/09/12: ふたばちゃんねるにおいてHTTPSで通信した場合にeasterがクラッシュする不具合について<br>
 	</div>
 	<div class="message-body">
-		ふたばちゃんねるにおいてHTTPSで通信した場合にeasterがクラッシュする不具合が発生しています<br>
-		（HTTPSではなくHTTPでアクセスした場合は問題ありません）。<br>
-		これはMoaiディレクトリ内のHTTPSの処理を行うためのライブラリ（libressl）において、<br>
-		HTTPS証明書の有効期間（Expire）の処理で誤判定が発生していることに起因します。<br>
+		ふたばちゃんねるにおいてHTTPSで通信した場合にeasterがクラッシュする不具合が発生しています（HTTPSではなくHTTPでアクセスした場合は問題ありません）。<br>
+		これはMoaiディレクトリ内のHTTPSの処理を行うためのライブラリ（libressl）において、HTTPS証明書の有効期間（Expire）の処理で誤判定が発生していることに起因します。<br>
 <br>
-		Moaiアップグレードに対応するには時間が掛かりそうなため、さしあたっては、以下の手順でファイルを差し替えてください。<br>
+		さしあたっては、以下の手順でファイルを差し替えてください（作業中は一旦Moaiを終了しておいてください）。<br>
 <br>
 		<ul>
-			<li>Moai Windows 32bit版の場合</li>
+			<li>Moai Windows 32bit版(win32)の場合</li>
 <br>
-			libresslの実体ファイルはlibtls-17.dllであり、今回これが問題となっています。<br>
-			修正済みのlibtls-17.dllを用意しましたのでこれをお使いください。<br>
+			今回問題となっているのはlibtls-17.dllというファイルです。修正版を用意しましたのでこれをお使いください。<br>
 <br>
-			まず一旦Moaiを終了します。<br>
 			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_rep/releases/download/v1.0.0/libressl-modified-win32.zip">libressl-modified-win32.zip</a>をダウンロードし、これを解凍します。<br>
 			解凍すると中にlibtls-17.dllという名前のファイルがありますので、<br>
 			お使いのMoaiフォルダ（moai-v2.2-win32）内の同名のファイルをこれで上書きしてください。<br>
-			最後にMoaiをもう一度起動し、ふたばちゃんねるにおいてHTTPSによる通信が可能であることを確認してください。<br>
 <br>
-			<li>Moai Windows 64bit版の場合</li>
+			<li>Moai Windows 64bit版(win64)の場合</li>
 <br>
-			libresslの実体ファイルはlibtls-17.dllであり、今回これが問題となっています。<br>
-			修正済みのlibtls-17.dllを用意しましたのでこれをお使いください。<br>
+			今回問題となっているのはlibtls-17.dllというファイルです。修正版を用意しましたのでこれをお使いください。<br>
 <br>
-			まず一旦Moaiを終了します。<br>
 			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_rep/releases/download/v1.0.0/libressl-modified-win64.zip">libressl-modified-win64.zip</a>をダウンロードし、これを解凍します。<br>
 			解凍すると中にlibtls-17.dllという名前のファイルがありますので、<br>
 			お使いのMoaiフォルダ（moai-v2.2-win64）内の同名のファイルをこれで上書きしてください。<br>
-			最後にMoaiをもう一度起動し、ふたばちゃんねるにおいてHTTPSによる通信が可能であることを確認してください。<br>
+<br>
+			<li>Moai Cygwin 32bit版(cygwin32)の場合</li>
+<br>
+			今回問題となっているのはcygtls-17.dllというファイルです。修正版を用意しましたのでこれをお使いください。<br>
+<br>
+			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_rep/releases/download/v1.0.0/libressl-modified-win32.zip">libressl-modified-win32.zip</a>をダウンロードし、これを解凍します（win32版のものですが共通して使えます）。<br>
+			解凍すると中にlibtls-17.dllという名前のファイルがあります。<br>
+			これを<b>cygtls-17.dllという名前に変更</b>し、お使いのMoaiフォルダ（moai-v2.2-cygwin32）内の同名のファイルをこれで上書きしてください。<br>
+<br>
+			<li>Moai Linux 32bit版(linux32)の場合</li>
+<br>
+			今回問題となっているのはcygtls-17.soというファイルです。修正版を用意しましたのでこれをお使いください。<br>
+<br>
+			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_rep/releases/download/v1.0.0/libressl-modified-linux32.zip">libressl-modified-linux32.zip</a>をダウンロードし、これを解凍します。<br>
+			解凍すると中にlibtls-17.soという名前のファイルがありますので、<br>
+			お使いのMoaiフォルダ（moai-v2.2-linux32）内の同名のファイルをこれで上書きしてください。<br>
+<br>
+			<li>Moai Linux 64bit版(linux64)の場合</li>
+<br>
+			linux64に関しては現時点では問題は発生していませんが、<br>
+			気になる方はこちらに関しても修正版に差し替えておいた方が確実かもしれません。<br>
+<br>
+			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_rep/releases/download/v1.0.0/libressl-modified-linux64.zip">libressl-modified-linux64.zip</a>をダウンロードし、これを解凍します。<br>
+			解凍すると中にlibtls-17.soという名前のファイルがありますので、<br>
+			お使いのMoaiフォルダ（moai-v2.2-linux64）内の同名のファイルをこれで上書きしてください。<br>
 <br>
 			<li>Moai Android版の場合</li>
 <br>
-			libresslの実体ファイルはlibtls-17.soであり、今回これが問題となっています。<br>
-			ただしAndroid版の場合、このファイルだけをピンポイントで変えるのは現状難しいです。<br>
+			今回問題となっているのはlibtls-17.soというファイルです。<br>
+			ただしAndroid版の場合、このファイルだけをピンポイントで変えるのは一般には難しいかもしれません。<br>
 			新しいapk(Ver2.3)を用意しましたので、これで全体を丸ごと上書きインストールしてください。<br>
 <br>
-			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_project/releases/download/v2.3/moai-v2.3-android.apk">moai-v2.3-android.apk</a>をダウンロードし、これを直接タップしてインストールします。<br>
-			最後にMoaiを起動し、ふたばちゃんねるにおいてHTTPSによる通信が可能であることを確認してください。<br>
+			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_rep/releases/download/v1.0.0/moai-v2.3-android.apk">moai-v2.3-android.apk</a>をダウンロードし、これを直接タップしてインストールします。<br>
 		</ul>
 <br>
-		Linux版におけるlibresslの修正ファイルについては準備中ですのでもうしばらくお待ち下さい。<br>
+		尚、ソースコードからビルドしてお使いの方は、znk_project/libresslを一旦完全cleanし、以下の手順で全体を再ビルドしなおしてください。<br>
 <br>
-		尚、ソースコードからビルドしてお使いの方は、znk_project/libresslを一旦完全cleanし、<br>
-		znk_project/libressl/cryptoのMakefile内でコンパイルオプション-DSIZEOF_TIME_T=8を指定した上で、<br>
-		libtls-17.dll（Linux版/Android版の場合はlibtls-17.so）全体を再ビルドしてください。<br>
-		その上でMoai全体をインストールし直すことで、ひとまず問題は解消すると思います。<br>
+		<ul>
+			<li>Windows系（MinGW,VC)の場合</li>
 <br>
+			znk_project/libressl/cryptoのMakefile_vc.makあるいはMakefile_mingw.mak内でコンパイルオプション-DSIZEOF_TIME_T=8を指定した上で、<br>
+			libtls-17.dll全体を再ビルドしてください。その上でMoai全体をインストールし直します。<br>
+<br>
+			<li>Linux系（gcc)の場合</li>
+<br>
+			znk_project/libressl/cryptoのMakefile内でコンパイルオプション-DSIZEOF_TIME_T=8を指定した上で、<br>
+			libtls-17.so全体を再ビルドしてください。その上でMoai全体をインストールし直します。<br>
+<br>
+			<li>Androidの場合</li>
+<br>
+			znk_project/libressl/cryptoのMakefile_android.mak内でコンパイルオプション-DSIZEOF_TIME_T=8を指定した上で、<br>
+			libtls-17.so全体を再ビルドしてください。その上でMoai全体をインストールし直します。<br>
+			ただしこの環境でのビルドは非常に難しいため、上記のバイナリ修正版を適用した方が確実かと思います。<br>
+		</ul>
 	</div>
 </article>
 <br>
@@ -158,7 +186,7 @@
 <br>
 			<li>Moai Android 版を使われる方<br>
 <br>
-			バージョン2.3が最新版となりますのでそちらをご覧ください.<br>
+			バージョン2.3が最新版となりますのでそちらをご使用ください.<br>
 			Android版に関しては、現時点では Moai アップグレードをサポートしていません.<br>
 			</li>
 		</ul>
@@ -193,8 +221,8 @@
 			<li>Linux(64bit)版<br>
 			<a class=MstyElemLink target=_blank href=https://github.com/mr-moai-2016/znk_project/releases/download/v2.2/moai-v2.2-linux64.zip>moai-v2.2-linux64.zip</a><br>
 			</li>
-			<li>Android(Ver4.1 Jelly Bean以降)版（これについてはVer2.3をお使いください）<br>
-			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_project/releases/download/v2.3/moai-v2.3-android.apk">moai-v2.3-android.apk</a><br>
+			<li>Android(Ver4.1 Jelly Bean以降)版（これについてはVer2.2では問題があるため、Ver2.3をお使いください）<br>
+			<a class=MstyElemLink target=_blank href="https://github.com/mr-moai-2016/znk_rep/releases/download/v1.0.0/moai-v2.3-android.apk">moai-v2.3-android.apk</a><br>
 			</li>
 		</ul>
 <br>
