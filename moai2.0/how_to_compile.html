@@ -1354,22 +1354,23 @@ Q. quit
 	特に実行バイナリなどプラットフォームによって異なるものはディレクトリ moai-v2.*\bin\$PLATFORM へ格納されます。
 	ここで$PLATFORMの値は、MinGW32を使った場合 windows-x86 となります。
 <br><br>
-	<a name=AName_compile_by_mingw_3></a><script type="text/javascript">var st_compile_by_mingw_3_group_id_ary = [ "compile_by_mingw_3" ];</script>
-<a class=MstyDetailLink id=compile_by_mingw_3_btn onClick="if( MstyUI_selectTab( st_compile_by_mingw_3_group_id_ary, this.id ) ){location.href = '#AName_compile_by_mingw_3';}">参考: インストールディレクトリを変更したい場合</a>
-<span id=compile_by_mingw_3 class=MstyUnvisible>
 	<div class=box>
 		環境変数ZNK_INSTALL_DIRでインストールされるディレクトリのパスを明示的に指定することもできます。
 		その場合、指定したディレクトリへインストールされます。
 	</div>
-	</span>
-<br><br>
+	<div class=box>
+		ビルドの結果は通常キャッシュされています。
+		なんらかの理由でこのキャッシュを消去し、完全に一からビルドし直したい場合は、「2. make clean」を実行した上で
+		再度「1. make install」を実行してください。
+	</div>
+<br>
 	以上でWindows 32bit版のMoaiのコンパイルとインストールはすべて完了です。
 	お疲れ様でした。
 <br><br>
 	<a name=WhyBaseTools></a>
-	<a name=AName_compile_by_mingw_4></a><script type="text/javascript">var st_compile_by_mingw_4_group_id_ary = [ "compile_by_mingw_4" ];</script>
-<a class=MstyDetailLink id=compile_by_mingw_4_btn onClick="if( MstyUI_selectTab( st_compile_by_mingw_4_group_id_ary, this.id ) ){location.href = '#AName_compile_by_mingw_4';}">参考: auto_trigger.exeそれ自体をビルドしたい場合</a>
-<span id=compile_by_mingw_4 class=MstyUnvisible>
+	<a name=AName_compile_by_mingw_3></a><script type="text/javascript">var st_compile_by_mingw_3_group_id_ary = [ "compile_by_mingw_3" ];</script>
+<a class=MstyDetailLink id=compile_by_mingw_3_btn onClick="if( MstyUI_selectTab( st_compile_by_mingw_3_group_id_ary, this.id ) ){location.href = '#AName_compile_by_mingw_3';}">参考: auto_trigger.exeそれ自体をビルドしたい場合</a>
+<span id=compile_by_mingw_3 class=MstyUnvisible>
 	<div class=box>
 		Moaiのソースコードにおいて、いくつかの基盤ツールだけは最初からビルドされた状態で同梱されています。
 		例えば auto_trigger.exe（トリガーツール）と raraku.exe (raraku言語のコンパイラ）です。
@@ -1382,9 +1383,9 @@ Q. quit
 		これを実行すると、32bit Windows 版 auto_trigger.exe, raraku.exe だけがまずビルドされます（より正確にはこれらのツールが依存するlibZnk, libRrkもビルドされます）。
 		一旦 auto_trigger.exe が出来上がれば、そこからはauto_trigger.batを起動することでMoaiの残りすべてのビルドを行うことができます。
 <br><br>
-		<a name=AName_compile_by_mingw_5></a><script type="text/javascript">var st_compile_by_mingw_5_group_id_ary = [ "compile_by_mingw_5" ];</script>
-<a class=MstyDetailLink id=compile_by_mingw_5_btn onClick="if( MstyUI_selectTab( st_compile_by_mingw_5_group_id_ary, this.id ) ){location.href = '#AName_compile_by_mingw_5';}">参考: なぜいくつかの基盤ツールは最初からビルドされた状態で同梱しているのか</a>
-<span id=compile_by_mingw_5 class=MstyUnvisible>
+		<a name=AName_compile_by_mingw_4></a><script type="text/javascript">var st_compile_by_mingw_4_group_id_ary = [ "compile_by_mingw_4" ];</script>
+<a class=MstyDetailLink id=compile_by_mingw_4_btn onClick="if( MstyUI_selectTab( st_compile_by_mingw_4_group_id_ary, this.id ) ){location.href = '#AName_compile_by_mingw_4';}">参考: なぜいくつかの基盤ツールは最初からビルドされた状態で同梱しているのか</a>
+<span id=compile_by_mingw_4 class=MstyUnvisible>
 		<div class=box>
 			その理由はかなり複雑であり、どのOS向けにビルドするのかによっても異なります。
 			以下、そのあたりに興味ある方だけお読み下さい。
@@ -1424,11 +1425,11 @@ Q. quit
 				勿論、最初からVCないしはMinGWをインストールしている（あるいはそれを追加でインストールしても構わない）開発者ならば、
 				build_zerobase.batを実行することで、これらのexeをゼロから生成することもできます。
 			</div>
-			<a class=MstyDetailLink onClick="MstyUI_selectTab( st_compile_by_mingw_5_group_id_ary, 'compile_by_mingw_5_btn' );location.href = '#AName_compile_by_mingw_5';">Close</a>
+			<a class=MstyDetailLink onClick="MstyUI_selectTab( st_compile_by_mingw_4_group_id_ary, 'compile_by_mingw_4_btn' );location.href = '#AName_compile_by_mingw_4';">Close</a>
 		</div>
 		</span>
 <br><br>
-		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_compile_by_mingw_4_group_id_ary, 'compile_by_mingw_4_btn' );location.href = '#AName_compile_by_mingw_4';">Close</a>
+		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_compile_by_mingw_3_group_id_ary, 'compile_by_mingw_3_btn' );location.href = '#AName_compile_by_mingw_3';">Close</a>
 	</div>
 	</span>
 <br><br>
@@ -1460,9 +1461,9 @@ Q. quit
 	今回取得すべきファイルにどうやって至ったのかまで知りたい方は以下をご覧下さい。
 	手っ取り早く目的のファイルをダウンロードして先に進みたい方は読む必要はありません。
 <br><br>
-	<a name=AName_compile_by_mingw_6></a><script type="text/javascript">var st_compile_by_mingw_6_group_id_ary = [ "compile_by_mingw_6" ];</script>
-<a class=MstyDetailLink id=compile_by_mingw_6_btn onClick="if( MstyUI_selectTab( st_compile_by_mingw_6_group_id_ary, this.id ) ){location.href = '#AName_compile_by_mingw_6';}">参考: 今回取得すべきファイルにどうやって至ったのか？</a>
-<span id=compile_by_mingw_6 class=MstyUnvisible>
+	<a name=AName_compile_by_mingw_5></a><script type="text/javascript">var st_compile_by_mingw_5_group_id_ary = [ "compile_by_mingw_5" ];</script>
+<a class=MstyDetailLink id=compile_by_mingw_5_btn onClick="if( MstyUI_selectTab( st_compile_by_mingw_5_group_id_ary, this.id ) ){location.href = '#AName_compile_by_mingw_5';}">参考: 今回取得すべきファイルにどうやって至ったのか？</a>
+<span id=compile_by_mingw_5 class=MstyUnvisible>
 	<div class=box>
 		まずこのsourceforgeにはMinGW64コンパイラ（gcc）自身のソースコードも置かれていますが、
 		今回我々が入手したいのはビルド済み実行バイナリとなります
@@ -1576,7 +1577,7 @@ Q. quit
 		（我々がこれを選んだのは単にファイルサイズが一番小さかったからです（微々たる差ですが））。
 		よってここから先はこのファイルをダウンロードしたものとして説明していきます。
 <br><br>
-		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_compile_by_mingw_6_group_id_ary, 'compile_by_mingw_6_btn' );location.href = '#AName_compile_by_mingw_6';">Close</a>
+		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_compile_by_mingw_5_group_id_ary, 'compile_by_mingw_5_btn' );location.href = '#AName_compile_by_mingw_5';">Close</a>
 	</div>
 	</span>
 <br><br>
@@ -1819,15 +1820,16 @@ Q. quit
 	特に実行バイナリなどプラットフォームによって異なるものはディレクトリ moai-v2.*\bin\$PLATFORM へ格納されます。
 	ここで$PLATFORMの値は、MinGW64-64を使った場合 windows-x64 となります。
 <br><br>
-	<a name=AName_compile_by_mingw_7></a><script type="text/javascript">var st_compile_by_mingw_7_group_id_ary = [ "compile_by_mingw_7" ];</script>
-<a class=MstyDetailLink id=compile_by_mingw_7_btn onClick="if( MstyUI_selectTab( st_compile_by_mingw_7_group_id_ary, this.id ) ){location.href = '#AName_compile_by_mingw_7';}">参考: インストールディレクトリを変更したい場合</a>
-<span id=compile_by_mingw_7 class=MstyUnvisible>
 	<div class=box>
 		環境変数ZNK_INSTALL_DIRでインストールされるディレクトリのパスを明示的に指定することもできます。
 		その場合、指定したディレクトリへインストールされます。
 	</div>
-	</span>
-<br><br>
+	<div class=box>
+		ビルドの結果は通常キャッシュされています。
+		なんらかの理由でこのキャッシュを消去し、完全に一からビルドし直したい場合は、「2. make clean」を実行した上で
+		再度「1. make install」を実行してください。
+	</div>
+<br>
 	以上でWindows 64bit版のMoaiのコンパイルとインストールはすべて完了です。
 	お疲れ様でした。
 <br>
@@ -2098,21 +2100,22 @@ REM set   ZNK_VC_UCRT_DIR=D:\Program Files (x86)\Windows Kits\10
 	特に実行バイナリなどプラットフォームによって異なるものはディレクトリ moai-v2.*\bin\$PLATFORM へ格納されます。
 	ここで$PLATFORMの値は、MACHINEの値が x86 の場合 windows-x86、MACHINEの値が x64 の場合 windows-x64 となります。
 <br><br>
-	<a name=AName_compile_by_vc_1></a><script type="text/javascript">var st_compile_by_vc_1_group_id_ary = [ "compile_by_vc_1" ];</script>
-<a class=MstyDetailLink id=compile_by_vc_1_btn onClick="if( MstyUI_selectTab( st_compile_by_vc_1_group_id_ary, this.id ) ){location.href = '#AName_compile_by_vc_1';}">参考: インストールディレクトリを変更したい場合</a>
-<span id=compile_by_vc_1 class=MstyUnvisible>
 	<div class=box>
 		環境変数ZNK_INSTALL_DIRでインストールされるディレクトリのパスを明示的に指定することもできます。
 		その場合、指定したディレクトリへインストールされます。
 	</div>
-	</span>
-<br><br>
+	<div class=box>
+		ビルドの結果は通常キャッシュされています。
+		なんらかの理由でこのキャッシュを消去し、完全に一からビルドし直したい場合は、「sh ./make_world.sh clean」を実行した上で
+		再度「sh ./make_world.sh install」を実行してください。
+	</div>
+<br>
 	以上でWindows版のMoaiのコンパイルとインストールはすべて完了です。
 	お疲れ様でした。
 <br><br>
-	<a name=AName_compile_by_vc_2></a><script type="text/javascript">var st_compile_by_vc_2_group_id_ary = [ "compile_by_vc_2" ];</script>
-<a class=MstyDetailLink id=compile_by_vc_2_btn onClick="if( MstyUI_selectTab( st_compile_by_vc_2_group_id_ary, this.id ) ){location.href = '#AName_compile_by_vc_2';}">参考: VCの自動認識</a>
-<span id=compile_by_vc_2 class=MstyUnvisible>
+	<a name=AName_compile_by_vc_1></a><script type="text/javascript">var st_compile_by_vc_1_group_id_ary = [ "compile_by_vc_1" ];</script>
+<a class=MstyDetailLink id=compile_by_vc_1_btn onClick="if( MstyUI_selectTab( st_compile_by_vc_1_group_id_ary, this.id ) ){location.href = '#AName_compile_by_vc_1';}">参考: VCの自動認識</a>
+<span id=compile_by_vc_1 class=MstyUnvisible>
 	<div class=box>
 		znk_project のビルドシステムは、特に環境変数を設定せずともPCにインストールされているVCを自動認識できることがあります。
 		特にVC6.0以上VS2015以下のx86環境向けで、デフォルトの位置にインストールされている場合ならこれはうまく機能する可能性があります。
@@ -2121,9 +2124,9 @@ REM set   ZNK_VC_UCRT_DIR=D:\Program Files (x86)\Windows Kits\10
 		Moai Ver2.2以前では、この自動認識システムでVCによるコンパイルを賄っていました。
 		しかしMoai Ver2.3以降では、既に述べた３つの環境変数を指定する方法を正式な手順として採用しています。
 <br><br>
-		<a name=AName_compile_by_vc_3></a><script type="text/javascript">var st_compile_by_vc_3_group_id_ary = [ "compile_by_vc_3" ];</script>
-<a class=MstyDetailLink id=compile_by_vc_3_btn onClick="if( MstyUI_selectTab( st_compile_by_vc_3_group_id_ary, this.id ) ){location.href = '#AName_compile_by_vc_3';}">参考: どうやって自動認識しているのか？</a>
-<span id=compile_by_vc_3 class=MstyUnvisible>
+		<a name=AName_compile_by_vc_2></a><script type="text/javascript">var st_compile_by_vc_2_group_id_ary = [ "compile_by_vc_2" ];</script>
+<a class=MstyDetailLink id=compile_by_vc_2_btn onClick="if( MstyUI_selectTab( st_compile_by_vc_2_group_id_ary, this.id ) ){location.href = '#AName_compile_by_vc_2';}">参考: どうやって自動認識しているのか？</a>
+<span id=compile_by_vc_2 class=MstyUnvisible>
 		<div class=box>
 			内部的にはこの自動認識は znk_project\src\bat_utils\setenv_vc.bat というbatファイルにおいて行われます。
 			上記の手順で失敗する場合、この自動認識が失敗していると考えられます。
@@ -2164,11 +2167,11 @@ REM set   ZNK_VC_UCRT_DIR=D:\Program Files (x86)\Windows Kits\10
 			さらに言えば、VC付属batファイルは内部でレジストリ情報を参照するため、VC本体の位置が変わった場合などに柔軟に対応できません。
 			このように色々と厄介な問題があることもあり、Moai Ver2.3 以降ではこれを使うことを基本的にはやめ、detect_vc.batという独自の検出スクリプトを開発導入しました。
 <br><br>
-			<a class=MstyDetailLink onClick="MstyUI_selectTab( st_compile_by_vc_3_group_id_ary, 'compile_by_vc_3_btn' );location.href = '#AName_compile_by_vc_3';">Close</a>
+			<a class=MstyDetailLink onClick="MstyUI_selectTab( st_compile_by_vc_2_group_id_ary, 'compile_by_vc_2_btn' );location.href = '#AName_compile_by_vc_2';">Close</a>
 		</div>
 		</span>
 <br><br>
-		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_compile_by_vc_2_group_id_ary, 'compile_by_vc_2_btn' );location.href = '#AName_compile_by_vc_2';">Close</a>
+		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_compile_by_vc_1_group_id_ary, 'compile_by_vc_1_btn' );location.href = '#AName_compile_by_vc_1';">Close</a>
 	</div>
 	</span>
 <br>
@@ -2246,10 +2249,21 @@ REM set   ZNK_VC_UCRT_DIR=D:\Program Files (x86)\Windows Kits\10
 <br>
 	尚、Cygwinの場合、出来上がるdllの名前にはcygプリフィックスをつける仕様としてあります。
 	これは別に必須というわけではないのですが、Cygwin用のdllはVCやMinGWにより生成する普通のdllとは一部異なるため、区別するためにこのようにしてあります. 
+	デフォルトでは、ディレクトリ src の一つ上の階層にディレクトリmoai-v2.* が生成され、
+	コンパイルされた実行バイナリや設定ファイルなどの必要なものすべてが、そのディレクトリへとインストールされます。
+	特に実行バイナリなどプラットフォームによって異なるものはディレクトリ moai-v2.*\bin\$PLATFORM へ格納されます。
+	ここで$PLATFORMの値は、ZNK_MINGW32_DIRを使った場合 windows-x86、ZNK_MINGW64_DIRを使った場合 windows-x64 となります。
 <br><br>
-	さらに、srcディレクトリの一つ上の階層にmoai-v2.*-cygwin32ディレクトリが生成され、コンパイルされた実行バイナリや設定ファイルなどの必要なものすべてが、そのディレクトリへとインストールされます。
-	(なんらかの理由でこのインストール処理だけを省略し、つまり純粋にコンパイルだけを行いたい場合は、「sh ./make_world.sh install」の替わりに「sh ./make_world.sh」と実行してください)
-<br><br>
+	<div class=box>
+		環境変数ZNK_INSTALL_DIRでインストールされるディレクトリのパスを明示的に指定することもできます。
+		その場合、指定したディレクトリへインストールされます。
+	</div>
+	<div class=box>
+		ビルドの結果は通常キャッシュされています。
+		なんらかの理由でこのキャッシュを消去し、完全に一からビルドし直したい場合は、「sh ./make_world.sh clean」を実行した上で
+		再度「sh ./make_world.sh install」を実行してください。
+	</div>
+<br>
 	以上でMoaiのコンパイルとインストールはすべて完了です。
 <br><br>
 	<h3>動作確認</h3>
@@ -2453,14 +2467,14 @@ Moai : ObserveR : 1-th sock events by select.
 	MSYSは通常MinGWと組み合わせて使うものですから、必要なコマンド群もMinGWと一致します。
 	そしてMinGWとMSYSでは、これらのコマンドはすべて標準で付属します。
 	MinGWをまだインストールされていない方は、必要であればまずは<a class=MstyElemLink href=#compile_by_mingw>Windows版をコンパイルする(MinGWを使用)</a>
-	の「MinGW32のインストール」の部分をご一読の上、先にMinGWのインストールを済ませて下さい。
+	をご一読の上、先にMinGWのインストールを済ませて下さい（MinGW32.org、MinGW64-32、MinGW64-64のいずれでも構いません）。
 <br><br>
 	<h3>MSYSのインストール</h3>
 <br>
 	ここでは MSYS そのもののインストール方法について述べます。
 	既に MSYS をインストールされ、しかも make コマンドと gcc コマンドが使える状態になっている方は読み飛ばして構いません。
 <br><br>
-	この記事執筆現在、MSYSの公式サイトはMinGW32と同じく<a class=MstyElemLink href="https://sourceforge.net/projects/mingw" target=_blank>https://sourceforge.net/projects/mingw</a> となっています。
+	この記事執筆現在、MSYSの公式サイトはMinGW32.orgと同じく<a class=MstyElemLink href="https://sourceforge.net/projects/mingw" target=_blank>https://sourceforge.net/projects/mingw</a> となっています。
 <br><br>
 	ただしこの sourceforge は若干サイトの構造がわかりにくいので、インストーラ（mingw-get）が置かれているURLを一旦以下に示します。
 <br><br>
@@ -2582,13 +2596,27 @@ c: on /c type user (binmode,noumount)
 	MSYS 上の /home/Zenkaku に相当することになります。
 <br><br>
 	次に gcc コマンドを使えるようにします
-	（今回はMSYS本体をMinGW32とは独立して最小構成でインストールしましたので、
+	（今回はMSYS本体をMinGWとは独立して最小構成でインストールしましたので、
 	gcc コマンドの方は使えないはずです）。
 <br><br>
-	今、C:\mingw32_dir 配下に MinGW32 がインストールされているとしましょう。
-	このとき、MinGW32 のインストールディレクトリは MSYS のインストールディレクトリの外にあります。
-	よって MSYS 上で MinGW32 のインストールディレクトリを認識させるには、
-	その位置を MSYS に教えねばなりません。
+	今、MinGWのインストールディレクトリを C:\mingw_dir としましょう
+	（C:\mingw_dir\bin\gcc.exeが存在するものとします）。
+<br><br>
+	<div class=box>
+		「Windows版をコンパイルする(MinGWを使用)」のセクションで用いた具体例では、
+		MinGWのインストールディレクトリは以下のように設定しました。
+		この例に従う場合は、C:\mingw_dirの部分を以下で読み替えて下さい。
+<br><br>
+		<table>
+			<tr>                    <th>ツールの種類</th><th>インストールディレクトリ   </th><th>生成されるバイナリ</th></tr>
+			<tr class="MstyItemEvn"><td>MinGW32.org </td><td>C:\mingw32_dir\v6.3        </td><td>windows-x86</td></tr>
+			<tr class="MstyItemEvn"><td>MinGW64-32  </td><td>C:\mingw32_dir\v6.4\dwarf  </td><td>windows-x86</td></tr>
+			<tr class="MstyItemEvn"><td>MinGW64-64  </td><td>C:\mingw64_dir\v7.1\win_seh</td><td>windows-x64</td></tr>
+		</table>
+	</div>
+<br>
+	MinGW のインストールディレクトリは MSYS のインストールディレクトリの外にありますから、
+	MSYS 上で MinGW のインストールディレクトリを認識させるには、その位置を MSYS に明示的に教えねばなりません。
 <br><br>
 	C:\msys_dir\v1\msys\1.0\etc\fstab.conf をお好きなテキストエディタで開きましょう。
 	もしもこれが存在しなければ、まず同フォルダ内の fstab.sample を fstab.conf と言う名前でコピーしてそれを開きます。
@@ -2604,7 +2632,7 @@ c: on /c type user (binmode,noumount)
 <br><br>
 		
 	
-<pre class=hljs><code class="language-bash">c:/msys_dir/v1 /mingw
+<pre class=hljs><code class="language-bash">C:/msys_dir/v1 /mingw
 </code></pre>
 	
 	<br>
@@ -2613,13 +2641,25 @@ c: on /c type user (binmode,noumount)
 <br><br>
 		
 	
-<pre class=hljs><code class="language-bash">c:/mingw32_dir /mingw
+<pre class=hljs><code class="language-bash">C:/mingw_dir /mingw
 </code></pre>
 	
 	<br>
 	左側をMinGW32が実際にインストールされているディレクトリのパスに書き換えます
 	（ただしディレクトリの区切り記号としては「/」を使用してください）。
 	一方、右側は /mingw のままにしておきます。
+<br><br>
+	<div class=box>
+		念のためこの記事で述べた例に従う場合の記述も示しましょう。
+<br><br>
+		<table>
+			<tr>                    <th>ツールの種類</th><th>fstab.confで記述すべき行</th></tr>
+			<tr class="MstyItemEvn"><td>MinGW32.org </td><td>C:/mingw32_dir/v6.3         /mingw</td></tr>
+			<tr class="MstyItemEvn"><td>MinGW64-32  </td><td>C:/mingw32_dir/v6.4/dwarf   /mingw</td></tr>
+			<tr class="MstyItemEvn"><td>MinGW64-64  </td><td>C:/mingw64_dir/v7.1/win_seh /mingw</td></tr>
+		</table>
+	</div>
+<br>
 	書き換えたらこのファイルを上書き保存します。
 <br><br>
 	上記の fstab.conf に書かれた内容を反映させるには、MSYS 上で mountコマンドを次のように実行する必要があります。
@@ -2640,12 +2680,103 @@ $ mount /mingw
 </code></pre>
 	
 	<br>
-	将来、MinGW32フォルダの位置を移動したり、MinGW64 を使うように変更するなどして
-	/etc/fstab.conf の内容を書き直したらこのアンマウント/マウントを再度実行する必要があるので注意しましょう。
+	MinGWフォルダの位置を移動した場合、/etc/fstab.conf の内容を書き直した上でこのアンマウント/マウントを再度実行する必要があるので注意しましょう。
 <br><br>
 	これで gcc が無事起動できるようになったはずです。
 	gcc と単独で実行したとき、「no input files」などと表示されればOKです。
 <br><br>
+	<h3>複数のMinGWをインストールしている場合の切り分け</h3>
+<br>
+	複数のMinGWをインストールしており、それぞれを切り分けて使用したい場合を考えます。
+	例えば、MinGW32.org、MinGW64-32、MinGW64-64の三つをインストールしているものとしましょう。
+	MSYSの場合、fstab.conf に例えば以下のようにこれら三つのインストールディレクトリのパスを書いておき、
+	現在使用するもの以外はコメントアウトするなどして切り替える方法があります。
+<br><br>
+	MinGW32.orgを使用したい場合：
+		
+	
+<pre class=hljs><code class="language-bash">C:/mingw32_dir/v6.3 /mingw
+#C:/mingw32_dir/v6.4/dwarf /mingw
+#C:/mingw64_dir/v7.1/win_seh /mingw
+</code></pre>
+	
+	<br>
+	MinGW64-32を使用したい場合：
+		
+	
+<pre class=hljs><code class="language-bash">#C:/mingw32_dir/v6.3 /mingw
+C:/mingw32_dir/v6.4/dwarf /mingw
+#C:/mingw64_dir/v7.1/win_seh /mingw
+</code></pre>
+	
+	<br>
+	MinGW64-64を使用したい場合：
+		
+	
+<pre class=hljs><code class="language-bash">#C:/mingw32_dir/v6.3 /mingw
+#C:/mingw32_dir/v6.4/dwarf /mingw
+C:/mingw64_dir/v7.1/win_seh /mingw
+</code></pre>
+	
+	<br>
+	fstabを書き換えた後は、「umount /mingw」「mount /mingw」を忘れずに実行しておきましょう。
+<br><br>
+	また「gcc --version」を実行することで、現在使用可能なgccの種類を表すメッセージが表示されます。
+	この記事でインストールしたバージョンの場合、それぞれ以下のように表示されますので参考にして下さい。
+<br><br>
+	MinGW32.orgがマウントされている場合：
+		
+	
+<pre class=hljs><code class="language-bash">$ gcc --version
+gcc.exe (MinGW.org GCC-6.3.0-1) 6.3.0
+...
+</code></pre>
+	
+	<br>
+	MinGW64-32がマウントされている場合：
+		
+	
+<pre class=hljs><code class="language-bash">$ gcc --version
+gcc.exe (i686-win32-dwarf-rev0, Build by MinGW-W64 project) 6.4.0
+...
+</code></pre>
+	
+	<br>
+	MinGW64-64がマウントされている場合：
+		
+	
+<pre class=hljs><code class="language-bash">$ gcc --version
+gcc.exe (x86_64-win32-seh-rev0, Build by MinGW-W64 project) 7.1.0
+...
+</code></pre>
+	
+	<br>
+	ところで auto_trigger を使ったMinGWの場合、環境変数ZNK_MINGW32_DIR、ZNK_MINGW64_DIRの値を設定することで
+	切り分けが可能でした。
+	MSYSでこれに近い運用をするには、以下のように実行するとよいでしょう。
+<br><br>
+	ZNK_MINGW32_DIRで指定されたMinGWでビルドしたい場合:
+		
+	
+<pre class=hljs><code class="language-bash">umount /mingw &amp;&amp; mount $ZNK_MINGW32_DIR /mingw
+</code></pre>
+	
+	<br>
+	ZNK_MINGW64_DIRで指定されたMinGWでビルドしたい場合:
+		
+	
+<pre class=hljs><code class="language-bash">umount /mingw &amp;&amp; mount $ZNK_MINGW64_DIR /mingw
+</code></pre>
+	
+	<br>
+	上記によりfstab.confを直接編集せずとも /mingw のマウント先を一時的に変更することができます。
+<br><br>
+	<div class=box>
+		この実行によりfstab.confの内容が更新されるわけではなく、
+		MSYSのシェルウィンドウを閉じて再び起動すると、このコマンドの効果は消滅して
+		デフォルトのマウント設定になります。
+	</div>
+<br>
 	<h3>Moaiのコンパイルおよびインストール</h3>
 <br>
 	MSYSターミナルを開き、srcディレクトリ内の以下のシェルスクリプトを実行します。
@@ -2663,11 +2794,51 @@ $ mount /mingw
 		コンパイル後の実行バイナリは各ディレクトリ内のout_dirに格納されます。
 	</div>
 <br>
-	さらに、srcディレクトリの一つ上の階層にmoai-v2.*-win32ディレクトリが生成され、
+	ただしこのビルドによってwindows-x86版とwindows-x64版のどちらがビルドされるかは /mingw がどうマウントされているか
+	（正確にはgcc --versionの値がどうなるか）によって異なります。
+	これを明示的に指定するには以下のようにします。
+<br><br>
+	<ul>
+		<li>windows-x86版で明示的にコンパイルしたい場合</li>
+<br>
+		環境変数 ZNK_MINGW32_DIR に32bit版バイナリを生成するためのMinGW
+		（MinGW.orgまたはMinGW64-32）のインストールディレクトリのパスを設定しておきます。
+		その上で以下のように実行します。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-bash">umount /mingw &amp;&amp; mount $ZNK_MINGW32_DIR /mingw
+sh ./make_world.sh install
+</code></pre>
+	
+<br><br>
+		<li>windows-x64版で明示的にコンパイルしたい場合</li>
+<br>
+		環境変数 ZNK_MINGW64_DIR に64bit版バイナリを生成するためのMinGW
+		（MinGW64-64）のインストールディレクトリのパスを設定しておきます。
+		その上で以下のように実行します。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-bash">umount /mingw &amp;&amp; mount $ZNK_MINGW64_DIR /mingw
+sh ./make_world.sh install
+</code></pre>
+	
+	</ul>
+<br>
+	デフォルトでは、ディレクトリ src の一つ上の階層にディレクトリmoai-v2.* が生成され、
 	コンパイルされた実行バイナリや設定ファイルなどの必要なものすべてが、そのディレクトリへとインストールされます。
+	特に実行バイナリなどプラットフォームによって異なるものはディレクトリ moai-v2.*\bin\$PLATFORM へ格納されます。
+	ここで$PLATFORMの値は、ZNK_MINGW32_DIRを使った場合 windows-x86、ZNK_MINGW64_DIRを使った場合 windows-x64 となります。
 <br><br>
 	<div class=box>
-		なんらかの理由でこのインストール処理だけを省略し、つまり純粋にコンパイルだけを行いたい場合は、「sh ./make_world.sh install」の替わりに「sh ./make_world.sh」と実行してください。
+		環境変数ZNK_INSTALL_DIRでインストールされるディレクトリのパスを明示的に指定することもできます。
+		その場合、指定したディレクトリへインストールされます。
+	</div>
+	<div class=box>
+		ビルドの結果は通常キャッシュされています。
+		なんらかの理由でこのキャッシュを消去し、完全に一からビルドし直したい場合は、「sh ./make_world.sh clean」を実行した上で
+		再度「sh ./make_world.sh install」を実行してください。
 	</div>
 <br>
 	以上でMoaiのコンパイルとインストールはすべて完了です。
@@ -7730,7 +7901,7 @@ agp_ver = AGP_e_3_1_0
 	場合によってはOpenJDKのバージョンを変える必要も生じますが、これも自動的にダウンロードされます。
 <br><br>
 	<a name=AName_compile_for_apk_11></a><script type="text/javascript">var st_compile_for_apk_11_group_id_ary = [ "compile_for_apk_11" ];</script>
-<a class=MstyDetailLink id=compile_for_apk_11_btn onClick="if( MstyUI_selectTab( st_compile_for_apk_11_group_id_ary, this.id ) ){location.href = '#AName_compile_for_apk_11';}">config_gen.rrksの全ソースコード (28 lines)</a>
+<a class=MstyDetailLink id=compile_for_apk_11_btn onClick="if( MstyUI_selectTab( st_compile_for_apk_11_group_id_ary, this.id ) ){location.href = '#AName_compile_for_apk_11';}">config_gen.rrksの全ソースコード (30 lines)</a>
 <span id=compile_for_apk_11 class=MstyUnvisible><div class=box>
 
 
@@ -7762,7 +7933,9 @@ app_abi = [
 /*****************************************************************************/
 
 
-return CfgGen_main( agp_ver, app_abi )
+return CfgGen_main( agp_ver, app_abi,
+		app_id:  "znkproject.moai",
+		app_name:"Moai for Android" )
 </code></pre><!-- depress auto br -->
 <a class=MstyDetailLink onClick="MstyUI_selectTab( st_compile_for_apk_11_group_id_ary, 'compile_for_apk_11_btn' );location.href = '#AName_compile_for_apk_11';">Close</a></div>
 </span>
@@ -8375,6 +8548,124 @@ adb: error: failed to get feature set: no devices/emulators found
 		</ol>
 	</div>
 <br>
+	<div class=box>
+		adb_install_apk を実行時に以下のように表示されるかもしれません。
+<br><br>
+			
+	
+<pre class=hljs><code class="language-bash">Performing Streamed Install
+
+adb: failed to install moai-v2.3-android.apk:
+Failure [INSTALL_FAILED_UPDATE_INCOMPATIBLE: Package znkproject.moai signatures do not match previously installed version; ignoring!]
+</code></pre>
+	
+		<br>
+		このエラーが表示されるということは、おそらく現在あなたのスマホ端末側に、
+		Moai公式サイトからダウンロードしてインストールしたMoaiが既に存在しています。
+		また、今あなたが新しくビルドしインストールしようとするapkファイルは、既に存在するこのMoaiを上書きインストールしようとしています。
+		ところが両者の保持する内部的な署名が異なるため、あなたのスマホ端末のインストールマネージャーはこのインストールを許可しません。
+		これがこのエラーの原因です。
+<br><br>
+		Moaiのソースコードでは、通常 make_apk/moai/__by_your_build__ という名前のファイルが存在し、
+		このファイルが存在するならばこの問題を回避できるようになっています。
+		よって、このファイルが何らかの理由で消えてしまったために、このエラーが発生している可能性が一番高いです。
+<br><br>
+		まずはこのファイルの存在を確認してください。
+		万一これが存在しない場合は、この名前のファイル（中身は空でかまいません）を作成した上で、
+		もう一度 config_gen.bat/config_gen.shを実行し、apk を作成し直してください。
+<br><br>
+		<a name=AName_android_trasfer_2></a><script type="text/javascript">var st_android_trasfer_2_group_id_ary = [ "android_trasfer_2" ];</script>
+<a class=MstyDetailLink id=android_trasfer_2_btn onClick="if( MstyUI_selectTab( st_android_trasfer_2_group_id_ary, this.id ) ){location.href = '#AName_android_trasfer_2';}">参考: 署名と__by_your_build__の詳細</a>
+<span id=android_trasfer_2 class=MstyUnvisible>
+		<div class=box>
+			通常、apkを生成するためのAndroid SDKは、ホームディレクトリに .android/debug.keystore というファイルを自動的に作成します。
+			このファイルが署名の実体です。
+<br><br>
+			デフォルトでは、このファイルはPCにより異なった内容で作成されます。
+			結果的に我々Moai開発チームが作成した apk とあなたがあなたのPCでビルドした apk は、デフォルトでは異なる署名が
+			自動的になされてしまうことになります。
+<br><br>
+			自ら作った apk であるのに署名で弾かれるというのはなんとも歯痒いものですが、
+			apk自体がこのような仕様になっている以上仕方ありません。
+<br><br>
+			apkの署名の詳細については以下を参照してください。
+<br><br>
+			<a class=MstyElemLink href="https://developer.android.com/studio/publish/app-signing" target=_blank>https://developer.android.com/studio/publish/app-signing</a>
+<br><br>
+			我々が作成したdebug.keystoreファイルも公開してしまえば、ある意味では一番わかりやすいのですが、
+			一般にはセキュリティ上の理由から、このファイルを公開するのはあまり望ましいことではありません。
+<br><br>
+			そこでMoaiではこれに対する別の解決策を用意しています。
+<br><br>
+			<ul>
+				<li>解決策1</li>
+<br>
+					apk ファイルは ApplicationID （パッケージ名と呼ばれることもある）という文字列を内部で保持しており、
+					この文字列の値でアプリケーションを個別に識別しています。
+<br><br>
+					そこであなたが作成する apk ファイルの ApplicationID をMoai公式のものとは別の値に変更します。
+					これにより、我々がビルドした公式のMoaiとは（中身は全く同じですが）完全に別物のアプリとして端末に認識される形になります。
+<br><br>
+					このApplicationIDの実体は make_apk/moai/app/build.gradle 内の applicationId の値となります。
+					我々がビルドした公式のMoaiの apk ではこの値は「moai.znkproject」となっています。
+					一方、あなたがビルドした apk ではこの値を、我々のものと別の例えば
+					「moai.znkproject.by_your_build」という値に変更するものとします。
+					これにより、署名が違っても（そもそも端末には別のアプリとして認識されているわけですから）何も問題がないというわけです。
+<br><br>
+					この方法の場合、あなたが既にインストールしている（おそらく我々がビルドした公式の）Moaiをアンインストールすることなく、
+					あなたがビルドした apk を別途インストールすることができます。
+					ただし、いわゆるアイコンや設定画面に表示されるアプリケーションのタイトルが我々のものと全く同じですと、
+					実際に使用する際にどっちがどっちであるのかが紛らわしくなります。
+					つまりこのタイトルも（人間の目にとって分かりやすくするため）変えておいた方がよいということです。
+<br><br>
+					apk ファイルは ApplicationName という文字列を内部で保持しており、この値がタイトルに相当します。
+					このApplicationNameの実体は make_apk/moai/app/src/main/res/values/strings.xml 内の app_name の値となります。
+<br><br>
+					我々がビルドした公式のMoaiの apk ではこの値は「Moai for Android」となっています。
+					一方、あなたがビルドした apk ではこの値を、我々のものと別の例えば
+					「Moai for Android (by your build)」という値に変更するものとします。
+					これにより、アイコンや設定画面に表示されるアプリケーションのタイトルを変更することができます。
+<br><br>
+					さて、原理的には上記のファイルを変えることで、ApplicationIDとApplicationNameの値を変更できるのですが、
+					そもそもMoaiのソースコードでは make_apk/moai/__by_your_build__ というファイルの有無により、
+					これらの値を簡単に切り替えできるようになっています。
+<br><br>
+					即ち config_gen.bat または config_gen.bat の実行時、
+<br><br>
+					<ul>
+						<li>make_apk/moai/__by_your_build__ ファイルが存在する場合</li>
+<br>
+							make_apk/moai/app/build.gradle と make_apk/moai/app/src/main/res/values/strings.xml が自動生成され、
+							ApplicationIDの値は「moai.znkproject.by_your_build」、
+							ApplicationNameの値は「Moai for Android (by your build)」
+							に自動的に変更されます。
+<br><br>
+						<li>make_apk/moai/__by_your_build__ ファイルが存在しない場合</li>
+<br>
+							ApplicationIDの値は「moai.znkproject」、ApplicationNameの値は「Moai for Android」となります。
+<br><br>
+					</ul>
+<br>
+					ちなみに、githubに存在するソースコードでは最初からこの __by_your_build__ ファイルが存在します。
+					よって、誤ってこのファイルが消されない限り、通常はこの問題は発生しないことになります。
+					一方、我々はこのファイルを消した状態で公式のMoaiをビルドしています。
+					これにより、通常は値の衝突が回避されています。
+<br><br>
+				<li>解決策2</li>
+<br>
+					万が一、__by_your_build__ファイルが存在するにも関わらず、同様のエラーが出る場合、
+					最後の手段として、既に端末にインストールされているMoaiを一旦アンインストールし、
+					その上で新しいMoaiをインストールします。
+<br><br>
+					あるいは何らかの理由で、ApplicationIDの値を「moai.znkproject」、ApplicationNameの値を「Moai for Android」のままにしておきたい
+					（しかし署名は既にインストールされているものと異なる）の場合も、この方法をとるしかありません。
+			</ul>
+<br>
+			<a class=MstyDetailLink onClick="MstyUI_selectTab( st_android_trasfer_2_group_id_ary, 'android_trasfer_2_btn' );location.href = '#AName_android_trasfer_2';">Close</a>
+		</div>
+		</span>
+	</div>
+<!--
 	adb_install_apk を実行時に以下のように表示される場合、既にスマホ側にインストールされているMoaiの署名と
 	今新しくインストールするapkファイルの署名が一致していません。
 <br><br>
@@ -8396,9 +8687,9 @@ Failure [INSTALL_FAILED_UPDATE_INCOMPATIBLE: Package znkproject.moai signatures 
 	これで両者の署名は一致するはずです。
 	作り直したapkファイルを再度インストールしてみてください。
 <br><br>
-	<a name=AName_android_trasfer_2></a><script type="text/javascript">var st_android_trasfer_2_group_id_ary = [ "android_trasfer_2" ];</script>
-<a class=MstyDetailLink id=android_trasfer_2_btn onClick="if( MstyUI_selectTab( st_android_trasfer_2_group_id_ary, this.id ) ){location.href = '#AName_android_trasfer_2';}">補足: PCのホームディレクトリ</a>
-<span id=android_trasfer_2 class=MstyUnvisible>
+	<a name=AName_android_trasfer_3></a><script type="text/javascript">var st_android_trasfer_3_group_id_ary = [ "android_trasfer_3" ];</script>
+<a class=MstyDetailLink id=android_trasfer_3_btn onClick="if( MstyUI_selectTab( st_android_trasfer_3_group_id_ary, this.id ) ){location.href = '#AName_android_trasfer_3';}">補足: PCのホームディレクトリ</a>
+<span id=android_trasfer_3 class=MstyUnvisible>
 	<div class=box>
 		PCのホームディレクトリはOSによって異なります。
 <br><br>
@@ -8416,7 +8707,7 @@ Failure [INSTALL_FAILED_UPDATE_INCOMPATIBLE: Package znkproject.moai signatures 
 				いわゆるホームディレクトリ「~/」です。
 		</ul>
 <br>
-		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_android_trasfer_2_group_id_ary, 'android_trasfer_2_btn' );location.href = '#AName_android_trasfer_2';">Close</a>
+		<a class=MstyDetailLink onClick="MstyUI_selectTab( st_android_trasfer_3_group_id_ary, 'android_trasfer_3_btn' );location.href = '#AName_android_trasfer_3';">Close</a>
 	</div>
 	</span>
 <br><br>
@@ -8434,6 +8725,7 @@ Failure [INSTALL_FAILED_UPDATE_INCOMPATIBLE: Package znkproject.moai signatures 
 <br><br>
 		<a class=MstyElemLink href="https://developer.android.com/studio/publish/app-signing" target=_blank>https://developer.android.com/studio/publish/app-signing</a>
 	</div>
+-->
 <br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>

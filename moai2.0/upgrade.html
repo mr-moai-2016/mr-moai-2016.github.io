@@ -38,8 +38,8 @@
 <div class="content">
 
 <a name=TopBar></a>
-<!-- p><b><img src="/imgs/here_landmark.png"> Moai+Easter 初級マニュアル</b></p -->
-<p style="height: 40px; border: 0px;"><img src="/imgs/here_landmark.png"> <b>Moai+Easter 初級マニュアル</b></p>
+<!-- p><b><img src="/imgs/here_landmark.png"> Moai+Easter Standard Manual</b></p -->
+<p style="height: 40px; border: 0px;"><img src="/imgs/here_landmark.png"> <b>Moai+Easter Standard Manual</b></p>
 <a class=MstyElemLink href="/">Moai</a> 
 <a class=MstyNowSelectedLink href="/moai2.0/index.html">Manual</a> 
 <a class=MstyElemLink href="/moai2.0/index_expert.html">Advanced Manual</a> 
@@ -48,11 +48,38 @@
 <a class=MstyElemLink href="/moai2.0/install.html">インストール</a> 
 <a class=MstyElemLink href="/moai2.0/easter_reference.html">Easterの詳細</a> 
 <a class=MstyElemLink href="/moai2.0/virtual_users.html">VirtualUSERSの詳細</a> 
-<a class=MstyNowSelectedLink href="/moai2.0/upgrade.html">Moaiアップグレードの詳細</a> 
+<a class=MstyNowSelectedLink href="/moai2.0/upgrade.html">Moai Upgradeの詳細</a> 
 
 <a name=AtFirst></a>
 <h1 class="title">はじめに</h1>
-ここではMoaiアップグレードについて、詳細に解説します.<br>
+
+	<b>Moai Upgrade</b>とはMoaiシステム全体を簡単に最新のバージョンにアップグレードするための仕組みです。
+<br><br>
+	<div class=box>
+		<u><b>Moai Upgradeが使えない環境およびバージョンについて</b></u>
+<br><br>
+		Moai Upgrade は Android APK版 では現時点では使えません。
+		またMoai Ver2.0.2以前ではサポートされておりません。
+		上記の環境またはバージョンをお使いの方は、最新版Moaiを直接ダウンロードし、インストールして下さい。
+<br><br>
+		Moai Upgrade は Ver2.3以降、新しい仕組みに移行したためUIが変更されています。<br>
+		Ver2.3以降については<a class=MstyElemLink href=#MoaiUpgrade>こちら</a>をご覧下さい。<br>
+		Ver2.2以前については<a class=MstyElemLink href=#MoaiUpgrade_2_2>こちら</a>をご覧下さい。
+<br><br>
+		moai_profileを最新版のMoaiへ（Moai Upgradeを使わず）手動で継続したい場合、
+		<a class=MstyElemLink href=#TakeOverMoaiProfile>こちらの記事</a>を参考にしてください。
+	</div>
+	<div class=box>
+		<u><b>vtagファイル</b></u>
+<br><br>
+		Moaiインストールディレクトリ内には vtag ファイルというものが含まれており、このファイルの中身にバージョン番号が書かれてあります。
+		Moaiの内部システム的にはこれを真のバージョン番号として認識しています。
+<br><br>
+		Moai Upgrade は、WebブラウザのMoaiエンジン設定の画面より現在のMoaiが最新バージョンであるかを確認し、
+		最新バージョンでなければ最新版の修正パッチを自動的にダウンロードし、上記の適用処理を自動的に行いますが、
+		vtagファイルの内容はこのときに参照されます。
+	</div>
+<br>
 <br>
 
 
@@ -61,294 +88,271 @@
 <h1 class="title">目次</h1>
 <br>
 <ul>
-	<li><b><a class=MstyElemLink href=#MoaiUpgrade>Moaiアップグレードの使い方</a></b></li>
-	<li><b><a class=MstyElemLink href=#AboutBirdman>Moaiアップグレードの詳細(Birdmanについて)</a></b></li>
+	<li><b><a class=MstyElemLink href=#MoaiUpgrade>Moai Upgrade の使い方（Ver2.3以降の場合）</a></b></li>
+	<li><b><a class=MstyElemLink href=#MoaiUpgrade_2_2>Moai Upgrade の使い方（Ver2.2以前の場合）</a></b></li>
 	<li><b><a class=MstyElemLink href=#TakeOverMoaiProfile>Moaiを新規インストールした場合にmoai_profileをそれへ引き継ぐ方法</a></b></li>
-	<li><b><a class=MstyElemLink href=#DetailOfPatch>Moaiアップグレードが内部で使用する修正パッチの詳細</a></b></li>
 </ul><br>
 
 
 
 <a name=MoaiUpgrade></a>
-<h1 class="title">Moaiアップグレードの使い方</h1>
-	<b>Moaiアップグレード</b>とはボタンを押すだけでMoaiシステム全体を自動的に最新のバージョンにアップグレードできるというものです.<br>
-	このようなソフトウェアの更新機能は、最近のアプリケーションではよく見かけると思います.<br>
+<h1 class="title">Moai Upgrade の使い方（Ver2.3以降の場合）</h1>
+
+	以下に手順を述べます。
+	<ol>
+		<li>Moaiトップページを開くと「Moai Upgrade」というリンクがあります。
+			このリンク先を開くと、Moai Upgradeの画面が表示されます。
+		</li>
 <br>
-	<div class=box>
-		<u><b>Moaiアップグレードが使えない環境およびバージョンについて</b></u><br>
+		<li><b>更新の確認</b>ボタンの直下にある表示を確認します。
+			<ul>
+				<li><b>Latest version.</b>と表示される場合
+<br><br>
+					現在ご利用のMoaiは最新です。
+					現時点ではこれ以上何もする必要はありません。
+					Moaiのトップページに戻りましょう。
+				</li>
 <br>
-		Moaiアップグレードは Android APK版 では使えません.<br>
-		またMoai Ver2.0.2以前ではサポートされておりません.<br>
+				<li><b>There is a new revision [X.Y.Z]. Please upgrade to it.</b>と表示される場合
+<br><br>
+					現在ご利用のMoaiより新しいバージョンが存在します。
+					即ち、Moaiをより新しいバージョンにアップグレード可能であることを示します
+					（X.Y.Zの部分が新しいバージョン番号を表します）。
+					この場合は、さらに次のステップへ進みます。
+				</li>
+			</ul>
+		</li>
 <br>
-		上記の環境またはバージョンをお使いの方は、改めて最新版Moaiを新規インストールして頂きますようお願いします.<br>
-		moai_profileを最新版のMoaiへ(Moaiアップグレードを使わず)手動で継続したい場合、<br>
-		<a class=MstyElemLink href=#TakeOverMoaiProfile>こちらの記事</a>を参考にしてください.<br>
-	</div>
+		<li><b>Upgrade</b>ボタンを押します。
+<br><br>
+			必要なzipファイルがMoaiのリポジトリ（現在 https://github.com/mr-moai-2016/znk_rep）からダウンロードされ、
+			新しいファイル群が作業ディレクトリ（__birdman2_ws__/ws）に格納されます。
+			それが完了した後にMoai本体が自動的に停止します（起動した状態では自分自身を更新できないためです）。
+<br><br>
+			<div class=box>
+				ただしMoaiは終了直前にbirdman2という子プロセスを生成し、これが続きの作業を行います。
+			</div>
 <br>
-	使い方を極端的に言いますと、以下の３つのボタンを順番に押すというものです.<br>
+			Moaiインストールディレクトリにあるファイルはtmpディレクトリなどを除き、全てバックアップディレクトリ（__birdman2_ws__/backup）へ移動され、
+			作業ディレクトリに格納されていた新しいファイル群がMoaiインストールディレクトリに全て適用されます。
+			これが無事終わるとMoai本体が自動的に再起動するはずです。
+<br><br>
+			<div class=box>
+				役目を終えたbirdman2はここで終了します。
+			</div>
+<br>
+			最後に「[OK]: apply done.」のように表示されていれば成功です。
+		</li>
+	</ol>
+<br>
+	<br>
+	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
+<br><!-- Section MoaiUpgrade end -->
+
+
+<a name=MoaiUpgrade_2_2></a>
+<h1 class="title">Moai Upgrade の使い方（Ver2.2以前の場合）</h1>
+
+	以下の３つのボタンを順番に押します。
+<br><br>
 	<ol>
 		<li>最新バージョンの確認</li>
 		<li>修正パッチのダウンロード</li>
 		<li>修正パッチを適用</li>
 	</ol>
 <br>
-	では以下にその手順を図等を例示しながら少し詳しく述べます.<br>
+	では以下にその手順を図等を例示しながら少し詳しく述べます。
 	<ol>
-		<li>Moaiトップページを開くと「Moaiアップグレード」というリンクがあります.<br>
-			このリンク先を開くと、以下のような画面が表示されます.<br>
-<br>
-			<div class=MstyImgBox>
-				<img src=/imgs/birdman_console1.png /><br>
-			</div>
+		<li>Moaiトップページを開くと「Moaiアップグレード」というリンクがあります。
+			このリンク先を開きます。
+			<!-- div class=MstyImgBox>
+				<img src=/imgs/birdman_console1.png />
+			</div -->
 		</li>
 <br>
-		<li>「最新バージョンの確認」ボタンを押します.<br>
-			このとき、次の二通りのシナリオが考えられ、例えば次のように表示されます.<br>
+		<li>「最新バージョンの確認」ボタンを押します。
+			このとき、次の二通りのシナリオが考えられ、例えば次のように表示されます。
 			<ul>
-				<li>現在ご利用のMoaiより新しいバージョンが<b>ない</b>場合<br>
-<br>
-					<div class=MstyImgBox>
-						<img src=/imgs/birdman_console2.png /><br>
+				<li>現在ご利用のMoaiより新しいバージョンが<b>ない</b>場合
+<br><br>
+					以下のように表示されると思います。
+<br><br>
+						
+	
+<pre class=hljs><code>現在ご利用の Moai は最新バージョンのようです.
+従ってMoaiアップグレードを行う必要は今はありません.
+</code></pre>
+	
+					<br>
+					現時点ではこれ以上は何もする必要がないことを意味します。
+					今はMoaiのトップページに戻りましょう。
+<br><br>
+					<div class=box>
+						ただし現在Ver2.2よりも新しいMoaiが存在しますので、
+						この表示になることは（AndroidなどMoaiアップグレードがサポートされていない環境を除き）基本的にはないと思われます。
 					</div>
-					現時点ではこれ以上は何もする必要がありません.<br>
-					今はMoaiのトップページに戻りましょう.<br>
-					新しいバージョンがリリースされた場合はMoai公式サイトでアナウンスされますので、<br>
-					そのときにあらためてこのボタンを押し、最新バージョンにアップグレードするとよいでしょう.<br>
+					<!--
+					新しいバージョンがリリースされた場合はMoai公式サイトでアナウンスされますので、
+					そのときにあらためてこのボタンを押し、最新バージョンにアップグレードするとよいでしょう。
+					-->
+					<!-- div class=MstyImgBox>
+						<img src=/imgs/birdman_console2.png />
+					</div -->
 				</li>
 <br>
-				<li>現在ご利用のMoaiより新しいバージョンが<b>ある</b>場合<br>
-<br>
+				<li>現在ご利用のMoaiより新しいバージョンが<b>ある</b>場合
+<br><br>
+					以下のように表示されると思います。
+<br><br>
+						
+	
+<pre class=hljs><code>現在の Moai は Ver 2.X です.
+Moai を Ver 2.X.Y へアップグレードすることができます.
+
+まず最新版の修正パッチ(zipファイル)をダウンロードする必要があります.
+(birdmanフォルダの直下にダウンロードされます).
+「修正パッチのダウンロード」ボタンを押してください.
+</code></pre>
+	
+					<br>
+					Moaiを新しいバージョンにアップグレード可能であることを示します。
+					この場合は、さらに次のステップへ進みます。
+					<!--
 					<div class=MstyImgBox>
-						<img src=/imgs/birdman_console3.png /><br>
+						<img src=/imgs/birdman_console3.png />
 					</div>
-					Moaiを新しいバージョンにアップグレード可能であることを示します.<br>
-					この場合は、さらに次のステップへ進みます.<br>
+					-->
 				</li>
 			</ul>
 		</li>
 <br>
-		<li>「修正パッチのダウンロード」ボタンを押します.<br>
-			例えば以下のような画面が表示されると思います.<br>
-<br>
-			<div class=MstyImgBox>
-				<img src=/imgs/birdman_console4.png /><br>
-			</div>
-			ここでは、修正パッチを適用できる直前までの状態が整ったことが述べられています.<br>
-			(実際にはまだ適用されていません).<br>
+		<li>「修正パッチのダウンロード」ボタンを押します。
+<br><br>
+			以下のように表示されると思います。
+<br><br>
+				
+	
+<pre class=hljs><code>修正パッチ ... のダウンロードを開始します.
+...
+修正パッチのダウンロードは完了しました.
+
+修正パッチを解凍します.
+...
+修正パッチの解凍は完了しました.
+
+最後にこの修正パッチを実際に適用します.
+(このときMoai本体の上書きも行われるため、古いMoaiプロセスが一旦終了し、新しいMoaiが起動します).
+「修正パッチの適用」を押してください.
+</code></pre>
+	
+			<br>
+			ここでは、修正パッチを適用できる直前までの状態が整ったことが述べられています（実際にはまだ適用されていません）。
+			<!--div class=MstyImgBox>
+				<img src=/imgs/birdman_console4.png />
+			</div-->
 		</li>
 <br>
-		<li>「修正パッチを適用」ボタンを押します.<br>
-			例えば次のように表示され、古いバージョンのMoaiフォルダ内に対し、新しいファイルのコピー処理などが行われます.<br>
-<br>
+		<li>「修正パッチを適用」ボタンを押します。
+<br><br>
+			古いバージョンのMoaiフォルダ内に対し、新しいファイルのコピー処理などが行われます。
+			以下のように表示されると思います。
+<br><br>
+				
+	
+<pre class=hljs><code>Birdman : ....
+Birdman : ....
+Birdman : ....
+Birdman : ....
+Birdman : ....
+Birdman : OK. All upgrade is successfully done.
+</code></pre>
+	
+			<br>
+			またこのとき、一瞬Moai本体が終了し再度起動すると思います
+			（これはMoai本体を上書きするためには、Moaiを一度終了させる必要があるためです）。
+<br><br>
+			最後に「OK. All upgrade is successfully done.」のように表示されていれば成功です。
+			念のため、Moaiのトップページに戻り、バージョンの表示されている部分が最新版の数字になっていることを確認してください
+			（一番上にある「Welcome to Moai+Easter World」と書かれている部分のすぐ右です）。
+			<!--
 			<div class=MstyImgBox>
-				<img src=/imgs/birdman_console5.png /><br>
+				<img src=/imgs/birdman_console5.png />
 			</div>
-			またこのとき、一瞬Moai本体が終了し再度起動すると思います.<br>
-			(これはMoai本体を上書きするためには、Moaiを一度終了させる必要があるためです)<br>
-		</li>
-<br>
-		<li>最後に「OK. All upgrade is successfully done.」のように表示されていれば成功です.<br>
-			念のため、Moaiのトップページに戻り、バージョンの表示されている部分が最新版の数字になっていることを確認してください.<br>
-			(一番上にある「Welcome to Moai+Easter World」と書かれている部分のすぐ右です)<br>
+			-->
 		</li>
 	</ol>
+<br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br><!-- Section MoaiUpgrade end -->
-
-
-<a name=AboutBirdman></a>
-<h1 class="title">Moaiアップグレードの詳細(Birdmanについて)</h1>
-	ここではMoaiアップグレードが内部で何を行っているかについて解説します.<br>
-	このセクションはそのような内部挙動に興味ある方のための解説であり、<br>
-	Moaiアップグレードを単に使うだけならば、ここに書いてある内容を読む必要はありません.<br>
-<br>
-	Moaiアップグレードを行うための内部プログラムは我々が「Birdman」と呼んでいるものとなります.<br>
-	このプログラムは Moai Ver2.1 より新規導入されました.<br>
-<br>
-	<div class=box>
-		ちなみに名前の由来はEaster島の鳥人伝説です.<br>
-		この伝説によれば、卵を手渡された鳥人はその瞬間に新たなる鳥人となるのだそうです.<br>
-	</div>
-<br>
-	MoaiアップグレードによりMoaiエンジン本体も更新され得るのですが、その処理はMoaiとは別のプログラムが行う必要があります.<br>
-	その役目を担うのがBirdmanです.<br>
-	一方、Birdman自身も更新される場合があり、これについてはMoai本体がその処理を担います.<br>
-	そういう意味ではこの二つのプログラムは相補的な関係にあります.<br>
-<br>
-	Moaiアップグレード画面では、Birdman が出力する内容が事細かに表示されます.<br>
-	我々はこれを「Birdman Console」と呼んでいます.<br>
-	開始時には何も処理されていないため、メッセージの部分が「None.」と表示されます.<br>
-<br>
-	Birdmanは最初に github のMoai公式サイトへアクセスし、そこに置かれた vtag_rule というファイルをダウンロードします.<br>
-	これを分析することで、今現在インストールされているMoaiが最新バージョンであるかどうかを確認します.<br>
-<br>
-	この分析の結果、現在のMoaiが古いバージョンであったと判明した場合、<br>
-	Birdmanは github のMoai公式サイトへ再びアクセスし、最新バージョンへの修正パッチを自動的にダウンロードします.<br>
-	修正パッチは zip 形式となっていますので、さらにこれを解凍しなければなりません.<br>
-	この解凍処理も自動的に行われます.<br>
-	これらの実体はMoaiフォルダ直下のbirdman/tmpフォルダに一時的に置かれます.<br>
-	また「最新バージョンの確認」ボタンを押すタイミングでこれは削除されます.<br>
-<br>
-	<div class=box>
-		ボタンを三段階に分けなくても、一つのボタンで一括で全部やっちゃえば？と思われる方もいるかもしれません.<br>
-<br>
-		しかし万一途中で問題が発生した場合でもどの時点でそれが起きたかを一目瞭然とすることは重要です.<br>
-		また、Moaiの哲学として「処理の透明性」を主要なポリシーの一つとして掲げているというのもあります.<br>
-		そのような理由で、現時点ではこのように三つのフェーズに分けてあります.<br>
-	</div>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br><!-- Section AboutBirdman end -->
+<br><!-- Section MoaiUpgrade_2_2 end -->
 
 
 <a name=TakeOverMoaiProfile></a>
 <h1 class="title">Moaiを新規インストールした場合にmoai_profileをそれへ引き継ぐ方法</h1>
-ここではMoaiを新規インストールした場合、moai_profileをそれに引き継ぐ際の注意事項について説明します.<br>
+
+	ここでは新しいMoaiをインストールした場合、古いMoaiでのmoai_profileを引き継ぐ方法について説明します。
+	moai_profileとは、登録されたEasterのリンク集やコレクションデータが格納された環境です。
+<br><br>
+	<h3>PC版Moaiの場合</h3>
 <br>
-<article class="message is-dark"><br>
-	<div class="message-header">
-		PC版Moaiの場合<br>
+	新しいMoaiのインストール先フォルダは、古いMoaiの moai_profile フォルダと同列の位置になるようにするのが、
+	一番簡単な引き継ぎ方だと思われます。
+	言い換えれば、新しいMoaiのインストール先フォルダを、古いMoaiのフォルダと同列になるようにインストールします
+	（まあ普通はそうされると思います）。
+<br><br>
+	このようにすることによって特に何も設定することなく、新しいMoaiでmoai_profileが引き続き使用できると思います。
+<br><br>
+	この様子を念のために冗長に書きますと、以下のようになります。
+	例えば C:\znk_project というフォルダの下に、古いMoaiが以下のようにインストールされていたとします。
+<br><br>
+		
+	
+<pre class=hljs><code>	【フォルダ構成】
+	moai-v2.2-win32
+	moai_profile
+</code></pre>
+	
+	<br>
+	新しいMoai の zip をダウンロードし、同フォルダに以下のように展開します。
+	これが上で言う「同列に置く」の意味です。
+<br><br>
+		
+	
+<pre class=hljs><code>	【フォルダ構成】
+	moai-v2.2-win32
+	moai-v2.3-windows
+	moai_profile
+</code></pre>
+	
+	<br>
+	moai-v2.3-windows の方の moai を起動し、問題がないことを確かめて下さい。
+	そして moai-v2.2-win32 の方については、もはや必要ないのであればこれを削除して頂いても構いません。
+<br><br>
+		
+	
+<pre class=hljs><code>	【フォルダ構成】
+	moai-v2.3-windows
+	moai_profile
+</code></pre>
+	
+	<br>
+	Windows 32bit版を例に挙げましたが、他のプラットフォームでも同様です。
+	Linux環境ではこのドキュメント内での「フォルダ」という用語を「ディレクトリ」に読み替えてください。
+<br><br>
+	<div class=box>
+		尚、Ver2.3以降は、moaiの実行ファイルの本体はbinディレクトリ配下に配置されています。
+		例えばwindowsの場合、32bit版のexeはbin/windows-x86ディレクトリの直下、64bit版のexeはbin/windows-x64ディレクトリの直下にあります。
+		moai-v2.3-windows ディレクトリ内にこれらの両方を含むような状況もありえます。
 	</div>
-	<div class="message-body">
-		新しいMoaiのインストール先フォルダは 古いMoaiの使用の際に既に作成頂いている moai_profile フォルダと同列の位置になるようにした方が良いでしょう.<br>
-		( 言い換えれば、新しいMoaiのインストール先フォルダを 古いMoaiのフォルダと同列になるようにインストールします. まあ普通はそうされることが多いとは思いますが… ).<br>
-		そうすれば 新しいMoai でも moai_profile環境( 古いMoai において登録されたEasterのリンク集やコレクションの環境 )が特に何も設定することなく引き続き使用できると思います.<br>
 <br>
-		この様子を念のために冗長に書きますと、以下のようになります.<br>
-		以下ではWindows 32bit版を例に、古いMoaiを moai-v2.0-win32、新しいMoaiを moai-v2.2-win32という名前であるとして説明します.<br>
-		moai-v2.0-win32 が例えば C:\znk_project というフォルダの下に以下のようにインストールされていたとします.<br>
+	<h3>Android APK版Moaiの場合</h3>
 <br>
-		<div class=box><div class=MstyCode>
-			【フォルダ構成】<br>
-			moai-v2.0-win32<br>
-			moai_profile<br>
-		</div></div>
+	Android apk版では moai_profileの位置は通常、/sdcard/moai_profileに固定されているため、
+	あなたが特にこの位置を明示的に変更していない限りは、特に意識する必要はなくmoai_profileを新しいMoaiへ継続できると思います。
 <br>
-		新しいMoai の zip をダウンロードし、同フォルダに以下のように展開します.<br>
-		これが上で言う「同列に置く」の意味です.<br>
-<br>
-		<div class=box><div class=MstyCode>
-			【フォルダ構成】<br>
-			moai-v2.0-win32<br>
-			moai-v2.2-win32<br>
-			moai_profile<br>
-		</div></div>
-<br>
-		moai-v2.2-win32 の方の moai.exe を起動し、問題がないことを確かめて下さい.<br>
-		そして moai-v2.0-win32 の方については、もはや必要ないのであればこれを削除して頂いても構いません.<br>
-<br>
-		<div class=box><div class=MstyCode>
-			【フォルダ構成】<br>
-			moai-v2.2-win32<br>
-			moai_profile<br>
-		</div></div>
-<br>
-		Windows 32bit版を例に挙げましたが、他のプラットフォームでも同様です.<br>
-		Linux環境ではこのドキュメント内での「フォルダ」という用語を「ディレクトリ」に読み替えてください.<br>
-	</div>
-</article><br>
-<br>
-<br>
-<article class="message is-dark"><br>
-	<div class="message-header">
-		Android APK版Moaiの場合<br>
-	</div>
-	<div class="message-body">
-		Android apk版では moai_profileの位置は通常、/sdcard/moai_profileに固定されているため、<br>
-		あなたが特にこの位置を明示的に変更していない限りは、特に意識する必要はなくmoai_profileを新しいMoaiへ継続できると思います.<br>
-	</div>
-</article><br>
 	<br>
 	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
 <br><!-- Section TakeOverMoaiProfile end -->
-
-
-<a name=DetailOfPatch></a>
-<h1 class="title">Moaiアップグレードが内部で使用する修正パッチの詳細</h1>
-<article class="message is-dark"><br>
-	<div class="message-header">
-		修正パッチの配布元と名前形式<br>
-	</div>
-	<div class="message-body">
-		修正パッチは以下より入手できます.<br>
-		Moaiアップグレードも内部で以下を参照します.<br>
-<br>
-		<div class=box>
-			https://mr-moai-2016.github.io/patch/moai-v{old}-patch-v{new}-{platform}.zip<br>
-		</div>
-<br>
-		ここで {old} や {new} の部分は 2.0 や2.2 といったバージョンの数字をあらわす文字列となります.<br>
-		{platform} の部分はお使いのプラットフォームを表す文字列で、windows, linux, cygwin, android のうちのいずれかです.<br>
-<br>
-		<div class=box>
-			たとえば {old} が 2.1、{new} が 2.2 であった場合<br>
-			この修正パッチは Moai Ver2.1 のフォルダに対してのみ適用できます.<br>
-			それ以外のものには適用できません.<br>
-<br>
-			ここで言う Ver2.1 とは Ver2.1シリーズすべてを含みます.<br>
-			即ち、Ver2.1、Ver2.1.1、Ver2.1.2 ...  などがいずれも適用可能な対象となり、<br>
-			それらをすべて Ver2.2へ引き上げるための修正パッチということになります.<br>
-		</div>
-	</div>
-</article><br>
-<br>
-<article class="message is-dark"><br>
-	<div class="message-header">
-		修正パッチ内のスクリプトが実行する処理<br>
-	</div>
-	<div class="message-body">
-		この修正パッチ内には、パッチ適用のためのスクリプトが用意されています.<br>
-		それを実行することで自動的に 古いMoaiのフォルダを認識し、パッチが適用される仕組みとなっています.<br>
-		Moaiアップグレードでは、これを以下の手順に従って内部的に実行します.<br>
-<br>
-		<ol>
-			<li>まずMoaiが起動中の場合は、<b>起動中のMoaiを一旦終了します</b>.<br>
-			そうしないと一部の実行形式のファイルにおいて「共有違反です」あるいは「ビージー(busy)」というメッセージが出て<br>
-			パッチの適用に失敗してしまいます.<br>
-			</li>
-			<br>
-			<li>ダウンロードしたzipファイルを、既にインストールされた Moai のフォルダ内の birdman/tmp フォルダに一時的に置きます.<br>
-			そこでこの zip ファイルを展開します.<br>
-			</li>
-			<br>
-			<li>zipを展開するとmoai-v{old}-patch-v{new}-{platform} というフォルダが作成されます.<br>
-			</li>
-<br>
-			<li>このzipを展開したフォルダの中に moai-{platform} という名前のフォルダがあります.<br>
-			この中身は、新しく更新されたファイル群の集合となっています.<br>
-			apply_list.myfに記述された命令に従ってこの中身が、パッチが適用される Moaiフォルダへ上書きコピーされます.<br>
-			また逆に不要なファイルは削除されます.<br>
-			</li>
-			<br>
-			<li>さらにzipを展開したフォルダの中に「moai-common」というフォルダがあります.<br>
-			これも同様にapply_list.myfに記述された命令に従ってこの中身が、パッチが適用される Moaiフォルダへ上書きコピーされます.<br>
-			また逆に不要なファイルは削除されます.<br>
-			</li>
-<br>
-			<li>以上でフォルダの中身はすべて最新の状態になります.<br>
-			</li>
-		</ol>
-	</div>
-</article><br>
-<br>
-<br>
-<article class="message is-dark"><br>
-	<div class="message-header">
-		vtagファイル<br>
-	</div>
-	<div class="message-body">
-		moaiフォルダ内には vtag ファイルというものが含まれており、このファイルの中身にバージョン番号が書かれてあります.<br>
-		Moaiの内部システム的にはこれを真のバージョン番号として認識しています.<br>
-<br>
-		「Moaiアップグレード」は、WebブラウザのMoaiエンジン設定の画面より現在のMoaiが最新バージョンであるかを確認し、<br>
-		最新バージョンでなければ最新版の修正パッチを自動的にダウンロードし、上記の適用処理を自動的に行いますが、<br>
-		vtagファイルの内容はこのときに参照されます.<br>
-	</div>
-</article><br>
-	<br>
-	<b><a class=MstyElemLink href=#Index>目次に戻る</a></b><br>
-<br><!-- Section DetailOfPatch end -->
 
 
 
@@ -367,7 +371,7 @@
 			</div>
 		</div>
 		<div class="content">
-		  <time datetime="2016-1-1">2019/07/28</time>
+		  <time datetime="2016-1-1">2026/09/19</time>
 		</div>
 	</div>
 </div>
